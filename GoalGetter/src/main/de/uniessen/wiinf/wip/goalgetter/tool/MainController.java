@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.15 2004/09/08 18:31:34 moleman Exp $
+ * $Id: MainController.java,v 1.16 2004/09/09 18:19:18 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -42,6 +42,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Constants;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
 import de.uniessen.wiinf.wip.goalgetter.domain.ProjectFactory;
 import de.uniessen.wiinf.wip.goalgetter.tool.file.GoalGetterFileFilter;
+import de.uniessen.wiinf.wip.goalgetter.view.MainFrame;
 import de.uniessen.wiinf.wip.goalgetter.view.file.GoalGetterFileView;
 import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
 import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityAnalysisDialog;
@@ -55,7 +56,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  *  
  */
 public final class MainController {
@@ -163,17 +164,19 @@ public final class MainController {
     /**
      * Prints a project summary.
      */
-    void print() {
-        //  showMessage("Print performed.");
-        getMainModule().print();
+       void print() {
+    	 	mainModule.print((MainFrame) getDefaultParentFrame());
+    	   	
     }
 
     /**
-     * Opens a print dialog
+     * Opens a print dialog, then prints a project summary to the choosen
+     * printer.
      */
     void openPrintDialog() {
         PrintManager.openPageSetupDialog();
-        // showMessage("Open print dialog performed.");
+        print();
+        //showMessage("Open print dialog performed.");
     }
 
     /**

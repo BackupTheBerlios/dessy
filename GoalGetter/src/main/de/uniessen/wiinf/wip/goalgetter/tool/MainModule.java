@@ -16,10 +16,12 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainModule.java,v 1.6 2004/09/08 18:31:34 moleman Exp $
+ * $Id: MainModule.java,v 1.7 2004/09/09 18:19:18 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.prefs.Preferences;
@@ -36,12 +38,16 @@ import com.jgoodies.binding.beans.Model;
 import com.jgoodies.uif.application.Application;
 import com.jgoodies.uif.util.ResourceUtils;
 import com.jgoodies.uifextras.convenience.SetupManager;
+import com.jgoodies.uifextras.printing.PrintManager;
+import com.jgoodies.uifextras.printing.PrintableDocument;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
 import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
 import de.uniessen.wiinf.wip.goalgetter.tool.node.RootNode;
+import de.uniessen.wiinf.wip.goalgetter.view.MainFrame;
+import de.uniessen.wiinf.wip.goalgetter.view.editor.ResultsPanel;
 
 /**
  * Provides bound bean properties for the project, navigation tree, navigation
@@ -51,7 +57,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.RootNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class MainModule extends Model {
@@ -511,8 +517,18 @@ public final class MainModule extends Model {
     /**
      * 
      */
-    public void print() {
-      // Application.getMainFrame().
+    public void print(MainFrame frame) {
+
+    	PageFormat pf = PrintManager.getPageFormat();
+    	ResultsPanel results =  frame.mainPageBuilder().getResultsPanel();
+    	 
+    	PrintableDocument pd = results.getPrintableDocument();
+        System.out.println("druckt....");
+        
+//        pd.setFooter("Footer");
+//       	pd.setHeader("Header");
+       	pd.setJobName("Golagetter print");
+       	pd.printWithDialog();
         
     }
 

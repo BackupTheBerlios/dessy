@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainPageBuilder.java,v 1.9 2004/09/08 18:31:34 moleman Exp $
+ * $Id: MainPageBuilder.java,v 1.10 2004/09/09 18:19:18 jsprenger Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -58,7 +58,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *  
  */
 
@@ -218,6 +218,7 @@ public final class MainPageBuilder {
         editorPanel.addEditor(new AlternativeContainerEditor());
         //     editorPanel.addEditor(new ActionContainerEditor());
         resultsPanel = new ResultsPanel();
+       
         editorPanel.addEditor(resultsPanel);
         editorPanel.setActiveEditor(welcomePanel);
         return editorPanel;
@@ -355,7 +356,7 @@ public final class MainPageBuilder {
      * @author tfranz
      * @author jsprenger
      * 
-     * @version $Revision: 1.9 $
+     * @version $Revision: 1.10 $
      *  
      */
     private class HelpVisibilityChangeHandler implements PropertyChangeListener {
@@ -380,7 +381,7 @@ public final class MainPageBuilder {
      * @author tfranz
      * @author jsprenger
      * 
-     * @version $Revision: 1.9 $
+     * @version $Revision: 1.10 $
      *  
      */
     private class HelpNavigatorVisibilityChangeHandler implements
@@ -437,4 +438,11 @@ public final class MainPageBuilder {
 
     }
 
+	/**
+	 * @return Returns the resultsPanel.
+	 */
+	public ResultsPanel getResultsPanel() {
+		 resultsPanel.setModel(module.getProject());
+		return resultsPanel;
+	}
 }

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainFrame.java,v 1.7 2004/09/08 18:31:34 moleman Exp $
+ * $Id: MainFrame.java,v 1.8 2004/09/09 18:19:18 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -39,7 +39,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public final class MainFrame extends AbstractMainFrame {
@@ -152,7 +152,7 @@ public final class MainFrame extends AbstractMainFrame {
     /*
      * Returns the main page.
      */
-    private MainPageBuilder mainPageBuilder() {
+    public MainPageBuilder mainPageBuilder() {
         return mainPageBuilder;
     }
 

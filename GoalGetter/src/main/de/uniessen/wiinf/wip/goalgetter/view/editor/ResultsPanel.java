@@ -10,20 +10,17 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: ResultsPanel.java,v 1.1 2004/09/08 18:31:34 moleman Exp $
+ * $Id: ResultsPanel.java,v 1.2 2004/09/09 18:19:18 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
-import java.awt.Color;
 import java.awt.Insets;
 import java.io.StringWriter;
 import java.util.Iterator;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
-import javax.swing.UIManager;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.factories.Borders;
@@ -47,7 +44,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.GoalContainerTableModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class ResultsPanel extends AbstractEditor {
@@ -70,13 +67,15 @@ public class ResultsPanel extends AbstractEditor {
      */
     protected void build() {
 
-        FormLayout layout = new FormLayout("0:grow:0.9");//$NON-NLS-1$
+    	
+    	FormLayout layout = new FormLayout("0:grow:0.9");//$NON-NLS-1$
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
         builder.setBorder(Borders.EMPTY_BORDER);
         builder.appendRow(new RowSpec("fill:0dlu:grow")); //$NON-NLS-1$
         // java.awt.Component overviewPane = new JScrollPane(overviewTable);
         builder.add(buildContent());
+       
     }
 
     private JComponent buildContent() {
@@ -152,7 +151,7 @@ public class ResultsPanel extends AbstractEditor {
     private String getGoalTable() {
         StringWriter stw = new StringWriter();
         HTMLTableWriter tabWriter = new HTMLTableWriter();
-
+       
         GoalContainerTableModel gctm = new GoalContainerTableModel(getProject()
                 .getGoalContainer().getGoals());
         System.out.println(gctm);
@@ -213,7 +212,7 @@ public class ResultsPanel extends AbstractEditor {
 
     public PrintableDocument getPrintableDocument() {
         updateView();
-        return new PrintableDocument("Auswertung", editor, false);
+         return new PrintableDocument("Auswertung", editor, false);
     }
 
     private String lightbackgroundColor() {
