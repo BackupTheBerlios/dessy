@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisChart.java,v 1.6 2004/09/20 18:43:53 jsprenger Exp $
+ * $Id: SensitivityAnalysisChart.java,v 1.7 2004/09/25 10:05:45 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 import java.awt.Color;
@@ -29,14 +29,14 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.DefaultCategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 /**
  * SensitivityAnalysisChart
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public class SensitivityAnalysisChart extends ChartFactory {

@@ -16,25 +16,26 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: PreferencesDialog.java,v 1.7 2004/08/14 11:11:12 moleman Exp $
+ * $Id: PreferencesDialog.java,v 1.8 2004/09/25 10:05:45 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Frame;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import com.jgoodies.binding.PresentationModel;
 import com.jgoodies.uif.AbstractDialog;
 import com.jgoodies.uif.application.ResourceIDs;
 import com.jgoodies.uif.util.Resizer;
 import com.jgoodies.uif.util.ResourceUtils;
+import com.jgoodies.uifextras.laf.LafChoiceModel;
+import com.jgoodies.uifextras.laf.LafChoicePanelBuilder;
 import com.jgoodies.uifextras.panel.HeaderPanel;
-import com.jgoodies.uifextras.plaf.LookAndFeelPanel;
 
 import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
 
@@ -45,105 +46,95 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public final class PreferencesDialog extends AbstractDialog {
 
-    /**
-     * Refers to the settings to be edited.
-     */
-    private final PresentationSettings settings;
+	/**
+	 * Refers to the model that holds the settings and that vends ValueModels
+	 * that adapt the bound bean properties of the settings.
+	 */
+	private final PresentationModel model;
 
-    /**
-     * Holds the panel for the look&amp;feel choice and preview.
-     */
-    private LookAndFeelPanel lafPanel;
+	/**
+	 * Holds the panel for the look&amp;feel choice and preview.
+	 */
+	private LafChoicePanelBuilder lafPanel;
 
-    // Instance Creation ******************************************************
+	// Instance Creation ******************************************************
 
-    /**
-     * Constructs a <code>PreferencesDialog</code>.
-     * 
-     * @param owner
-     *            this dialog's parent frame
-     * @param settings
-     *            the settings to edit
-     */
-    public PreferencesDialog(Frame owner, PresentationSettings settings) {
-        super(owner);
-        this.settings = settings;
-    }
+	/**
+	 * Constructs a <code>PreferencesDialog</code>.
+	 * 
+	 * @param owner
+	 *            this dialog's parent frame
+	 * @param settings
+	 *            the settings to edit
+	 */
+	public PreferencesDialog(Frame owner, PresentationSettings settings) {
+		super(owner);
+		this.model = new PresentationModel(settings, getTriggerChannel());
+	}
 
-    // Building *************************************************************
+	// Building *************************************************************
 
-    /**
-     * Builds the UI. In addition to the superclass behavior, we ensure that the
-     * selection in the look-and-feel panel is visible.
-     */
-    protected void build() {
-        super.build();
-        lafPanel.ensureSelectionsAreVisible();
-    }
+	/**
+	 * Builds and returns the preference's header.
+	 */
+	protected JComponent buildHeader() {
+		return new HeaderPanel(
+				ResourceUtils
+						.getString("preferencesDialog.preferencesHeader.text"), //$NON-NLS-1$
+				ResourceUtils
+						.getString("preferencesDialog.preferencesDescription.text"), //$NON-NLS-1$
+				ResourceUtils.getIcon(ResourceIDs.PREFERENCES_ICON));
+	}
 
-    /**
-     * Builds and returns the preference's header.
-     */
-    protected JComponent buildHeader() {
-        return new HeaderPanel(
-                ResourceUtils
-                        .getString("preferencesDialog.preferencesHeader.text"), //$NON-NLS-1$
-                ResourceUtils
-                        .getString("preferencesDialog.preferencesDescription.text"), //$NON-NLS-1$
-                ResourceUtils.getIcon(ResourceIDs.PREFERENCES_ICON));
-    }
+	/**
+	 * Builds and returns the preference's content pane.
+	 */
+	protected JComponent buildContent() {
+		JPanel content = new JPanel(new BorderLayout());
+		content.add(buildTabbedPane(), BorderLayout.CENTER);
+		content.add(buildButtonBarWithOKCancel(), BorderLayout.SOUTH);
+		return content;
+	}
 
-    /**
-     * Builds and returns the preference's content pane.
-     */
-    protected JComponent buildContent() {
-        JPanel content = new JPanel(new BorderLayout());
-        content.add(buildTabbedPane(), BorderLayout.CENTER);
-        content.add(buildButtonBarWithOKCancel(), BorderLayout.SOUTH);
-        return content;
-    }
+	/**
+	 * Builds and returns the tabbed pane.
+	 * 
+	 * @return tabbed Pane
+	 */
+	protected JTabbedPane buildTabbedPane() {
+		lafPanel = new LafChoicePanelBuilder(new LafChoiceModel(
+				getTriggerChannel()));
 
-    /**
-     * Builds and returns the tabbed pane.
-     * 
-     * @return tabbed Pane
-     */
-    protected JTabbedPane buildTabbedPane() {
-        Component generalPanel = new GeneralTabBuilder(settings,
-                getTriggerChannel()).build();
+		JTabbedPane pane = new JTabbedPane();
+		pane.addTab(ResourceUtils.getString("preferencesDialog.general.text"),//$NON-NLS-1$
+				new GeneralTabBuilder(model).build());
+		pane.addTab(ResourceUtils.getString("preferencesDialog.laf.text"),//$NON-NLS-1$
+				lafPanel.build());
+		return pane;
+	}
 
-        lafPanel = new LookAndFeelPanel(getTriggerChannel());
+	// Misc *****************************************************************
 
-        JTabbedPane pane = new JTabbedPane();
-        pane.addTab(ResourceUtils.getString("preferencesDialog.general.text"),//$NON-NLS-1$
-                generalPanel);
-        pane.addTab(ResourceUtils.getString("preferencesDialog.laf.text"),//$NON-NLS-1$
-                lafPanel);
-        return pane;
-    }
+	/**
+	 * Closes the window.
+	 */
+	protected void doCloseWindow() {
+		doCancel();
+	}
 
-    // Misc *****************************************************************
-
-    /**
-     * Closes the window.
-     */
-    protected void doCloseWindow() {
-        doCancel();
-    }
-
-    /**
-     * Unlike the default try to get an aspect ratio of 1:1.
-     * 
-     * @param component
-     *            the component to resize
-     */
-    protected void resizeHook(JComponent component) {
-        Resizer.ONE2ONE.resizeDialogContent(component);
-    }
+	/**
+	 * Unlike the default try to get an aspect ratio of 1:1.
+	 * 
+	 * @param component
+	 *            the component to resize
+	 */
+	protected void resizeHook(JComponent component) {
+		Resizer.ONE2ONE.resizeDialogContent(component);
+	}
 
 }

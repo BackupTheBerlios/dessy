@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GeneralTabBuilder.java,v 1.6 2004/08/14 11:11:12 moleman Exp $
+ * $Id: GeneralTabBuilder.java,v 1.7 2004/09/25 10:05:45 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
@@ -24,6 +24,8 @@ package de.uniessen.wiinf.wip.goalgetter.view.preferences;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 
+import com.jgoodies.binding.PresentationModel;
+import com.jgoodies.binding.adapter.BasicComponentFactory;
 import com.jgoodies.binding.adapter.ToggleButtonAdapter;
 import com.jgoodies.binding.beans.PropertyAdapter;
 import com.jgoodies.binding.value.BufferedValueModel;
@@ -42,111 +44,106 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class GeneralTabBuilder {
 
-    private JCheckBox showTipsBox;
+	private final PresentationModel settingsModel;
 
-    private JCheckBox autoExpandBox;
+	private JCheckBox showTipsBox;
 
-    private JCheckBox autoCollapseBox;
+	private JCheckBox autoExpandBox;
 
-    // Instance Creation ****************************************************
+	private JCheckBox autoCollapseBox;
 
-    /**
-     * Constructs the <i>General </i> panel for the preferences dialog.
-     * 
-     * @param settings
-     *            the presentation related settings
-     * @param triggerChannel
-     *            triggers a commit when apply is pressed
-     */
-    public GeneralTabBuilder(PresentationSettings settings,
-            ValueModel triggerChannel) {
-        initComponents(settings, triggerChannel);
-    }
+	// Instance Creation ****************************************************
 
-    // Component Creation and Initialization ********************************
+	/**
+	 * Constructs the <i>General </i> panel for the preferences dialog.
+	 * 
+	 * @param settingsModel
+	 *            holds the presentation settings and vends models for the bound
+	 *            bean properties of the settings object
+	 */
+	public GeneralTabBuilder(PresentationModel settingsModel) {
+		this.settingsModel = settingsModel;
+	}
 
-    /**
-     * Creates and configures the UI components. Creates three check boxes that
-     * are bound to properties of the <code>TipOfTheDayDialog</code> and the
-     * given <code>PresentationSettings</code>. All models are buffered and
-     * change the underlying model properties only if the
-     * <code>triggerChannel</code> indicates that values shall be commited.
-     * <p>
-     * 
-     * The adapted bean properties will not be observed; therefore we don't need
-     * to invoke <code>PropertyAdapter.release</code>
-     * 
-     * @param settings
-     *            holds the properties for the tree manipulation
-     * @param triggerChannel
-     *            indicates a commit or flush of the buffered values
-     * @see PropertyAdapter
-     * @see BufferedValueModel
-     * @see ToggleButtonAdapter
-     */
-    private void initComponents(PresentationSettings settings,
-            ValueModel triggerChannel) {
-        showTipsBox = new JCheckBox(ResourceUtils
-                .getString("generalTabBuilder.showtipofday.text")); //$NON-NLS-1$
-        showTipsBox.setModel(new ToggleButtonAdapter(new BufferedValueModel(
-                TipOfTheDayDialog.showingTipsModel(), triggerChannel)));
+	// Component Creation and Initialization ********************************
 
-        autoExpandBox = new JCheckBox(ResourceUtils
-                .getString("generalTabBuilder.autoexpand.text")); //$NON-NLS-1$
-        autoExpandBox
-                .setModel(new ToggleButtonAdapter(
-                        new BufferedValueModel(
-                                new PropertyAdapter(
-                                        settings,
-                                        PresentationSettings.PROPERTYNAME_EXPAND_SELECTED_PATHS),
-                                triggerChannel)));
+	/**
+	 * Creates and configures the UI components. Creates three check boxes that
+	 * are bound to properties of the <code>TipOfTheDayDialog</code> and the
+	 * given <code>PresentationSettings</code>. All models are buffered and
+	 * change the underlying model properties only if the
+	 * <code>triggerChannel</code> indicates that values shall be commited.
+	 * <p>
+	 * 
+	 * The adapted bean properties will not be observed; therefore we don't need
+	 * to invoke <code>PropertyAdapter.release</code>
+	 * 
+	 * @param settings
+	 *            holds the properties for the tree manipulation
+	 * @param triggerChannel
+	 *            indicates a commit or flush of the buffered values
+	 * @see PropertyAdapter
+	 * @see BufferedValueModel
+	 * @see ToggleButtonAdapter
+	 */
+	private void initComponents(PresentationSettings settings,
+			ValueModel triggerChannel) {
 
-        autoCollapseBox = new JCheckBox(ResourceUtils
-                .getString("generalTabBuilder.autocollapse.text")); //$NON-NLS-1$
-        autoCollapseBox
-                .setModel(new ToggleButtonAdapter(
-                        new BufferedValueModel(
-                                new PropertyAdapter(
-                                        settings,
-                                        PresentationSettings.PROPERTYNAME_COLLAPSE_DESELECTED_PATHS),
-                                triggerChannel)));
+		showTipsBox = BasicComponentFactory.createCheckBox(
+				new BufferedValueModel(TipOfTheDayDialog.showingTipsModel(),
+						settingsModel.getTriggerChannel()), ResourceUtils
+						.getString("generalTabBuilder.showtipofday.text"));//$NON-NLS-1$
 
-    }
+		autoExpandBox = BasicComponentFactory
+				.createCheckBox(
+						settingsModel
+								.getBufferedModel(PresentationSettings.PROPERTYNAME_EXPAND_SELECTED_PATHS),
+						ResourceUtils
+								.getString("generalTabBuilder.autoexpand.text"));//$NON-NLS-1$
 
-    // Building *************************************************************
+		autoCollapseBox = BasicComponentFactory
+				.createCheckBox(
+						settingsModel
+								.getBufferedModel(PresentationSettings.PROPERTYNAME_COLLAPSE_DESELECTED_PATHS),
+						ResourceUtils
+								.getString("generalTabBuilder.autocollapse.text"));//$NON-NLS-1$
 
-    /**
-     * Builds and returns the general panel using the previously created
-     * components. Uses a FormLayout to lay out the panel, and a PanelBuilder to
-     * add the UI components.
-     * 
-     * @return the general tab
-     */
-    JComponent build() {
-        FormLayout layout = new FormLayout("7dlu, left:pref, 0:grow",//$NON-NLS-1$
-                "pref, 2dlu, pref, 14dlu, " + "pref, 2dlu, pref, 2dlu, pref");//$NON-NLS-1$ //$NON-NLS-2$
+	}
 
-        PanelBuilder builder = new PanelBuilder(layout);
-        builder.setDefaultDialogBorder();
-        CellConstraints cc = new CellConstraints();
+	// Building *************************************************************
 
-        builder.addSeparator(ResourceUtils
-                .getString("generalTabBuilder.onStartup.text"), cc.xyw( //$NON-NLS-1$
-                1, 1, 3));
-        builder.add(showTipsBox, cc.xy(2, 3));
+	/**
+	 * Builds and returns the general panel using the previously created
+	 * components. Uses a FormLayout to lay out the panel, and a PanelBuilder to
+	 * add the UI components.
+	 * 
+	 * @return the general tab
+	 */
+	JComponent build() {
+		FormLayout layout = new FormLayout("7dlu, left:pref, 0:grow",//$NON-NLS-1$
+				"pref, 2dlu, pref, 14dlu, " + "pref, 2dlu, pref, 2dlu, pref");//$NON-NLS-1$ //$NON-NLS-2$
 
-        builder.addSeparator(ResourceUtils
-                .getString("generalTabBuilder.navigationTree.text"), cc.xyw(1, //$NON-NLS-1$
-                5, 3));
-        builder.add(autoExpandBox, cc.xy(2, 7));
-        builder.add(autoCollapseBox, cc.xy(2, 9));
+		PanelBuilder builder = new PanelBuilder(layout);
+		builder.setDefaultDialogBorder();
+		CellConstraints cc = new CellConstraints();
 
-        return builder.getPanel();
-    }
+		builder.addSeparator(ResourceUtils
+				.getString("generalTabBuilder.onStartup.text"), cc.xyw( //$NON-NLS-1$
+				1, 1, 3));
+		builder.add(showTipsBox, cc.xy(2, 3));
+
+		builder.addSeparator(ResourceUtils
+				.getString("generalTabBuilder.navigationTree.text"), cc.xyw(1, //$NON-NLS-1$
+				5, 3));
+		builder.add(autoExpandBox, cc.xy(2, 7));
+		builder.add(autoCollapseBox, cc.xy(2, 9));
+
+		return builder.getPanel();
+	}
 
 }
