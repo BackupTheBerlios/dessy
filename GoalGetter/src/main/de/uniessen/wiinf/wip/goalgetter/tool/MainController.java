@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: MainController.java,v 1.2 2004/07/12 12:35:12 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -24,6 +24,7 @@ import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.File;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -33,6 +34,7 @@ import com.jgoodies.uifextras.convenience.DefaultAboutDialog;
 import com.jgoodies.uifextras.convenience.SetupManager;
 import com.jgoodies.uifextras.convenience.TipOfTheDayDialog;
 
+import de.uniessen.wiinf.wip.chart.DessyChart;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
 import de.uniessen.wiinf.wip.goalgetter.domain.ProjectFactory;
 import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
@@ -45,7 +47,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class MainController {
@@ -197,8 +199,16 @@ public final class MainController {
      * Adds a segment as child under the selected node.
      */
     void showSensitivityAnalysis() {
-        // mainModule().addActionNode();
-        showMessage("Show Sensitivity Analysis performed.");
+    	//mainModule.addAnalyseNode();
+    	DessyChart chart = new DessyChart();
+    	JDialog d = new JDialog();
+    	d.setSize(300,300);
+    	d.setLocationRelativeTo(getDefaultParentFrame());
+    	d.getContentPane().add(chart.getChartPanel());
+    	d.show();
+    	//JOptionPane.showMessageDialog(getDefaultParentFrame(), what);
+    	
+    	//showMessage("Show Sensitivity Analysis performed.");
     }
 
     /**
