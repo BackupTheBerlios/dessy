@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainPageBuilder.java,v 1.8 2004/08/16 11:25:22 moleman Exp $
+ * $Id: MainPageBuilder.java,v 1.9 2004/09/08 18:31:34 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -41,14 +41,14 @@ import com.jgoodies.uifextras.util.UIFactory;
 
 import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
 import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
-import de.uniessen.wiinf.wip.goalgetter.view.editor.ActionContainerEditor;
-import de.uniessen.wiinf.wip.goalgetter.view.editor.ActionEditor;
+import de.uniessen.wiinf.wip.goalgetter.view.editor.ActionByAlternativeEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.AlternativeContainerEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.AlternativeEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.DescriptionEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.EditorPanel;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.GoalContainerEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.GoalEditor;
+import de.uniessen.wiinf.wip.goalgetter.view.editor.ResultsPanel;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
 
 /**
@@ -58,7 +58,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 
@@ -100,6 +100,8 @@ public final class MainPageBuilder {
 
     private JLabel statusField;
 
+    private ResultsPanel resultsPanel;
+
     // Instance Creation ******************************************************
 
     /**
@@ -118,6 +120,10 @@ public final class MainPageBuilder {
         mainModule.getHelpModule().addPropertyChangeListener(
                 DynamicHelpModule.PROPERTYNAME_HELP_NAVIGATOR_VISIBLE,
                 new HelpNavigatorVisibilityChangeHandler());
+
+        mainModule.addPropertyChangeListener(
+                MainModule.PROPERTYNAME_RESULTSPANEL_VISIBLE,
+                new ResultPanelShowChangeHandler());
 
     }
 
@@ -207,13 +213,22 @@ public final class MainPageBuilder {
         editorPanel.addEditor(new DescriptionEditor());
         editorPanel.addEditor(new GoalEditor());
         editorPanel.addEditor(new AlternativeEditor());
-        editorPanel.addEditor(new ActionEditor());
+        editorPanel.addEditor(new ActionByAlternativeEditor());
         editorPanel.addEditor(new GoalContainerEditor());
         editorPanel.addEditor(new AlternativeContainerEditor());
-        editorPanel.addEditor(new ActionContainerEditor());
-
+        //     editorPanel.addEditor(new ActionContainerEditor());
+        resultsPanel = new ResultsPanel();
+        editorPanel.addEditor(resultsPanel);
         editorPanel.setActiveEditor(welcomePanel);
         return editorPanel;
+    }
+
+    private void showResultPanel() {
+       // editorPanel.getActiveEditor().deactivate();
+        resultsPanel.setModel(module.getProject());
+        resultsPanel.activate();
+        editorPanel.setActiveEditor(resultsPanel);        
+       
     }
 
     /**
@@ -329,7 +344,6 @@ public final class MainPageBuilder {
 
     }
 
-   
     private boolean isHelpNavigatorVisible() {
         return navigatorHelpSplitPane.getTopComponent() != null;
     }
@@ -341,7 +355,7 @@ public final class MainPageBuilder {
      * @author tfranz
      * @author jsprenger
      * 
-     * @version $Revision: 1.8 $
+     * @version $Revision: 1.9 $
      *  
      */
     private class HelpVisibilityChangeHandler implements PropertyChangeListener {
@@ -366,7 +380,7 @@ public final class MainPageBuilder {
      * @author tfranz
      * @author jsprenger
      * 
-     * @version $Revision: 1.8 $
+     * @version $Revision: 1.9 $
      *  
      */
     private class HelpNavigatorVisibilityChangeHandler implements
@@ -380,8 +394,23 @@ public final class MainPageBuilder {
          *            describes the property change
          */
         public void propertyChange(PropertyChangeEvent evt) {
-            boolean visible = ((Boolean) evt.getNewValue()).booleanValue();            
+            boolean visible = ((Boolean) evt.getNewValue()).booleanValue();
             setHelpNavigatorVisible(visible);
+        }
+    }
+
+    private class ResultPanelShowChangeHandler implements
+            PropertyChangeListener {
+
+        /**
+         * The module's help visibility has changed. Show or hide the help
+         * viewer.
+         * 
+         * @param evt
+         *            describes the property change
+         */
+        public void propertyChange(PropertyChangeEvent evt) {
+            showResultPanel();
         }
     }
 
@@ -402,10 +431,8 @@ public final class MainPageBuilder {
             //                return;
             ComponentTreeUtils.updateComponentTreeUI(editorHelpSplitPane);
             // if (navigatorHelpSplitPane == null || isHelpNavigatorVisible())
-            ComponentTreeUtils.updateComponentTreeUI(navigatorHelpSplitPane);        
-               
-            
-            
+            ComponentTreeUtils.updateComponentTreeUI(navigatorHelpSplitPane);
+
         }
 
     }

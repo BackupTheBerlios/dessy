@@ -16,12 +16,13 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.14 2004/08/22 11:33:18 jsprenger Exp $
+ * $Id: MainController.java,v 1.15 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
 import java.awt.Frame;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -35,6 +36,8 @@ import com.jgoodies.uifextras.convenience.SetupManager;
 import com.jgoodies.uifextras.convenience.TipOfTheDayDialog;
 import com.jgoodies.uifextras.printing.PrintManager;
 
+import de.uniessen.wiinf.wip.goalgetter.domain.Action;
+import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Constants;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
 import de.uniessen.wiinf.wip.goalgetter.domain.ProjectFactory;
@@ -52,7 +55,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  *  
  */
 public final class MainController {
@@ -161,16 +164,16 @@ public final class MainController {
      * Prints a project summary.
      */
     void print() {
-        showMessage("Print performed.");
+        //  showMessage("Print performed.");
+        getMainModule().print();
     }
 
     /**
-     * Opens a print dialog, then prints a project summary to the choosen
-     * printer.
+     * Opens a print dialog
      */
     void openPrintDialog() {
         PrintManager.openPageSetupDialog();
-        showMessage("Open print dialog performed.");
+        // showMessage("Open print dialog performed.");
     }
 
     /**
@@ -198,12 +201,12 @@ public final class MainController {
     /**
      * Adds a goal as child under the selected node.
      */
-    void addGoal() {        
+    void addGoal() {
         String identifier = JOptionPane.showInputDialog(
                 getDefaultParentFrame(), "Please enter the name for the goal");
         if (identifier != null) {
             mainModule.addGoal(identifier);
-        }       
+        }
     }
 
     /**
@@ -215,7 +218,7 @@ public final class MainController {
                 "Please enter the name for the alternative");
         if (identifier != null) {
             mainModule.addAlternative(identifier);
-        }       
+        }
     }
 
     /**
@@ -244,46 +247,56 @@ public final class MainController {
 
         // TODO: anpassen an echte Datenstruktur...
         List col = new ArrayList();
-        SensitivityElements e;
-        String nameX = "Alternative", nameY = "Kosten";
-
-        e = new SensitivityElements("Peter");
-        e.addValues("Handlung 1", "500");
-        e.addValues("Handlung 2", "700");
-        e.addValues("Handlung 3", "1000");
-        col.add(e);
-
-        e = new SensitivityElements("Klaus");
-        e.addValues("Handlung 1", "100");
-        e.addValues("Handlung 2", "2000");
-        e.addValues("Handlung 3", "900");
-        col.add(e);
+        SensitivityElements e;        
+        Iterator iterator = getMainModule().getProject().getAlternatives().iterator();
         
-        e = new SensitivityElements("test");
-        e.addValues("Handlung 1", "10");
-        e.addValues("Handlung 2", "200");
-        e.addValues("Handlung 3", "90");
-        col.add(e);
+        while (iterator.hasNext()) {
+            Alternative anAlternative = (Alternative) iterator.next();
+            e = new SensitivityElements(anAlternative.getIdentifier());
+            
+            Iterator actionsIterator = getMainModule().getProject().getActionContainer().getActionsFor(anAlternative).iterator();
+            while (actionsIterator.hasNext()) {              
+                Action anAction = (Action) actionsIterator.next();
+                String name = anAction.getName();
+                if(name==null)
+                    name=""; //$NON-NLS-1$
+                e.addValues(name,Integer.toString(anAction.paymentAmount()));               
+            }
+            col.add(e);
+        }
+        
+
+//        e = new SensitivityElements("Peter");
+//        e.addValues("Handlung 1", "500");
+//        e.addValues("Handlung 2", "700");
+//        e.addValues("Handlung 3", "1000");
+//        col.add(e);
+//
+//        e = new SensitivityElements("Klaus");
+//        e.addValues("Handlung 1", "100");
+//        e.addValues("Handlung 2", "2000");
+//        e.addValues("Handlung 3", "900");
+//        col.add(e);
+//
+//        e = new SensitivityElements("test");
+//        e.addValues("Handlung 1", "10");
+//        e.addValues("Handlung 2", "200");
+//        e.addValues("Handlung 3", "90");
+//        col.add(e);
 
         // end new Elements
-        new SensitivityAnalysisDialog(getDefaultParentFrame(), col, nameX,
-                nameY).open();
+        
+        new SensitivityAnalysisDialog(getDefaultParentFrame(), col,
+                "Alternative", "Zahlung").open();
 
-        //        SensitivityAnalysisChart chart = new SensitivityAnalysisChart();
-        //        JDialog d = new JDialog();
-        //        d.setSize(300, 300);
-        //        d.setLocationRelativeTo(getDefaultParentFrame());
-        //        d.getContentPane().add(chart.getChartPanel());
-        //        d.setVisible(true);
 
     }
 
     /**
      * Adds a segment as child under the selected node.
      */
-    void showReport() {
-        // mainModule().addActionNode();
-        showMessage("Show Report performed.");
+    void showReport() {      
+        mainModule.showReport();
     }
 
     /**
@@ -336,8 +349,8 @@ public final class MainController {
     void closeDynamicHelpNavigator() {
         getMainModule().getHelpModule().setHelpNavigatorVisible(false);
         getDefaultParentFrame().repaint(); // ensure the correct toggle state
-                                           // for dynamic help menu button is
-                                           // set.
+        // for dynamic help menu button is
+        // set.
     }
 
     // Helper Code **********************************************************
@@ -354,6 +367,9 @@ public final class MainController {
 
     // Accessing Collaborators **********************************************
 
+    /** Answers the main Module
+     * @return main Module
+     */
     public MainModule getMainModule() {
         return mainModule;
     }

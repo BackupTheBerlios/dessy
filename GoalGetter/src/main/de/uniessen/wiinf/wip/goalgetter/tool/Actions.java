@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.8 2004/08/16 11:25:22 moleman Exp $
+ * $Id: Actions.java,v 1.9 2004/09/08 18:31:34 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -52,7 +52,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 /**
@@ -61,7 +61,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class Actions {
@@ -428,9 +428,7 @@ public final class Actions {
             } else if (id.equals(SHOW_SENSITIVITYANALYSIS_ID)) {
                 getController().showSensitivityAnalysis();
             } else if (id.equals(SHOW_REPORT_ID)) {
-                getController().showReport();
-                //            } else if (id.equals(NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID)) {
-                //                System.out.println("die modusaction gibt es");
+                getController().showReport();               
             } else {
                 Logger.getLogger("Actions").warning("Unknown action: " + id);//$NON-NLS-1$ //$NON-NLS-2$
             }

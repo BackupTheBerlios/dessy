@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionAlternativeNode.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: ActionAlternativeNode.java,v 1.3 2004/09/08 18:31:34 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -24,7 +24,9 @@ package de.uniessen.wiinf.wip.goalgetter.tool.node;
 import javax.swing.Icon;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
+import de.uniessen.wiinf.wip.goalgetter.tool.ActionContainerByAlternative;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.view.editor.ActionByAlternativeEditor;
 
 /**
  * 
@@ -33,7 +35,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class ActionAlternativeNode extends AbstractTreeNode {
@@ -48,8 +50,8 @@ public final class ActionAlternativeNode extends AbstractTreeNode {
      * @param alternative
      *            the associated model, an instance of Alternative
      */
-    public ActionAlternativeNode(NavigationNode parent, Alternative alternative) {
-        super(parent, alternative);
+    public ActionAlternativeNode(NavigationNode parent, ActionContainerByAlternative ac) {
+        super(parent, ac);
     }
 
     // Implementing the NavigationNode Interface ******************************
@@ -60,7 +62,7 @@ public final class ActionAlternativeNode extends AbstractTreeNode {
      * @return this node's name
      */
     public String getName() {
-        return getAlternative().getIdentifier();
+        return getAlternatives().getName();
     }
 
     // ************************************************************************
@@ -85,8 +87,8 @@ public final class ActionAlternativeNode extends AbstractTreeNode {
      * @return this node's associated Action instance.
      * @see NavigationNode#getModel()
      */
-    public Alternative getAlternative() {
-        return (Alternative) getModel();
+    public ActionContainerByAlternative getAlternatives() {
+        return (ActionContainerByAlternative) getModel();
     }
 
 }

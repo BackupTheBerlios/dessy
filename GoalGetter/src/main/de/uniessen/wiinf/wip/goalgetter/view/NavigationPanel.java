@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: NavigationPanel.java,v 1.2 2004/08/16 12:51:40 moleman Exp $
+ * $Id: NavigationPanel.java,v 1.3 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -62,7 +62,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public class NavigationPanel extends SimpleInternalFrame {
@@ -80,7 +80,7 @@ public class NavigationPanel extends SimpleInternalFrame {
 
     /**
      * Refers to the tree that displays the navigation nodes.
-     * 
+     *  
      */
     private UIFTree tree;
 
@@ -97,10 +97,10 @@ public class NavigationPanel extends SimpleInternalFrame {
      *            provides the tree model and tree selection model
      */
     NavigationPanel(MainModule mainModule) {
-        super("Navigator");
+        super(ResourceUtils.getString("navigator.label")); //$NON-NLS-1$
         this.module = mainModule;
         initComponents();
-        setToolBar(buildToolBar());
+      //  setToolBar(buildToolBar());
         setContent(UIFactory.createStrippedScrollPane(buildContent()));
         setSelected(true);
 
@@ -114,7 +114,8 @@ public class NavigationPanel extends SimpleInternalFrame {
      * @return navigator toolbar
      */
     private JToolBar buildToolBar() {
-        ToolBarBuilder builder = new ToolBarBuilder("Navigator");
+        ToolBarBuilder builder = new ToolBarBuilder(ResourceUtils
+                .getString("navigator.label")); //$NON-NLS-1$
         builder.addToggle((ToggleAction) ActionManager
                 .get(Actions.NAVIGATOR_ACTIONS_BY_GOAL_ID));
         builder.addToggle((ToggleAction) ActionManager

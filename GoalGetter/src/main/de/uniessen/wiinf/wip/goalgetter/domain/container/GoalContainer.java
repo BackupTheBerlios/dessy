@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainer.java,v 1.3 2004/08/16 11:25:22 moleman Exp $
+ * $Id: GoalContainer.java,v 1.4 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -36,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class GoalContainer extends AbstractDomain {
@@ -134,7 +134,7 @@ public class GoalContainer extends AbstractDomain {
      * @param goal
      *            the Goal to remove
      */
-    public void removeGoal(String goal) {
+    public void removeGoal(Goal goal) {
         List oldGoals = getGoals();
         goals.remove(goal);
         List newGoals = getGoals();

@@ -16,15 +16,15 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerEditor.java,v 1.13 2004/08/16 12:51:40 moleman Exp $
+ * $Id: GoalContainerEditor.java,v 1.14 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
 import javax.swing.JScrollPane;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
-import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
@@ -39,7 +39,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.table.OverviewTable;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  *  
  */
 public class GoalContainerEditor extends AbstractEditor {
@@ -68,11 +68,11 @@ public class GoalContainerEditor extends AbstractEditor {
                 ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
         //   builder.appendRow(builder.getLineGapSpec());
-        // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
-        //builder.nextLine();
+         builder.appendRow(new RowSpec("fill:0dlu:grow")); //$NON-NLS-1$
+       // builder.nextLine();
 
         JScrollPane overviewPane = new JScrollPane(overviewTable);
-        builder.append(overviewPane);
+        builder.add(overviewPane);
 
     }
 

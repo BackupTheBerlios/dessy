@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainModule.java,v 1.5 2004/08/16 12:26:21 moleman Exp $
+ * $Id: MainModule.java,v 1.6 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -34,6 +34,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import com.jgoodies.binding.beans.Model;
 import com.jgoodies.uif.application.Application;
+import com.jgoodies.uif.util.ResourceUtils;
 import com.jgoodies.uifextras.convenience.SetupManager;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
@@ -50,7 +51,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.RootNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class MainModule extends Model {
@@ -78,7 +79,10 @@ public final class MainModule extends Model {
      * Bound Bean Property <code>PROPERTYNAME_NAVIGATION_TREE_MODEL</code>
      */
     public static final String PROPERTYNAME_NAVIGATION_TREE_MODEL = "navigationTreeModel"; //$NON-NLS-1$
-
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_RESULTSPANEL_VISIBLE</code>
+     */
+    public static final String PROPERTYNAME_RESULTSPANEL_VISIBLE = "resultspanelvisible";
     // Instance Fields ********************************************************
 
     /**
@@ -122,6 +126,7 @@ public final class MainModule extends Model {
      */
     private Class selectionType;
 
+
     /**
      * Holds the model for the navigation tree. It changes everytime this
      * module's project changes.
@@ -162,7 +167,8 @@ public final class MainModule extends Model {
      * selection and no tree model.
      */
     public MainModule() {
-        setNavigationTreeModel(createNavigationTreeModel(new Project("Empty")));
+        setNavigationTreeModel(createNavigationTreeModel(new Project(
+                ResourceUtils.getString("project.empty.text")))); //$NON-NLS-1$
         navigationTreeSelectionModel = new DefaultTreeSelectionModel();
         navigationTreeSelectionModel
                 .setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -238,6 +244,7 @@ public final class MainModule extends Model {
      */
     public void addGoal(String identifier) {
         Goal g = new Goal(identifier);
+        g.setIntensity(""); //$NON-NLS-1$
         project.addGoal(g);
         setNavigationTreeModel(createNavigationTreeModel(project));
 
@@ -252,7 +259,7 @@ public final class MainModule extends Model {
      * @see Alternative
      */
     public void addAlternative(String identifier) {
-        Alternative a = new Alternative(identifier);
+        Alternative a = new Alternative(identifier);        
         project.addAlternative(a);
 
         setNavigationTreeModel(createNavigationTreeModel(project));
@@ -426,7 +433,7 @@ public final class MainModule extends Model {
      */
     public void storeState() {
         Preferences prefs = Application.getUserPreferences();
-        getPresentationSettings().storeIn(prefs);      
+        getPresentationSettings().storeIn(prefs);
         SetupManager.incrementUsageCounter();
     }
 
@@ -492,6 +499,21 @@ public final class MainModule extends Model {
             setNavigationTreeModel(createNavigationTreeModel(project));
         }
 
+    }
+
+    /**
+     * 
+     */
+    public void showReport() {
+      firePropertyChange(PROPERTYNAME_RESULTSPANEL_VISIBLE,false,true);        
+    }
+
+    /**
+     * 
+     */
+    public void print() {
+      // Application.getMainFrame().
+        
     }
 
 }

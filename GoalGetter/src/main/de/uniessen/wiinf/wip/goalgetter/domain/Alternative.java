@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Alternative.java,v 1.7 2004/08/16 12:26:21 moleman Exp $
+ * $Id: Alternative.java,v 1.8 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -45,7 +45,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public class Alternative extends AbstractDomain {
@@ -180,7 +180,10 @@ public class Alternative extends AbstractDomain {
      *            the Goal whose intensity is to be removed
      */
     public void removeIntensity(Goal goal) {
-        removeIntensity(goal);
+        Map oldValue = getIntensityMap();
+        intensityMap.remove(goal);
+        Map newValue = getIntensityMap();
+        firePropertyChange(PROPERTYNAME_INTENSITY, oldValue, newValue);
     }
 
     /*

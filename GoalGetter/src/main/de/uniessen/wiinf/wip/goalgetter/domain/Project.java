@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Project.java,v 1.7 2004/08/16 12:26:21 moleman Exp $
+ * $Id: Project.java,v 1.8 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.jgoodies.binding.beans.Model;
+import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.container.ActionContainer;
 import de.uniessen.wiinf.wip.goalgetter.domain.container.AlternativeContainer;
@@ -45,7 +46,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public final class Project extends Model {
@@ -70,9 +71,9 @@ public final class Project extends Model {
     /**
      * Holds a list of actions
      */
-    private ActionContainer actionContainerByGoal;
+    private ActionContainer actionContainer;
 
-    private ActionContainer actionContainerByAlternative;
+    // private ActionContainer actionContainerByAlternative;
 
     /**
      * The file used to save this project to.
@@ -82,7 +83,7 @@ public final class Project extends Model {
     // Instance Creation ******************************************************
 
     /**
-     * Constructs a <code>Project</code> 
+     * Constructs a <code>Project</code>
      */
     public Project() {
         this(null);
@@ -97,11 +98,13 @@ public final class Project extends Model {
      */
     public Project(String name) {
         this.description = new Description(name);
-        this.goalContainer = new GoalContainer("Goals");
-        this.alternativeContainer = new AlternativeContainer("Alternatives");
-        this.actionContainerByGoal = new ActionContainer("Actions by Goal");
-        this.actionContainerByAlternative = new ActionContainer(
-                "Actions by Alternative");
+        this.goalContainer = new GoalContainer(ResourceUtils
+                .getString("project.goalContainer.name.text")); //$NON-NLS-1$
+        this.alternativeContainer = new AlternativeContainer(ResourceUtils
+                .getString("project.alternativeContainer.name.text")); //$NON-NLS-1$
+        this.actionContainer = new ActionContainer(ResourceUtils
+                .getString("project.actionContainer.name.text")); //$NON-NLS-1$
+
     }
 
     // The public API *********************************************************
@@ -158,7 +161,7 @@ public final class Project extends Model {
      *            the goal to remove
      */
     public void removeGoal(Goal goal) {
-        goalContainer.removeGoal(goal.getIdentifier());
+        goalContainer.removeGoal(goal);
 
         Iterator iterator = alternativeContainer.getAlternatives().iterator();
         while (iterator.hasNext()) {
@@ -203,8 +206,8 @@ public final class Project extends Model {
             Goal g = (Goal) iterator.next();
             alternative.putIntensity(g, ""); // default intensity //$NON-NLS-1$
             Action ac = new Action(g, alternative);
-            actionContainerByGoal.addAction(ac);
-            actionContainerByAlternative.addAction(ac);
+            actionContainer.addAction(ac);
+            //  actionContainerByAlternative.addAction(ac);
         }
         alternativeContainer.addAlternative(alternative);
 
@@ -253,21 +256,24 @@ public final class Project extends Model {
      * 
      * @return an unmodifiable list of this project's actions.
      */
-    public List getActionsbyGoal() {
-        return Collections.unmodifiableList(actionContainerByGoal.getActions());
-    }
-
-    public List getActionsbyAlternative() {
-        return Collections.unmodifiableList(actionContainerByAlternative
-                .getActions());
-    }
-
-    public ActionContainer getActionsbyAlternativeContainer() {
-        return actionContainerByAlternative;
-    }
-
-    public ActionContainer getActionsbyGoalContainer() {
-        return actionContainerByGoal;
+    //    public List getActionsbyGoal() {
+    //        return Collections.unmodifiableList(actionContainerByGoal.getActions());
+    //    }
+    //
+    //    public List getActionsbyAlternative() {
+    //        return Collections.unmodifiableList(actionContainerByAlternative
+    //                .getActions());
+    //    }
+    //
+    //    public ActionContainer getActionsbyAlternativeContainer() {
+    //        return actionContainerByAlternative;
+    //    }
+    //
+    //    public ActionContainer getActionsbyGoalContainer() {
+    //        return actionContainerByGoal;
+    //    }
+    public ActionContainer getActionContainer() {
+        return actionContainer;
     }
 
     //    /**
@@ -290,7 +296,24 @@ public final class Project extends Model {
     //        actionContainer.removeAction(action);
     //    }
 
-   
+    /**
+     * Finds and answers the alternative with the least payment amount.
+     * 
+     * @return alternative with least payment amount
+     */
+    public Alternative bestAlternative() {
+        int minPayment = Integer.MAX_VALUE;
+        Alternative bestAlternative = null;
+        Iterator iterator = alternativeContainer.getAlternatives().iterator();
+        while (iterator.hasNext()) {
+            Alternative anAlternative = (Alternative) iterator.next();
+            if (actionContainer.paymentFor(anAlternative) < minPayment) {
+                minPayment = actionContainer.paymentFor(anAlternative);
+                bestAlternative = anAlternative;
+            }
+        }
+        return bestAlternative;
+    }
 
     // Reading and Saving *****************************************************
 
@@ -305,8 +328,8 @@ public final class Project extends Model {
         //TODO error handling for other file formats
         XMLDecoder dec;
         try {
-            dec = new XMLDecoder(new BufferedInputStream(new FileInputStream(
-                    f)));
+            dec = new XMLDecoder(
+                    new BufferedInputStream(new FileInputStream(f)));
             Object importObject = dec.readObject();
             dec.close();
 
@@ -335,7 +358,7 @@ public final class Project extends Model {
      * @param aFile
      *            the file to save to
      */
-    public void saveAs(File aFile) {        
+    public void saveAs(File aFile) {
         setFile(aFile);
         System.out.println(file);
         XMLEncoder enc;

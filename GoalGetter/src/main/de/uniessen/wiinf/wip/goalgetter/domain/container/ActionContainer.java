@@ -16,13 +16,17 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  *
- * $Id: ActionContainer.java,v 1.3 2004/08/16 12:26:21 moleman Exp $
+ * $Id: ActionContainer.java,v 1.4 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.ListModel;
+
+import com.jgoodies.binding.list.ArrayListModel;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain;
 import de.uniessen.wiinf.wip.goalgetter.domain.Action;
@@ -37,14 +41,14 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class ActionContainer extends AbstractDomain {
 
     private static final long serialVersionUID = 1L;
 
-    private List actions = new ArrayList();
+    private ArrayListModel actions = new ArrayListModel();
 
     private String identifier;
 
@@ -57,9 +61,9 @@ public class ActionContainer extends AbstractDomain {
      * Bound Bean Property <code>PROPERTYNAME_ACTIONS</code>
      */
     public static final String PROPERTYNAME_ACTIONS = "actions";//$NON-NLS-1$
-    
+
     /**
-     * 
+     *  
      */
     public ActionContainer() {
         this(null);
@@ -84,10 +88,12 @@ public class ActionContainer extends AbstractDomain {
         return identifier;
     }
 
-    /** Answers all Actions
+    /**
+     * Answers all Actions
+     * 
      * @return all Actions
      */
-    public List getActions() {
+    public ArrayListModel getActions() {
         return actions;
     }
 
@@ -104,16 +110,21 @@ public class ActionContainer extends AbstractDomain {
                 newIdentifier);
     }
 
-    /** Sets a new List of Actions
-     * @param newActions the List of Actions to be set instead of the current List
+    /**
+     * Sets a new List of Actions
+     * 
+     * @param newActions
+     *            the List of Actions to be set instead of the current List
      */
-    public void setActions(List newActions) {        
+    public void setActions(ArrayListModel newActions) {
         List oldActions = getActions();
         actions = newActions;
         firePropertyChange(PROPERTYNAME_ACTIONS, oldActions, newActions);
     }
 
-    /** Adds an action to the Collection
+    /**
+     * Adds an action to the Collection
+     * 
      * @param newAction
      */
     public void addAction(Action newAction) {
@@ -123,8 +134,11 @@ public class ActionContainer extends AbstractDomain {
         firePropertyChange(PROPERTYNAME_ACTIONS, oldActions, newActions);
     }
 
-    /**Removes an Action from the Collection
-     * @param action the Action to remove
+    /**
+     * Removes an Action from the Collection
+     * 
+     * @param action
+     *            the Action to remove
      */
     public void removeAction(Action action) {
         List oldActions = getActions();
@@ -133,7 +147,9 @@ public class ActionContainer extends AbstractDomain {
         firePropertyChange(PROPERTYNAME_ACTIONS, oldActions, newActions);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     public String toString() {
@@ -191,8 +207,8 @@ public class ActionContainer extends AbstractDomain {
      * @throws IllegalStateException
      *             if the Goal does not match any of the Actions.
      */
-    public List getActionsFor(Goal g) {
-        List resultList = new ArrayList();
+    public ArrayListModel getActionsFor(Goal g) {
+        ArrayListModel resultList = new ArrayListModel();
         Iterator iterator = actions.iterator();
         while (iterator.hasNext()) {
             Action action = (Action) iterator.next();
@@ -216,8 +232,8 @@ public class ActionContainer extends AbstractDomain {
      * @throws IllegalStateException
      *             if the Alternative does not match any of the Actions.
      */
-    public List getActionsFor(Alternative a) {
-        List resultList = new ArrayList();
+    public ArrayListModel getActionsFor(Alternative a) {
+        ArrayListModel resultList = new ArrayListModel();
         Iterator iterator = actions.iterator();
         while (iterator.hasNext()) {
             Action action = (Action) iterator.next();
@@ -255,4 +271,31 @@ public class ActionContainer extends AbstractDomain {
         throw new IllegalStateException(
                 "For this combination of Goal and Alternative is no Action available. This should never happen."); //$NON-NLS-1$
     }
+
+    /**
+     * @return
+     */
+    public ArrayListModel getActionByGoalListModel() {
+        return new ArrayListModel();
+    }
+
+    /**
+     * Comoutes the payment amount for the given alternative
+     * 
+     * @param a
+     *            alternative to compute the payment for
+     * @return sum of the payments of all actions for the alternative
+     */
+    public int paymentFor(Alternative a) {
+        int payment = 0;
+        List l = getActionsFor(a);
+        Iterator iterator = l.iterator();
+        while (iterator.hasNext()) {
+            Action anAction = (Action) iterator.next();
+            payment += anAction.paymentAmount();
+        }
+        return payment;
+    }
+    
+
 }

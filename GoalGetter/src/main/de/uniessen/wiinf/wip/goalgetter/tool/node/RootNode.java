@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: RootNode.java,v 1.8 2004/08/16 12:26:21 moleman Exp $
+ * $Id: RootNode.java,v 1.9 2004/09/08 18:31:34 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -28,7 +28,7 @@ import javax.swing.Icon;
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
-import de.uniessen.wiinf.wip.goalgetter.tool.ActionPresentationMode;
+import de.uniessen.wiinf.wip.goalgetter.tool.ActionContainerByAlternative;
 import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
 
 /**
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class RootNode extends AbstractTreeNode {
@@ -70,12 +70,12 @@ public final class RootNode extends AbstractTreeNode {
      *            the project to build the tree from
      */
     private void buildNodesFrom(Project project) {
-        Iterator i ;
+        Iterator i;
         add(new DescriptionNode(this, project.getDescription()));
 
         GoalContainerNode masterGoalNode = new GoalContainerNode(this, project
                 .getGoalContainer());
-        for ( i = project.getGoals().iterator(); i.hasNext();) {
+        for (i = project.getGoals().iterator(); i.hasNext();) {
             Goal goal = (Goal) i.next();
             GoalNode node = new GoalNode(masterGoalNode, goal);
             masterGoalNode.add(node);
@@ -84,48 +84,52 @@ public final class RootNode extends AbstractTreeNode {
 
         AlternativeContainerNode masterAlternativeNode = new AlternativeContainerNode(
                 this, project.getAlternativeContainer());
-        
-        i= project.getAlternatives().iterator();
-        
+
+        i = project.getAlternatives().iterator();
+
         while (i.hasNext()) {
-            Alternative alternative = (Alternative) i.next();          
+            Alternative alternative = (Alternative) i.next();
             AlternativeNode node = new AlternativeNode(masterAlternativeNode,
                     alternative);
             masterAlternativeNode.add(node);
-            
+
         }
 
         add(masterAlternativeNode);
 
         ActionContainerNode masterActionNode;
+        //TODO decide whether action display types should be kept.
+        //        if (false && presentationSettings != null
+        //                && presentationSettings.getActionPresentationMode() ==
+        // ActionPresentationMode.GOAL) {
+        //
+        //            masterActionNode = new ActionContainerNode(this, project
+        //                    .getActionContainer());
+        //            for ( i = project.getGoalContainer().getGoals().iterator(); i
+        //                    .hasNext();) {
+        //                Goal goal = (Goal) i.next();
+        //                ActionContainerByGoal acbg = new
+        // ActionContainerByGoal(project.getActionContainer(),goal);
+        //                ActionGoalNode node = new ActionGoalNode(masterActionNode, acbg);
+        //                masterActionNode.add(node);
+        //            }
+        //        } else {
+        
+        masterActionNode = new ActionContainerNode(this, project
+                .getActionContainer());
 
-        if (presentationSettings != null
-                && presentationSettings.getActionPresentationMode() == ActionPresentationMode.GOAL) { 
+        i = project.getAlternativeContainer().getAlternatives().iterator();
 
-            masterActionNode = new ActionContainerNode(this, project
-                    .getActionsbyGoalContainer());
-            for ( i = project.getGoalContainer().getGoals().iterator(); i
-                    .hasNext();) {
-                Goal goal = (Goal) i.next();
-                ActionGoalNode node = new ActionGoalNode(masterActionNode, goal);
-                masterActionNode.add(node);
-            }
-        } else {
-            masterActionNode = new ActionContainerNode(this, project
-                    .getActionsbyAlternativeContainer());
-            
-            
-            i= project.getAlternativeContainer().getAlternatives().iterator();
-          
-            while (i.hasNext()) {
-            
-           
-                Alternative alternative = (Alternative) i.next();
-                ActionAlternativeNode node = new ActionAlternativeNode(
-                        masterActionNode, alternative);
-                masterActionNode.add(node);
-            }
+        while (i.hasNext()) {
+
+            Alternative alternative = (Alternative) i.next();
+            ActionContainerByAlternative acba = new
+            ActionContainerByAlternative(project.getActionContainer(),alternative);
+            ActionAlternativeNode node = new ActionAlternativeNode(
+                    masterActionNode, acba);
+            masterActionNode.add(node);
         }
+        // }
 
         add(masterActionNode);
 

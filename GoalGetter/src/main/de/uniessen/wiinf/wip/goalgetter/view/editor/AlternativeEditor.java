@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeEditor.java,v 1.9 2004/08/15 15:13:34 moleman Exp $
+ * $Id: AlternativeEditor.java,v 1.10 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *  
  */
 public final class AlternativeEditor extends AbstractEditor {
@@ -128,14 +128,14 @@ public final class AlternativeEditor extends AbstractEditor {
         intensitiesPanel.removeAll();
 
         FormLayout layout = new FormLayout(
-                "right:max(40dlu;p), 4dlu, 0:grow:0.7, 4dlu, 0:grow:0.3");//$NON-NLS-1$
+                "right:max(80dlu;p), 4dlu, 0:grow:0.7, 4dlu, 0:grow:0.3");//$NON-NLS-1$
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), intensitiesPanel);
         builder.setBorder(Borders.EMPTY_BORDER);
 
         builder.append("", new JLabel(identifierField.getText()), new JLabel( //$NON-NLS-1$
-                "Sollzustand"));
+                "Zielwert"));
         builder.nextLine();
 
         Iterator iterator = getAlternative().getGoals().iterator();
@@ -190,7 +190,7 @@ public final class AlternativeEditor extends AbstractEditor {
 
         java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
         FormLayout layout = new FormLayout(
-                "right:max(40dlu;p), 4dlu, 160dlu:grow");//$NON-NLS-1$
+                "right:max(80dlu;p), 4dlu, 160dlu:grow");//$NON-NLS-1$
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
@@ -211,5 +211,21 @@ public final class AlternativeEditor extends AbstractEditor {
         builder.append(intensitiesPanel, 3);
 
     }
+    
+    /* (non-Javadoc)
+     * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#activate()
+     */
+    public void activate() {       
+        super.activate();
+        updateView();
+    }
+    
+    /* (non-Javadoc)
+     * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#deactivate()
+     */
+    public void deactivate() {       
+        super.deactivate();
+    }
+
 
 }

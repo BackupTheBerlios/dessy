@@ -16,19 +16,23 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.13 2004/08/16 11:25:22 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.14 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JScrollPane;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.container.AlternativeContainer;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
-import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.AlternativeContainerTableModel;
+import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.AlternativeContainerTableModelTransposed;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.table.AlternativeContainerEditorPopupAdapter;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.table.OverviewTable;
 
@@ -38,7 +42,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.table.OverviewTable;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
@@ -69,9 +73,9 @@ public class AlternativeContainerEditor extends AbstractEditor {
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
-
+        builder.appendRow(new RowSpec("fill:0dlu:grow")); //$NON-NLS-1$
         java.awt.Component overviewPane = new JScrollPane(overviewTable);
-        builder.append(overviewPane);
+        builder.add(overviewPane);
     }
 
     /**
@@ -82,6 +86,8 @@ public class AlternativeContainerEditor extends AbstractEditor {
         overviewTable
                 .addMouseListener(new AlternativeContainerEditorPopupAdapter());
         overviewTable.setHighlightColumn(0);
+        
+        addPropertyChangeListener(AlternativeContainer.PROPERTYNAME_ALTERNATIVES, new AlternativesChangedHandler());
     }
 
     /*
@@ -118,7 +124,7 @@ public class AlternativeContainerEditor extends AbstractEditor {
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#updateModel()
      */
     protected void updateModel() {
-        AlternativeContainerTableModel actm = new AlternativeContainerTableModel(
+        AlternativeContainerTableModelTransposed actm = new AlternativeContainerTableModelTransposed(
                 getAlternativeContainer().getAlternativesListModel());
         overviewTable.setModel(actm);
 
@@ -130,10 +136,37 @@ public class AlternativeContainerEditor extends AbstractEditor {
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#updateView()
      */
     protected void updateView() {
-        AlternativeContainerTableModel actm = new AlternativeContainerTableModel(
+        AlternativeContainerTableModelTransposed actm = new AlternativeContainerTableModelTransposed(
                 getAlternativeContainer().getAlternativesListModel());
         overviewTable.setModel(actm);
 
+    }
+    
+    /* (non-Javadoc)
+     * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#activate()
+     */
+    public void activate() {       
+        super.activate();
+        updateView();
+    }
+    
+    /* (non-Javadoc)
+     * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#deactivate()
+     */
+    public void deactivate() {       
+        super.deactivate();
+    }
+    
+    private class AlternativesChangedHandler implements PropertyChangeListener {
+
+        /* (non-Javadoc)
+         * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+         */
+        public void propertyChange(PropertyChangeEvent evt) {
+           System.out.println("hier höre ich was");
+            
+        }
+        
     }
 
 }

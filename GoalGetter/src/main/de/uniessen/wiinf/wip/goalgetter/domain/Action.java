@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Action.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
+ * $Id: Action.java,v 1.5 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -48,7 +48,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class Action extends AbstractDomain {
@@ -79,6 +79,10 @@ public class Action extends AbstractDomain {
      * Property constant for the result
      */
     public static final String PROPERTYNAME_RESULT = "result";//$NON-NLS-1$
+    
+   /** Property constant for the name
+    */
+   public static final String PROPERTYNAME_NAME = "name";//$NON-NLS-1$
 
     private String description;
 
@@ -91,6 +95,8 @@ public class Action extends AbstractDomain {
     private String paymentForTradeoff;
 
     private String result;
+    
+    private String name;
 
     /**
      * Constructor. it constructs an action for the given goal and alternative
@@ -103,6 +109,28 @@ public class Action extends AbstractDomain {
     public Action(Goal goal, Alternative alternative) {
         this.alternative = alternative;
         this.goal = goal;
+    }
+    
+    /**
+     * Accessor for name
+     * 
+     * @param name
+     *            The name to set.
+     */
+    public void setName(String name) {
+        String oldName = getName();
+        this.name = name;
+        firePropertyChange(PROPERTYNAME_NAME, oldName,
+                name);
+    }
+    
+    /**
+     * Accessor for name
+     * 
+     * @return Returns the name.
+     */
+    public String getName() {
+        return name;
     }
 
     /**
@@ -201,14 +229,18 @@ public class Action extends AbstractDomain {
                 newDescription);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     public String toString() {
         return super.toString() + ':' + getIdentifier();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
      */
     protected boolean isEmpty() {
@@ -216,25 +248,48 @@ public class Action extends AbstractDomain {
                 && ValidationUtils.isBlank(paymentForTradeoff);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
      */
     protected boolean isFilled() {
         return !ValidationUtils.isBlank(paymentForAction)
                 || !ValidationUtils.isBlank(paymentForTradeoff);
     }
-    
-    /** Answers the action's Goal
+
+    /**
+     * Answers the action's Goal
+     * 
      * @return the Goal this action belongs to
      */
-    public Goal getGoal(){
+    public Goal getGoal() {
         return goal;
     }
-    /** Answers the action's Alternative
+
+    /**
+     * Answers the action's Alternative
+     * 
      * @return the Alternative this action belongs to
      */
-    public Alternative getAlternative(){
+    public Alternative getAlternative() {
         return alternative;
+    }
+
+    /**
+     * Comuptes and Answers the difference of both payments. Payments for
+     * actions are costs, Payments for tradeoffs are incomes.
+     * 
+     * @return real costs. The difference between paymentForAction and
+     *         paymentForTradeOff
+     */
+    public int paymentAmount() {
+        String pfa = getPaymentForAction();
+        String pft = getPaymentForTradeoff();
+        pfa = (pfa != null) ? pfa : "0"; //$NON-NLS-1$
+        pft = (pft != null) ? pft : "0"; //$NON-NLS-1$
+        return Integer.parseInt(pfa) - Integer.parseInt(pft);
+
     }
 
 }

@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: AlternativeContainerTableModel.java,v 1.5 2004/08/22 16:00:06 moleman Exp $
+ * $Id: AlternativeContainerTableModel.java,v 1.6 2004/09/08 18:31:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
 
@@ -19,8 +19,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ListModel;
-
-import com.jgoodies.binding.adapter.TableAdapter;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+import javax.swing.table.AbstractTableModel;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
@@ -31,13 +32,13 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
-public class AlternativeContainerTableModel extends TableAdapter {
+public class AlternativeContainerTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = 1L;
-
+    private final ListModel listModel;
     private List columnNames;
 
     /**
@@ -47,7 +48,12 @@ public class AlternativeContainerTableModel extends TableAdapter {
      *            the ListModel to construct the TableModel for
      */
     public AlternativeContainerTableModel(ListModel listModel) {
-        super(listModel);
+        this.listModel   = listModel;	    
+	    if (listModel == null)
+	        throw new NullPointerException("The list model must not be null.");
+	    
+	    listModel.addListDataListener(createChangeHandler());
+	    
         this.columnNames = createColumnNames();
        
     }
@@ -142,8 +148,15 @@ public class AlternativeContainerTableModel extends TableAdapter {
      * @see #getRowCount()
      */
     public int getColumnCount() {
+       // System.out.println("colCount: "+columnNames.size());
         return columnNames.size();
     }
+    
+    public final int getRowCount() {
+     //   System.out.println("rowCount: "+listModel.getSize());
+        return listModel.getSize();
+    }
+
 
     public List getHighlightColumns() {
         List l = new ArrayList();
@@ -155,6 +168,85 @@ public class AlternativeContainerTableModel extends TableAdapter {
     private Goal getGoalAt(int i) {
         Alternative alternative = (Alternative) getRow(1);       
         return (Goal) (alternative.getGoals()).get(i - 1);
+    }
+    
+    
+    /**
+     * Returns the row at the specified row index.
+     * 
+     * @param index   row index in the underlying list model
+     * @return the row at the specified row index. 
+     */
+    protected final Object getRow(int index) {
+        return listModel.getElementAt(index);
+    }
+    
+    
+    
+    // Event Handling *******************************************************
+    
+    /**
+     * Creates and returns a listener that handles changes 
+     * in the underlying list model.
+     * 
+     * @return the listener that handles changes in the underlying ListModel
+     */
+    protected ListDataListener createChangeHandler() {
+        return new ListDataChangeHandler();
+    }
+    
+    /*
+     * Listens to subject changes and fires a contents change event.
+     */
+    private class ListDataChangeHandler implements ListDataListener {
+
+        /** 
+         * Sent after the indices in the index0,index1 
+         * interval have been inserted in the data model.
+         * The new interval includes both index0 and index1.
+         *
+         * @param evt  a <code>ListDataEvent</code> encapsulating the
+         *    event information
+         */
+        public void intervalAdded(ListDataEvent evt) {
+            columnNames = createColumnNames();
+            fireTableRowsInserted(evt.getIndex0(), evt.getIndex1());
+            fireTableStructureChanged();
+        }
+    
+        
+        /**
+         * Sent after the indices in the index0,index1 interval
+         * have been removed from the data model.  The interval 
+         * includes both index0 and index1.
+         *
+         * @param evt  a <code>ListDataEvent</code> encapsulating the
+         *    event information
+         */
+        public void intervalRemoved(ListDataEvent evt) {
+            columnNames = createColumnNames();
+            fireTableRowsDeleted(evt.getIndex0(), evt.getIndex1());
+            fireTableStructureChanged();
+        }
+    
+    
+        /** 
+         * Sent when the contents of the list has changed in a way 
+         * that's too complex to characterize with the previous 
+         * methods. For example, this is sent when an item has been
+         * replaced. Index0 and index1 bracket the change.
+         *
+         * @param evt  a <code>ListDataEvent</code> encapsulating the
+         *    event information
+         */
+        public void contentsChanged(ListDataEvent evt) {
+            columnNames = createColumnNames();
+            int firstRow = evt.getIndex0();
+            int lastRow = evt.getIndex1();
+            fireTableRowsUpdated(firstRow, lastRow);
+            fireTableStructureChanged();
+        }
+
     }
 
 }
