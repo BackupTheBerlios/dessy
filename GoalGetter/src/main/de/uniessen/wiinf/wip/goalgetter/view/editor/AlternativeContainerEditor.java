@@ -16,9 +16,12 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.2 2004/07/12 11:59:37 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,6 +30,8 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.AlternativeContainer;
+import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
+import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTableEntry;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 
 /**
@@ -35,7 +40,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
@@ -72,16 +77,34 @@ public class AlternativeContainerEditor extends AbstractEditor {
     private void initComponents() {
         //TODO table model
 
-        String rowData[][] = {
-
-        { "Availability", "April", "Jan-May" },
-                { "Knowledge", "C++", "Pascal" },
-                { "Salary", "11.000", "12.000" }
-
-        };
-        String columnNames[] = { "  ", "Klaus", "Peter" };
-
-        overviewTable = new JTable(rowData, columnNames);
+//        String rowData[][] = {
+//
+//        { "Availability", "April", "Jan-May" },
+//                { "Knowledge", "C++", "Pascal" },
+//                { "Salary", "11.000", "12.000" }
+//
+//        };
+//        String columnNames[] = { "  ", "Klaus", "Peter" };
+//
+//        overviewTable = new JTable(rowData, columnNames);
+       
+        List entries = new ArrayList();
+        // neue Zeile
+       OverviewTableEntry element = new OverviewTableEntry("Alternative","Klaus");
+       element.newElement("Availability"," June",java.lang.String.class);
+       element.newElement("Knowledge","java",java.lang.String.class);
+       element.newElement("Salary","12.000",java.lang.String.class);
+       entries.add(element);
+        // neue Zeile
+       element =  new OverviewTableEntry("Alternative","Peter");
+       element.newElement("Availability","June",java.lang.String.class);
+       element.newElement("Knowledge","java",java.lang.String.class);
+       element.newElement("Salary","12.000",java.lang.String.class);
+       entries.add(element);
+       // neue Zeile
+       
+        // erzeuge neue Tabelle
+       overviewTable = new OverviewTable(entries);
     }
 
     /*

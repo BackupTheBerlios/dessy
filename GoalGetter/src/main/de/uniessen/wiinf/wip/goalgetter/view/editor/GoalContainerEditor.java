@@ -16,10 +16,16 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerEditor.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: GoalContainerEditor.java,v 1.2 2004/07/12 11:59:37 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -27,6 +33,8 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.GoalContainer;
+import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
+import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTableEntry;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 
 /**
@@ -35,13 +43,13 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class GoalContainerEditor extends AbstractEditor {
 
     private JTable overviewTable;
-
+    
     public GoalContainerEditor() {
         super(Resources.GOAL_ICON, "Goals Overview");
     }
@@ -62,8 +70,10 @@ public class GoalContainerEditor extends AbstractEditor {
         builder.appendRow(builder.getLineGapSpec());
         // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
         builder.nextLine(2);
+        
         java.awt.Component overviewPane = new JScrollPane(overviewTable);
         builder.append(overviewPane, 3);
+      
     }
 
     /**
@@ -71,12 +81,35 @@ public class GoalContainerEditor extends AbstractEditor {
      */
     private void initComponents() {
         //TODO table model
-        String rowData[][] = { { "Availability", "=", "may - june" },
-                { "Knowledge", ">=", "Java" }, { "Salary", "<=", "10.000" } };
-        String columnNames[] = { "Goal", "operator", "intensity" };
-        overviewTable = new JTable(rowData, columnNames);
-
-    }
+        
+    	
+    	
+    	
+//    	String rowData[][] = { { "Availability", "=", "may - june" },
+//                { "Knowledge", ">=", "Java" }, { "Salary", "<=", "10.000" } };
+//        String columnNames[] = { "Goal", "operator", "intensity" };
+//        overviewTable = new JTable(rowData, columnNames);
+    	
+    	         
+         List entries = new ArrayList();
+          // neue Zeile
+         OverviewTableEntry element = new OverviewTableEntry("Goal","Availability");
+         element.newElement("Operator","=",java.lang.String.class);
+         element.newElement("Intensity","may - june",java.lang.String.class);
+         entries.add(element);
+          // neue Zeile
+         element =  new OverviewTableEntry("Goal","Knowledge");
+         element.newElement("Operator",">=",java.lang.String.class);
+         element.newElement("Intensity","java",java.lang.String.class); 
+         entries.add(element);
+         // neue Zeile
+         element =  new OverviewTableEntry("Goal","Salary");
+         element.newElement("Operator",">=",java.lang.String.class);
+         element.newElement("Intensity","12.000",java.lang.String.class);
+         entries.add(element);
+          // erzeuge neue Tabelle
+         overviewTable = new OverviewTable(entries);
+          }
 
     /*
      * (non-Javadoc)
