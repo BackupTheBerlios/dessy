@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.7 2004/08/07 09:28:03 moleman Exp $
+ * $Id: MainController.java,v 1.8 2004/08/09 07:46:23 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -47,7 +47,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public final class MainController {
@@ -287,7 +287,7 @@ public final class MainController {
 
     // Accessing Collaborators **********************************************
 
-    private MainModule getMainModule() {
+    public MainModule getMainModule() {
         return mainModule;
     }
 

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: OverviewTable.java,v 1.6 2004/08/07 09:28:04 moleman Exp $
+ * $Id: OverviewTable.java,v 1.7 2004/08/09 07:46:23 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.overviewTable;
 
@@ -35,7 +35,7 @@ import com.jgoodies.uifextras.util.ExtTable;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  */
 public class OverviewTable extends ExtTable {
@@ -80,7 +80,7 @@ public class OverviewTable extends ExtTable {
     protected void configureTable() {
         super.configureTable();
         getTableHeader().setReorderingAllowed(false);
-        setAutoResizeMode(AUTO_RESIZE_ALL_COLUMNS);
+        setAutoResizeMode(AUTO_RESIZE_LAST_COLUMN);
         setRowSelectionAllowed(true);
         setFocusable(true);
         setColumnSelectionAllowed(true);
