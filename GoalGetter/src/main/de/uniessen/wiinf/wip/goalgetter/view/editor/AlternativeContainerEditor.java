@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.10 2004/08/14 16:43:35 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.11 2004/08/15 07:51:42 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.AlternativeContainerTabl
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
@@ -65,16 +65,14 @@ public class AlternativeContainerEditor extends AbstractEditor {
     protected void build() {
         initComponents();
 
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow"); //$NON-NLS-1$
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout,
-                ResourceUtils.getBundle(), this);
-        builder.setDefaultDialogBorder();
-        //  CellConstraints cc = new CellConstraints();
+        FormLayout layout = new FormLayout(
+        "0:grow:0.9");//$NON-NLS-1$
+DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+        ResourceUtils.getBundle(), this);
+builder.setDefaultDialogBorder();
         builder
                 .appendI15dSeparator("alternativeContainerEditor.alternatives.text");//$NON-NLS-1$
-        // builder.appendRow(builder.getLineGapSpec());
-        // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
-        // builder.nextLine(2);
+ 
         builder.nextLine();
         java.awt.Component overviewPane = new JScrollPane(overviewTable);
         builder.append(overviewPane, 3);
@@ -118,7 +116,7 @@ public class AlternativeContainerEditor extends AbstractEditor {
      */
     protected void updateModel() {
         AlternativeContainerTableModel actm = new AlternativeContainerTableModel(
-                getAlternativeContainer().getAlternatives());
+                getAlternativeContainer().getAlternativesListModel());
         overviewTable.setModel(actm);
 
     }
@@ -130,7 +128,7 @@ public class AlternativeContainerEditor extends AbstractEditor {
      */
     protected void updateView() {
         AlternativeContainerTableModel actm = new AlternativeContainerTableModel(
-                getAlternativeContainer().getAlternatives());
+                getAlternativeContainer().getAlternativesListModel());
         overviewTable.setModel(actm);
 
     }

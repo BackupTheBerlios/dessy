@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainer.java,v 1.1 2004/08/14 16:43:35 moleman Exp $
+ * $Id: AlternativeContainer.java,v 1.2 2004/08/15 07:51:42 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -36,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.FillLevel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class AlternativeContainer extends AbstractDomain {
@@ -82,6 +82,20 @@ public class AlternativeContainer extends AbstractDomain {
      */
     public ArrayListModel getAlternatives() {
         return alternatives;
+    }
+    
+    /**
+     * Returns the list of alternatives
+     * 
+     * @return alternatives
+     */
+    public ArrayListModel getAlternativesListModel() {
+        //TODO auch die Zeile mit den Goal-Intensities direkt liefern und nicht
+        // in AlternativeContainerTableMode errechnen
+        ArrayListModel alm = new ArrayListModel();
+        alm.add("");
+        alm.addAll(alternatives);
+        return alm;
     }
 
     /**
@@ -171,6 +185,6 @@ public class AlternativeContainer extends AbstractDomain {
 
         return false;
 
-    }    
-   
+    }
+
 }

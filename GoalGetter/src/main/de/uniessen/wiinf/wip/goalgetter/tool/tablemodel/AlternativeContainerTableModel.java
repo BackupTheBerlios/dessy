@@ -10,11 +10,12 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: AlternativeContainerTableModel.java,v 1.1 2004/08/14 11:11:12 moleman Exp $
+ * $Id: AlternativeContainerTableModel.java,v 1.2 2004/08/15 07:51:42 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ListModel;
@@ -22,6 +23,7 @@ import javax.swing.ListModel;
 import com.jgoodies.binding.adapter.TableAdapter;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
+import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 
 /**
  * AlternativeContainerTableModel
@@ -29,7 +31,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class AlternativeContainerTableModel extends TableAdapter {
@@ -51,13 +53,15 @@ public class AlternativeContainerTableModel extends TableAdapter {
 
     private List createColumnNames() {
         List columnNameList = new ArrayList();
-        columnNameList.add("Zielkriterium");
-        columnNameList.add("Zielwert");
-
-        for (int i = 0; i < getRowCount(); i++) {
-            Alternative alternative = (Alternative) getRow(i);
-            columnNameList.add(alternative.getIdentifier());
+columnNameList.add("");
+        Alternative alternative = (Alternative) getRow(1);
+        List goals = alternative.getGoals();
+        Iterator iterator = goals.iterator();
+        while (iterator.hasNext()) {
+            Goal g = (Goal) iterator.next();
+            columnNameList.add(g.getName());
         }
+
         return columnNameList;
     }
 
@@ -67,17 +71,25 @@ public class AlternativeContainerTableModel extends TableAdapter {
      * @see javax.swing.table.TableModel#getValueAt(int, int)
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
+        if(rowIndex==0 && columnIndex ==0){
+            return "Zielwert";
+        }
+        
+        
+        if(rowIndex==0 && columnIndex >0){
+            return getGoalAt(columnIndex).getIntensity();
+        }
+        
         Alternative alternative = (Alternative) getRow(rowIndex);
+       System.out.println(alternative.getIdentifier());
 
         switch (columnIndex) {
         case 0:
-        //   return alternative.getIntensities().keySet();
-        //        case 1:
-        //            return alternative.get();
-        //        case 2:
-        //            return alternative.getIntensity();
+            return alternative.getIdentifier();
         default:
-            return null;
+            Goal g = getGoalAt(columnIndex);
+            return alternative.getIntensity(g);
+
         }
     }
 
@@ -128,15 +140,22 @@ public class AlternativeContainerTableModel extends TableAdapter {
      * @see #getColumnName(int)
      * @see #getRowCount()
      */
-    public int getColumnCount() {
+    public int getColumnCount() {      
         return columnNames.size();
     }
+
 
     public List getHighlightColumns() {
         List l = new ArrayList();
         l.add(new Integer(0));
         l.add(new Integer(1));
         return l;
+    }
+
+    private Goal getGoalAt(int i) {
+        Alternative alternative = (Alternative) getRow(1);
+        System.out.println(alternative.getGoals().size());
+        return (Goal) (alternative.getGoals()).get(i-1);
     }
 
 }

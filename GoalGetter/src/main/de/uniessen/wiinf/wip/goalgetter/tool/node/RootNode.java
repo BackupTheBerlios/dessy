@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: RootNode.java,v 1.6 2004/08/14 11:11:12 moleman Exp $
+ * $Id: RootNode.java,v 1.7 2004/08/15 07:51:42 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class RootNode extends AbstractTreeNode {
@@ -52,6 +52,8 @@ public final class RootNode extends AbstractTreeNode {
      * 
      * @param project
      *            the associated project
+     * @param presentationSettings
+     *            the PresentationSettings (containing tree construction rules)
      */
     public RootNode(Project project, PresentationSettings presentationSettings) {
         super(null, project);

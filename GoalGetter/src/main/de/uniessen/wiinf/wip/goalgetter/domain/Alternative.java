@@ -16,11 +16,13 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Alternative.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
+ * $Id: Alternative.java,v 1.5 2004/08/15 07:51:42 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -39,7 +41,7 @@ import java.util.TreeMap;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class Alternative extends AbstractDomain {
@@ -185,8 +187,12 @@ public class Alternative extends AbstractDomain {
     /**
      * @return a collection of the Goals
      */
-    public Collection getGoals() {
-        return intensityMap.keySet();
+    public List getGoals() {
+        Set set = intensityMap.keySet();
+        List l = new ArrayList();
+        l.addAll(set);
+        return l;
+
     }
 
 }
