@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: NavigationPanelBuilder.java,v 1.5 2004/07/19 18:22:02 moleman Exp $
+ * $Id: NavigationPanelBuilder.java,v 1.6 2004/07/28 16:02:18 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -31,16 +31,20 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import com.jgoodies.uif.action.ActionManager;
+import com.jgoodies.uif.builder.ToolBarBuilder;
 import com.jgoodies.uif.component.UIFTree;
 import com.jgoodies.uif.panel.CardPanel;
 import com.jgoodies.uif.util.ResourceUtils;
 import com.jgoodies.uif.util.TreeUtils;
 
+import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
 import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
 import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
 import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
@@ -61,7 +65,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 final class NavigationPanelBuilder {
@@ -258,7 +262,7 @@ final class NavigationPanelBuilder {
                     : getTextNonSelectionColor());
             selected = sel;
             this.setIcon(node.getIcon(sel));
-            this.setText(node.getName());          
+            this.setText(node.getName());
             return this;
         }
     }
