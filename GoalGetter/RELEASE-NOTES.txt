@@ -1,0 +1,21 @@
+
+                    GoalGetter Version 0.1
+                        Release Notes 
+                     
+
+INTRODUCTION
+
+GoalGetter is a good application.
+  
+  
+BUGS FIXED
+
+  o none
+  
+  
+OTHER CHANGES
+
+  o none
+
+
+
