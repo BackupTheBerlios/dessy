@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ProjectFactory.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: ProjectFactory.java,v 1.4 2004/10/05 10:11:38 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.domain;
@@ -26,13 +26,13 @@ package de.uniessen.wiinf.wip.goalgetter.domain;
  * A factory that can create a sample project with a sample description, some
  * goals and alternatives and actions.
  * <p>
- * This class is only for development purposes and may be removed after
- * completing the load and save mechanism
+ * is currently capable of either returning a full featured sample project or a
+ * project stub for quickstart.
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class ProjectFactory {
@@ -61,6 +61,20 @@ public final class ProjectFactory {
     }
 
     /**
+     * Creates an initially empty project containing just stubs for a goal,
+     * alternative (and thus also action). None of the field values are filled.
+     * 
+     * @return project with stubs
+     */
+    public static Project createEmpty() {
+        Project project = new Project("Unnamed Project");
+        project.addGoal(createGoal("Goal 1"));
+        project.addAlternative(createAlternative("Alternative 1"));
+        project.getDescription().setIdentifier("Project description");
+        return project;
+    }
+
+    /**
      * Sets sample data in the given description.
      * 
      * @param description
@@ -68,7 +82,7 @@ public final class ProjectFactory {
      */
     private static void fillDescription(Description description) {
         description.setIdentifier("Sample Project");
-        description.setDescription("Super Problem, super Problem.");
+        description.setDescription("Description for the project.");
     }
 
     /**
@@ -95,10 +109,4 @@ public final class ProjectFactory {
         return new Alternative(identifier);
     }
 
-    /**
-     * Creates and returns a sample action with the specified identifier.
-     */
-    //    private static Action createAction(Goal goal, Alternative alternative) {
-    //        return new Action(goal, alternative);
-    //    }
 }

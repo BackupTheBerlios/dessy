@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: NavigationPanel.java,v 1.4 2004/09/25 14:56:57 moleman Exp $
+ * $Id: NavigationPanel.java,v 1.5 2004/10/05 10:11:38 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -62,7 +62,7 @@ import de.uniessen.wiinf.wip.goalgetter.model.node.NavigationNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class NavigationPanel extends SimpleInternalFrame {
@@ -262,7 +262,6 @@ public class NavigationPanel extends SimpleInternalFrame {
             if (PresentationSettings.PROPERTYNAME_ACTION_PRESENTATION_MODE
                     .equals(evt.getPropertyName())) {
                 // dirty workaround for refreshing the tree
-                //TODO remove through better method (find out how)
                 mainModel.setProject(mainModel.getProject());
             }
         }

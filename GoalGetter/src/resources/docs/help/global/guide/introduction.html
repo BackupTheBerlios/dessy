@@ -4,14 +4,241 @@
 	<link rel=stylesheet type="text/css" href="../style.css">
 </HEAD>
 <BODY>
-<H3>Introduction</H3>
 
-    GaolGetter is a decision supporting software.
-    
-     <p>
-     GoalGetter utilizes the JGoodies Looks and Swing Suite.
-     While the JGoodies Looks ensure a high-fidelity appearance
-     the Suite provides prepared components for common Swing tasks.
+<H1>Einf&uuml;hrung</H1>
+<P>GoalGetter ist eine entscheidungsunterst&uuml;tzende Software die
+dem Prinzip des gleichnamigen Modells von Markus Stgallkamp folgt.   
+</P>
+<P>Eine Entscheidung besteht hierbei aus</P>
+<UL>
+	<LI><P>Oberziel</P>
+	<LI><P>Zieldimensionen</P>
+	<LI><P>Alternativen</P>
+	<LI><P>Handlungen</P>
+</UL>
+
+<H2>Oberziel</H2>
+<P>Ein Oberziel kann abstrakt sein. Die einzelnen Attribute werden
+dann unter "Zieldimensionen" ausformuliert. Jedoch sollte eine
+grobe Sto&szlig;richtung vorgegeben werden, um die Dimensions- und
+Alternativenfindung zu erleichtern.</P>
+<P>Erwerb eines Fahrzeugs ist beispielsweise ein v&ouml;llig
+ausreichendes Ziel.</P>
+
+<H2>Zieldimensionen</H2>
+<P>Um eine Entscheidung treffen zu k&ouml;nnen, muss man sich der
+entscheidungsrelevanten Zieldimensionen bewusst sein. Bei Erwerb
+eines Autos k&ouml;nnen z.B. PS, Sitzanzahl, Verbrauch oder Farbe 
+entscheidend sein. Wie bereits aus diesem Beispiel deutlich wird,
+m&uuml;ssen die Ziele nicht numerischer Natur oder gar
+nominalskaliert sein.</P>
+<P>Die einzelnen Dimensionen werden nun mit Zielwerten belegt. Auch
+diese m&uuml;ssen nicht mathematisch auswertbar sein. Beim obigen
+Beispiel w&auml;re eine denkbare Wertbelegung</P>
+<UL>
+	<LI><P>PS &gt;= 120</P>
+	<LI><P>Sitzanzahl = 4 bis 5</P>
+	<LI><P>Verbrauch &lt; 8l</P>
+	<LI><P>Farbe = Taubengrau</P>
+</UL>
+<H2 CLASS="western">Alternativen 
+</H2>
+<P>Nun werden die einzelnen Alternativen ins Spiel gebracht. Jede
+einzelne Alternative hat Auspr&auml;gungen der Zieldimensionen, die
+oftmals nicht innerhalb der gew&uuml;nschten Parameter liegen. Dies
+ist ersteinmal nicht gravierend, da dies der Realit&auml;t
+entspricht. 
+</P>
+<TABLE border="1">
+	<THEAD>
+		<TR>
+			<TH>
+				<P><BR>
+				</P>
+			</TH>
+			<TH>
+				Fahrrad
+			</TH>
+			<TH>
+				Skoda Kerosina
+			</TH>
+			<TH>
+				Mazda MX5
+			</TH>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR>
+			<TD>
+				PS
+			</TD>
+			<TD>
+				0
+			</TD>
+			<TD>
+				75
+			</TD>
+			<TD>
+				150
+			</TD>
+		</TR>
+		<TR>
+			<TD>
+				Sitzanzahl
+			</TD>
+			<TD>
+				1
+			</TD>
+			<TD>
+				5
+			</TD>
+			<TD>
+				2
+			</TD>
+		</TR>
+		<TR>
+			<TD>
+				Verbrauch
+			</TD>
+			<TD>
+			Eine Flasche Malzbier auf 1 km
+			</TD>
+			<TD>
+				6
+			</TD>
+			<TD>
+				8
+			</TD>
+		</TR>
+		<TR>
+			<TD>
+				Farbe
+			</TD>
+			<TD>
+				Gelb
+			</TD>
+			<TD>
+				Anthrazit
+			</TD>
+			<TD>
+				schwarz
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+
+<H2>Handlungen</H2>
+<P>Da die einzelnen Dimensionswerte der Alternativen nicht der
+Zielvorgabe entsprechen, werden sie durch Handlungen in den
+Zielkorridor gebracht.</P>
+<P>Hierbei k&ouml;nnen zwei Arten Zahlungen auftreten:</P>
+<UL>
+	<LI><P>Aktionskosten<BR>sind Kosten, die dazu aufgewendet werden,
+	die alternative in den Zielkorridor zu bringen.</P>
+	<LI><P>Trade-Off-Kosten<BR>sind Kosten, die den &uuml;ber den
+	Zielkorridor hinausgehenden Zusatznutzen bewerten.</P>
+</UL>
+<P><B>Beispiel anhand des <I>PS-Anzahl </I>Skoda Kerosina:</B></P>
+<P>Um die PS-Anzahl in den (nach oben offenen) Zielkorridor zu
+bringen, ist die Aktion "Motortuning" get&auml;tigt worden. Diese
+kostet 5000 EUR und bietet daf&uuml;r einen Motor mit 150 PS. Die
+&uuml;ber die Mindestvorgabe von 120 PS hinausgehenden 30 PS werden
+mit einem Zusatznutzen von 2000 EUR bewertet.</P>
+<TABLE border="1">	
+	<THEAD>
+		<TR>
+			<TH>
+				Zielname
+			</TH>
+			<TH>
+				Aktion
+			</TH>
+			<TH>
+				Ergebnis
+			</TH>
+			<TH>
+				Handlungskosten
+			</TH>
+			<TH>
+				Trade-Off-Kosten
+			</TH>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR>
+			<TD>
+			PS
+			</TD>
+			<TD>
+				Motortuning
+			</TD>
+			<TD>
+				Motor mit 150 PS
+			</TD>
+			<TD>
+				5000
+			</TD>
+			<TD>
+				2000
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P><BR><BR>
+</P>
+<P><B>Beispiel anhand der <I>Farbe</I> des Skoda Kerosina:</B></P>
+<P>Um die Farbe von Anthrazit auf
+Taubengrau zu wechseln, ist die Aktion "Umspritzen" zu t&auml;tigen.
+Das Umspritzen bringt Handlungskosten von 1500 EUR mit sich. Ein
+Zusatznutzen f&auml;llt nicht an.</P>
+
+<TABLE border="1">
+	<THEAD>
+		<TR>
+			<TH>
+				Zielname
+			</TH>
+			<TH>
+				Aktion
+			</TH>
+			<TH>
+				Ergebnis
+			</TH>
+			<TH>
+				Handlungskosten
+			</TH>
+			<TH>
+				Trade-Off-Kosten
+			</TH>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR>
+			<TD>
+				Farbe
+			</TD>
+			<TD>
+				Umspritzen
+			</TD>
+			<TD>
+				Taubengraue Farbe
+			</TD>
+			<TD>
+				1500 EUR
+			</TD>
+			<TD>
+				0
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+
+<P><B>Beispiel anhand der <I>Sitzanzahl</I> des Mazda MX5:</B></P>
+<P>Um die Sitzanzahl in den Zielkorridor
+zu bringen, ist ein Einbau zweier zus&auml;tzlicher Sitze notwendig.
+Eine Nachfrage beim Mazda-H&auml;ndler brachte  aber nur ein irres
+Lachen. Hier ist also keine Aktion m&ouml;glich und die gesamte
+Alternative wird verworfen.</P>
      
     
 </BODY>

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Project.java,v 1.10 2004/09/25 14:56:57 moleman Exp $
+ * $Id: Project.java,v 1.11 2004/10/05 10:11:38 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -46,7 +46,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *  
  */
 public final class Project extends Model {
@@ -298,7 +298,7 @@ public final class Project extends Model {
      * @return project
      */
     public static Project readFrom(File f) {
-        //TODO error handling for other file formats
+
         XMLDecoder dec;
         try {
             dec = new XMLDecoder(
@@ -310,6 +310,7 @@ public final class Project extends Model {
             model.setFile(f);
             return model;
         } catch (FileNotFoundException e) {
+            // TODO error handling for other file formats
             e.printStackTrace();
         }
         return ProjectFactory.createSample();
@@ -387,5 +388,13 @@ public final class Project extends Model {
     public String toString() {
         return super.toString() + ':' + getFileName();
     }
+
+    /**
+     * @return
+     */
+    public boolean isFilled() {
+       return actionContainer.getFillLevel() == FillLevel.FULL;
+    }
+    
 
 }

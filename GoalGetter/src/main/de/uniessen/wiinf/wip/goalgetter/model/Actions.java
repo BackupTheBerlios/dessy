@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
+ * $Id: Actions.java,v 1.2 2004/10/05 10:11:38 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.model;
@@ -52,7 +52,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 /**
@@ -61,7 +61,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class Actions {
@@ -72,6 +72,11 @@ public final class Actions {
      * Comment for <code>NEW_PROJECT_ID</code>
      */
     public static final String NEW_PROJECT_ID = "newProject";//$NON-NLS-1$
+
+    /**
+     * Comment for <code>NEW_PROJECT_ID</code>
+     */
+    public static final String SAMPLE_PROJECT_ID = "sampleProject";//$NON-NLS-1$
 
     /**
      * Comment for <code>OPEN_PROJECT_ID</code>
@@ -267,6 +272,14 @@ public final class Actions {
                 getController().openProject();
             }
         });
+        
+        ActionManager.register(SAMPLE_PROJECT_ID, new AbstractAction() {
+
+            public void actionPerformed(ActionEvent event) {
+                getController().sampleProject();
+            }
+        });
+        
         ActionManager.register(SAVE_ID, new AbstractAction() {
 
             public void actionPerformed(ActionEvent event) {
@@ -279,12 +292,7 @@ public final class Actions {
                 getController().saveAs();
             }
         }).setEnabled(false);
-        //        ActionManager.register(OPEN_PAGE_SETUP_ID, new AbstractAction() {
-        //
-        //            public void actionPerformed(ActionEvent event) {
-        //                PrintManager.openPageSetupDialog();
-        //            }
-        //        });
+
         ActionManager.register(PRINT_ID, new AbstractAction() {
 
             public void actionPerformed(ActionEvent event) {
@@ -323,7 +331,7 @@ public final class Actions {
         });
 
         // toggle navigator actions sort mode
-        
+
         // This adapter vends ValueModels that convert bean properties
         // of the PresentationSettings into the ValueModel interface.
         BeanAdapter presentationAdapter = new BeanAdapter(
@@ -420,13 +428,13 @@ public final class Actions {
             } else if (id.equals(OPEN_PAGE_SETUP_ID)) {
                 PrintManager.openPageSetupDialog();
             } else if (id.equals(ADD_ALTERNATIVE_ID)) {
-                getController().addAlternative();            
+                getController().addAlternative();
             } else if (id.equals(DELETE_ITEM_ID)) {
                 getController().deleteItem();
             } else if (id.equals(SHOW_SENSITIVITYANALYSIS_ID)) {
                 getController().showSensitivityAnalysis();
             } else if (id.equals(SHOW_REPORT_ID)) {
-                getController().showReport();               
+                getController().showReport();
             } else {
                 Logger.getLogger("Actions").warning("Unknown action: " + id);//$NON-NLS-1$ //$NON-NLS-2$
             }

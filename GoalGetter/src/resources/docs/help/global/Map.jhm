@@ -6,6 +6,7 @@
 <map version="1.0">
   <mapID target="release.requirements"		url="release/requirements.html" />
   <mapID target="release.security"			url="release/security.html" />
+   <mapID target="release.limitations"			url="release/limitations.html" />
 
   <mapID target="guide.introduction"		url="guide/introduction.html" />
   <mapID target="guide.features"			url="guide/features.html" />

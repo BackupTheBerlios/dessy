@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  *
- * $Id: ActionContainer.java,v 1.5 2004/09/25 14:56:57 moleman Exp $
+ * $Id: ActionContainer.java,v 1.6 2004/10/05 10:11:38 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public class ActionContainer extends AbstractDomain {
@@ -287,6 +287,6 @@ public class ActionContainer extends AbstractDomain {
         }
         return payment;
     }
-    
+
 
 }

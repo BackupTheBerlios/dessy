@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Description.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: Description.java,v 1.4 2004/10/05 10:11:38 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -27,7 +27,7 @@ package de.uniessen.wiinf.wip.goalgetter.domain;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class Description extends AbstractDomain {
@@ -110,7 +110,6 @@ public final class Description extends AbstractDomain {
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
      */
     protected boolean isEmpty() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -120,7 +119,6 @@ public final class Description extends AbstractDomain {
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
      */
     protected boolean isFilled() {
-        // TODO Auto-generated method stub
         return false;
     }
 

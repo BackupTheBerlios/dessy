@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.2 2004/10/04 21:31:12 moleman Exp $
+ * $Id: MainController.java,v 1.3 2004/10/05 10:11:38 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.model;
 
@@ -56,7 +56,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class MainController {
@@ -96,10 +96,16 @@ public final class MainController {
     // Action Behavior ******************************************************
 
     /**
-     * Creates a new project and sets it in the main module. Uses a sample
-     * project for demoing purposes.
+     * Creates a new project and sets it in the main module.
      */
     void newProject() {
+        getMainModule().setProject(ProjectFactory.createEmpty());
+    }
+
+    /**
+     * Creates a sample project and sets it in the main module.
+     */
+    void sampleProject() {
         getMainModule().setProject(ProjectFactory.createSample());
     }
 
@@ -235,22 +241,19 @@ public final class MainController {
     }
 
     /**
-     * Adds a segment as child under the selected node.
+     * SHows the sensitivity analysis dialog after populating its data with a
+     * snapshot of the project's data
      */
     void showSensitivityAnalysis() {
-
-        //mainModule.addAnalyseNode();
-
-        // TODO: anpassen an echte Datenstruktur...
         List col = new ArrayList();
         SensitivityElements e;
-        
+
         Iterator iterator = getMainModule().getProject().getAlternatives()
                 .iterator();
 
         while (iterator.hasNext()) {
             Alternative anAlternative = (Alternative) iterator.next();
-            
+
             e = new SensitivityElements(anAlternative.getIdentifier());
 
             Iterator actionsIterator = getMainModule().getProject()
@@ -259,10 +262,10 @@ public final class MainController {
             while (actionsIterator.hasNext()) {
                 Action anAction = (Action) actionsIterator.next();
                 String name = anAction.getName();
-                if (name == null)
+                if (name == null) {
                     name = ""; //$NON-NLS-1$
-          
-                    e.addValues(name, Integer.toString(anAction.paymentAmount()));
+                }
+                e.addValues(name, Integer.toString(anAction.paymentAmount()));
             }
             col.add(e);
         }

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: WelcomePanel.java,v 1.8 2004/09/25 14:56:57 moleman Exp $
+ * $Id: WelcomePanel.java,v 1.9 2004/10/05 10:11:38 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.model.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class WelcomePanel extends GradientBackgroundPanel implements
@@ -116,11 +116,13 @@ public final class WelcomePanel extends GradientBackgroundPanel implements
                 .getString("welcomePanel.selectOptionsBelow.text")); //$NON-NLS-1$
         Component newProjectButton = createActionComponent(ActionManager
                 .get(Actions.NEW_PROJECT_ID));
+        Component sampleProjectButton = createActionComponent(ActionManager
+                .get(Actions.SAMPLE_PROJECT_ID));
         Component openProjectButton = createActionComponent(ActionManager
                 .get(Actions.OPEN_PROJECT_ID));
 
         FormLayout layout = new FormLayout("9dlu, left:pref:grow", //$NON-NLS-1$
-                "b:pref, c:pref, t:pref, 9dlu, pref, 6dlu, pref"); //$NON-NLS-1$
+                "b:pref, c:pref, t:pref, 9dlu, pref, 6dlu, pref, 6dlu, pref"); //$NON-NLS-1$
         PanelBuilder builder = new PanelBuilder(layout);
         builder.getPanel().setOpaque(false);
         builder.setBorder(Borders.DLU14_BORDER);
@@ -131,7 +133,8 @@ public final class WelcomePanel extends GradientBackgroundPanel implements
         builder.add(logoLbl, cc.xyw(1, 2, 2, "left, center")); //$NON-NLS-1$
         builder.add(selectLbl, cc.xyw(1, 3, 2));
         builder.add(newProjectButton, cc.xy(2, 5));
-        builder.add(openProjectButton, cc.xy(2, 7));
+        builder.add(sampleProjectButton, cc.xy(2, 7));
+        builder.add(openProjectButton, cc.xy(2, 9));
 
         return builder.getPanel();
     }

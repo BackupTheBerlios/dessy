@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Action.java,v 1.8 2004/10/04 21:31:12 moleman Exp $
+ * $Id: Action.java,v 1.9 2004/10/05 10:11:38 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -48,7 +48,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public class Action extends AbstractDomain {
@@ -291,12 +291,6 @@ public class Action extends AbstractDomain {
 	 *         paymentForTradeOff
 	 */
 	public int paymentAmount() {
-		//      TODO auf Integer umbiegen
-		//        String pfa = getPaymentForAction();
-		//        String pft = getPaymentForTradeoff();
-		//        pfa = (pfa != null) ? pfa : "0"; //$NON-NLS-1$
-		//        pft = (pft != null) ? pft : "0"; //$NON-NLS-1$
-		//        return Integer.parseInt(pfa) - Integer.parseInt(pft);
 		return getPaymentForAction().intValue()
 				- getPaymentForTradeoff().intValue();
 
