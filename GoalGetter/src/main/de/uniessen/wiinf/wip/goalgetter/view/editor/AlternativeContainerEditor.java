@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.8 2004/08/07 09:28:03 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.9 2004/08/14 11:11:11 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -30,6 +30,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.AlternativeContainer;
 import de.uniessen.wiinf.wip.goalgetter.overviewTable.AlternativeContainerEditorPopupAdapter;
 import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.AlternativeContainerTableModel;
 
 /**
  * AlternativeContainerEditor
@@ -37,10 +38,12 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
+
+    private static final long serialVersionUID = 1L;
 
     private OverviewTable overviewTable;
 
@@ -48,7 +51,10 @@ public class AlternativeContainerEditor extends AbstractEditor {
      * Constructs a <code>AlternativeContainerEditor</code>
      */
     public AlternativeContainerEditor() {
-        super(Resources.ALTERNATIVE_ICON, "Alternative Overview");
+        super(
+                Resources.ALTERNATIVE_ICON,
+                ResourceUtils
+                        .getString("alternativeContainerEditor.alternativeOverview.text"));//$NON-NLS-1$
     }
 
     /*
@@ -59,16 +65,16 @@ public class AlternativeContainerEditor extends AbstractEditor {
     protected void build() {
         initComponents();
 
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow"); //$NON-NLS-1$
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
         //  CellConstraints cc = new CellConstraints();
         builder
-                .appendI15dSeparator("alternativeContainerEditor.alternatives.text");
-       // builder.appendRow(builder.getLineGapSpec());
+                .appendI15dSeparator("alternativeContainerEditor.alternatives.text");//$NON-NLS-1$
+        // builder.appendRow(builder.getLineGapSpec());
         // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
-       // builder.nextLine(2);
+        // builder.nextLine(2);
         builder.nextLine();
         java.awt.Component overviewPane = new JScrollPane(overviewTable);
         builder.append(overviewPane, 3);
@@ -78,20 +84,9 @@ public class AlternativeContainerEditor extends AbstractEditor {
      *  
      */
     private void initComponents() {
-        //TODO table model
-
-        String rowData[][] = {
-
-        { "Availability", "Juni","April", "Jan-May" },
-                { "Knowledge", "Java","C++", "Pascal" },
-                { "Salary", "10.000","11.000", "12.000" }
-
-        };
-        String columnNames[] = { "  ","Soll", "Klaus", "Peter" };
-
-        overviewTable = new OverviewTable(rowData, columnNames);
-        overviewTable.setHighlightColumn(1);
-        overviewTable.addMouseListener(new AlternativeContainerEditorPopupAdapter());
+        overviewTable = new OverviewTable();
+        overviewTable
+                .addMouseListener(new AlternativeContainerEditorPopupAdapter());
     }
 
     /*
@@ -122,7 +117,9 @@ public class AlternativeContainerEditor extends AbstractEditor {
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#updateModel()
      */
     protected void updateModel() {
-        // TODO Auto-generated method stub
+        AlternativeContainerTableModel actm = new AlternativeContainerTableModel(
+                getAlternativeContainer().getAlternatives());
+        overviewTable.setModel(actm);
 
     }
 
@@ -132,7 +129,9 @@ public class AlternativeContainerEditor extends AbstractEditor {
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#updateView()
      */
     protected void updateView() {
-        // TODO Auto-generated method stub
+        AlternativeContainerTableModel actm = new AlternativeContainerTableModel(
+                getAlternativeContainer().getAlternatives());
+        overviewTable.setModel(actm);
 
     }
 

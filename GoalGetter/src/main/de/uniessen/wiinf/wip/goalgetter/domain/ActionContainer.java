@@ -16,14 +16,12 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  *
- * $Id: ActionContainer.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: ActionContainer.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.jgoodies.binding.beans.Model;
 
 /**
  * 
@@ -32,10 +30,12 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
-public class ActionContainer extends Model {
+public class ActionContainer extends AbstractDomain {
+
+    private static final long serialVersionUID = 1L;
 
     private List actions = new ArrayList();
 
@@ -60,6 +60,7 @@ public class ActionContainer extends Model {
     public ActionContainer(String identifier) {
         this.identifier = identifier;
     }
+
     /**
      * Answers the identifier
      * 
@@ -72,6 +73,7 @@ public class ActionContainer extends Model {
     public List getActions() {
         return actions;
     }
+
     /**
      * Sets the identifier
      * 
@@ -107,5 +109,25 @@ public class ActionContainer extends Model {
 
     public String toString() {
         return super.toString() + ':' + getIdentifier();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
+     */
+    protected boolean isEmpty() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
+     */
+    protected boolean isFilled() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

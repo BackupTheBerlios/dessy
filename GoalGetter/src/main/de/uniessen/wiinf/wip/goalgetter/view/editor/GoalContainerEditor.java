@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerEditor.java,v 1.7 2004/08/07 09:28:03 moleman Exp $
+ * $Id: GoalContainerEditor.java,v 1.8 2004/08/14 11:11:11 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.GoalContainerTableModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public class GoalContainerEditor extends AbstractEditor {
@@ -50,7 +50,7 @@ public class GoalContainerEditor extends AbstractEditor {
      */
     public GoalContainerEditor() {
         super(Resources.GOAL_ICON, ResourceUtils
-                .getString("goalContainerEditor.goalsOverview.text"));
+                .getString("goalContainerEditor.goalsOverview.text"));//$NON-NLS-1$
     }
 
     /*
@@ -62,12 +62,12 @@ public class GoalContainerEditor extends AbstractEditor {
         initComponents();
 
         FormLayout layout = new FormLayout(
-                "right:max(40dlu;p), 4dlu, 0:grow:0.9");
+                "right:max(40dlu;p), 4dlu, 0:grow:0.9");//$NON-NLS-1$
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
 
-        builder.appendI15dSeparator("goalContainerEditor.goals.text");
+        builder.appendI15dSeparator("goalContainerEditor.goals.text");//$NON-NLS-1$
         //   builder.appendRow(builder.getLineGapSpec());
         // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
         builder.nextLine();
@@ -81,33 +81,6 @@ public class GoalContainerEditor extends AbstractEditor {
      *  
      */
     private void initComponents() {
-        //TODO table model
-
-        //    	String rowData[][] = { { "Availability", "=", "may - june" },
-        //                { "Knowledge", ">=", "Java" }, { "Salary", "<=", "10.000" } };
-        //        String columnNames[] = { "Goal", "operator", "intensity" };
-        // overviewTable = new JTable(rowData, columnNames);
-
-        //        List entries = new ArrayList();
-        //        // neue Zeile
-        //        OverviewTableEntry element = new OverviewTableEntry("Goal",
-        //                "Availability");
-        //        element.newElement("Operator", "=", java.lang.String.class);
-        //        element.newElement("Intensity", "may - june",
-        // java.lang.String.class);
-        //        entries.add(element);
-        //        // neue Zeile
-        //        element = new OverviewTableEntry("Goal", "Knowledge");
-        //        element.newElement("Operator", ">=", java.lang.String.class);
-        //        element.newElement("Intensity", "java", java.lang.String.class);
-        //        entries.add(element);
-        //        // neue Zeile
-        //        element = new OverviewTableEntry("Goal", "Salary");
-        //        element.newElement("Operator", ">=", java.lang.String.class);
-        //        element.newElement("Intensity", "12.000", java.lang.String.class);
-        //        entries.add(element);
-        //        // erzeuge neue Tabelle
-
         overviewTable = new OverviewTable();
         overviewTable.addMouseListener(new GoalContainerEditorPopupAdapter());
 
@@ -144,8 +117,8 @@ public class GoalContainerEditor extends AbstractEditor {
     }
 
     /**
-     * Convenience function for {@link #getModel()}including the
-     * correct typecast.
+     * Convenience function for {@link #getModel()}including the correct
+     * typecast.
      * 
      * @return GoalContainer
      */

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.8 2004/08/09 07:46:23 moleman Exp $
+ * $Id: MainController.java,v 1.9 2004/08/14 11:11:11 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -24,7 +24,6 @@ import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.File;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -33,11 +32,12 @@ import com.jgoodies.uif.application.Application;
 import com.jgoodies.uifextras.convenience.DefaultAboutDialog;
 import com.jgoodies.uifextras.convenience.SetupManager;
 import com.jgoodies.uifextras.convenience.TipOfTheDayDialog;
+import com.jgoodies.uifextras.printing.PrintManager;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
 import de.uniessen.wiinf.wip.goalgetter.domain.ProjectFactory;
-import de.uniessen.wiinf.wip.goalgetter.view.chart.SensitivityAnalysisChart;
 import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
+import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityAnalysisDialog;
 
 /**
  * Provides all application-level behavior. Most of the methods in this class
@@ -47,7 +47,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class MainController {
@@ -137,6 +137,7 @@ public final class MainController {
      * printer.
      */
     void openPrintDialog() {
+        PrintManager.openPageSetupDialog();
         showMessage("Open print dialog performed.");
     }
 
@@ -166,17 +167,26 @@ public final class MainController {
      * Adds a goal as child under the selected node.
      */
     void addGoal() {
-        mainModule.addGoal();
-
-        showMessage("Add goal performed.");
+        //  String identifier = DefaultComponentFactory.getInstance().
+        String identifier = JOptionPane.showInputDialog(
+                getDefaultParentFrame(), "Please enter the name for the goal");
+        if (identifier != null) {
+            mainModule.addGoal(identifier);
+        }
+        // showMessage("Add goal performed.");
     }
 
     /**
      * Adds a alternative as child under the selected node.
      */
     void addAlternative() {
-        mainModule.addAlternative();
-        showMessage("Add alternative performed.");
+        String identifier = JOptionPane.showInputDialog(
+                getDefaultParentFrame(),
+                "Please enter the name for the alternative");
+        if (identifier != null) {
+            mainModule.addAlternative(identifier);
+        }
+        //showMessage("Add alternative performed.");
     }
 
     /**
@@ -192,7 +202,8 @@ public final class MainController {
      */
     void deleteItem() {
         mainModule.removeSelectedItem();
-        showMessage("Item removed.");
+        //  showMessage("Item removed.");
+
     }
 
     /**
@@ -201,15 +212,15 @@ public final class MainController {
     void showSensitivityAnalysis() {
 
         //mainModule.addAnalyseNode();
-        SensitivityAnalysisChart chart = new SensitivityAnalysisChart();
-        JDialog d = new JDialog();
-        d.setSize(300, 300);
-        d.setLocationRelativeTo(getDefaultParentFrame());
-        d.getContentPane().add(chart.getChartPanel());
-        d.setVisible(true);
-        //JOptionPane.showMessageDialog(getDefaultParentFrame(), what);
 
-        //showMessage("Show Sensitivity Analysis performed.");
+        new SensitivityAnalysisDialog(getDefaultParentFrame()).open();
+
+        //        SensitivityAnalysisChart chart = new SensitivityAnalysisChart();
+        //        JDialog d = new JDialog();
+        //        d.setSize(300, 300);
+        //        d.setLocationRelativeTo(getDefaultParentFrame());
+        //        d.getContentPane().add(chart.getChartPanel());
+        //        d.setVisible(true);
 
     }
 
@@ -245,7 +256,7 @@ public final class MainController {
      * Opens the tip-of-the-day dialog.
      */
     void openTipOfTheDayDialog() {
-        String tipIndexPath = Application.getGlobals().getTipIndexPath();
+        String tipIndexPath = Application.getConfiguration().getTipIndexPath();
         new TipOfTheDayDialog(getDefaultParentFrame(), tipIndexPath).open();
     }
 

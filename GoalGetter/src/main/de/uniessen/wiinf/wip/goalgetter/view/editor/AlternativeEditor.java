@@ -16,13 +16,12 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeEditor.java,v 1.6 2004/08/07 09:28:03 moleman Exp $
+ * $Id: AlternativeEditor.java,v 1.7 2004/08/14 11:11:11 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
 import java.awt.Component;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
@@ -30,12 +29,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import com.jgoodies.binding.adapter.DocumentAdapter;
+import com.jgoodies.binding.beans.BeanAdapter;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.uif.util.ResourceUtils;
 
+import de.uniessen.wiinf.wip.goalgetter.domain.Action;
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 
@@ -46,12 +48,14 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class AlternativeEditor extends AbstractEditor {
 
     // Instance Creation ****************************************************
+
+    private static final long serialVersionUID = 1L;
 
     private JTextField identifierField;
 
@@ -86,10 +90,9 @@ public final class AlternativeEditor extends AbstractEditor {
      * Writes the editor contents to the underlying model.
      */
     protected void updateModel() {
-        Alternative alternative = getAlternative();
+        super.updateModel();
 
-        alternative.setIdentifier(identifierField.getText());
-        alternative.setDescription(descriptionArea.getText());
+        Alternative alternative = getAlternative();
 
         Component[] components = intensitiesPanel.getComponents();
         for (int i = 0; i < components.length; i++) {
@@ -102,13 +105,24 @@ public final class AlternativeEditor extends AbstractEditor {
 
     }
 
+    //    private Goal getGoalByName(String s){
+    //        Alternative a = getAlternative();
+    //        Collection c = a.getGoals();
+    //        Iterator iterator = c.iterator();
+    //        while(iterator.hasNext()){
+    //            Goal g = (Goal) iterator.next();
+    //            if(g.getName().equals(s))
+    //                return g;
+    //        }
+    //        return null;
+    //    }
+
     /**
      * Reads the editor contents from the underlying model.
      */
     protected void updateView() {
         Alternative alternative = getAlternative();
-        identifierField.setText(alternative.getIdentifier());
-        descriptionArea.setText(alternative.getDescription());
+        super.updateView();
 
         intensitiesPanel.removeAll();
 
@@ -120,23 +134,24 @@ public final class AlternativeEditor extends AbstractEditor {
         builder.setBorder(Borders.EMPTY_BORDER);
         // CellConstraints cc = new CellConstraints();
 
-        builder.append("", new JLabel(getAlternative().getIdentifier()),
-                new JLabel("Sollzustand"));
+        builder.append("", new JLabel(identifierField.getText()), new JLabel(
+                "Sollzustand"));
         builder.nextLine();
 
-        Map intensities = getAlternative().getIntensities();
-        Iterator iterator = intensities.keySet().iterator();
+        // TODO zugriff auf Goals ermöglichen
+        Iterator iterator = getAlternative().getGoalIdentifiers().iterator();
         while (iterator.hasNext()) {
-            String key = (String) iterator.next();
+            String goalIdentifier = (String) iterator.next();
             JTextField textfield = new JTextField();
-            textfield.setName(key);
-            textfield.setText((String) intensities.get(key));
+            textfield.setName(goalIdentifier);
+            textfield.setText(getAlternative().getIntensity(goalIdentifier));
             JTextField shouldBeTextfield = new JTextField();
             // shouldbeTextfield.setName(key);
-            shouldBeTextfield.setText("1000");
+            shouldBeTextfield.setText("");
+            //System.out.println(g.getName() + g.getIntensity());
             shouldBeTextfield.setEditable(false);
 
-            builder.append(key, textfield, shouldBeTextfield);
+            builder.append(goalIdentifier, textfield, shouldBeTextfield);
             builder.nextLine();
         }
 
@@ -151,6 +166,13 @@ public final class AlternativeEditor extends AbstractEditor {
         identifierField = new JTextField();
         descriptionArea = new JEditorPane();
         intensitiesPanel = new JPanel();
+
+        beanAdapter = new BeanAdapter(getModel(), true);
+
+        identifierField.setDocument(new DocumentAdapter(beanAdapter
+                .getValueModel(Action.PROPERTYNAME_IDENTIFIER)));
+        descriptionArea.setDocument(new DocumentAdapter(beanAdapter
+                .getValueModel(Action.PROPERTYNAME_DESCRIPTION)));
     }
 
     // Building *************************************************************
@@ -177,9 +199,8 @@ public final class AlternativeEditor extends AbstractEditor {
 
         builder.appendI15dSeparator("alternativeEditor.alternative.text");//$NON-NLS-1$
 
-        builder
-                .appendI15d("alternativeEditor.identifier.text",//$NON-NLS-1$
-                        identifierField);
+        builder.appendI15d("alternativeEditor.identifier.text",//$NON-NLS-1$
+                identifierField);
         builder.appendRow(builder.getLineGapSpec());
         builder.appendRow(new RowSpec("fill:50dlu:nogrow"));//$NON-NLS-1$
         builder.nextLine(2);

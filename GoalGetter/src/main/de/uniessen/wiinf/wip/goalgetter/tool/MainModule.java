@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainModule.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
+ * $Id: MainModule.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -50,32 +50,34 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.RootNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class MainModule extends Model {
+
+    private static final long serialVersionUID = 1L;
 
     // Names of the Bound Bean Properties *************************************
 
     /**
      * Bound Bean Property <code>PROPERTYNAME_PROJECT</code>
      */
-    public static final String PROPERTYNAME_PROJECT = "project";
+    public static final String PROPERTYNAME_PROJECT = "project"; //$NON-NLS-1$
 
     /**
      * Bound Bean Property <code>PROPERTYNAME_SELECTION</code>
      */
-    public static final String PROPERTYNAME_SELECTION = "selection";
+    public static final String PROPERTYNAME_SELECTION = "selection"; //$NON-NLS-1$
 
     /**
      * Bound Bean Property <code>PROPERTYNAME_SELECTION_TYPE</code>
      */
-    public static final String PROPERTYNAME_SELECTION_TYPE = "selectionType";
+    public static final String PROPERTYNAME_SELECTION_TYPE = "selectionType"; //$NON-NLS-1$
 
     /**
      * Bound Bean Property <code>PROPERTYNAME_NAVIGATION_TREE_MODEL</code>
      */
-    public static final String PROPERTYNAME_NAVIGATION_TREE_MODEL = "navigationTreeModel";
+    public static final String PROPERTYNAME_NAVIGATION_TREE_MODEL = "navigationTreeModel"; //$NON-NLS-1$
 
     // Instance Fields ********************************************************
 
@@ -199,8 +201,8 @@ public final class MainModule extends Model {
 
         Project oldProject = getProject();
         project = newProject;
-        project.addPropertyChangeListener(Goal.PROPERTYNAME_IDENTIFIER,
-                new GoalIdentifierChangeHandler());
+        project.addPropertyChangeListener(Goal.PROPERTYNAME_NAME,
+                new GoalNameChangeHandler());
         firePropertyChange(PROPERTYNAME_PROJECT, oldProject, newProject);
         setNavigationTreeModel(createNavigationTreeModel(newProject));
 
@@ -228,10 +230,14 @@ public final class MainModule extends Model {
 
     /**
      * Adds a Goal
+     * 
+     * @param identifier
+     *            the identifier for the goal
+     * 
      * @see Goal
      */
-    public void addGoal() {
-        Goal g = new Goal("Supergoal");
+    public void addGoal(String identifier) {
+        Goal g = new Goal(identifier);
         project.addGoal(g);
         setNavigationTreeModel(createNavigationTreeModel(project));
 
@@ -239,10 +245,14 @@ public final class MainModule extends Model {
 
     /**
      * Adds an Alternative
+     * 
+     * @param identifier
+     *            the identifier for the alternative
+     * 
      * @see Alternative
      */
-    public void addAlternative() {
-        Alternative a = new Alternative("SuperAlternative");
+    public void addAlternative(String identifier) {
+        Alternative a = new Alternative(identifier);
         project.addAlternative(a);
 
         setNavigationTreeModel(createNavigationTreeModel(project));
@@ -382,7 +392,8 @@ public final class MainModule extends Model {
      * @return a TreeModel for the given project
      */
     private TreeModel createNavigationTreeModel(Project aProject) {
-        return new DefaultTreeModel(new RootNode(aProject));
+        return new DefaultTreeModel(new RootNode(aProject,
+                getPresentationSettings()));
     }
 
     // Exposing Submodules ****************************************************
@@ -421,6 +432,7 @@ public final class MainModule extends Model {
     public void storeState() {
         Preferences prefs = Application.getUserPreferences();
         getPresentationSettings().storeIn(prefs);
+        System.out.println("ich komme hier wirklich hin.");
         SetupManager.incrementUsageCounter();
     }
 
@@ -451,7 +463,7 @@ public final class MainModule extends Model {
 
     }
 
-    private class GoalIdentifierChangeHandler implements PropertyChangeListener {
+    private class GoalNameChangeHandler implements PropertyChangeListener {
 
         /*
          * (non-Javadoc)
@@ -460,7 +472,7 @@ public final class MainModule extends Model {
          */
         public void propertyChange(PropertyChangeEvent evt) {
             String propertyName = evt.getPropertyName();
-            if (Goal.PROPERTYNAME_IDENTIFIER.equals(propertyName)) {
+            if (Goal.PROPERTYNAME_NAME.equals(propertyName)) {
                 System.out.println((String) evt.getOldValue()
                         + (String) evt.getNewValue());
             }
@@ -473,14 +485,17 @@ public final class MainModule extends Model {
      *  
      */
     public void removeSelectedItem() {
+        System.out.println(getSelectionType());
         if (getSelectionType() == Goal.class) {
-            System.out.println("removed goal");
+            //  System.out.println("removed goal");
             project.removeGoal((Goal) getSelection());
+            setNavigationTreeModel(createNavigationTreeModel(project));
 
         }
         if (getSelectionType() == Alternative.class) {
-            System.out.println("removed alternative");
+            // System.out.println("removed alternative");
             project.removeAlternative((Alternative) getSelection());
+            setNavigationTreeModel(createNavigationTreeModel(project));
         }
 
     }

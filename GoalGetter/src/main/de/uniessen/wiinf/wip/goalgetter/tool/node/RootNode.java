@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: RootNode.java,v 1.5 2004/08/07 09:28:04 moleman Exp $
+ * $Id: RootNode.java,v 1.6 2004/08/14 11:11:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -28,6 +28,8 @@ import javax.swing.Icon;
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
+import de.uniessen.wiinf.wip.goalgetter.tool.ActionPresentationMode;
+import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
 
 /**
  * 
@@ -36,10 +38,12 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class RootNode extends AbstractTreeNode {
+
+    private PresentationSettings presentationSettings = null;
 
     // Instance Creation ******************************************************
 
@@ -49,8 +53,9 @@ public final class RootNode extends AbstractTreeNode {
      * @param project
      *            the associated project
      */
-    public RootNode(Project project) {
+    public RootNode(Project project, PresentationSettings presentationSettings) {
         super(null, project);
+        this.presentationSettings = presentationSettings;
         buildNodesFrom(project);
     }
 
@@ -86,30 +91,34 @@ public final class RootNode extends AbstractTreeNode {
         }
         add(masterAlternativeNode);
 
-        ActionContainerNode masterActionNode = new ActionContainerNode(this,
-                project.getActionContainer());
+        ActionContainerNode masterActionNode;
 
-        ActionContainerNode actionByGoalNode = new ActionContainerNode(
-                masterActionNode, project.getActionsbyGoalContainer());
-        for (Iterator i = project.getGoalContainer().getGoals().iterator(); i
-                .hasNext();) {
-            Goal goal = (Goal) i.next();
-            ActionGoalNode node = new ActionGoalNode(actionByGoalNode, goal);
-            actionByGoalNode.add(node);
+        if (presentationSettings != null
+                && presentationSettings.getActionPresentationMode() == ActionPresentationMode.GOAL) { //TODO:
+            // make
+            // presentation
+            // settings
+            // aware
+
+            masterActionNode = new ActionContainerNode(this, project
+                    .getActionsbyGoalContainer());
+            for (Iterator i = project.getGoalContainer().getGoals().iterator(); i
+                    .hasNext();) {
+                Goal goal = (Goal) i.next();
+                ActionGoalNode node = new ActionGoalNode(masterActionNode, goal);
+                masterActionNode.add(node);
+            }
+        } else {
+            masterActionNode = new ActionContainerNode(this, project
+                    .getActionsbyAlternativeContainer());
+            for (Iterator i = project.getAlternativeContainer()
+                    .getAlternatives().iterator(); i.hasNext();) {
+                Alternative alternative = (Alternative) i.next();
+                ActionAlternativeNode node = new ActionAlternativeNode(
+                        masterActionNode, alternative);
+                masterActionNode.add(node);
+            }
         }
-
-        ActionContainerNode actionByAlternativeNode = new ActionContainerNode(
-                masterActionNode, project.getActionsbyAlternativeContainer());
-        for (Iterator i = project.getAlternativeContainer().getAlternatives()
-                .iterator(); i.hasNext();) {
-            Alternative alternative = (Alternative) i.next();
-            ActionAlternativeNode node = new ActionAlternativeNode(
-                    actionByAlternativeNode, alternative);
-            actionByAlternativeNode.add(node);
-        }
-
-        masterActionNode.add(actionByGoalNode);
-        masterActionNode.add(actionByAlternativeNode);
 
         add(masterActionNode);
 

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Resources.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
+ * $Id: Resources.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -32,26 +32,26 @@ import com.jgoodies.uif.util.ResourceUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 /**
- * Resources 
- *
+ * Resources
+ * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
- *
+ * @version $Revision: 1.3 $
+ *  
  */
 /**
- * Resources 
- *
+ * Resources
+ * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
- *
+ * @version $Revision: 1.3 $
+ *  
  */
 public final class Resources {
 
@@ -92,6 +92,12 @@ public final class Resources {
      */
     public static final String LOGO_ICON_ID = "logo.icon";//$NON-NLS-1$
 
+    public static final String COMPLETION_EMPTY_ICON_ID = "completion.empty.icon";
+
+    public static final String COMPLETION_HALF_ICON_ID = "completion.half.icon";
+
+    public static final String COMPLETION_FULL_ICON_ID = "completion.full.icon";
+
     /**
      * Comment for <code>HELP_CONTENTS_ICON_ID</code>
      */
@@ -128,6 +134,12 @@ public final class Resources {
      * Comment for <code>ACTION_ICON</code>
      */
     public static final Icon ACTION_ICON = getIcon(ACTION_ICON_ID);
+
+    public static final Icon COMPLETION_EMPTY_ICON = getIcon(COMPLETION_EMPTY_ICON_ID);
+
+    public static final Icon COMPLETION_HALF_ICON = getIcon(COMPLETION_HALF_ICON_ID);
+
+    public static final Icon COMPLETION_FULL_ICON = getIcon(COMPLETION_FULL_ICON_ID);
 
     // Helper Code ************************************************************
 

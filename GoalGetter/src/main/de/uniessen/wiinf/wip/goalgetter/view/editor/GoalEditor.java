@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalEditor.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
+ * $Id: GoalEditor.java,v 1.6 2004/08/14 11:11:11 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -42,14 +42,14 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public class GoalEditor extends AbstractEditor {
 
     private JTextArea descriptionArea;
 
-    private JTextComponent identifierField;
+    private JTextComponent nameField;
 
     private JTextComponent unitField;
 
@@ -68,14 +68,18 @@ public class GoalEditor extends AbstractEditor {
         return (Goal) getModel();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#getTitleSuffix()
      */
     protected String getTitleSuffix() {
-        return getGoal().getIdentifier();
+        return getGoal().getName();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.Editor#getDomainClass()
      */
     public Class getDomainClass() {
@@ -88,7 +92,7 @@ public class GoalEditor extends AbstractEditor {
      * Creates and intializes the UI components.
      */
     private void initComponents() {
-        identifierField = new JTextField();
+        nameField = new JTextField();
         descriptionArea = new JTextArea();
         descriptionArea.setLineWrap(true);
         //descriptionArea.setFont(getCurrentTheme().getControlTextFont());
@@ -98,8 +102,8 @@ public class GoalEditor extends AbstractEditor {
 
         beanAdapter = new BeanAdapter(getModel(), true);
 
-        identifierField.setDocument(new DocumentAdapter(beanAdapter
-                .getValueModel(Goal.PROPERTYNAME_IDENTIFIER)));
+        nameField.setDocument(new DocumentAdapter(beanAdapter
+                .getValueModel(Goal.PROPERTYNAME_NAME)));
         descriptionArea.setDocument(new DocumentAdapter(beanAdapter
                 .getValueModel(Goal.PROPERTYNAME_DESCRIPTION)));
         unitField.setDocument(new DocumentAdapter(beanAdapter
@@ -110,7 +114,6 @@ public class GoalEditor extends AbstractEditor {
     }
 
     // Building *************************************************************
-
 
     protected void build() {
         initComponents();
@@ -123,7 +126,7 @@ public class GoalEditor extends AbstractEditor {
                 ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
         builder.appendI15dSeparator("goalEditor.goal.text");
-        builder.appendI15d("goalEditor.identifier.text", identifierField);
+        builder.appendI15d("goalEditor.identifier.text", nameField);
         builder.nextLine();
         builder.appendI15d("goalEditor.unit.text", unitField);
         builder.nextLine();

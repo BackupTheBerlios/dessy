@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: EditorPanel.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
+ * $Id: EditorPanel.java,v 1.3 2004/08/14 11:11:11 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -58,10 +58,12 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class EditorPanel extends SimpleInternalFrame {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Maps domain classes to <code>Editor</code> instances.

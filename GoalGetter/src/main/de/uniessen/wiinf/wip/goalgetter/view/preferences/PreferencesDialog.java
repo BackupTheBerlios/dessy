@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: PreferencesDialog.java,v 1.6 2004/08/07 09:28:04 moleman Exp $
+ * $Id: PreferencesDialog.java,v 1.7 2004/08/14 11:11:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
@@ -45,7 +45,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class PreferencesDialog extends AbstractDialog {
@@ -92,9 +92,9 @@ public final class PreferencesDialog extends AbstractDialog {
     protected JComponent buildHeader() {
         return new HeaderPanel(
                 ResourceUtils
-                        .getString("preferencesDialog.preferencesHeader.text"),
+                        .getString("preferencesDialog.preferencesHeader.text"), //$NON-NLS-1$
                 ResourceUtils
-                        .getString("preferencesDialog.preferencesDescription.text"),
+                        .getString("preferencesDialog.preferencesDescription.text"), //$NON-NLS-1$
                 ResourceUtils.getIcon(ResourceIDs.PREFERENCES_ICON));
     }
 
@@ -110,6 +110,7 @@ public final class PreferencesDialog extends AbstractDialog {
 
     /**
      * Builds and returns the tabbed pane.
+     * 
      * @return tabbed Pane
      */
     protected JTabbedPane buildTabbedPane() {

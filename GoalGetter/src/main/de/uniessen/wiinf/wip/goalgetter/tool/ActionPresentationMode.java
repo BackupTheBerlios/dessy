@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: ActionPresentationMode.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
+ * $Id: ActionPresentationMode.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -21,7 +21,7 @@ package de.uniessen.wiinf.wip.goalgetter.tool;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class ActionPresentationMode {
@@ -30,14 +30,14 @@ public final class ActionPresentationMode {
      * {@link de.uniessen.wiinf.wip.goalgetter.domain.Goal}
      */
     public static final ActionPresentationMode GOAL = new ActionPresentationMode(
-            "Goal");
+            "Goal");//$NON-NLS-1$
 
     /**
      * presentation mode for a grouping by
      * {@link de.uniessen.wiinf.wip.goalgetter.domain.Alternative}
      */
     public static final ActionPresentationMode ALTERNATIVE = new ActionPresentationMode(
-            "Alternative");
+            "Alternative");//$NON-NLS-1$
 
     /**
      * The default Presentation Mode, returned by {@link #valueOf(String)}if no
@@ -87,7 +87,7 @@ public final class ActionPresentationMode {
     }
 
     public String toString() {
-        return "ViewMode: " + name;
+        return "ViewMode: " + name; //$NON-NLS-1$
     }
 
 }

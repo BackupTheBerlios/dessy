@@ -16,14 +16,13 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Alternative.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: Alternative.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
-
-import com.jgoodies.binding.beans.Model;
 
 /**
  * 
@@ -32,10 +31,10 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
-public class Alternative extends Model {
+public class Alternative extends AbstractDomain {
 
     /**
      * Bound Bean Property <code>PROPERTYNAME_DESCRIPTION</code>
@@ -51,7 +50,7 @@ public class Alternative extends Model {
 
     private String identifier;
 
-    private Map intensities = new TreeMap();
+    private Map intensityMap = new TreeMap();
 
     /**
      * Constructs an <code>Alternative</code> with the given identifier.
@@ -112,26 +111,85 @@ public class Alternative extends Model {
         return super.toString() + ':' + getIdentifier();
     }
 
-    /** Returns the intensities
+    /**
+     * Returns the intensities
+     * 
      * @return intensities
      */
     public Map getIntensities() {
-        return intensities;
+        return intensityMap;
     }
 
-    /** Puts an intensity  
-     * @param key 
+    /**
+     * Returns the intensity for the given Goal
+     * 
+     * @param key
+     *            the Goal to fetch the intensity for
+     * @return Intensity for the given Goal
+     */
+    public String getIntensity(String key) {
+
+        return (String) intensityMap.get(key);
+    }
+
+    public String getIntensity(Goal g) {
+        return getIntensity(g.getIdentifier());
+    }
+
+    /**
+     * Puts an intensity
+     * 
+     * @param key
+     *            identifier of the Goal that the intensity belongs to
      * @param value
      */
-    public void putIntensity(Object key, Object value) {
-        intensities.put(key, value);
+    public void putIntensity(String key, String value) {
+        intensityMap.put(key, value);
     }
 
-    /** removes an intensity
-     * @param key the intensity to remove
+    public void putIntensity(Goal g, String value) {
+        putIntensity(g.getIdentifier(), value);
+    }
+
+    /**
+     * removes an intensity
+     * 
+     * @param goal
+     *            the Goal whose intensity is to be removed
      */
-    public void removeIntensity(Object key) {
-        intensities.remove(key);
+    public void removeIntensity(Goal goal) {
+        removeIntensity(goal.getIdentifier());
+    }
+
+    public void removeIntensity(String key) {
+        intensityMap.remove(key);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
+     */
+    protected boolean isEmpty() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
+     */
+    protected boolean isFilled() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /**
+     * @return
+     */
+    public Collection getGoalIdentifiers() {
+        return intensityMap.keySet();
     }
 
 }

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
+ * $Id: Actions.java,v 1.6 2004/08/14 11:11:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -31,8 +31,8 @@ import javax.swing.Action;
 
 import com.jgoodies.binding.beans.BeanAdapter;
 import com.jgoodies.binding.value.ValueModel;
-import com.jgoodies.uif.ToggleAction;
 import com.jgoodies.uif.action.ActionManager;
+import com.jgoodies.uif.action.ToggleAction;
 import com.jgoodies.uifextras.help.HelpBroker;
 import com.jgoodies.uifextras.printing.PrintManager;
 
@@ -51,7 +51,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 /**
@@ -60,7 +60,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class Actions {
@@ -273,12 +273,12 @@ public final class Actions {
                 getController().saveAs();
             }
         }).setEnabled(false);
-        ActionManager.register(OPEN_PAGE_SETUP_ID, new AbstractAction() {
-
-            public void actionPerformed(ActionEvent event) {
-                PrintManager.openPageSetupDialog();
-            }
-        });
+        //        ActionManager.register(OPEN_PAGE_SETUP_ID, new AbstractAction() {
+        //
+        //            public void actionPerformed(ActionEvent event) {
+        //                PrintManager.openPageSetupDialog();
+        //            }
+        //        });
         ActionManager.register(PRINT_ID, new AbstractAction() {
 
             public void actionPerformed(ActionEvent event) {
@@ -382,6 +382,8 @@ public final class Actions {
      */
     private class DispatchingAction extends AbstractAction {
 
+        private static final long serialVersionUID = 1L;
+
         private final String id;
 
         /*
@@ -399,6 +401,8 @@ public final class Actions {
         public void actionPerformed(ActionEvent event) {
             if (id.equals(ADD_GOAL_ID)) {
                 getController().addGoal();
+            } else if (id.equals(OPEN_PAGE_SETUP_ID)) {
+                PrintManager.openPageSetupDialog();
             } else if (id.equals(ADD_ALTERNATIVE_ID)) {
                 getController().addAlternative();
             } else if (id.equals(ADD_ACTION_ID)) {
@@ -409,8 +413,10 @@ public final class Actions {
                 getController().showSensitivityAnalysis();
             } else if (id.equals(SHOW_REPORT_ID)) {
                 getController().showReport();
+                //            } else if (id.equals(NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID)) {
+                //                System.out.println("die modusaction gibt es");
             } else {
-                Logger.getLogger("Actions").warning("Unknown action: " + id);
+                Logger.getLogger("Actions").warning("Unknown action: " + id);//$NON-NLS-1$ //$NON-NLS-2$
             }
         }
 
@@ -421,6 +427,7 @@ public final class Actions {
      * dispatching <code>Action</code> implementation.
      */
     private void registerActionsViaDispatchingClass() {
+        register(OPEN_PAGE_SETUP_ID);
         register(ADD_GOAL_ID);
         register(ADD_ALTERNATIVE_ID);
         register(ADD_ACTION_ID);
@@ -460,7 +467,8 @@ public final class Actions {
     // Updating the Action Enablement *****************************************
 
     /**
-     * Updates the enablement state actions realted to the node selection.
+     * Updates the enablement state actions related to the node selection or
+     * application state.
      * 
      * @param selection
      *            the selected domain object
@@ -480,6 +488,13 @@ public final class Actions {
                 canAddAlternative);
         //   ActionManager.get(Actions.ADD_ACTION_ID).setEnabled(canAddComponent);
         ActionManager.get(Actions.DELETE_ITEM_ID).setEnabled(canDelete);
+
+        // only enable Navigator Action toggles when project is loaded
+        ActionManager.get(Actions.NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID)
+                .setEnabled(getModule().hasProject());
+        ActionManager.get(Actions.NAVIGATOR_ACTIONS_BY_GOAL_ID).setEnabled(
+                getModule().hasProject());
+
     }
 
     /**
@@ -523,6 +538,10 @@ public final class Actions {
 
     MainController getController() {
         return controller;
+    }
+
+    MainModule getModule() {
+        return mainModule;
     }
 
     PresentationSettings getPresentationSettings() {

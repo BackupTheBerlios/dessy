@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Project.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: Project.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.jgoodies.binding.beans.Model;
+import com.jgoodies.binding.list.ArrayListModel;
 
 /**
  * 
@@ -34,10 +35,12 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class Project extends Model {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Refers to <code>Description</code> object that describes this project.
@@ -126,8 +129,7 @@ public final class Project extends Model {
         Iterator iterator = alternativeContainer.getAlternatives().iterator();
         while (iterator.hasNext()) {
             Alternative a = (Alternative) iterator.next();
-            Goal g = new Goal(goal.getIdentifier());
-            a.putIntensity(g.getIdentifier(), g.getIntensity());
+            a.putIntensity(goal, goal.getIntensity());
         }
 
     }
@@ -139,7 +141,14 @@ public final class Project extends Model {
      *            the goal to remove
      */
     public void removeGoal(Goal goal) {
-        goalContainer.removeGoal(goal);
+        goalContainer.removeGoal(goal.getIdentifier());
+
+        Iterator iterator = alternativeContainer.getAlternatives().iterator();
+        while (iterator.hasNext()) {
+            Alternative a = (Alternative) iterator.next();
+            a.removeIntensity(goal);
+        }
+
     }
 
     /**
@@ -175,9 +184,8 @@ public final class Project extends Model {
         Iterator iterator = goalContainer.getGoals().iterator();
         while (iterator.hasNext()) {
             Goal g = (Goal) iterator.next();
-            alternative.putIntensity(g.getIdentifier(), g.getIntensity());
-            Action ac = new Action(g.getIdentifier(), alternative
-                    .getIdentifier());
+            alternative.putIntensity(g, g.getIntensity());
+            Action ac = new Action(g.getName(), alternative.getIdentifier());
             actionContainerByGoal.addAction(ac);
             actionContainerByAlternative.addAction(ac);
         }
@@ -202,6 +210,80 @@ public final class Project extends Model {
      */
     public AlternativeContainer getAlternativeContainer() {
         return alternativeContainer;
+    }
+
+    public ArrayListModel getAlternativeIntensitiesFor(Goal g) {
+        ArrayListModel aModel = new ArrayListModel();
+
+        Iterator i = alternativeContainer.getAlternatives().iterator();
+        while (i.hasNext()) {
+            //  aModel
+        }
+        return aModel;
+
+    }
+
+    public ArrayListModel alternativesForTable() {
+        ArrayListModel aModel = new ArrayListModel();
+
+        Iterator goalIterator = goalContainer.getGoals().iterator();
+        Iterator alternativeIterator = alternativeContainer.getAlternatives()
+                .iterator();
+        while (alternativeIterator.hasNext()) {
+            while (goalIterator.hasNext()) {
+                Goal g = (Goal) goalIterator.next();
+                Alternative a = (Alternative) alternativeIterator.next();
+                aModel.add(new AlternativeTableRow(g.getName(), g
+                        .getIntensity(), a.getIdentifier(), a.getIntensity(g)));
+            }
+        }
+        return aModel;
+    }
+
+    public class AlternativeTableRow {
+        String goalIdentifier;
+
+        String goalValue;
+
+        String alternativeIdentifier;
+
+        String alternativeValue;
+
+        public AlternativeTableRow(String goalId, String goalVal,
+                String alternativeID, String alternativeVal) {
+            this.goalIdentifier = goalId;
+            this.goalValue = goalVal;
+            this.alternativeIdentifier = alternativeID;
+            this.alternativeValue = alternativeVal;
+        }
+
+        /**
+         * @return Returns the alternativeIdentifier.
+         */
+        public String getAlternativeIdentifier() {
+            return alternativeIdentifier;
+        }
+
+        /**
+         * @return Returns the alternativeValue.
+         */
+        public String getAlternativeValue() {
+            return alternativeValue;
+        }
+
+        /**
+         * @return Returns the goalIdentifier.
+         */
+        public String getGoalIdentifier() {
+            return goalIdentifier;
+        }
+
+        /**
+         * @return Returns the goalValue.
+         */
+        public String getGoalValue() {
+            return goalValue;
+        }
     }
 
     //  Managing Actions ********************************************************
@@ -247,8 +329,7 @@ public final class Project extends Model {
     //    public void removeAlternative(Action action) {
     //        actionContainer.removeAction(action);
     //    }
-    
-    
+
     /**
      * Returns the Project's ActionContainer instance
      * 

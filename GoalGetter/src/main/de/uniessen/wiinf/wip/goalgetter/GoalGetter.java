@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalGetter.java,v 1.3 2004/08/07 09:28:04 moleman Exp $
+ * $Id: GoalGetter.java,v 1.4 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter;
 
@@ -31,7 +31,8 @@ import com.jgoodies.looks.Options;
 import com.jgoodies.uif.action.ActionManager;
 import com.jgoodies.uif.application.AbstractMainFrame;
 import com.jgoodies.uif.application.Application;
-import com.jgoodies.uif.application.Globals;
+import com.jgoodies.uif.application.ApplicationConfiguration;
+import com.jgoodies.uif.application.ApplicationDescription;
 import com.jgoodies.uif.osx.OSXApplicationMenu;
 import com.jgoodies.uif.splash.ImageSplash;
 import com.jgoodies.uif.splash.Splash;
@@ -50,7 +51,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.MainFrame;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 
@@ -152,19 +153,23 @@ public final class GoalGetter extends DefaultApplicationStarter {
     public static void main(String[] arguments) {
         OSXApplicationMenu.setAboutName("GoalGetter");//$NON-NLS-1$ 
         new GoalGetter()
-                .boot(new Globals(
-                        "GoalGetter", //$NON-NLS-1$ // Application name
-                        "goalgetter",//$NON-NLS-1$ // prefix for logs and prefs
-                        "0.1",//$NON-NLS-1$ // version
-                        "0.1.3 (July-19-2004)",//$NON-NLS-1$ // full version
-                        "A Decision supporting system using the GoalGetter Method by Markus Stallkamp",//$NON-NLS-1$ // description
-                        "\u00a9 2004",//$NON-NLS-1$ // copyright
-                        "Universität Duisburg-Essen", //$NON-NLS-1$ // vendor
-                        "de/uniessen/wiinf/wip/goalgetter/",//$NON-NLS-1$ // resource properties URL
-                        "docs/help/global/Help.hs",//$NON-NLS-1$ // helpset URL
-                        "docs/help/tips/index.txt",//$NON-NLS-1$ // tip index path
-                        "http://www.wip.uni-essen.de/",//$NON-NLS-1$ // vendor URL
-                        "tim.franz@uni-essen.de"));//$NON-NLS-1$ // support eMail
+                .boot(
+                        new ApplicationDescription(
+                                "GoalGetter", //$NON-NLS-1$ // Application name
+                                "GoalGetter", //$NON-NLS-1$ // Application short name
+                                "0.1",//$NON-NLS-1$ // version
+                                "0.1.3 (July-19-2004)",//$NON-NLS-1$ // full version
+                                "A Decision supporting system using the GoalGetter Method by Markus Stallkamp",//$NON-NLS-1$ // description
+                                "\u00a9 2004",//$NON-NLS-1$ // copyright
+                                "Universität Duisburg-Essen", //$NON-NLS-1$ // vendor
+                                "http://www.wip.uni-essen.de/",//$NON-NLS-1$ // vendor URL
+                                "tim.franz@uni-essen.de"),//$NON-NLS-1$ // support eMail
+                        new ApplicationConfiguration("goalgetter",//$NON-NLS-1$ // prefix for logs and prefs  
+                                "de/uniessen/wiinf/wip/goalgetter/",//$NON-NLS-1$ // resource properties URL
+                                "docs/help/global/Help.hs",//$NON-NLS-1$ // helpset URL
+                                "docs/help/tips/index.txt")//$NON-NLS-1$ // tip index path
+                );
+
     }
 
 }

@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: GoalContainerTableModel.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: GoalContainerTableModel.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
 
@@ -27,7 +27,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public class GoalContainerTableModel extends TableAdapter {
@@ -53,7 +53,7 @@ public class GoalContainerTableModel extends TableAdapter {
         Goal goal = (Goal) getRow(rowIndex);
         switch (columnIndex) {
         case 0:
-            return goal.getIdentifier();
+            return goal.getName();
         case 1:
             return goal.getUnit();
         case 2:
@@ -71,7 +71,7 @@ public class GoalContainerTableModel extends TableAdapter {
         Goal goal = (Goal) getRow(rowIndex);
         switch (columnIndex) {
         case 0:
-            goal.setIdentifier((String) aValue);
+            goal.setName((String) aValue);
             break;
         case 1:
             goal.setUnit((String) aValue);

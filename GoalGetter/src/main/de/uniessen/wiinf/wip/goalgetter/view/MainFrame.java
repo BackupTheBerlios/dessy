@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainFrame.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
+ * $Id: MainFrame.java,v 1.6 2004/08/14 11:11:11 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -39,17 +39,19 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class MainFrame extends AbstractMainFrame {
+
+    private static final long serialVersionUID = 1L;
 
     private static final Dimension MINIMUM_SIZE = new Dimension(500, 400);
 
     /**
      * Bound Bean Property <code>PROPERTYNAME_HELP_NAVIGATOR_VISIBLE</code>
      */
-    public static final String PROPERTYNAME_HELP_NAVIGATOR_VISIBLE = "helpNavigatorVisible";
+    public static final String PROPERTYNAME_HELP_NAVIGATOR_VISIBLE = "helpNavigatorVisible"; //$NON-NLS-1$
 
     /**
      * Refers to the module that provides all high-level models. Used to build
@@ -70,7 +72,7 @@ public final class MainFrame extends AbstractMainFrame {
      *            provides bound properties and high-level models
      */
     public MainFrame(MainModule mainModule) {
-        super(Application.getGlobals().getWindowTitle());
+        super(Application.getDescription().getWindowTitle());
         this.module = mainModule;
     }
 
@@ -96,6 +98,7 @@ public final class MainFrame extends AbstractMainFrame {
 
     /**
      * Builds and returns the menu bar.
+     * 
      * @return built menu bar
      */
     private JMenuBar buildMenuBar() {
@@ -138,10 +141,9 @@ public final class MainFrame extends AbstractMainFrame {
      */
     public void storeState() {
         super.storeState();
+        System.out.println("der mainframe speichert den status");
         module.storeState();
         Preferences userPrefs = Application.getUserPreferences();
-        // TODO: Enable this if the welcome is animated and has state.
-        // welcomePanel.storeIn(userPrefs);
         mainPageBuilder().storeIn(userPrefs);
     }
 

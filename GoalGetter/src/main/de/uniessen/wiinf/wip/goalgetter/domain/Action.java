@@ -16,15 +16,13 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Action.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: Action.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
-import com.jgoodies.binding.beans.Model;
-
 /**
  * 
- * An acton in the GoalGetter Mmethod is specified through its
+ * An action in the GoalGetter method is specified through its
  * {@link de.uniessen.wiinf.wip.goalgetter.domain.Goal}and
  * {@link de.uniessen.wiinf.wip.goalgetter.domain.Alternative}. Each
  * combination of this two items requires an action, if the alternative's
@@ -48,10 +46,12 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
-public class Action extends Model {
+public class Action extends AbstractDomain {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Property constant for the description
@@ -201,6 +201,26 @@ public class Action extends Model {
 
     public String toString() {
         return super.toString() + ':' + getIdentifier();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
+     */
+    protected boolean isEmpty() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
+     */
+    protected boolean isFilled() {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

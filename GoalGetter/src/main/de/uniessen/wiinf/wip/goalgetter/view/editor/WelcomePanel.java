@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: WelcomePanel.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
+ * $Id: WelcomePanel.java,v 1.6 2004/08/14 11:11:11 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -50,11 +50,13 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class WelcomePanel extends GradientBackgroundPanel implements
         Editor {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a <code>WelcomePanel</code>.
@@ -126,7 +128,7 @@ public final class WelcomePanel extends GradientBackgroundPanel implements
         CellConstraints cc = new CellConstraints();
 
         builder.add(welcomeLbl, cc.xyw(1, 1, 2));
-        builder.add(logoLbl, cc.xyw(1, 2, 2, "left, center"));
+        builder.add(logoLbl, cc.xyw(1, 2, 2, "left, center")); //$NON-NLS-1$
         builder.add(selectLbl, cc.xyw(1, 3, 2));
         builder.add(newProjectButton, cc.xy(2, 5));
         builder.add(openProjectButton, cc.xy(2, 7));

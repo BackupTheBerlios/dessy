@@ -16,13 +16,13 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainer.java,v 1.4 2004/08/07 09:28:04 moleman Exp $
+ * $Id: GoalContainer.java,v 1.5 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
+import java.util.Iterator;
 import java.util.List;
 
-import com.jgoodies.binding.beans.Model;
 import com.jgoodies.binding.list.ArrayListModel;
 
 /**
@@ -32,10 +32,10 @@ import com.jgoodies.binding.list.ArrayListModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
-public class GoalContainer extends Model {
+public class GoalContainer extends AbstractDomain {
 
     private ArrayListModel goals = new ArrayListModel();
 
@@ -107,12 +107,12 @@ public class GoalContainer extends Model {
     /**
      * Adds a Goal
      * 
-     * @param newGoal
+     * @param goal
      *            the Goal to add
      */
-    public void addGoal(Goal newGoal) {
+    public void addGoal(Goal goal) {
         List oldGoals = getGoals();
-        goals.add(newGoal);
+        goals.add(goal);
         List newGoals = getGoals();
         firePropertyChange(PROPERTYNAME_GOALS, oldGoals, newGoals);
     }
@@ -121,17 +121,81 @@ public class GoalContainer extends Model {
      * Removes a Goal
      * 
      * @param goal
-     *            Goal to remove
+     *            the Goal to remove
      */
-    public void removeGoal(Goal goal) {
+    public void removeGoal(String goal) {
         List oldGoals = getGoals();
         goals.remove(goal);
         List newGoals = getGoals();
         firePropertyChange(PROPERTYNAME_GOALS, oldGoals, newGoals);
     }
 
+    /**
+     * Finds and answers a Goal with the given identifier
+     * 
+     * @param goalIdentifier
+     *            identifier of the Goal to find
+     * @return Goal
+     * @throws IllegalArgumentException
+     *             if goalIdentifier matches no goal in the container
+     */
+    public Goal goalByIdentifier(String goalIdentifier) {
+        Iterator iterator = goals.iterator();
+        while (iterator.hasNext()) {
+            Goal g = (Goal) iterator.next();
+            if (g.getIdentifier().equals(goalIdentifier)) {
+                return g;
+            }
+        }
+        throw new IllegalArgumentException("Given identifier matches no Goal"); //$NON-NLS-1$
+    }
+
     public String toString() {
         return super.toString() + ':' + getIdentifier();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
+     */
+    protected boolean isEmpty() {
+        Iterator iterator = getGoals().iterator();
+        int fillLevel = 0;
+        while (iterator.hasNext()) {
+            Goal g = (Goal) iterator.next();
+            fillLevel += g.getFillLevel();
+        }
+        switch (fillLevel) {
+        case FillLevel.EMPTY:
+            return true;
+
+        default:
+            return false;
+
+        }
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
+     */
+    protected boolean isFilled() {
+
+        Iterator iterator = getGoals().iterator();
+        int fillLevel = 0;
+        while (iterator.hasNext()) {
+            Goal g = (Goal) iterator.next();
+            fillLevel += g.getFillLevel();
+        }
+        if (fillLevel == FillLevel.FULL * getGoals().size()) {
+            return true;
+        }
+
+        return false;
+
     }
 
 }

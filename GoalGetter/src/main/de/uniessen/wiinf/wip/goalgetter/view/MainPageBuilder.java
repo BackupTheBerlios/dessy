@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainPageBuilder.java,v 1.6 2004/08/07 09:28:03 moleman Exp $
+ * $Id: MainPageBuilder.java,v 1.7 2004/08/14 11:11:11 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -35,7 +35,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 
 import com.jgoodies.looks.LookUtils;
-import com.jgoodies.uif.ToggleAction;
 import com.jgoodies.uif.action.ActionManager;
 import com.jgoodies.uif.application.Application;
 import com.jgoodies.uif.builder.ToolBarBuilder;
@@ -63,7 +62,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 
@@ -73,8 +72,8 @@ public final class MainPageBuilder {
             620, 510)
             : new Dimension(760, 570);
 
-    private static final String COPYRIGHT_TEXT = Application.getGlobals()
-            .getFullCopyright();
+    private static final String COPYRIGHT_TEXT = Application.getDescription()
+            .getCopyrightAndVendor();
 
     // Preferences Key
     private static final String MAIN_DIVIDER_LOCATION_KEY = "mainDividerLocation";//$NON-NLS-1$
@@ -128,14 +127,15 @@ public final class MainPageBuilder {
      * Creates, binds and configures the subpanels and components.
      */
     private void initComponents() {
-        navigator = new SimpleInternalFrame("Navigator");
-        navigator.setContent(UIFactory
-                .createStrippedScrollPane(new NavigationPanelBuilder(module)
-                        .build()));
+        //        navigator = new SimpleInternalFrame("Navigator");
+        //        navigator.setContent(UIFactory
+        //                .createStrippedScrollPane(new NavigationPanelBuilder(module)
+        //                        .build()));
+        navigator = new NavigationPanel(module);
         navigator.setSelected(true);
         navigator.setMinimumSize(new Dimension(100, 100));
         navigator.setPreferredSize(new Dimension(160, 200));
-        navigator.setToolBar(buildNavigatorToolBar());
+        //  navigator.setToolBar(buildNavigatorToolBar());
 
         helpNavigator = new SimpleInternalFrame("Dynamic Help Topics");
         helpNavigator.setContent(UIFactory
@@ -243,20 +243,20 @@ public final class MainPageBuilder {
         return builder.getToolBar();
     }
 
-    /**
-     * Builds and answers the navigator toolbar.
-     * 
-     * @return navigator toolbar
-     */
-    private JToolBar buildNavigatorToolBar() {
-        //TODO move to navigator panel class
-        ToolBarBuilder builder = new ToolBarBuilder("Navigator");
-        builder.addToggle((ToggleAction) ActionManager
-                .get(Actions.NAVIGATOR_ACTIONS_BY_GOAL_ID));
-        builder.addToggle((ToggleAction) ActionManager
-                .get(Actions.NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID));
-        return builder.getToolBar();
-    }
+    //    /**
+    //     * Builds and answers the navigator toolbar.
+    //     *
+    //     * @return navigator toolbar
+    //     */
+    //    private JToolBar buildNavigatorToolBar() {
+    //        //TODO move to navigator panel class
+    //        ToolBarBuilder builder = new ToolBarBuilder("Navigator");
+    //        builder.addToggle((ToggleAction) ActionManager
+    //                .get(Actions.NAVIGATOR_ACTIONS_BY_GOAL_ID));
+    //        builder.addToggle((ToggleAction) ActionManager
+    //                .get(Actions.NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID));
+    //        return builder.getToolBar();
+    //    }
 
     /**
      * Builds and answers the status bar.
@@ -369,6 +369,8 @@ public final class MainPageBuilder {
     // Helper Class ***********************************************************
 
     private class RefreshedPanel extends JPanel {
+
+        private static final long serialVersionUID = 1L;
 
         /**
          * In case some panels are invisible, we explicitly update their UIs.

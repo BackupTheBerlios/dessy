@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: OverviewTable.java,v 1.7 2004/08/09 07:46:23 moleman Exp $
+ * $Id: OverviewTable.java,v 1.8 2004/08/14 11:11:11 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.overviewTable;
 
@@ -30,13 +30,13 @@ import javax.swing.table.TableCellRenderer;
 import com.jgoodies.uifextras.util.ExtTable;
 
 /**
- * OverviewTable 
- *
+ * OverviewTable
+ * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
- *
+ * @version $Revision: 1.8 $
+ *  
  */
 public class OverviewTable extends ExtTable {
 
@@ -53,14 +53,18 @@ public class OverviewTable extends ExtTable {
      * Sets a column as the highlight column. This column is displayed with a
      * different background than the other columns
      * 
-     * @param i column number
+     * @param i
+     *            column number
      */
     public void setHighlightColumn(int i) {
         highlightColumn = i;
     }
 
-    /** Answers the highlight column  
-     * @return column index of highlighted column or -1 if no column is highlighted
+    /**
+     * Answers the highlight column
+     * 
+     * @return column index of highlighted column or -1 if no column is
+     *         highlighted
      */
     public int getHighlightColumn() {
         return highlightColumn;
@@ -69,6 +73,7 @@ public class OverviewTable extends ExtTable {
     /**
      * Constructs an <code>ExtTable</code> for the specified row data and
      * column names.
+     * 
      * @param columnNames
      * @param rowData
      */
@@ -116,7 +121,7 @@ public class OverviewTable extends ExtTable {
             }
         } else {
 
-            Color color = UIManager.getColor("List.selectionBackground");
+            Color color = UIManager.getColor("List.selectionBackground");//$NON-NLS-1$
 
             int r = color.getRed();
             int g = color.getGreen();
@@ -130,8 +135,8 @@ public class OverviewTable extends ExtTable {
         }
 
         if (isCellSelected(rowIndex, vColIndex)) {
-            c.setBackground(UIManager.getColor("List.selectionBackground"));
-            c.setForeground(UIManager.getColor("List.selectionForeground"));
+            c.setBackground(UIManager.getColor("List.selectionBackground"));//$NON-NLS-1$
+            c.setForeground(UIManager.getColor("List.selectionForeground"));//$NON-NLS-1$
         }
         return c;
     }

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpSets.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: HelpSets.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.help;
@@ -40,7 +40,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class HelpSets {
@@ -122,13 +122,13 @@ public final class HelpSets {
         DefaultMutableTreeNode chapter;
 
         chapter = createChapter("Help");
-        chapter.add(createTopic("Welcome", "welcome/welcome"));
-        chapter.add(createTopic("How to use dynamic help", "welcome/help"));
+        chapter.add(createTopic("Welcome", "welcome/welcome")); //$NON-NLS-2$
+        chapter.add(createTopic("How to use dynamic help", "welcome/help"));//$NON-NLS-2$
         root.add(chapter);
 
         chapter = createChapter("Getting Started");
-        chapter.add(createTopic("Create a new project", "welcome/new"));
-        chapter.add(createTopic("Open existing project", "welcome/open"));
+        chapter.add(createTopic("Create a new project", "welcome/new"));//$NON-NLS-2$
+        chapter.add(createTopic("Open existing project", "welcome/open"));//$NON-NLS-2$
         root.add(chapter);
 
         return root;
@@ -144,9 +144,9 @@ public final class HelpSets {
         DefaultMutableTreeNode chapter;
 
         chapter = createChapter("Help");
-        chapter.add(createTopic("Decision", "decision/project"));
-        chapter.add(createTopic("Identifier", "decision/identifier"));
-        chapter.add(createTopic("Description", "decision/description"));
+        chapter.add(createTopic("Decision", "decision/project"));//$NON-NLS-2$
+        chapter.add(createTopic("Identifier", "decision/identifier"));//$NON-NLS-2$
+        chapter.add(createTopic("Description", "decision/description"));//$NON-NLS-2$
         root.add(chapter);
 
         return root;
@@ -162,8 +162,8 @@ public final class HelpSets {
         DefaultMutableTreeNode chapter;
 
         chapter = createChapter("Help");
-        chapter.add(createTopic("Goal", "goal/general"));
-        chapter.add(createTopic("Comments", "goal/comments"));
+        chapter.add(createTopic("Goal", "goal/general"));//$NON-NLS-2$
+        chapter.add(createTopic("Comments", "goal/comments"));//$NON-NLS-2$
         root.add(chapter);
 
         return root;
@@ -179,7 +179,7 @@ public final class HelpSets {
         DefaultMutableTreeNode chapter;
 
         chapter = createChapter("Help");
-        chapter.add(createTopic("Alternative", "alternative/general"));
+        chapter.add(createTopic("Alternative", "alternative/general"));//$NON-NLS-2$
         root.add(chapter);
 
         return root;
@@ -195,7 +195,7 @@ public final class HelpSets {
         DefaultMutableTreeNode chapter;
 
         chapter = createChapter("Help");
-        chapter.add(createTopic("Action", "action/general"));
+        chapter.add(createTopic("Action", "action/general"));//$NON-NLS-2$
         root.add(chapter);
 
         return root;
@@ -211,7 +211,7 @@ public final class HelpSets {
         DefaultMutableTreeNode chapter;
 
         chapter = createChapter("Help");
-        chapter.add(createTopic("Overview", "goalcontainer/general"));
+        chapter.add(createTopic("Overview", "goalcontainer/general"));//$NON-NLS-2$
         root.add(chapter);
 
         return root;
@@ -227,7 +227,7 @@ public final class HelpSets {
         DefaultMutableTreeNode chapter;
 
         chapter = createChapter("Help");
-        chapter.add(createTopic("Overview", "alternativecontainer/general"));
+        chapter.add(createTopic("Overview", "alternativecontainer/general"));//$NON-NLS-2$
         root.add(chapter);
 
         return root;
@@ -243,7 +243,7 @@ public final class HelpSets {
         DefaultMutableTreeNode chapter;
 
         chapter = createChapter("Help");
-        chapter.add(createTopic("Overview", "actioncontainer/general"));
+        chapter.add(createTopic("Overview", "actioncontainer/general"));//$NON-NLS-2$
         root.add(chapter);
 
         return root;
@@ -259,7 +259,7 @@ public final class HelpSets {
      * @return topic
      */
     private static DefaultMutableTreeNode createTopic(String name, String path) {
-        String fullPath = URL_PREFIX + path + ".html";
+        String fullPath = URL_PREFIX + path + ".html";//$NON-NLS-1$
         return new DefaultMutableTreeNode(HelpNode.createTopic(name, fullPath));
     }
 

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionGoalNode.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
+ * $Id: ActionGoalNode.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -33,7 +33,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class ActionGoalNode extends AbstractTreeNode {
@@ -61,7 +61,7 @@ public final class ActionGoalNode extends AbstractTreeNode {
      * @return this node's name
      */
     public String getName() {
-        return getGoal().getIdentifier();
+        return getGoal().getName();
     }
 
     // ************************************************************************

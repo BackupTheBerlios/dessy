@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpView.java,v 1.4 2004/08/07 09:28:03 moleman Exp $
+ * $Id: HelpView.java,v 1.5 2004/08/14 11:11:11 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -50,10 +50,12 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 final class HelpView extends SimpleInternalFrame {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Refers to the module that provides a bound property for the help page.
@@ -137,7 +139,7 @@ final class HelpView extends SimpleInternalFrame {
      * @author tfranz
      * @author jsprenger
      * 
-     * @version $Revision: 1.4 $
+     * @version $Revision: 1.5 $
      *  
      */
     private class PageChangeHandler implements PropertyChangeListener {

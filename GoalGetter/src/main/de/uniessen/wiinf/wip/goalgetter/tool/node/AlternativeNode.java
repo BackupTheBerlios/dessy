@@ -16,14 +16,17 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeNode.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
+ * $Id: AlternativeNode.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
 
 import javax.swing.Icon;
 
+import com.jgoodies.uif.util.CompoundIcon;
+
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
+import de.uniessen.wiinf.wip.goalgetter.domain.FillLevel;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 
 /**
@@ -33,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class AlternativeNode extends AbstractTreeNode {
@@ -73,7 +76,8 @@ public final class AlternativeNode extends AbstractTreeNode {
      * @return this node's icon.
      */
     public Icon getIcon(boolean sel) {
-        return Resources.ALTERNATIVE_ICON;
+        return new CompoundIcon(Resources.ALTERNATIVE_ICON, FillLevel
+                .getIcon(getAlternative().getFillLevel()));
     }
 
     /**

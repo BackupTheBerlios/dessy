@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpNode.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: HelpNode.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.help;
 
@@ -34,7 +34,7 @@ import com.jgoodies.uif.util.ResourceUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 
@@ -50,9 +50,9 @@ public final class HelpNode {
      */
     public static final int TOPIC_ITEM = 1;
 
-    private static final String BOOK_ICON_ID = "com.jgoodies.help.openBook.icon";
+    private static final String BOOK_ICON_ID = "com.jgoodies.help.openBook.icon"; //$NON-NLS-1$
 
-    private static final String TOPIC_ICON_ID = "com.jgoodies.help.topic.icon";
+    private static final String TOPIC_ICON_ID = "com.jgoodies.help.topic.icon"; //$NON-NLS-1$
 
     private static final Icon BOOK_ICON = ResourceUtils.getIcon(BOOK_ICON_ID);
 

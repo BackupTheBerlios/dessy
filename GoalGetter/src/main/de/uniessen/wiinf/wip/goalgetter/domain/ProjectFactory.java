@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ProjectFactory.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: ProjectFactory.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.domain;
@@ -32,7 +32,7 @@ package de.uniessen.wiinf.wip.goalgetter.domain;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class ProjectFactory {
@@ -54,8 +54,8 @@ public final class ProjectFactory {
         project.addGoal(createGoal("Knowledge"));
         project.addGoal(createGoal("Salary"));
 
-        project.addAlternative(createAlternative("Klaus"));
-        project.addAlternative(createAlternative("Peter"));
+        project.addAlternative(createAlternative("Klaus")); //$NON-NLS-1$
+        project.addAlternative(createAlternative("Peter")); //$NON-NLS-1$
 
         return project;
     }
@@ -79,7 +79,9 @@ public final class ProjectFactory {
      * @return instantiated Goal
      */
     private static Goal createGoal(String identifier) {
-        return new Goal(identifier);
+        Goal g = new Goal(identifier);
+        g.setIntensity("1000");
+        return g;
     }
 
     /**

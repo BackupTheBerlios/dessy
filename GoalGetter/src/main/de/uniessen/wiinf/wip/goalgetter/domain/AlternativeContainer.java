@@ -16,13 +16,13 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainer.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: AlternativeContainer.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
+import java.util.Iterator;
 import java.util.List;
 
-import com.jgoodies.binding.beans.Model;
 import com.jgoodies.binding.list.ArrayListModel;
 
 /**
@@ -32,10 +32,10 @@ import com.jgoodies.binding.list.ArrayListModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
-public class AlternativeContainer extends Model {
+public class AlternativeContainer extends AbstractDomain {
 
     private final ArrayListModel alternatives = new ArrayListModel();
 
@@ -123,5 +123,49 @@ public class AlternativeContainer extends Model {
 
     public String toString() {
         return super.toString() + ':' + getIdentifier();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
+     */
+    protected boolean isEmpty() {
+        Iterator iterator = getAlternatives().iterator();
+        int fillLevel = 0;
+        while (iterator.hasNext()) {
+            Alternative a = (Alternative) iterator.next();
+            fillLevel += a.getFillLevel();
+        }
+        switch (fillLevel) {
+        case FillLevel.EMPTY:
+            return true;
+
+        default:
+            return false;
+
+        }
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
+     */
+    protected boolean isFilled() {
+
+        Iterator iterator = getAlternatives().iterator();
+        int fillLevel = 0;
+        while (iterator.hasNext()) {
+            Alternative a = (Alternative) iterator.next();
+            fillLevel += a.getFillLevel();
+        }
+        if (fillLevel == FillLevel.FULL * getAlternatives().size()) {
+            return true;
+        }
+
+        return false;
+
     }
 }

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DescriptionEditor.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
+ * $Id: DescriptionEditor.java,v 1.6 2004/08/14 11:11:11 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -41,7 +41,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class DescriptionEditor extends AbstractEditor {
@@ -49,9 +49,10 @@ public final class DescriptionEditor extends AbstractEditor {
     private JTextComponent descriptionArea;
 
     private JTextComponent identifierField;
+
     /**
      * Constructs a <code>DescriptionEditor</code>
-     * 
+     *  
      */
     public DescriptionEditor() {
         super(Resources.DESCRIPTION_ICON, "General Decision Data");
@@ -68,9 +69,8 @@ public final class DescriptionEditor extends AbstractEditor {
         builder.setDefaultDialogBorder();
         // CellConstraints cc = new CellConstraints();
 
-        builder
-                .appendI15d("descriptionEditor.identifier.text",//$NON-NLS-1$
-                        identifierField);
+        builder.appendI15d("descriptionEditor.identifier.text",//$NON-NLS-1$
+                identifierField);
         builder.appendI15dSeparator("descriptionEditor.description.text");//$NON-NLS-1$
         builder.appendRow(builder.getLineGapSpec());
         builder.appendRow(new RowSpec("fill:50dlu:nogrow"));//$NON-NLS-1$
