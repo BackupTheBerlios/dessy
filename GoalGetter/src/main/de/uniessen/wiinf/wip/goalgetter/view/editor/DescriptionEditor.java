@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DescriptionEditor.java,v 1.8 2004/08/16 11:25:22 moleman Exp $
+ * $Id: DescriptionEditor.java,v 1.9 2004/09/25 14:56:57 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -32,7 +32,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Description;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
 
 /**
  * 
@@ -41,7 +41,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class DescriptionEditor extends AbstractEditor {

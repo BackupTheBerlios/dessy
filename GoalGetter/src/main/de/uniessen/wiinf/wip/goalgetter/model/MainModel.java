@@ -16,9 +16,9 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainModule.java,v 1.7 2004/09/09 18:19:18 jsprenger Exp $
+ * $Id: MainModel.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.tool;
+package de.uniessen.wiinf.wip.goalgetter.model;
 
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
@@ -44,8 +44,8 @@ import com.jgoodies.uifextras.printing.PrintableDocument;
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
-import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
-import de.uniessen.wiinf.wip.goalgetter.tool.node.RootNode;
+import de.uniessen.wiinf.wip.goalgetter.model.node.NavigationNode;
+import de.uniessen.wiinf.wip.goalgetter.model.node.RootNode;
 import de.uniessen.wiinf.wip.goalgetter.view.MainFrame;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.ResultsPanel;
 
@@ -57,10 +57,10 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.ResultsPanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.1 $
  *  
  */
-public final class MainModule extends Model {
+public final class MainModel extends Model {
 
     private static final long serialVersionUID = 1L;
 
@@ -85,10 +85,12 @@ public final class MainModule extends Model {
      * Bound Bean Property <code>PROPERTYNAME_NAVIGATION_TREE_MODEL</code>
      */
     public static final String PROPERTYNAME_NAVIGATION_TREE_MODEL = "navigationTreeModel"; //$NON-NLS-1$
+
     /**
      * Bound Bean Property <code>PROPERTYNAME_RESULTSPANEL_VISIBLE</code>
      */
     public static final String PROPERTYNAME_RESULTSPANEL_VISIBLE = "resultspanelvisible";
+
     // Instance Fields ********************************************************
 
     /**
@@ -132,7 +134,6 @@ public final class MainModule extends Model {
      */
     private Class selectionType;
 
-
     /**
      * Holds the model for the navigation tree. It changes everytime this
      * module's project changes.
@@ -157,7 +158,7 @@ public final class MainModule extends Model {
      * 
      * @see #getHelpModule()
      */
-    private final DynamicHelpModule helpModule;
+    private final DynamicHelpModel helpModule;
 
     /**
      * Refers to the submodule for the UI-related settings.
@@ -172,7 +173,7 @@ public final class MainModule extends Model {
      * Constructs a <code>MainModule</code> that has no project set, no
      * selection and no tree model.
      */
-    public MainModule() {
+    public MainModel() {
         setNavigationTreeModel(createNavigationTreeModel(new Project(
                 ResourceUtils.getString("project.empty.text")))); //$NON-NLS-1$
         navigationTreeSelectionModel = new DefaultTreeSelectionModel();
@@ -181,7 +182,7 @@ public final class MainModule extends Model {
         navigationTreeSelectionModel
                 .addTreeSelectionListener(new NavigationTreeSelectionChangeHandler());
 
-        helpModule = new DynamicHelpModule();
+        helpModule = new DynamicHelpModel();
         presentationSettings = new PresentationSettings();
         restoreState();
 
@@ -265,7 +266,7 @@ public final class MainModule extends Model {
      * @see Alternative
      */
     public void addAlternative(String identifier) {
-        Alternative a = new Alternative(identifier);        
+        Alternative a = new Alternative(identifier);
         project.addAlternative(a);
 
         setNavigationTreeModel(createNavigationTreeModel(project));
@@ -400,8 +401,7 @@ public final class MainModule extends Model {
      * @return a TreeModel for the given project
      */
     private TreeModel createNavigationTreeModel(Project aProject) {
-        return new DefaultTreeModel(new RootNode(aProject,
-                getPresentationSettings()));
+        return new DefaultTreeModel(new RootNode(aProject));
     }
 
     // Exposing Submodules ****************************************************
@@ -412,7 +412,7 @@ public final class MainModule extends Model {
      * 
      * @return the submodule for the dynamic help
      */
-    public DynamicHelpModule getHelpModule() {
+    public DynamicHelpModel getHelpModule() {
         return helpModule;
     }
 
@@ -508,28 +508,28 @@ public final class MainModule extends Model {
     }
 
     /**
-     * 
+     *  
      */
     public void showReport() {
-      firePropertyChange(PROPERTYNAME_RESULTSPANEL_VISIBLE,false,true);        
+        firePropertyChange(PROPERTYNAME_RESULTSPANEL_VISIBLE, false, true);
     }
 
     /**
-     * 
+     *  
      */
     public void print(MainFrame frame) {
 
-    	PageFormat pf = PrintManager.getPageFormat();
-    	ResultsPanel results =  frame.mainPageBuilder().getResultsPanel();
-    	 
-    	PrintableDocument pd = results.getPrintableDocument();
+        PageFormat pf = PrintManager.getPageFormat();
+        ResultsPanel results = frame.mainPageBuilder().getResultsPanel();
+
+        PrintableDocument pd = results.getPrintableDocument();
         System.out.println("druckt....");
-        
-//        pd.setFooter("Footer");
-//       	pd.setHeader("Header");
-       	pd.setJobName("Golagetter print");
-       	pd.printWithDialog();
-        
+
+        //        pd.setFooter("Footer");
+        //       	pd.setHeader("Header");
+        pd.setJobName("Golagetter print");
+        pd.printWithDialog();
+
     }
 
 }

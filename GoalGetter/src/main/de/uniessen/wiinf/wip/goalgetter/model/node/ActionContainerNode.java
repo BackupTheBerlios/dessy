@@ -16,15 +16,15 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionContainerNode.java,v 1.3 2004/08/14 16:43:35 moleman Exp $
+ * $Id: ActionContainerNode.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
 
-package de.uniessen.wiinf.wip.goalgetter.tool.node;
+package de.uniessen.wiinf.wip.goalgetter.model.node;
 
 import javax.swing.Icon;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.container.ActionContainer;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
 
 /**
  * 
@@ -33,7 +33,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  *  
  */
 /**
@@ -42,7 +42,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  *  
  */
 public final class ActionContainerNode extends AbstractTreeNode {

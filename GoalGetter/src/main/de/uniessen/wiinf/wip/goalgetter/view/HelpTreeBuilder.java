@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpTreeBuilder.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: HelpTreeBuilder.java,v 1.2 2004/09/25 14:56:57 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -34,8 +34,8 @@ import javax.swing.tree.TreeModel;
 import com.jgoodies.uif.component.UIFTree;
 import com.jgoodies.uif.util.TreeUtils;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
-import de.uniessen.wiinf.wip.goalgetter.tool.help.HelpNode;
+import de.uniessen.wiinf.wip.goalgetter.model.DynamicHelpModel;
+import de.uniessen.wiinf.wip.goalgetter.model.help.HelpNode;
 
 /**
  * Builds the help navigation panel that displays a tree of help nodes. The help
@@ -52,7 +52,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.help.HelpNode;
  * 
  * @author Karsten Lentzsch
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 final class HelpTreeBuilder {
@@ -60,7 +60,7 @@ final class HelpTreeBuilder {
     /**
      * Refers to the module that holds the tree model and tree selection model.
      */
-    private final DynamicHelpModule module;
+    private final DynamicHelpModel dynamicHelpModel;
 
     /**
      * Refers to the tree that displays the dynamic help nodes.
@@ -77,13 +77,9 @@ final class HelpTreeBuilder {
      * @param helpModule
      *            provides the tree model and tree selection model
      */
-    HelpTreeBuilder(DynamicHelpModule helpModule) {
-        this.module = helpModule;
-        initComponents();
-
-        helpModule.addPropertyChangeListener(
-                DynamicHelpModule.PROPERTYNAME_HELP_TREE_MODEL,
-                new TreeModelChangeHandler());
+    HelpTreeBuilder(DynamicHelpModel helpModule) {
+        this.dynamicHelpModel = helpModule;
+        initComponents();       
     }
 
     // Component Setup ********************************************************
@@ -93,12 +89,18 @@ final class HelpTreeBuilder {
      * <code>HelpNavigator</code>.
      */
     private void initComponents() {
-        tree = new RefreshedTree(module.getHelpTreeModel());
-        tree.setSelectionModel(module.getHelpTreeSelectionModel());
+        tree = new RefreshedTree(dynamicHelpModel.getHelpTreeModel());
+        tree.setSelectionModel(dynamicHelpModel.getHelpTreeSelectionModel());
         tree.setRootVisible(false);
         tree.setShowsRootHandles(false);
         tree.setCellRenderer(new TreeCellRenderer());
         TreeUtils.expandTopLevel(tree);
+    }
+    
+    private void initEventHandling(){
+        dynamicHelpModel.addPropertyChangeListener(
+                DynamicHelpModel.PROPERTYNAME_HELP_TREE_MODEL,
+                new TreeModelChangeHandler());
     }
 
     // Building ***************************************************************
@@ -110,7 +112,7 @@ final class HelpTreeBuilder {
      */
     JComponent build() {
         initComponents();
-
+initEventHandling();
         return tree;
     }
 

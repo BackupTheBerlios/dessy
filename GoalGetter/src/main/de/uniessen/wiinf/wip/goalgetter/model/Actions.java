@@ -16,10 +16,10 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.10 2004/09/20 08:45:55 moleman Exp $
+ * $Id: Actions.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
 
-package de.uniessen.wiinf.wip.goalgetter.tool;
+package de.uniessen.wiinf.wip.goalgetter.model;
 
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
@@ -52,7 +52,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.1 $
  *  
  */
 /**
@@ -61,7 +61,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.1 $
  *  
  */
 public final class Actions {
@@ -198,7 +198,7 @@ public final class Actions {
      * 
      * @see #getPresentationSettings()
      */
-    private final MainModule mainModule;
+    private final MainModel mainModule;
 
     // Instance Creation ******************************************************
 
@@ -212,7 +212,7 @@ public final class Actions {
      * @param controller
      *            used to forward all action behavior
      */
-    private Actions(MainModule mainModule, MainController controller) {
+    private Actions(MainModel mainModule, MainController controller) {
         this.controller = controller;
         this.mainModule = mainModule;
         registerActions();
@@ -231,7 +231,7 @@ public final class Actions {
      * @param controller
      *            used to forward all action behavior
      */
-    public static void initializeFor(MainModule mainModule,
+    public static void initializeFor(MainModel mainModule,
             MainController controller) {
         new Actions(mainModule, controller);
     }
@@ -344,7 +344,7 @@ public final class Actions {
         // toggle help navigator
         ValueModel showHelpNavigatorHolder = new PropertyAdapter(getModule()
                 .getHelpModule(),
-                DynamicHelpModule.PROPERTYNAME_HELP_NAVIGATOR_VISIBLE);
+                DynamicHelpModel.PROPERTYNAME_HELP_NAVIGATOR_VISIBLE);
         ActionManager.register(SHOW_HELP_NAVIGATOR_ID,
                 ToggleAction.createCheck(showHelpNavigatorHolder)).setEnabled(
                 true);
@@ -538,9 +538,9 @@ public final class Actions {
          */
         public void propertyChange(PropertyChangeEvent evt) {
             String propertyName = evt.getPropertyName();
-            if (MainModule.PROPERTYNAME_SELECTION.equals(propertyName)) {
+            if (MainModel.PROPERTYNAME_SELECTION.equals(propertyName)) {
                 updateSelectionActionEnablement(evt.getNewValue());
-            } else if (MainModule.PROPERTYNAME_PROJECT.equals(propertyName)) {
+            } else if (MainModel.PROPERTYNAME_PROJECT.equals(propertyName)) {
                 updateProjectActionEnablement((Project) evt.getNewValue());
             }
         }
@@ -552,7 +552,7 @@ public final class Actions {
         return controller;
     }
 
-    MainModule getModule() {
+    MainModel getModule() {
         return mainModule;
     }
 

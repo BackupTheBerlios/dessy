@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalGetter.java,v 1.7 2004/09/20 08:45:55 moleman Exp $
+ * $Id: GoalGetter.java,v 1.8 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter;
 
@@ -33,15 +33,18 @@ import com.jgoodies.uif.application.AbstractMainFrame;
 import com.jgoodies.uif.application.Application;
 import com.jgoodies.uif.application.ApplicationConfiguration;
 import com.jgoodies.uif.application.ApplicationDescription;
+import com.jgoodies.uif.lazy.BackgroundLoader;
+import com.jgoodies.uif.lazy.Preparables;
 import com.jgoodies.uif.osx.OSXApplicationMenu;
 import com.jgoodies.uif.splash.ImageSplash;
 import com.jgoodies.uif.splash.Splash;
 import com.jgoodies.uifextras.convenience.DefaultApplicationStarter;
+import com.jgoodies.uifextras.help.HelpBroker;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
-import de.uniessen.wiinf.wip.goalgetter.tool.MainController;
-import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
-import de.uniessen.wiinf.wip.goalgetter.tool.help.HelpSets;
+import de.uniessen.wiinf.wip.goalgetter.model.Actions;
+import de.uniessen.wiinf.wip.goalgetter.model.MainController;
+import de.uniessen.wiinf.wip.goalgetter.model.MainModel;
+import de.uniessen.wiinf.wip.goalgetter.model.help.HelpSets;
 import de.uniessen.wiinf.wip.goalgetter.view.MainFrame;
 
 /**
@@ -51,13 +54,13 @@ import de.uniessen.wiinf.wip.goalgetter.view.MainFrame;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 
 public final class GoalGetter extends DefaultApplicationStarter {
 
-    private MainModule mainModule;
+    private MainModel mainModule;
 
     private MainController mainController;
 
@@ -92,6 +95,19 @@ public final class GoalGetter extends DefaultApplicationStarter {
     protected AbstractMainFrame createMainFrame() {
         return new MainFrame(mainModule);
     }
+    
+    /**
+     * Configures the application preparation process.
+     */
+    private void configurePreparation() {
+        BackgroundLoader backgroundLoader = new BackgroundLoader();
+        backgroundLoader.add(Preparables.createEagerActionReader());
+        backgroundLoader.add(HelpBroker.getInstance());
+        backgroundLoader.add(Preparables.createUIDefaultsInitializer());
+        backgroundLoader.add(Preparables.createMenuInitializer());
+        backgroundLoader.add(Preparables.createSupportedLafsReader());
+        backgroundLoader.start();
+    }
 
     /**
      * Initializes the actions
@@ -114,7 +130,7 @@ public final class GoalGetter extends DefaultApplicationStarter {
 
         // Create the module that provides all high-level models.
         Splash.setNote("Creating Models", 30);//$NON-NLS-1$
-        mainModule = new MainModule();
+        mainModule = new MainModel();
 
         // Create the controller that provides the major operations.
         Splash.setNote("Creating Controller", 40);//$NON-NLS-1$
@@ -141,6 +157,8 @@ public final class GoalGetter extends DefaultApplicationStarter {
         Splash.setNote("Finishing...", 90);//$NON-NLS-1$
         mainFrame.open();
         mainController.checkForOpenTipOfTheDayDialog();
+        
+        configurePreparation();
     }
 
     /**
@@ -161,7 +179,7 @@ public final class GoalGetter extends DefaultApplicationStarter {
                                 "0.1.6 (September-20-2004)",//$NON-NLS-1$ // full version
                                 "A Decision supporting system using the GoalGetter Method by Markus Stallkamp",//$NON-NLS-1$ // description
                                 "\u00a9 2004",//$NON-NLS-1$ // copyright
-                                "Universit‰t Duisburg-Essen", //$NON-NLS-1$ // vendor
+                                "Universit√§t Duisburg-Essen", //$NON-NLS-1$ // vendor
                                 "http://www.wip.uni-essen.de/",//$NON-NLS-1$ // vendor URL
                                 "tim.franz@uni-essen.de"),//$NON-NLS-1$ // support eMail
                         new ApplicationConfiguration("goalgetter",//$NON-NLS-1$ // prefix for logs and prefs  

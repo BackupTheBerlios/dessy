@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeEditor.java,v 1.10 2004/09/08 18:31:34 moleman Exp $
+ * $Id: AlternativeEditor.java,v 1.11 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -41,7 +41,7 @@ import com.jgoodies.uif.util.ResourceUtils;
 import de.uniessen.wiinf.wip.goalgetter.domain.Action;
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
 
 /**
  * An implementation of {@link Editor}that displays instances of class
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *  
  */
 public final class AlternativeEditor extends AbstractEditor {

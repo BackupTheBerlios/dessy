@@ -16,10 +16,10 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpSets.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
+ * $Id: HelpSets.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
 
-package de.uniessen.wiinf.wip.goalgetter.tool.help;
+package de.uniessen.wiinf.wip.goalgetter.model.help;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
@@ -31,7 +31,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 import de.uniessen.wiinf.wip.goalgetter.domain.container.ActionContainer;
 import de.uniessen.wiinf.wip.goalgetter.domain.container.AlternativeContainer;
 import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
-import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
+import de.uniessen.wiinf.wip.goalgetter.model.DynamicHelpModel;
 
 /**
  * 
@@ -40,7 +40,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.1 $
  *  
  */
 public final class HelpSets {
@@ -100,7 +100,7 @@ public final class HelpSets {
      * @param helpModule
      *            holds a map from selection types to help sets
      */
-    public static void registerHelpSets(DynamicHelpModule helpModule) {
+    public static void registerHelpSets(DynamicHelpModel helpModule) {
         helpModule.registerHelp(Description.class, DECISION_HELP_SET);
         helpModule.registerHelp(Goal.class, GOAL_HELP_SET);
         helpModule.registerHelp(Alternative.class, ALTERNATIVE_HELP_SET);

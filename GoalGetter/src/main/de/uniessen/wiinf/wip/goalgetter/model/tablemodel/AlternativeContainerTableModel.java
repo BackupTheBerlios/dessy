@@ -10,9 +10,9 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: AlternativeContainerTableModel.java,v 1.6 2004/09/08 18:31:34 moleman Exp $
+ * $Id: AlternativeContainerTableModel.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
+package de.uniessen.wiinf.wip.goalgetter.model.tablemodel;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,7 +32,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.1 $
  *  
  */
 public class AlternativeContainerTableModel extends AbstractTableModel {

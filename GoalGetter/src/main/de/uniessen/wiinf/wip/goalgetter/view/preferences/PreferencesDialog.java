@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: PreferencesDialog.java,v 1.8 2004/09/25 10:05:45 moleman Exp $
+ * $Id: PreferencesDialog.java,v 1.9 2004/09/25 14:56:57 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
@@ -37,7 +37,7 @@ import com.jgoodies.uifextras.laf.LafChoiceModel;
 import com.jgoodies.uifextras.laf.LafChoicePanelBuilder;
 import com.jgoodies.uifextras.panel.HeaderPanel;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
+import de.uniessen.wiinf.wip.goalgetter.model.PresentationSettings;
 
 /**
  * 
@@ -46,7 +46,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class PreferencesDialog extends AbstractDialog {

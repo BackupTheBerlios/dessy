@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisDialog.java,v 1.9 2004/09/20 18:43:54 jsprenger Exp $
+ * $Id: SensitivityAnalysisDialog.java,v 1.10 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 
@@ -55,7 +55,7 @@ import com.jgoodies.uifextras.panel.HeaderPanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *  
  */
 public final class SensitivityAnalysisDialog extends AbstractDialog {
@@ -92,7 +92,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
      */
     public SensitivityAnalysisDialog(Frame owner, List elements, String nameX,
             String nameY) {
-        super(owner, "Sensitivitätsanalyse", true);
+        super(owner, "Sensitivitï¿½tsanalyse", true);
 
         this.setResizable(true);
         this.resize(new Dimension(600, 800));
@@ -119,8 +119,8 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
      */
     protected JComponent buildHeader() {
         return new HeaderPanel(
-                "Sensitivitätsanalyse",
-                "Führen Sie eine Sensitivitätsanalyse durch. Sie werden begeistert sein.",
+                "Sensitivitï¿½tsanalyse",
+                "Fï¿½hren Sie eine Sensitivitï¿½tsanalyse durch. Sie werden begeistert sein.",
                 ResourceUtils.getIcon(ResourceIDs.PREFERENCES_ICON));
     }
 
@@ -143,7 +143,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
         builder.nextLine();
         builder.appendSeparator();
         builder.nextLine();
-        builder.append(buildbuttonview());
+        builder.append(buildButtonView());
         builder.nextLine();
         builder.appendSeparator();
         builder.nextLine();
@@ -177,15 +177,15 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
     /**
      * @return
      */
-    private Component buildbuttonview() {
+    private Component buildButtonView() {
         JPanel panel = new JPanel();
 
         FormLayout layout = new FormLayout(
-                "right:pref,10dlu, 40dlu, 5dlu, 40dlu,5dlu,60dlu");//                                   
+                "right:pref,10dlu, 40dlu, 5dlu, 40dlu,5dlu,60dlu");//$NON-NLS-1$
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), panel);
-        //		 auswahl für bestealternative
+        //		 auswahl fï¿½r bestealternative
         int first = 0;
         String bestAlternative = "";
         SensitivityElements se;
@@ -226,7 +226,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
         stepSizeTextField = new JSpinner(model1);
         stepSizeTextField.setPreferredSize(new Dimension(100, 20));
         stepSizeTextField.addChangeListener(new TextFieldAction());
-        builder.append("Schrittgröße", stepSizeTextField);
+        builder.append("Schrittgrï¿½ï¿½e", stepSizeTextField);
 
         return builder.getPanel();
     }
@@ -238,7 +238,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
         JPanel panel = new JPanel();
 
        // FormLayout layout = new FormLayout("right:max(120dlu;d),10dlu,100dlu,10dlu,100dlu");//                                   
-        FormLayout layout = new FormLayout("80dlu,5dlu,80dlu,5dlu,80dlu");//                                   
+        FormLayout layout = new FormLayout("80dlu,5dlu,80dlu,5dlu,80dlu"); //$NON-NLS-1$
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), panel);
@@ -307,7 +307,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
                 builder.nextLine();
             }
         }
-        // preferred size muss immer größer ein als die von der scrollpane
+        // preferred size muss immer grï¿½ï¿½er ein als die von der scrollpane
         spinnerPanel.setPreferredSize(new Dimension(120, spinnerPanel
                 .getComponentCount() * 10));
         JScrollPane pane = new JScrollPane();

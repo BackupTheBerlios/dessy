@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Project.java,v 1.9 2004/09/20 08:45:55 moleman Exp $
+ * $Id: Project.java,v 1.10 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -46,7 +46,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *  
  */
 public final class Project extends Model {
@@ -248,7 +248,19 @@ public final class Project extends Model {
     public void setGoalContainer(GoalContainer goalContainer) {
         this.goalContainer = goalContainer;
     }
-    
+
+    //  Managing Actions ********************************************************
+
+    /**
+     * Returns the ActionCOntaienr. Needed for Loading / Saving via XMLEncoder /
+     * XMLDecoder
+     * 
+     * @return actionContainer
+     */
+    public ActionContainer getActionContainer() {
+        return actionContainer;
+    }
+
     /**
      * @param actionContainer
      *            The goalContainer to set.
@@ -256,14 +268,6 @@ public final class Project extends Model {
     public void setActionContainer(ActionContainer actionContainer) {
         this.actionContainer = actionContainer;
     }
-
-    //  Managing Actions ********************************************************
-
-  
-    public ActionContainer getActionContainer() {
-        return actionContainer;
-    }
-
 
     /**
      * Finds and answers the alternative with the least payment amount.

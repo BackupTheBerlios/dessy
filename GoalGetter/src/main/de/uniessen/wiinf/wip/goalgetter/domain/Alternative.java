@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Alternative.java,v 1.8 2004/09/08 18:31:34 moleman Exp $
+ * $Id: Alternative.java,v 1.9 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -45,7 +45,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public class Alternative extends AbstractDomain {
@@ -65,14 +65,25 @@ public class Alternative extends AbstractDomain {
      */
     public static final String PROPERTYNAME_INTENSITY = "intensity";//$NON-NLS-1$
 
+    /**
+     * The alternative's description
+     */
     private String description;
 
+    /**
+     * The alternative's identifier
+     */
     private String identifier;
 
+    /**
+     * Holds the intensities of the alternative. An alternative has an intensity
+     * for each Goal defined in the project.
+     */
     private TreeMap intensityMap = new TreeMap();
 
     /**
-     *  
+     * Constructs an <code>Alternative</code> with an null identifier. Needed
+     * for loading and saving via XMLEncoder / XMLDecoder
      */
     public Alternative() {
         this(null);

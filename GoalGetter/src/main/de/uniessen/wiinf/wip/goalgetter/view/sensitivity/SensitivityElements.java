@@ -32,10 +32,9 @@ public class SensitivityElements {
 	
 	String name;
 		
-	/**
-	 * @param costs
-	 * @param name
-	 * @param goal
+	
+	/**Constructor
+	 * @param name name of the sensitivityElement
 	 */
 	public SensitivityElements(String name) {
 		super();

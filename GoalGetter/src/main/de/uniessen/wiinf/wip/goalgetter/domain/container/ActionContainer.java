@@ -16,15 +16,12 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  *
- * $Id: ActionContainer.java,v 1.4 2004/09/08 18:31:34 moleman Exp $
+ * $Id: ActionContainer.java,v 1.5 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.swing.ListModel;
 
 import com.jgoodies.binding.list.ArrayListModel;
 
@@ -41,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class ActionContainer extends AbstractDomain {
@@ -272,12 +269,6 @@ public class ActionContainer extends AbstractDomain {
                 "For this combination of Goal and Alternative is no Action available. This should never happen."); //$NON-NLS-1$
     }
 
-    /**
-     * @return
-     */
-    public ArrayListModel getActionByGoalListModel() {
-        return new ArrayListModel();
-    }
 
     /**
      * Comoutes the payment amount for the given alternative

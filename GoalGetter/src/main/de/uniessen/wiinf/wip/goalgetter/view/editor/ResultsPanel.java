@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: ResultsPanel.java,v 1.2 2004/09/09 18:19:18 jsprenger Exp $
+ * $Id: ResultsPanel.java,v 1.3 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -33,10 +33,10 @@ import com.jgoodies.uifextras.util.UIFactory;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
-import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.ActionContainerTableModel;
-import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.AlternativeContainerTableModel;
-import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.GoalContainerTableModel;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.tablemodel.ActionContainerTableModel;
+import de.uniessen.wiinf.wip.goalgetter.model.tablemodel.AlternativeContainerTableModel;
+import de.uniessen.wiinf.wip.goalgetter.model.tablemodel.GoalContainerTableModel;
 
 /**
  * ActionContainerByGoal
@@ -44,7 +44,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.GoalContainerTableModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public class ResultsPanel extends AbstractEditor {

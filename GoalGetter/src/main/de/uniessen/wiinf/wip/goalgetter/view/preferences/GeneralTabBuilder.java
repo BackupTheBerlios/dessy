@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GeneralTabBuilder.java,v 1.7 2004/09/25 10:05:45 moleman Exp $
+ * $Id: GeneralTabBuilder.java,v 1.8 2004/09/25 14:56:57 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
@@ -36,7 +36,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.uif.util.ResourceUtils;
 import com.jgoodies.uifextras.convenience.TipOfTheDayDialog;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
+import de.uniessen.wiinf.wip.goalgetter.model.PresentationSettings;
 
 /**
  * Builds the <em>General</em> tab in the preferences dialog.
@@ -44,7 +44,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public final class GeneralTabBuilder {
@@ -83,16 +83,11 @@ public final class GeneralTabBuilder {
 	 * The adapted bean properties will not be observed; therefore we don't need
 	 * to invoke <code>PropertyAdapter.release</code>
 	 * 
-	 * @param settings
-	 *            holds the properties for the tree manipulation
-	 * @param triggerChannel
-	 *            indicates a commit or flush of the buffered values
 	 * @see PropertyAdapter
 	 * @see BufferedValueModel
 	 * @see ToggleButtonAdapter
 	 */
-	private void initComponents(PresentationSettings settings,
-			ValueModel triggerChannel) {
+	private void initComponents() {
 
 		showTipsBox = BasicComponentFactory.createCheckBox(
 				new BufferedValueModel(TipOfTheDayDialog.showingTipsModel(),
@@ -125,6 +120,7 @@ public final class GeneralTabBuilder {
 	 * @return the general tab
 	 */
 	JComponent build() {
+	    initComponents();
 		FormLayout layout = new FormLayout("7dlu, left:pref, 0:grow",//$NON-NLS-1$
 				"pref, 2dlu, pref, 14dlu, " + "pref, 2dlu, pref, 2dlu, pref");//$NON-NLS-1$ //$NON-NLS-2$
 

@@ -16,9 +16,9 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.18 2004/09/20 18:43:54 jsprenger Exp $
+ * $Id: MainController.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.tool;
+package de.uniessen.wiinf.wip.goalgetter.model;
 
 import java.awt.Frame;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Constants;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
 import de.uniessen.wiinf.wip.goalgetter.domain.ProjectFactory;
-import de.uniessen.wiinf.wip.goalgetter.tool.file.GoalGetterFileFilter;
+import de.uniessen.wiinf.wip.goalgetter.model.file.GoalGetterFileFilter;
 import de.uniessen.wiinf.wip.goalgetter.view.MainFrame;
 import de.uniessen.wiinf.wip.goalgetter.view.file.GoalGetterFileView;
 import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
@@ -56,7 +56,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.1 $
  *  
  */
 public final class MainController {
@@ -67,7 +67,7 @@ public final class MainController {
      * 
      * @see #getMainModule()
      */
-    private final MainModule mainModule;
+    private final MainModel mainModule;
 
     /**
      * Holds a frame that is used as default parent frame for message dialogs.
@@ -89,7 +89,7 @@ public final class MainController {
      * 
      * @see #setDefaultParentFrame(Frame)
      */
-    public MainController(MainModule mainModule) {
+    public MainController(MainModel mainModule) {
         this.mainModule = mainModule;
     }
 
@@ -372,7 +372,7 @@ public final class MainController {
      * 
      * @return main Module
      */
-    public MainModule getMainModule() {
+    public MainModel getMainModule() {
         return mainModule;
     }
 

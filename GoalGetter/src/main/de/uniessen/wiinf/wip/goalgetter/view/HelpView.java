@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpView.java,v 1.6 2004/08/16 12:26:21 moleman Exp $
+ * $Id: HelpView.java,v 1.7 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -39,9 +39,9 @@ import com.jgoodies.uif.panel.SimpleInternalFrame;
 import com.jgoodies.uif.util.ResourceUtils;
 import com.jgoodies.uifextras.util.UIFactory;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
-import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.Actions;
+import de.uniessen.wiinf.wip.goalgetter.model.DynamicHelpModel;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
 
 /**
  * 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 final class HelpView extends SimpleInternalFrame {
@@ -60,7 +60,7 @@ final class HelpView extends SimpleInternalFrame {
     /**
      * Refers to the module that provides a bound property for the help page.
      */
-    private final DynamicHelpModule module;
+    private final DynamicHelpModel module;
 
     private JEditorPane editor;
 
@@ -72,7 +72,7 @@ final class HelpView extends SimpleInternalFrame {
      * @param helpModule
      *            provides the tree model and tree selection model
      */
-    HelpView(DynamicHelpModule helpModule) {
+    HelpView(DynamicHelpModel helpModule) {
         super(ResourceUtils.getIcon(Resources.HELP_CONTENTS_ICON_ID),
                 ResourceUtils.getString("helpView.dynamicHelpContents.text")); //$NON-NLS-1$
         this.module = helpModule;
@@ -81,7 +81,7 @@ final class HelpView extends SimpleInternalFrame {
         setSelected(true);
 
         module.addPropertyChangeListener(
-                DynamicHelpModule.PROPERTYNAME_HELP_PAGE,
+                DynamicHelpModel.PROPERTYNAME_HELP_PAGE,
                 new PageChangeHandler());
     }
 
@@ -138,7 +138,7 @@ final class HelpView extends SimpleInternalFrame {
      * @author tfranz
      * @author jsprenger
      * 
-     * @version $Revision: 1.6 $
+     * @version $Revision: 1.7 $
      *  
      */
     private class PageChangeHandler implements PropertyChangeListener {

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: EditorPanel.java,v 1.4 2004/08/15 15:13:34 moleman Exp $
+ * $Id: EditorPanel.java,v 1.5 2004/09/25 14:56:57 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -39,7 +39,7 @@ import javax.swing.SwingUtilities;
 import com.jgoodies.uif.panel.SimpleInternalFrame;
 import com.jgoodies.uifextras.util.UIFactory;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
+import de.uniessen.wiinf.wip.goalgetter.model.MainModel;
 
 /**
  * A container that wraps <code>Editor</code> instances with a
@@ -58,7 +58,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class EditorPanel extends SimpleInternalFrame {
@@ -92,13 +92,13 @@ public final class EditorPanel extends SimpleInternalFrame {
      * @param mainModule
      *            used to observe selection changes
      */
-    public EditorPanel(MainModule mainModule) {
+    public EditorPanel(MainModel mainModule) {
         super("Editor"); //$NON-NLS-1$
         editorRegistry = new HashMap();
         editors = new LinkedList();
         setContent(buildContent());
 
-        mainModule.addPropertyChangeListener(MainModule.PROPERTYNAME_SELECTION,
+        mainModule.addPropertyChangeListener(MainModel.PROPERTYNAME_SELECTION,
                 new SelectionChangeHandler());
     }
 

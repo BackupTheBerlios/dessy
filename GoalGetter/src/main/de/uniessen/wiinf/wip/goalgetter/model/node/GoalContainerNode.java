@@ -16,10 +16,10 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerNode.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
+ * $Id: GoalContainerNode.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
 
-package de.uniessen.wiinf.wip.goalgetter.tool.node;
+package de.uniessen.wiinf.wip.goalgetter.model.node;
 
 import javax.swing.Icon;
 
@@ -27,7 +27,7 @@ import com.jgoodies.uif.util.CompoundIcon;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.FillLevel;
 import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
 
 /**
  * 
@@ -36,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.1 $
  *  
  */
 public final class GoalContainerNode extends AbstractTreeNode {

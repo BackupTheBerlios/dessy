@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainFrame.java,v 1.8 2004/09/09 18:19:18 jsprenger Exp $
+ * $Id: MainFrame.java,v 1.9 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -29,7 +29,7 @@ import javax.swing.JMenuBar;
 import com.jgoodies.uif.application.AbstractMainFrame;
 import com.jgoodies.uif.application.Application;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
+import de.uniessen.wiinf.wip.goalgetter.model.MainModel;
 
 /**
  * 
@@ -39,7 +39,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class MainFrame extends AbstractMainFrame {
@@ -59,7 +59,7 @@ public final class MainFrame extends AbstractMainFrame {
      * 
      * @see #buildContentPane()
      */
-    private final MainModule module;
+    private final MainModel module;
 
     private MainPageBuilder mainPageBuilder;
 
@@ -71,7 +71,7 @@ public final class MainFrame extends AbstractMainFrame {
      * @param mainModule
      *            provides bound properties and high-level models
      */
-    public MainFrame(MainModule mainModule) {
+    public MainFrame(MainModel mainModule) {
         super(Application.getDescription().getWindowTitle());
         this.module = mainModule;
     }

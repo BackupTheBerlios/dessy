@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainPageBuilder.java,v 1.10 2004/09/09 18:19:18 jsprenger Exp $
+ * $Id: MainPageBuilder.java,v 1.11 2004/09/25 14:56:57 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -39,8 +39,8 @@ import com.jgoodies.uif.panel.SimpleInternalFrame;
 import com.jgoodies.uif.util.ComponentTreeUtils;
 import com.jgoodies.uifextras.util.UIFactory;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
-import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
+import de.uniessen.wiinf.wip.goalgetter.model.DynamicHelpModel;
+import de.uniessen.wiinf.wip.goalgetter.model.MainModel;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.ActionByAlternativeEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.AlternativeContainerEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.AlternativeEditor;
@@ -58,7 +58,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *  
  */
 
@@ -80,7 +80,7 @@ public final class MainPageBuilder {
      * Refers to the module that provides all high-level models. Used to build
      * this frame's main page.
      */
-    private final MainModule module;
+    private final MainModel mainModel;
 
     private JPanel mainPage;
 
@@ -107,52 +107,57 @@ public final class MainPageBuilder {
     /**
      * Constructs a MainPageBuilder for the given main module.
      * 
-     * @param mainModule
+     * @param mainModel
      *            provides high-level models
      */
-    MainPageBuilder(MainModule mainModule) {
-        this.module = mainModule;
-
-        mainModule.getHelpModule().addPropertyChangeListener(
-                DynamicHelpModule.PROPERTYNAME_HELP_VISIBLE,
-                new HelpVisibilityChangeHandler());
-
-        mainModule.getHelpModule().addPropertyChangeListener(
-                DynamicHelpModule.PROPERTYNAME_HELP_NAVIGATOR_VISIBLE,
-                new HelpNavigatorVisibilityChangeHandler());
-
-        mainModule.addPropertyChangeListener(
-                MainModule.PROPERTYNAME_RESULTSPANEL_VISIBLE,
-                new ResultPanelShowChangeHandler());
+    MainPageBuilder(MainModel mainModel) {
+        this.mainModel = mainModel;
 
     }
 
-    // Building *************************************************************
+    //  Initialization
+    // *************************************************************
 
     /**
      * Creates, binds and configures the subpanels and components.
      */
     private void initComponents() {
-        navigator = new NavigationPanel(module);
+        navigator = new NavigationPanel(mainModel);
         navigator.setSelected(true);
         navigator.setMinimumSize(new Dimension(100, 100));
         navigator.setPreferredSize(new Dimension(160, 200));
 
-        helpNavigator = new HelpTreePanel(module.getHelpModule());
+        helpNavigator = new HelpTreePanel(mainModel.getHelpModule());
         helpNavigator.setSelected(true);
         helpNavigator.setMinimumSize(new Dimension(100, 100));
         helpNavigator.setPreferredSize(new Dimension(100, 100));
 
-        editorPanel = new EditorPanel(module);
+        editorPanel = new EditorPanel(mainModel);
         editorPanel.setMinimumSize(new Dimension(200, 100));
         editorPanel.setPreferredSize(new Dimension(400, 200));
 
-        helpView = new HelpView(module.getHelpModule());
+        helpView = new HelpView(mainModel.getHelpModule());
         helpView.setMinimumSize(new Dimension(200, 50));
         helpView.setPreferredSize(new Dimension(300, 100));
 
         statusField = UIFactory.createPlainLabel(COPYRIGHT_TEXT);
     }
+
+    private void initEventHandling() {
+        mainModel.getHelpModule().addPropertyChangeListener(
+                DynamicHelpModel.PROPERTYNAME_HELP_VISIBLE,
+                new HelpVisibilityChangeHandler());
+
+        mainModel.getHelpModule().addPropertyChangeListener(
+                DynamicHelpModel.PROPERTYNAME_HELP_NAVIGATOR_VISIBLE,
+                new HelpNavigatorVisibilityChangeHandler());
+
+        mainModel.addPropertyChangeListener(
+                MainModel.PROPERTYNAME_RESULTSPANEL_VISIBLE,
+                new ResultPanelShowChangeHandler());
+    }
+
+    //  Building *************************************************************
 
     /**
      * Builds this panel with the horizontal <code>JSplitPane</code> in the
@@ -162,6 +167,7 @@ public final class MainPageBuilder {
      */
     JComponent build() {
         initComponents();
+        initEventHandling();
 
         mainPage = new RefreshedPanel();
         mainPage.setLayout(new BorderLayout());
@@ -218,18 +224,18 @@ public final class MainPageBuilder {
         editorPanel.addEditor(new AlternativeContainerEditor());
         //     editorPanel.addEditor(new ActionContainerEditor());
         resultsPanel = new ResultsPanel();
-       
+
         editorPanel.addEditor(resultsPanel);
         editorPanel.setActiveEditor(welcomePanel);
         return editorPanel;
     }
 
     private void showResultPanel() {
-       // editorPanel.getActiveEditor().deactivate();
-        resultsPanel.setModel(module.getProject());
+        // editorPanel.getActiveEditor().deactivate();
+        resultsPanel.setModel(mainModel.getProject());
         resultsPanel.activate();
-        editorPanel.setActiveEditor(resultsPanel);        
-       
+        editorPanel.setActiveEditor(resultsPanel);
+
     }
 
     /**
@@ -356,7 +362,7 @@ public final class MainPageBuilder {
      * @author tfranz
      * @author jsprenger
      * 
-     * @version $Revision: 1.10 $
+     * @version $Revision: 1.11 $
      *  
      */
     private class HelpVisibilityChangeHandler implements PropertyChangeListener {
@@ -381,7 +387,7 @@ public final class MainPageBuilder {
      * @author tfranz
      * @author jsprenger
      * 
-     * @version $Revision: 1.10 $
+     * @version $Revision: 1.11 $
      *  
      */
     private class HelpNavigatorVisibilityChangeHandler implements
@@ -438,11 +444,11 @@ public final class MainPageBuilder {
 
     }
 
-	/**
-	 * @return Returns the resultsPanel.
-	 */
-	public ResultsPanel getResultsPanel() {
-		 resultsPanel.setModel(module.getProject());
-		return resultsPanel;
-	}
+    /**
+     * @return Returns the resultsPanel.
+     */
+    public ResultsPanel getResultsPanel() {
+        resultsPanel.setModel(mainModel.getProject());
+        return resultsPanel;
+    }
 }

@@ -10,13 +10,13 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: FillLevel.java,v 1.2 2004/08/14 16:43:35 moleman Exp $
+ * $Id: FillLevel.java,v 1.3 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
 import javax.swing.Icon;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
 
 /**
  * FillLevel
@@ -24,7 +24,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public class FillLevel {

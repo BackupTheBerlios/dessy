@@ -16,15 +16,15 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DescriptionNode.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
+ * $Id: DescriptionNode.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
 
-package de.uniessen.wiinf.wip.goalgetter.tool.node;
+package de.uniessen.wiinf.wip.goalgetter.model.node;
 
 import javax.swing.Icon;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Description;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
 
 /**
  * 
@@ -33,7 +33,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.1 $
  *  
  */
 public final class DescriptionNode extends AbstractTreeNode {

@@ -10,9 +10,9 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: ActionPresentationMode.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: ActionPresentationMode.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.tool;
+package de.uniessen.wiinf.wip.goalgetter.model;
 
 /**
  * A typesafe enumaration for the Navigator Action modes. An action mode
@@ -21,7 +21,7 @@ package de.uniessen.wiinf.wip.goalgetter.tool;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  *  
  */
 public final class ActionPresentationMode {

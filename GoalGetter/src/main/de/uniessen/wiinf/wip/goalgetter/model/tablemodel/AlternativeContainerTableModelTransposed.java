@@ -10,9 +10,9 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: AlternativeContainerTableModelTransposed.java,v 1.1 2004/09/08 18:31:34 moleman Exp $
+ * $Id: AlternativeContainerTableModelTransposed.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
+package de.uniessen.wiinf.wip.goalgetter.model.tablemodel;
 
 import javax.swing.ListModel;
 import javax.swing.event.ListDataEvent;

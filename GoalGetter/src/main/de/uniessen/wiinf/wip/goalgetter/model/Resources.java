@@ -16,10 +16,10 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Resources.java,v 1.4 2004/08/16 11:25:22 moleman Exp $
+ * $Id: Resources.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
 
-package de.uniessen.wiinf.wip.goalgetter.tool;
+package de.uniessen.wiinf.wip.goalgetter.model;
 
 import javax.swing.Icon;
 
@@ -32,7 +32,7 @@ import com.jgoodies.uif.util.ResourceUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.1 $
  *  
  */
 public final class Resources {

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainToolBarBuilder.java,v 1.3 2004/08/16 11:25:22 moleman Exp $
+ * $Id: MainToolBarBuilder.java,v 1.4 2004/09/25 14:56:57 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -34,7 +34,7 @@ import com.jgoodies.uif.action.ToggleAction;
 import com.jgoodies.uif.builder.ToolBarBuilder;
 import com.jgoodies.uif.component.ToolBarButton;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
+import de.uniessen.wiinf.wip.goalgetter.model.Actions;
 
 /**
  * 
@@ -43,7 +43,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 final class MainToolBarBuilder {
@@ -54,12 +54,11 @@ final class MainToolBarBuilder {
      * @return the application's toolbar.
      */
     JToolBar build() {
-        ToolBarBuilder builder = new ToolBarBuilder("ToolBar");
 
         // Set a hint so that JGoodies Looks will detect it as being in the
         // header.
-        builder.getToolBar().putClientProperty(Options.HEADER_STYLE_KEY,
-                HeaderStyle.BOTH);
+        ToolBarBuilder builder = new ToolBarBuilder("ToolBar", HeaderStyle.BOTH); //$NON-NLS-1$
+
         // Unlike the default, use a separator border.
         builder.getToolBar().putClientProperty(
                 WindowsLookAndFeel.BORDER_STYLE_KEY, BorderStyle.SEPARATOR);
@@ -91,7 +90,7 @@ final class MainToolBarBuilder {
      * @param actionID
      *            the action id to crete the button for
      * @return toolbar button
-     * @see de.uniessen.wiinf.wip.goalgetter.tool.Actions
+     * @see de.uniessen.wiinf.wip.goalgetter.model.Actions
      */
     private AbstractButton createToolBarButton(String actionID) {
         return new ToolBarButton(ActionManager.get(actionID));

@@ -10,9 +10,9 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: GoalContainerTableModel.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
+ * $Id: GoalContainerTableModel.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
+package de.uniessen.wiinf.wip.goalgetter.model.tablemodel;
 
 import javax.swing.ListModel;
 
@@ -27,7 +27,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.1 $
  *  
  */
 public class GoalContainerTableModel extends TableAdapter {

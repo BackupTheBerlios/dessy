@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainer.java,v 1.6 2004/09/08 18:31:34 moleman Exp $
+ * $Id: AlternativeContainer.java,v 1.7 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -36,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.FillLevel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public class AlternativeContainer extends AbstractDomain {
@@ -99,13 +99,6 @@ public class AlternativeContainer extends AbstractDomain {
      * @return alternatives
      */
     public ArrayListModel getAlternativesListModel() {
-        //TODO auch die Zeile mit den Goal-Intensities direkt liefern und nicht
-        // in AlternativeContainerTableMode errechnen
-      
-//        ArrayListModel alm = new ArrayListModel();
-//        alm.add("");
-//        alm.addAll(alternatives);
-//        return alm;
         return alternativesWithShouldBe;
     }
 
@@ -150,6 +143,21 @@ public class AlternativeContainer extends AbstractDomain {
         alternativesWithShouldBe.addAll(newAlternatives);
         
         firePropertyChange(PROPERTYNAME_ALTERNATIVES, oldAlternatives, newAlternatives);
+    }
+    
+    /**
+     * @param alternativesWithShouldBe The alternativesWithShouldBe to set.
+     */
+    public void setAlternativesWithShouldBe(
+            ArrayListModel alternativesWithShouldBe) {
+        this.alternativesWithShouldBe = alternativesWithShouldBe;
+    }
+    
+    /**
+     * @return Returns the alternativesWithShouldBe.
+     */
+    public ArrayListModel getAlternativesWithShouldBe() {
+        return alternativesWithShouldBe;
     }
 
     /**

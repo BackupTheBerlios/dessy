@@ -10,9 +10,9 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: GoalGetterFileFilter.java,v 1.2 2004/08/16 11:25:22 moleman Exp $
+ * $Id: GoalGetterFileFilter.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.tool.file;
+package de.uniessen.wiinf.wip.goalgetter.model.file;
 
 import java.io.File;
 import java.util.Enumeration;

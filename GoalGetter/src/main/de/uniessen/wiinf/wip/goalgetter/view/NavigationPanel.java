@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: NavigationPanel.java,v 1.3 2004/09/08 18:31:34 moleman Exp $
+ * $Id: NavigationPanel.java,v 1.4 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -41,10 +41,10 @@ import com.jgoodies.uif.util.ResourceUtils;
 import com.jgoodies.uif.util.TreeUtils;
 import com.jgoodies.uifextras.util.UIFactory;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
-import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
-import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
-import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
+import de.uniessen.wiinf.wip.goalgetter.model.Actions;
+import de.uniessen.wiinf.wip.goalgetter.model.MainModel;
+import de.uniessen.wiinf.wip.goalgetter.model.PresentationSettings;
+import de.uniessen.wiinf.wip.goalgetter.model.node.NavigationNode;
 
 /**
  * Builds the navigation panel that is primarily intended to display a tree of
@@ -62,7 +62,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class NavigationPanel extends SimpleInternalFrame {
@@ -76,7 +76,7 @@ public class NavigationPanel extends SimpleInternalFrame {
     /**
      * Refers to the module that holds the tree model and tree selection model.
      */
-    private final MainModule module;
+    private final MainModel mainModel;
 
     /**
      * Refers to the tree that displays the navigation nodes.
@@ -93,19 +93,19 @@ public class NavigationPanel extends SimpleInternalFrame {
     /**
      * Constructs an <code>NavigationPanel</code>.
      * 
-     * @param mainModule
+     * @param mainModel
      *            provides the tree model and tree selection model
      */
-    NavigationPanel(MainModule mainModule) {
+    NavigationPanel(MainModel mainModel) {
         super(ResourceUtils.getString("navigator.label")); //$NON-NLS-1$
-        this.module = mainModule;
+        this.mainModel = mainModel;
         initComponents();
       //  setToolBar(buildToolBar());
         setContent(UIFactory.createStrippedScrollPane(buildContent()));
         setSelected(true);
 
         //   updateCard();
-        registerListeners();
+        initEventHandling();
     }
 
     /**
@@ -131,8 +131,8 @@ public class NavigationPanel extends SimpleInternalFrame {
      * selection model from the MainModule.
      */
     private void initComponents() {
-        tree = new RefreshedTree(module.getNavigationTreeModel());
-        tree.setSelectionModel(module.getNavigationTreeSelectionModel());
+        tree = new RefreshedTree(mainModel.getNavigationTreeModel());
+        tree.setSelectionModel(mainModel.getNavigationTreeSelectionModel());
         tree.putClientProperty("JTree.lineStyle", "None"); //$NON-NLS-1$ //$NON-NLS-2$
         tree.setRootVisible(false);
         tree.setShowsRootHandles(true);
@@ -263,7 +263,7 @@ public class NavigationPanel extends SimpleInternalFrame {
                     .equals(evt.getPropertyName())) {
                 // dirty workaround for refreshing the tree
                 //TODO remove through better method (find out how)
-                module.setProject(module.getProject());
+                mainModel.setProject(mainModel.getProject());
             }
         }
 
@@ -312,11 +312,11 @@ public class NavigationPanel extends SimpleInternalFrame {
 
     }
 
-    private void registerListeners() {
-        module.addPropertyChangeListener(
-                MainModule.PROPERTYNAME_NAVIGATION_TREE_MODEL,
+    private void initEventHandling() {
+        mainModel.addPropertyChangeListener(
+                MainModel.PROPERTYNAME_NAVIGATION_TREE_MODEL,
                 new TreeModelChangeHandler());
-        module.addPropertyChangeListener(MainModule.PROPERTYNAME_SELECTION,
+        mainModel.addPropertyChangeListener(MainModel.PROPERTYNAME_SELECTION,
                 new SelectionChangeHandler());
         presentationSettings().addPropertyChangeListener(
                 new PresentationSettingsChangeHandler());
@@ -325,7 +325,7 @@ public class NavigationPanel extends SimpleInternalFrame {
     // Accessing Collaborators **********************************************
 
     private PresentationSettings presentationSettings() {
-        return module.getPresentationSettings();
+        return mainModel.getPresentationSettings();
     }
 
 }

@@ -16,9 +16,9 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DynamicHelpModule.java,v 1.3 2004/08/16 11:25:22 moleman Exp $
+ * $Id: DynamicHelpModel.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.tool;
+package de.uniessen.wiinf.wip.goalgetter.model;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -37,8 +37,8 @@ import javax.swing.tree.TreeSelectionModel;
 
 import com.jgoodies.binding.beans.Model;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.help.HelpNode;
-import de.uniessen.wiinf.wip.goalgetter.tool.help.HelpSets;
+import de.uniessen.wiinf.wip.goalgetter.model.help.HelpNode;
+import de.uniessen.wiinf.wip.goalgetter.model.help.HelpSets;
 
 /**
  * 
@@ -49,10 +49,10 @@ import de.uniessen.wiinf.wip.goalgetter.tool.help.HelpSets;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  *  
  */
-public final class DynamicHelpModule extends Model {
+public final class DynamicHelpModel extends Model {
 
     // Names of the Bound Bean Properties *************************************
 
@@ -131,7 +131,7 @@ public final class DynamicHelpModule extends Model {
      * Constructs a <code>DynamicHelpModule</code> with the welcome help set
      * preselected.
      */
-    DynamicHelpModule() {
+    DynamicHelpModel() {
         helpRegistry = new HashMap();
 
         setHelpSet(HelpSets.WELCOME_HELP_SET);

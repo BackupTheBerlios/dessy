@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainMenuBuilder.java,v 1.6 2004/08/16 11:25:22 moleman Exp $
+ * $Id: MainMenuBuilder.java,v 1.7 2004/09/25 14:56:57 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -35,7 +35,7 @@ import com.jgoodies.uif.builder.MenuBuilder;
 import com.jgoodies.uif.osx.OSXApplicationMenu;
 import com.jgoodies.uif.util.ResourceUtils;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
+import de.uniessen.wiinf.wip.goalgetter.model.Actions;
 
 /**
  * 
@@ -44,7 +44,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class MainMenuBuilder {

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionByAlternativeEditor.java,v 1.1 2004/09/08 18:31:34 moleman Exp $
+ * $Id: ActionByAlternativeEditor.java,v 1.2 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -29,9 +29,9 @@ import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Action;
 import de.uniessen.wiinf.wip.goalgetter.domain.container.ActionContainer;
-import de.uniessen.wiinf.wip.goalgetter.tool.ActionContainerByAlternative;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
-import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.ActionContainerTableModel;
+import de.uniessen.wiinf.wip.goalgetter.model.ActionContainerByAlternative;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.tablemodel.ActionContainerTableModel;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.table.ActionContainerEditorPopupAdapter;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.table.OverviewTable;
 
@@ -42,7 +42,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.table.OverviewTable;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class ActionByAlternativeEditor extends AbstractEditor {

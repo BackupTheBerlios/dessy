@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditorPopupAdapter.java,v 1.1 2004/08/16 11:25:22 moleman Exp $
+ * $Id: AlternativeContainerEditorPopupAdapter.java,v 1.2 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor.table;
 
@@ -25,7 +25,7 @@ import javax.swing.JPopupMenu;
 import com.jgoodies.uif.action.ActionManager;
 import com.jgoodies.uifextras.util.PopupAdapter;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
+import de.uniessen.wiinf.wip.goalgetter.model.Actions;
 
 /**
  * Builds the right click popup menu for the AlternativeContainerEditor
@@ -33,7 +33,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class AlternativeContainerEditorPopupAdapter extends PopupAdapter {

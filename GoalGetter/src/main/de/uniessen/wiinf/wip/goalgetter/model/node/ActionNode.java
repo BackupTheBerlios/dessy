@@ -1,5 +1,5 @@
 /*
- * AlternativeNode.java
+ * ActionNode.java
  * Package: de.uniessen.wiinf.wip.goalgetter.tool.node
  * Project: GoalGetter
  * 
@@ -16,55 +16,51 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeNode.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: ActionNode.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
 
-package de.uniessen.wiinf.wip.goalgetter.tool.node;
+package de.uniessen.wiinf.wip.goalgetter.model.node;
 
 import javax.swing.Icon;
 
-import com.jgoodies.uif.util.CompoundIcon;
-
-import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
-import de.uniessen.wiinf.wip.goalgetter.domain.FillLevel;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.ActionContainerByAlternative;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
 
 /**
  * 
- * AlternativeNode
+ * ActionNode
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  *  
  */
-public final class AlternativeNode extends AbstractTreeNode {
+public final class ActionNode extends AbstractTreeNode {
 
     // Instance Creation ******************************************************
 
     /**
-     * Constructs a <code>AlternativeNode</code> for the specified parent and
-     * alternative.
+     * Constructs a <code>ShaftNode</code> for the given parent and action.
      * 
      * @param parent
      *            this node's parent
-     * @param alternative
-     *            the associated model, an instance of Alternative
+     * @param actionContainer
+     *            the associated model, an instance of ActionContainer
      */
-    public AlternativeNode(NavigationNode parent, Alternative alternative) {
-        super(parent, alternative);
+    public ActionNode(NavigationNode parent, ActionContainerByAlternative actionContainer) {
+        super(parent, actionContainer);
     }
 
     // Implementing the NavigationNode Interface ******************************
 
     /**
-     * Returns this node's name, the identifier of the associated alternative.
+     * Returns this node's name, the identifier of the associated action.
      * 
      * @return this node's name
      */
     public String getName() {
-        return getAlternative().getIdentifier();
+        return getAlternatives().getName();
     }
 
     // ************************************************************************
@@ -76,19 +72,21 @@ public final class AlternativeNode extends AbstractTreeNode {
      * @return this node's icon.
      */
     public Icon getIcon(boolean sel) {
-        return new CompoundIcon(Resources.ALTERNATIVE_ICON, FillLevel
-                .getIcon(getAlternative().getFillLevel()));
+//        return new CompoundIcon(Resources.ACTION_ICON, FillLevel
+//                .getIcon(getAlternatives().getFillLevel()));
+        return Resources.ACTION_ICON;
     }
 
+    
     /**
-     * Returns this node's associated Alternative instance. Convenience function
-     * for {@link NavigationNode#getModel()}with the respective typecast
+     * Returns this node's associated Action instance. Convenience function for
+     * {@link NavigationNode#getModel()}with the respective typecast
      * 
-     * @return this node's associated Alternative instance.
+     * @return this node's associated Action instance.
      * @see NavigationNode#getModel()
      */
-    public Alternative getAlternative() {
-        return (Alternative) getModel();
+    public ActionContainerByAlternative getAlternatives() {
+        return (ActionContainerByAlternative) getModel();
     }
 
 }

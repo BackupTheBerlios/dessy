@@ -16,9 +16,9 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpNode.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: HelpNode.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.tool.help;
+package de.uniessen.wiinf.wip.goalgetter.model.help;
 
 import java.net.URL;
 
@@ -34,7 +34,7 @@ import com.jgoodies.uif.util.ResourceUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  *  
  */
 

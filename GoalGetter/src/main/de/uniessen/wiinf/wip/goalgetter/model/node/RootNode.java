@@ -16,10 +16,10 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: RootNode.java,v 1.9 2004/09/08 18:31:34 moleman Exp $
+ * $Id: RootNode.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
  */
 
-package de.uniessen.wiinf.wip.goalgetter.tool.node;
+package de.uniessen.wiinf.wip.goalgetter.model.node;
 
 import java.util.Iterator;
 
@@ -28,8 +28,8 @@ import javax.swing.Icon;
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
-import de.uniessen.wiinf.wip.goalgetter.tool.ActionContainerByAlternative;
-import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
+import de.uniessen.wiinf.wip.goalgetter.model.ActionContainerByAlternative;
+import de.uniessen.wiinf.wip.goalgetter.model.PresentationSettings;
 
 /**
  * 
@@ -38,12 +38,11 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.1 $
  *  
  */
 public final class RootNode extends AbstractTreeNode {
 
-    private PresentationSettings presentationSettings = null;
 
     // Instance Creation ******************************************************
 
@@ -55,9 +54,8 @@ public final class RootNode extends AbstractTreeNode {
      * @param presentationSettings
      *            the PresentationSettings (containing tree construction rules)
      */
-    public RootNode(Project project, PresentationSettings presentationSettings) {
+    public RootNode(Project project) {
         super(null, project);
-        this.presentationSettings = presentationSettings;
         buildNodesFrom(project);
     }
 
@@ -97,39 +95,19 @@ public final class RootNode extends AbstractTreeNode {
 
         add(masterAlternativeNode);
 
-        ActionContainerNode masterActionNode;
-        //TODO decide whether action display types should be kept.
-        //        if (false && presentationSettings != null
-        //                && presentationSettings.getActionPresentationMode() ==
-        // ActionPresentationMode.GOAL) {
-        //
-        //            masterActionNode = new ActionContainerNode(this, project
-        //                    .getActionContainer());
-        //            for ( i = project.getGoalContainer().getGoals().iterator(); i
-        //                    .hasNext();) {
-        //                Goal goal = (Goal) i.next();
-        //                ActionContainerByGoal acbg = new
-        // ActionContainerByGoal(project.getActionContainer(),goal);
-        //                ActionGoalNode node = new ActionGoalNode(masterActionNode, acbg);
-        //                masterActionNode.add(node);
-        //            }
-        //        } else {
-        
-        masterActionNode = new ActionContainerNode(this, project
-                .getActionContainer());
+        ActionContainerNode masterActionNode = new ActionContainerNode(this,
+                project.getActionContainer());
 
         i = project.getAlternativeContainer().getAlternatives().iterator();
 
         while (i.hasNext()) {
 
             Alternative alternative = (Alternative) i.next();
-            ActionContainerByAlternative acba = new
-            ActionContainerByAlternative(project.getActionContainer(),alternative);
-            ActionAlternativeNode node = new ActionAlternativeNode(
-                    masterActionNode, acba);
+            ActionContainerByAlternative acba = new ActionContainerByAlternative(
+                    project.getActionContainer(), alternative);
+            ActionNode node = new ActionNode(masterActionNode, acba);
             masterActionNode.add(node);
         }
-        // }
 
         add(masterActionNode);
 

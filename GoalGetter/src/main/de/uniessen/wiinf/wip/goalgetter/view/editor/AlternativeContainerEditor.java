@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.14 2004/09/08 18:31:34 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.15 2004/09/25 14:56:57 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -31,8 +31,8 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.container.AlternativeContainer;
-import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
-import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.AlternativeContainerTableModelTransposed;
+import de.uniessen.wiinf.wip.goalgetter.model.Resources;
+import de.uniessen.wiinf.wip.goalgetter.model.tablemodel.AlternativeContainerTableModelTransposed;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.table.AlternativeContainerEditorPopupAdapter;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.table.OverviewTable;
 
@@ -42,7 +42,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.table.OverviewTable;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
@@ -163,7 +163,7 @@ public class AlternativeContainerEditor extends AbstractEditor {
          * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
          */
         public void propertyChange(PropertyChangeEvent evt) {
-           System.out.println("hier höre ich was");
+           System.out.println("hier hï¿½re ich was");
             
         }
         
