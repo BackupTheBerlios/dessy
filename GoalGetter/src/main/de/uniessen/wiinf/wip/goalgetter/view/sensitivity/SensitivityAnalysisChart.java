@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisChart.java,v 1.4 2004/08/22 11:33:17 jsprenger Exp $
+ * $Id: SensitivityAnalysisChart.java,v 1.5 2004/08/22 14:30:10 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 import java.awt.Color;
@@ -28,21 +28,15 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.MultiplePiePlot;
-import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.CategoryToPieDataset;
-import org.jfree.data.DatasetChangeEvent;
 import org.jfree.data.DefaultCategoryDataset;
-import org.jfree.data.DefaultPieDataset;
-import org.jfree.util.TableOrder;
 /**
  * SensitivityAnalysisChart
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class SensitivityAnalysisChart extends ChartFactory {
@@ -96,6 +90,8 @@ public class SensitivityAnalysisChart extends ChartFactory {
         plot.setDomainGridlinesVisible(true);
 	    jfc.setBorderVisible(true);
 	    
+
+	    
 //       	plot.setBackgroundAlpha(0f);
 //        plot.getDomainAxis().setLabelFont(UIManager.getFont("Table.font"));
 //        plot.getRangeAxis().setLabelFont(UIManager.getFont("Table.font"));
@@ -123,7 +119,9 @@ public class SensitivityAnalysisChart extends ChartFactory {
 //			renderer.setSeriesPaint(i, adjustColor(col));
 //		}
 		cp = new ChartPanel(jfc);
-		
+//		cp.addChartMouseListener(new SensitivityChartMouseListener(this));
+//		cp.addMouseListener(new SensitivityChartMouseListener(this));
+//		cp.addMouseMotionListener(new SensitivityChartMouseListener(this));
 	}
 	private Color adjustColor(Color col) {
 		float[] hsbvals = Color.RGBtoHSB(col.getRed(), col.getGreen(), col
@@ -288,4 +286,5 @@ public void updateValues(List e) {
 	public void setChartchanged(boolean chartchanged) {
 		this.chartchanged = chartchanged;
 	}
+		
 }

@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisDialog.java,v 1.6 2004/08/22 11:52:04 jsprenger Exp $
+ * $Id: SensitivityAnalysisDialog.java,v 1.7 2004/08/22 14:30:10 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 import java.awt.Component;
@@ -54,7 +54,7 @@ import com.jgoodies.uifextras.panel.HeaderPanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class SensitivityAnalysisDialog extends AbstractDialog {
@@ -85,7 +85,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
 	 */
 	public SensitivityAnalysisDialog(Frame owner, List elements, String nameX,
 			String nameY) {
-		super(owner, "Sensitivitätsanalyse",false);
+		super(owner, "Sensitivitätsanalyse",true);
 		
 		this.setResizable(true);
 		this.resize(new Dimension(600,800));
@@ -122,7 +122,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
 		sortElements();
 		
 		chart = new SensitivityAnalysisChart(elements, nameX, nameY);
-	
+		
 		FormLayout layout = new FormLayout(
 		"right:max(500dlu;p)");  
 		
@@ -279,7 +279,7 @@ private JComponent buildEditFields() {
 				int value = Integer.parseInt(values.get(tmp).toString());
 				stepSize = new Integer(1);
 				SpinnerNumberModel model = new SpinnerNumberModel(new Integer(values.get(tmp).toString()),
-										   null, null, stepSize);
+										   new Integer(0), null, stepSize);
 				spin1 = new JSpinner(model);
 				spin1.setPreferredSize(new Dimension(70,20));
 				//spin1.setName(String.valueOf(elements.indexOf(se)) + "," + tmp.toString());
