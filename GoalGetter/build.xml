@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.6 2004/10/05 11:02:04 moleman Exp $
+   $Id: build.xml,v 1.7 2004/10/05 13:25:47 moleman Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -190,14 +190,14 @@
 
 	<!-- ***************************************************************** -->
 	<target name="package-source"
-	        depends="clean, javadoc,jar"
+	        depends="clean, javadoc"
 	        description="Creates the source distribution directory tree.">
 
 		<mkdir dir="${dist.source.dir}" />
 
 		<!-- Compile the documentation. -->
 		<copy todir="${dist.source.docs.dir}">
-			<fileset dir="${docs.dir}" />
+			<fileset dir="${docs.dir}" excludes="*.sxw, *.pdf" />
 		</copy>
 		<move todir="${dist.source.docs.dir}">
 			<fileset dir="${build.docs.dir}" />
@@ -223,7 +223,10 @@
 		      file="${top.dir}/README-src.html" />
 
 		<!-- Copy the jar file. -->
+	<!-- don't want this here. just bloats the zipfile.
 		<copy toFile="${dist.source.main.jar}" file="${build.main.jar}" />
+		
+		-->
 
 	</target>
 
@@ -239,7 +242,7 @@
 
 	<!-- ***************************************************************** -->
 	<target name="package-binary"
-	        depends="package-source"
+	        depends="package-source,jar"
 	        description="Creates the binary distribution directory tree.">
 
 		<mkdir dir="${dist.binary.dir}" />
