@@ -9,6 +9,8 @@ package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JComponent;
+
 /**
  * @author Jonas Sprenger
  */
@@ -16,8 +18,7 @@ public class SensitivityElements {
 	
 	Map values,orginals;
 	String name;
-	
-	
+		
 	/**
 	 * @param costs
 	 * @param name
@@ -67,5 +68,5 @@ public class SensitivityElements {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 }
+

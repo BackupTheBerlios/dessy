@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.13 2004/08/16 12:26:21 moleman Exp $
+ * $Id: MainController.java,v 1.14 2004/08/22 11:33:18 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -52,7 +52,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  *  
  */
 public final class MainController {
@@ -257,6 +257,12 @@ public final class MainController {
         e.addValues("Handlung 1", "100");
         e.addValues("Handlung 2", "2000");
         e.addValues("Handlung 3", "900");
+        col.add(e);
+        
+        e = new SensitivityElements("test");
+        e.addValues("Handlung 1", "10");
+        e.addValues("Handlung 2", "200");
+        e.addValues("Handlung 3", "90");
         col.add(e);
 
         // end new Elements

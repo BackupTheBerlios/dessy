@@ -14,32 +14,35 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisChart.java,v 1.3 2004/08/16 11:43:15 jsprenger Exp $
+ * $Id: SensitivityAnalysisChart.java,v 1.4 2004/08/22 11:33:17 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.swing.UIManager;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.StandardLegend;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.MultiplePiePlot;
+import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.CategoryItemRenderer;
+import org.jfree.data.CategoryToPieDataset;
+import org.jfree.data.DatasetChangeEvent;
 import org.jfree.data.DefaultCategoryDataset;
+import org.jfree.data.DefaultPieDataset;
+import org.jfree.util.TableOrder;
 /**
  * SensitivityAnalysisChart
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class SensitivityAnalysisChart extends ChartFactory {
@@ -51,6 +54,10 @@ public class SensitivityAnalysisChart extends ChartFactory {
 	JFreeChart jfc;
 	DefaultCategoryDataset category;
 	CategoryPlot plot;
+	boolean chartchanged = false;
+	protected static final Color OUTER_SHADOW_COLOR = new Color(0, 0, 0, 25);
+	protected static final Color INNER_SHADOW_COLOR = new Color(0, 0, 0, 42);
+	private boolean gitterFlag;
 	/**
 	 * Constructs a SensityvityAnalysisChart
 	 */
@@ -58,6 +65,8 @@ public class SensitivityAnalysisChart extends ChartFactory {
 		this.elements = elements;
 		this.nameX = nameX;
 		this.nameY = nameY;
+		this.chartchanged = false;
+		this.gitterFlag = true;
 		init();
 	}
 	public void init() {
@@ -78,35 +87,41 @@ public class SensitivityAnalysisChart extends ChartFactory {
 		jfc = createStackedBarChart(null, nameX, nameY, category,
 				PlotOrientation.VERTICAL, //$NON-NLS-1$  //$NON-NLS-2$ 
 				true, false, false);
+		boolean gitterflag = true;
+		
 		plot = jfc.getCategoryPlot();
-		plot.setBackgroundAlpha(0f);
-		plot.getDomainAxis().setLabelFont(UIManager.getFont("Table.font"));
-		plot.getRangeAxis().setLabelFont(UIManager.getFont("Table.font"));
-		plot.getDomainAxis().setTickLabelFont(UIManager.getFont("Table.font"));
-		plot.getRangeAxis().setTickLabelFont(UIManager.getFont("Table.font"));
-		plot.getRangeAxis().setTickLabelsVisible(true);
-		plot.getRangeAxis().setTickMarksVisible(false);
-		plot.getDomainAxis().setTickMarksVisible(false);
-		plot.setRangeGridlinesVisible(false);
-		// plot.getDomainAxis().setAxisLinePaint(Color.darkGray);
-		plot.getDomainAxis().setAxisLineVisible(false);
-		plot.getRangeAxis().setAxisLineVisible(false);
-		plot.setDomainGridlinesVisible(false);
-		plot.setOutlinePaint(null);
-		jfc.setBorderVisible(false);
-		((StandardLegend) jfc.getLegend()).setItemFont(UIManager
-				.getFont("Table.font"));
-		((StandardLegend) jfc.getLegend()).setBackgroundPaint(new Color(0, 0,
-				0, 0));
-		((StandardLegend) jfc.getLegend())
-				.setOutlinePaint(new Color(0, 0, 0, 0));
-		CategoryItemRenderer renderer = plot.getRenderer();
-		renderer.setBaseItemLabelFont(UIManager.getFont("Table.font"));
-		renderer.setOutlinePaint(Color.darkGray);
-		for (int i = 0; i < category.getColumnCount(); i++) {
-			Color col = (Color) renderer.getSeriesPaint(i);
-			renderer.setSeriesPaint(i, adjustColor(col));
-		}
+		plot.getDomainAxis().setAxisLineVisible(true);
+	    plot.getRangeAxis().setAxisLineVisible(true);
+        plot.setRangeGridlinesVisible(true);
+        plot.setDomainGridlinesVisible(true);
+	    jfc.setBorderVisible(true);
+	    
+//       	plot.setBackgroundAlpha(0f);
+//        plot.getDomainAxis().setLabelFont(UIManager.getFont("Table.font"));
+//        plot.getRangeAxis().setLabelFont(UIManager.getFont("Table.font"));
+//        plot.getDomainAxis().setTickLabelFont(UIManager.getFont("Table.font"));
+//        plot.getRangeAxis().setTickLabelFont(UIManager.getFont("Table.font"));
+//        plot.getRangeAxis().setTickLabelsVisible(true);
+//        plot.getRangeAxis().setTickMarksVisible(gitterflag);
+//        plot.getDomainAxis().setTickMarksVisible(gitterflag);
+
+//        plot.getDomainAxis().setAxisLinePaint(Color.darkGray);
+//        
+//        plot.setDomainGridlinesVisible(true);
+//               plot.setOutlinePaint(null);	    	
+//		((StandardLegend) jfc.getLegend()).setItemFont(UIManager
+//				.getFont("Table.font"));
+//		((StandardLegend) jfc.getLegend()).setBackgroundPaint(new Color(0, 0,
+//				0, 0));
+//		((StandardLegend) jfc.getLegend())
+//				.setOutlinePaint(new Color(0, 0, 0, 0));
+//		CategoryItemRenderer renderer = plot.getRenderer();
+//		renderer.setBaseItemLabelFont(UIManager.getFont("Table.font"));
+//		renderer.setOutlinePaint(Color.darkGray);
+//		for (int i = 0; i < category.getColumnCount(); i++) {
+//			Color col = (Color) renderer.getSeriesPaint(i);
+//			renderer.setSeriesPaint(i, adjustColor(col));
+//		}
 		cp = new ChartPanel(jfc);
 		
 	}
@@ -129,8 +144,6 @@ public class SensitivityAnalysisChart extends ChartFactory {
 	public void setChartPanel(ChartPanel cp) {
 		this.cp = cp;
 	}
-	protected static final Color OUTER_SHADOW_COLOR = new Color(0, 0, 0, 25);
-	protected static final Color INNER_SHADOW_COLOR = new Color(0, 0, 0, 42);
 	/**
 	 * renders a shadow. copied from the jgoodies chart library. has no use yet
 	 * 
@@ -153,7 +166,8 @@ public void updateValues(List e) {
 	
 		elements = e;
 	     Iterator it = elements.iterator();
-	        SensitivityElements se;
+	     category =  new DefaultCategoryDataset();;  
+	     SensitivityElements se;
 	        while(it.hasNext())
 	        {	
 	        	se =(SensitivityElements)it.next();
@@ -169,61 +183,77 @@ public void updateValues(List e) {
 	        		category.addValue(value,
 	        				tmp.toString(),
 							se.getName());  
-	        	}
+	        	   		}
+	        		
 	        }
-	       }
-		
-		if(status.equals("2D"))  
-		      jfc = createStackedBarChart(null,
+	      }
+	        
+	       if(status.equals("2DStackedBarChart")&& chartchanged == true)  
+		    jfc = createStackedBarChart(null,
 		                nameX, nameY, category, PlotOrientation.VERTICAL,//$NON-NLS-1$  //$NON-NLS-2$ 
 		                true, false, false);
-		      else if(status.equals("3D"))  	
-		      jfc = createStackedBarChart3D(null,
+		   else if(status.equals("3DStackedBarChart")&& chartchanged == true)	
+		   	jfc = createStackedBarChart3D(null,
 		            nameX, nameY, category, PlotOrientation.VERTICAL,//$NON-NLS-1$  //$NON-NLS-2$ 
 		            true, false, false);
-//		 else{
-//		 	
-//		 createBarChart3D(java.lang.String title, 
-//				java.lang.String categoryAxisLabel,
-//				java.lang.String valueAxisLabel, 
-//				CategoryDataset dataset, 
-//				PlotOrientation.VERTICAL, 
-//				true, 
-//				false, 
-//				false);
-//		 }
-			plot = jfc.getCategoryPlot();
-	       	plot.setBackgroundAlpha(0f);
-	        plot.getDomainAxis().setLabelFont(UIManager.getFont("Table.font"));
-	        plot.getRangeAxis().setLabelFont(UIManager.getFont("Table.font"));
-	        plot.getDomainAxis().setTickLabelFont(UIManager.getFont("Table.font"));
-	        plot.getRangeAxis().setTickLabelFont(UIManager.getFont("Table.font"));
-	        plot.getRangeAxis().setTickLabelsVisible(true);
-	        plot.getRangeAxis().setTickMarksVisible(false);
-	        plot.getDomainAxis().setTickMarksVisible(false);
-	        plot.setRangeGridlinesVisible(false);
-	        // plot.getDomainAxis().setAxisLinePaint(Color.darkGray);
-	        plot.getDomainAxis().setAxisLineVisible(false);
-	        plot.getRangeAxis().setAxisLineVisible(false);
-	        plot.setDomainGridlinesVisible(false);
-	        plot.setOutlinePaint(null);	
-		 
-	        jfc.setBorderVisible(false);
-	        ((StandardLegend) jfc.getLegend()).setItemFont(UIManager
-	                .getFont("Table.font"));
-	        ((StandardLegend) jfc.getLegend()).setBackgroundPaint(new Color(0, 0,
-	                0, 0));
-	        ((StandardLegend) jfc.getLegend())
-	                .setOutlinePaint(new Color(0, 0, 0, 0));
-	        CategoryItemRenderer renderer = plot.getRenderer();
-	        renderer.setBaseItemLabelFont(UIManager.getFont("Table.font"));
-	        renderer.setOutlinePaint(Color.darkGray);
+		   
+		   else if(status.equals("2DBarChart")&& chartchanged == true)
+		   	jfc = createBarChart(null, 
+					nameX,nameY, category, PlotOrientation.VERTICAL, 
+					true, false, false); 
+		   
+		   else if(status.equals("3DBarChart")&& chartchanged == true)		 	
+		   	jfc = createBarChart3D(null, 
+				nameX,nameY, category, PlotOrientation.VERTICAL, 
+				true, false, false);
+		  
+		 else {
+		 	plot = jfc.getCategoryPlot();
+	      jfc.getCategoryPlot().setDataset(category);
+	      plot.setDomainGridlinesVisible(gitterFlag);
+	      plot.setRangeGridlinesVisible(gitterFlag);
+	      return;
+		 }
+	       plot = jfc.getCategoryPlot();
+	       plot.setDomainGridlinesVisible(gitterFlag);
+		   plot.setRangeGridlinesVisible(gitterFlag);
+		   
+		   chartchanged=false;
+		   
+//	       	plot.setBackgroundAlpha(0f);
+//	        plot.getDomainAxis().setLabelFont(UIManager.getFont("Table.font"));
+//	        plot.getRangeAxis().setLabelFont(UIManager.getFont("Table.font"));
+//	        plot.getDomainAxis().setTickLabelFont(UIManager.getFont("Table.font"));
+//	        plot.getRangeAxis().setTickLabelFont(UIManager.getFont("Table.font"));
+//	        plot.getRangeAxis().setTickLabelsVisible(true);
+//	        plot.getRangeAxis().setTickMarksVisible(true);
+//	        plot.getDomainAxis().setTickMarksVisible(true);
+//	        plot.setRangeGridlinesVisible(gitterFlag);
+//	        //plot.getDomainAxis().setAxisLinePaint(Color.darkGray);
+//	        plot.getDomainAxis().setAxisLineVisible(true);
+//	        plot.getRangeAxis().setAxisLineVisible(true);
+//	        
 
-	        for (int i = 0; i < category.getColumnCount(); i++) {
-	            Color col = (Color) renderer.getSeriesPaint(i);
-
-	            renderer.setSeriesPaint(i, adjustColor(col));
-	        }
+//	        
+////	        plot.setOutlinePaint(null);	
+//		 
+//	        jfc.setBorderVisible(true);
+//	        
+//	        ((StandardLegend) jfc.getLegend()).setItemFont(UIManager
+//	                .getFont("Table.font"));
+//	        ((StandardLegend) jfc.getLegend()).setBackgroundPaint(new Color(0, 0,
+//	                0, 0));
+//	        ((StandardLegend) jfc.getLegend())
+//	                .setOutlinePaint(new Color(0, 0, 0, 0));
+//	        CategoryItemRenderer renderer = plot.getRenderer();
+//	        renderer.setBaseItemLabelFont(UIManager.getFont("Table.font"));
+//	        renderer.setOutlinePaint(Color.darkGray);
+//
+//	        for (int i = 0; i < category.getColumnCount(); i++) {
+//	            Color col = (Color) renderer.getSeriesPaint(i);
+//
+//	            renderer.setSeriesPaint(i, adjustColor(col));
+//	        }
 	        cp.setChart(jfc);
 	      
 	    }	/**
@@ -238,5 +268,24 @@ public void updateValues(List e) {
 	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	/**
+	 * @param b
+	 */
+	public void setGitterFlag(boolean b) {
+		this.gitterFlag = b;
+		
+	}
+	/**
+	 * @return Returns the chartchanged.
+	 */
+	public boolean isChartchanged() {
+		return chartchanged;
+	}
+	/**
+	 * @param chartchanged The chartchanged to set.
+	 */
+	public void setChartchanged(boolean chartchanged) {
+		this.chartchanged = chartchanged;
 	}
 }
