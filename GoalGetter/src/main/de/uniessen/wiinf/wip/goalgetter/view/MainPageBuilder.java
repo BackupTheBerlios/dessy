@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainPageBuilder.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
+ * $Id: MainPageBuilder.java,v 1.4 2004/07/19 18:22:02 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -36,6 +36,7 @@ import javax.swing.JToolBar;
 
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.uif.action.ActionManager;
+import com.jgoodies.uif.application.Application;
 import com.jgoodies.uif.builder.ToolBarBuilder;
 import com.jgoodies.uif.panel.SimpleInternalFrame;
 import com.jgoodies.uif.util.ComponentTreeUtils;
@@ -44,6 +45,7 @@ import com.jgoodies.uifextras.util.UIFactory;
 import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
 import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
 import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
+import de.uniessen.wiinf.wip.goalgetter.view.editor.ActionContainerEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.ActionEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.AlternativeContainerEditor;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.AlternativeEditor;
@@ -60,7 +62,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 
@@ -70,7 +72,7 @@ public final class MainPageBuilder {
             620, 510)
             : new Dimension(760, 570);
 
-    private static final String COPYRIGHT_TEXT = "\u00a9 2004 Jonas Sprenger and Tim Franz";
+    private static final String COPYRIGHT_TEXT = Application.getGlobals().getFullCopyright();
 
     // Preferences Key
     private static final String MAIN_DIVIDER_LOCATION_KEY = "mainDividerLocation";
@@ -206,7 +208,7 @@ public final class MainPageBuilder {
         editorPanel.addEditor(new ActionEditor());
         editorPanel.addEditor(new GoalContainerEditor());
         editorPanel.addEditor(new AlternativeContainerEditor());
-        //  editorPanel.addEditor(new ActionContainerEditor());
+        editorPanel.addEditor(new ActionContainerEditor());
 
         editorPanel.setActiveEditor(welcomePanel);
         return editorPanel;

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalGetter.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: GoalGetter.java,v 1.2 2004/07/19 18:22:02 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter;
 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.MainFrame;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 
@@ -151,10 +151,10 @@ public final class GoalGetter extends DefaultApplicationStarter {
                         "GoalGetter", // Application name
                         "goalgetter", // prefix for logs and prefs
                         "0.1", // version
-                        "0.1.2 (July-04-2004)", // full version
+                        "0.1.3 (July-19-2004)", // full version
                         "A Decision supporting system using the GoalGetter Method by Markus Stallkamp", // description
                         "\u00a9 2004", // copyright
-                        "Uni Essen", // vendor
+                        "Universität Duisburg-Essen", // vendor
                         "de/uniessen/wiinf/wip/goalgetter/", // resource
                         // properties URL
                         "docs/help/global/Help.hs", // helpset URL

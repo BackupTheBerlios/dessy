@@ -16,18 +16,18 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.6 2004/07/18 21:26:39 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.7 2004/07/19 18:22:02 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.AlternativeContainer;
+import de.uniessen.wiinf.wip.goalgetter.overviewTable.AlternativeContainerEditorPopupAdapter;
 import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 
@@ -37,12 +37,12 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
 
-    private JTable overviewTable;
+    private OverviewTable overviewTable;
 
     public AlternativeContainerEditor() {
         super(Resources.ALTERNATIVE_ICON, "Alternative Overview");
@@ -63,9 +63,10 @@ public class AlternativeContainerEditor extends AbstractEditor {
         //  CellConstraints cc = new CellConstraints();
         builder
                 .appendI15dSeparator("alternativeContainerEditor.alternatives.text");
-        builder.appendRow(builder.getLineGapSpec());
+       // builder.appendRow(builder.getLineGapSpec());
         // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
-        builder.nextLine(2);
+       // builder.nextLine(2);
+        builder.nextLine();
         java.awt.Component overviewPane = new JScrollPane(overviewTable);
         builder.append(overviewPane, 3);
     }
@@ -78,33 +79,16 @@ public class AlternativeContainerEditor extends AbstractEditor {
 
         String rowData[][] = {
 
-        { "Availability", "April", "Jan-May" },
-                { "Knowledge", "C++", "Pascal" },
-                { "Salary", "11.000", "12.000" }
+        { "Availability", "Juni","April", "Jan-May" },
+                { "Knowledge", "Java","C++", "Pascal" },
+                { "Salary", "10.000","11.000", "12.000" }
 
         };
-        String columnNames[] = { "  ", "Klaus", "Peter" };
+        String columnNames[] = { "  ","Soll", "Klaus", "Peter" };
 
         overviewTable = new OverviewTable(rowData, columnNames);
-
-        //        List entries = new ArrayList();
-        //        // neue Zeile
-        //       OverviewTableEntry element = new
-        // OverviewTableEntry("Alternative","Klaus");
-        //       element.newElement("Availability"," June",java.lang.String.class);
-        //       element.newElement("Knowledge","java",java.lang.String.class);
-        //       element.newElement("Salary","12.000",java.lang.String.class);
-        //       entries.add(element);
-        //        // neue Zeile
-        //       element = new OverviewTableEntry("Alternative","Peter");
-        //       element.newElement("Availability","June",java.lang.String.class);
-        //       element.newElement("Knowledge","java",java.lang.String.class);
-        //       element.newElement("Salary","12.000",java.lang.String.class);
-        //       entries.add(element);
-        //       // neue Zeile
-        //       
-        //        // erzeuge neue Tabelle
-        //       overviewTable = new OverviewTable(entries);
+        overviewTable.setHighlightColumn(1);
+        overviewTable.addMouseListener(new AlternativeContainerEditorPopupAdapter());
     }
 
     /*

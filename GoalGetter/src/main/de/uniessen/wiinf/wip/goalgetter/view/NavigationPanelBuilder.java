@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: NavigationPanelBuilder.java,v 1.4 2004/07/18 21:26:39 moleman Exp $
+ * $Id: NavigationPanelBuilder.java,v 1.5 2004/07/19 18:22:02 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -61,7 +61,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 final class NavigationPanelBuilder {
@@ -252,13 +252,13 @@ final class NavigationPanelBuilder {
                 boolean sel, boolean expanded, boolean leaf, int row,
                 boolean focus) {
             super.getTreeCellRendererComponent(tree, value, selected, expanded,
-                    false, row, focus);
+                    leaf, row, focus);
             NavigationNode node = (NavigationNode) value;
             this.setForeground(sel ? getTextSelectionColor()
                     : getTextNonSelectionColor());
             selected = sel;
             this.setIcon(node.getIcon(sel));
-            this.setText(node.getName());
+            this.setText(node.getName());          
             return this;
         }
     }

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: RootNode.java,v 1.2 2004/07/18 21:25:28 moleman Exp $
+ * $Id: RootNode.java,v 1.3 2004/07/19 18:22:02 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -37,7 +37,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class RootNode extends AbstractTreeNode {
@@ -92,19 +92,19 @@ public final class RootNode extends AbstractTreeNode {
 
         ActionContainerNode actionByGoalNode = new ActionContainerNode(
                 masterActionNode, project.getActionsbyGoalContainer());
-        for (Iterator i = project.getActionsbyGoalContainer().getActions()
+        for (Iterator i = project.getGoalContainer().getGoals()
                 .iterator(); i.hasNext();) {
-            Action action = (Action) i.next();
-            ActionNode node = new ActionNode(actionByGoalNode, action);
+            Goal goal= (Goal) i.next();
+            ActionGoalNode node = new ActionGoalNode(actionByGoalNode, goal);
             actionByGoalNode.add(node);
         }
 
         ActionContainerNode actionByAlternativeNode = new ActionContainerNode(
                 masterActionNode, project.getActionsbyAlternativeContainer());
-        for (Iterator i = project.getActionsbyAlternativeContainer()
-                .getActions().iterator(); i.hasNext();) {
-            Action action = (Action) i.next();
-            ActionNode node = new ActionNode(actionByAlternativeNode, action);
+        for (Iterator i = project.getAlternativeContainer()
+                .getAlternatives().iterator(); i.hasNext();) {
+            Alternative alternative = (Alternative) i.next();
+            ActionAlternativeNode node = new ActionAlternativeNode(actionByAlternativeNode, alternative);
             actionByAlternativeNode.add(node);
         }
 
