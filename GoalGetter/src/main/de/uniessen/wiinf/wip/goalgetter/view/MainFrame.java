@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainFrame.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
+ * $Id: MainFrame.java,v 1.4 2004/08/06 11:30:37 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -39,7 +39,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class MainFrame extends AbstractMainFrame {
@@ -122,8 +122,6 @@ public final class MainFrame extends AbstractMainFrame {
         super.restoreState();
         module.restoreState();
         Preferences userPrefs = Application.getUserPreferences();
-        // TODO: Enable this if the welcome is animated and has state.
-        // welcomePanel.restoreFrom(userPrefs);
         mainPageBuilder().restoreFrom(userPrefs);
     }
 

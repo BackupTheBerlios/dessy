@@ -16,13 +16,14 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GeneralTabBuilder.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
+ * $Id: GeneralTabBuilder.java,v 1.4 2004/08/06 11:30:37 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JRadioButton;
 
 import com.jgoodies.binding.adapter.ToggleButtonAdapter;
 import com.jgoodies.binding.beans.PropertyAdapter;
@@ -42,7 +43,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class GeneralTabBuilder {
@@ -52,6 +53,10 @@ public final class GeneralTabBuilder {
     private JCheckBox autoExpandBox;
 
     private JCheckBox autoCollapseBox;
+    
+    private JRadioButton actionsByGoal;
+    
+    private JRadioButton actionsByAlternative;
 
     // Instance Creation ****************************************************
 
