@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.3 2004/10/05 10:11:38 moleman Exp $
+ * $Id: MainController.java,v 1.4 2004/10/05 11:00:30 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.model;
 
@@ -56,7 +56,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class MainController {
@@ -261,7 +261,7 @@ public final class MainController {
                     .iterator();
             while (actionsIterator.hasNext()) {
                 Action anAction = (Action) actionsIterator.next();
-                String name = anAction.getName();
+                String name = anAction.getGoal().getName();
                 if (name == null) {
                     name = ""; //$NON-NLS-1$
                 }

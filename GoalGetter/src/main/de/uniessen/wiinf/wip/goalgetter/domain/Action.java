@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Action.java,v 1.9 2004/10/05 10:11:38 moleman Exp $
+ * $Id: Action.java,v 1.10 2004/10/05 11:00:30 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -48,7 +48,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *  
  */
 public class Action extends AbstractDomain {
@@ -251,8 +251,8 @@ public class Action extends AbstractDomain {
 	 * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
 	 */
 	protected boolean isEmpty() {
-		return paymentForAction.intValue() == 0
-				&& paymentForTradeoff.intValue() == 0;
+		return ValidationUtils.isEmpty(getResult())
+				&& ValidationUtils.isEmpty(getName());
 	}
 
 	/*
@@ -261,8 +261,8 @@ public class Action extends AbstractDomain {
 	 * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
 	 */
 	protected boolean isFilled() {
-		return paymentForAction.intValue() != 0
-		&& paymentForTradeoff.intValue() != 0;
+	    return !ValidationUtils.isEmpty(getResult())
+		&& !ValidationUtils.isEmpty(getName());
 	}
 
 	/**

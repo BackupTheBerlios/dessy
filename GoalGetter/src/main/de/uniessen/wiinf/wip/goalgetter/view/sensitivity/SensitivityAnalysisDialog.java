@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisDialog.java,v 1.11 2004/10/05 11:00:30 moleman Exp $
+ * $Id: SensitivityAnalysisDialog.java,v 1.12 2004/10/05 11:01:43 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 
@@ -55,7 +55,7 @@ import com.jgoodies.uifextras.panel.HeaderPanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  *  
  */
 public final class SensitivityAnalysisDialog extends AbstractDialog {
@@ -120,7 +120,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
     protected JComponent buildHeader() {
         return new HeaderPanel(
                 "Sensitivit�tsanalyse",
-                "F�hren Sie eine Sensitivit�tsanalyse durch. Sie werden begeistert sein.",
+                "Analysieren Sie die Alternativen.",
                 ResourceUtils.getIcon(ResourceIDs.PREFERENCES_ICON));
     }
 
