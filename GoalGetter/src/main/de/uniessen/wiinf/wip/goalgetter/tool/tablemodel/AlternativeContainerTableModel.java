@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: AlternativeContainerTableModel.java,v 1.4 2004/08/16 12:26:21 moleman Exp $
+ * $Id: AlternativeContainerTableModel.java,v 1.5 2004/08/22 16:00:06 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
 
@@ -31,7 +31,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class AlternativeContainerTableModel extends TableAdapter {
@@ -80,8 +80,7 @@ public class AlternativeContainerTableModel extends TableAdapter {
             return getGoalAt(columnIndex).getIntensity();
         }
 
-        Alternative alternative = (Alternative) getRow(rowIndex);
-        System.out.println(alternative.getIdentifier());
+        Alternative alternative = (Alternative) getRow(rowIndex);       
 
         switch (columnIndex) {
         case 0:
@@ -154,8 +153,7 @@ public class AlternativeContainerTableModel extends TableAdapter {
     }
 
     private Goal getGoalAt(int i) {
-        Alternative alternative = (Alternative) getRow(1);
-        System.out.println(alternative.getGoals().size());
+        Alternative alternative = (Alternative) getRow(1);       
         return (Goal) (alternative.getGoals()).get(i - 1);
     }
 
