@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisDialog.java,v 1.10 2004/09/25 14:56:57 moleman Exp $
+ * $Id: SensitivityAnalysisDialog.java,v 1.11 2004/10/05 11:00:30 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 
@@ -55,7 +55,7 @@ import com.jgoodies.uifextras.panel.HeaderPanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *  
  */
 public final class SensitivityAnalysisDialog extends AbstractDialog {
@@ -292,7 +292,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
                 int value = Integer.parseInt(values.get(tmp).toString());
                 stepSize = new Integer(1);
                 SpinnerNumberModel model = new SpinnerNumberModel(new Integer(
-                        values.get(tmp).toString()), new Integer(0), null,
+                        values.get(tmp).toString()), new Integer(Integer.MIN_VALUE), null,
                         stepSize);
                 spin1 = new JSpinner(model);
                 spin1.setPreferredSize(new Dimension(70, 20));
