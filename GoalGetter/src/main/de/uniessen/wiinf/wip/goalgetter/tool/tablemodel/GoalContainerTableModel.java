@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: GoalContainerTableModel.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: GoalContainerTableModel.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
 
@@ -27,14 +27,13 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class GoalContainerTableModel extends TableAdapter {
 
     private static final String[] COLUMN_NAMES = {
             ResourceUtils.getString("goalEditor.identifier.text"), //$NON-NLS-1$
-            ResourceUtils.getString("goalEditor.unit.text"), //$NON-NLS-1$
             ResourceUtils.getString("goalEditor.intensity.text") }; //$NON-NLS-1$
 
     /**
@@ -55,8 +54,6 @@ public class GoalContainerTableModel extends TableAdapter {
         case 0:
             return goal.getName();
         case 1:
-            return goal.getUnit();
-        case 2:
             return goal.getIntensity();
         default:
             return null;
@@ -74,9 +71,6 @@ public class GoalContainerTableModel extends TableAdapter {
             goal.setName((String) aValue);
             break;
         case 1:
-            goal.setUnit((String) aValue);
-            break;
-        case 2:
             goal.setIntensity((String) aValue);
             break;
         }

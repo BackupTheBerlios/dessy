@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.6 2004/08/14 11:11:12 moleman Exp $
+ * $Id: Actions.java,v 1.7 2004/08/14 16:43:35 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -36,11 +36,11 @@ import com.jgoodies.uif.action.ToggleAction;
 import com.jgoodies.uifextras.help.HelpBroker;
 import com.jgoodies.uifextras.printing.PrintManager;
 
-import de.uniessen.wiinf.wip.goalgetter.domain.ActionContainer;
-import de.uniessen.wiinf.wip.goalgetter.domain.AlternativeContainer;
 import de.uniessen.wiinf.wip.goalgetter.domain.Description;
-import de.uniessen.wiinf.wip.goalgetter.domain.GoalContainer;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
+import de.uniessen.wiinf.wip.goalgetter.domain.container.ActionContainer;
+import de.uniessen.wiinf.wip.goalgetter.domain.container.AlternativeContainer;
+import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
 
 /**
  * 
@@ -51,7 +51,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 /**
@@ -60,7 +60,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class Actions {

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpSets.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: HelpSets.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.help;
@@ -25,12 +25,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Action;
-import de.uniessen.wiinf.wip.goalgetter.domain.ActionContainer;
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
-import de.uniessen.wiinf.wip.goalgetter.domain.AlternativeContainer;
 import de.uniessen.wiinf.wip.goalgetter.domain.Description;
 import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
-import de.uniessen.wiinf.wip.goalgetter.domain.GoalContainer;
+import de.uniessen.wiinf.wip.goalgetter.domain.container.ActionContainer;
+import de.uniessen.wiinf.wip.goalgetter.domain.container.AlternativeContainer;
+import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
 import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
 
 /**
@@ -40,7 +40,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class HelpSets {

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Goal.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: Goal.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -29,10 +29,10 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
-public class Goal extends AbstractDomain {
+public class Goal extends AbstractDomain implements Comparable {
 
     /**
      * Bound Bean Property <code>PROPERTYNAME_DESCRIPTION</code>
@@ -45,11 +45,6 @@ public class Goal extends AbstractDomain {
     public static final String PROPERTYNAME_NAME = "name";//$NON-NLS-1$
 
     /**
-     * Bound Bean Property <code>PROPERTYNAME_UNIT</code>
-     */
-    public static final String PROPERTYNAME_UNIT = "unit";//$NON-NLS-1$
-
-    /**
      * Bound Bean Property <code>PROPERTYNAME_INTENSITY</code>
      */
     public static final String PROPERTYNAME_INTENSITY = "intensity";//$NON-NLS-1$
@@ -58,14 +53,14 @@ public class Goal extends AbstractDomain {
 
     private String name;
 
-    private String unit;
-
     private String intensity;
 
     /**
      * Internal identifier for a Goal instance.
      */
     private String identifier;
+    
+    private static long counter =0;
 
     // Instance Creation ******************************************************
 
@@ -93,7 +88,7 @@ public class Goal extends AbstractDomain {
      */
     private String generateUID() {
         return this.getClass().getName() + System.currentTimeMillis()
-                + System.identityHashCode(this);
+                + counter++;
     }
 
     /**
@@ -112,14 +107,6 @@ public class Goal extends AbstractDomain {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * 
-     * @return unit
-     */
-    public String getUnit() {
-        return unit;
     }
 
     /**
@@ -155,25 +142,13 @@ public class Goal extends AbstractDomain {
     /**
      * sets the identifier
      * 
-     * @param newIdentifier
+     * @param newName
      *            the identifier to set
      */
     public void setName(String newName) {
         String oldName = getName();
         name = newName;
         firePropertyChange(PROPERTYNAME_NAME, oldName, newName);
-    }
-
-    /**
-     * sets the unit
-     * 
-     * @param newUnit
-     *            the unit to set
-     */
-    public void setUnit(String newUnit) {
-        String oldUnit = getUnit();
-        unit = newUnit;
-        firePropertyChange(PROPERTYNAME_UNIT, oldUnit, newUnit);
     }
 
     /**
@@ -200,29 +175,32 @@ public class Goal extends AbstractDomain {
         return super.toString() + ':' + getName();
     }
 
+    /* (non-Javadoc)
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
+     */
     protected boolean isEmpty() {
         return ValidationUtils.isBlank(name)
                 && ValidationUtils.isBlank(intensity);
     }
 
+    /* (non-Javadoc)
+     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
+     */
     protected boolean isFilled() {
         return !ValidationUtils.isBlank(name)
                 && !ValidationUtils.isBlank(intensity);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
-    public boolean equals(Object obj) {
-        if (obj.getClass() != this.getClass())
-            return false;
-
-        Goal g = (Goal) obj;
-        return g.getDescription() == getDescription()
-                && g.getName() == getName()
-                && g.getIntensity() == getIntensity();
-
+    public int compareTo(Object o) {
+        if(o.getClass() != this.getClass()){
+            return 0;
+        }
+        Goal g = (Goal) o;
+        return identifier.compareTo(g.getIdentifier());
     }
+
+
 }

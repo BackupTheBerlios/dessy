@@ -16,9 +16,11 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Action.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: Action.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
+
+import com.jgoodies.validation.util.ValidationUtils;
 
 /**
  * 
@@ -46,7 +48,7 @@ package de.uniessen.wiinf.wip.goalgetter.domain;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class Action extends AbstractDomain {
@@ -80,9 +82,9 @@ public class Action extends AbstractDomain {
 
     private String description;
 
-    private String goalId;
+    private Goal goal;
 
-    private String alternativeId;
+    private Alternative alternative;
 
     private String paymentForAction;
 
@@ -93,14 +95,14 @@ public class Action extends AbstractDomain {
     /**
      * Constructor. it constructs an action for the given goal and alternative
      * 
-     * @param goalId
+     * @param goal
      *            the goal to construct the action for
-     * @param alternativeId
+     * @param alternative
      *            the alternative to construct the action for
      */
-    public Action(String goalId, String alternativeId) {
-        this.alternativeId = alternativeId;
-        this.goalId = goalId;
+    public Action(Goal goal, Alternative alternative) {
+        this.alternative = alternative;
+        this.goal = goal;
     }
 
     /**
@@ -183,7 +185,7 @@ public class Action extends AbstractDomain {
      * @return Returns the action's identifier
      */
     public String getIdentifier() {
-        return goalId + alternativeId;
+        return goal.getIdentifier() + alternative.getIdentifier();
     }
 
     /**
@@ -199,28 +201,40 @@ public class Action extends AbstractDomain {
                 newDescription);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     public String toString() {
         return super.toString() + ':' + getIdentifier();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
      */
     protected boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return false;
+        return ValidationUtils.isBlank(paymentForAction)
+                && ValidationUtils.isBlank(paymentForTradeoff);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
      */
     protected boolean isFilled() {
-        // TODO Auto-generated method stub
-        return false;
+        return !ValidationUtils.isBlank(paymentForAction)
+                || !ValidationUtils.isBlank(paymentForTradeoff);
+    }
+    
+    /** Answers the action's Goal
+     * @return the Goal this action belongs to
+     */
+    public Goal getGoal(){
+        return goal;
+    }
+    /** Answers the action's Alternative
+     * @return the Alternative this action belongs to
+     */
+    public Alternative getAlternative(){
+        return alternative;
     }
 
 }

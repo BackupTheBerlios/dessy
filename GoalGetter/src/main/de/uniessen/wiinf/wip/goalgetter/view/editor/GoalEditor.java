@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalEditor.java,v 1.6 2004/08/14 11:11:11 moleman Exp $
+ * $Id: GoalEditor.java,v 1.7 2004/08/14 16:43:35 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -42,7 +42,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public class GoalEditor extends AbstractEditor {
@@ -51,7 +51,6 @@ public class GoalEditor extends AbstractEditor {
 
     private JTextComponent nameField;
 
-    private JTextComponent unitField;
 
     private JTextComponent intensityField;
 
@@ -96,8 +95,7 @@ public class GoalEditor extends AbstractEditor {
         descriptionArea = new JTextArea();
         descriptionArea.setLineWrap(true);
         //descriptionArea.setFont(getCurrentTheme().getControlTextFont());
-
-        unitField = new JTextField();
+     
         intensityField = new JTextField();
 
         beanAdapter = new BeanAdapter(getModel(), true);
@@ -105,9 +103,7 @@ public class GoalEditor extends AbstractEditor {
         nameField.setDocument(new DocumentAdapter(beanAdapter
                 .getValueModel(Goal.PROPERTYNAME_NAME)));
         descriptionArea.setDocument(new DocumentAdapter(beanAdapter
-                .getValueModel(Goal.PROPERTYNAME_DESCRIPTION)));
-        unitField.setDocument(new DocumentAdapter(beanAdapter
-                .getValueModel(Goal.PROPERTYNAME_UNIT)));
+                .getValueModel(Goal.PROPERTYNAME_DESCRIPTION)));        
         intensityField.setDocument(new DocumentAdapter(beanAdapter
                 .getValueModel(Goal.PROPERTYNAME_INTENSITY)));
 
@@ -120,23 +116,21 @@ public class GoalEditor extends AbstractEditor {
 
         java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
 
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow"); //$NON-NLS-1$
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
-        builder.appendI15dSeparator("goalEditor.goal.text");
-        builder.appendI15d("goalEditor.identifier.text", nameField);
+        builder.appendI15dSeparator("goalEditor.goal.text"); //$NON-NLS-1$
+        builder.appendI15d("goalEditor.identifier.text", nameField); //$NON-NLS-1$
         builder.nextLine();
-        builder.appendI15d("goalEditor.unit.text", unitField);
+        builder.appendI15d("goalEditor.intensity.text", intensityField); //$NON-NLS-1$
         builder.nextLine();
-        builder.appendI15d("goalEditor.intensity.text", intensityField);
-        builder.nextLine();
-        builder.appendI15dSeparator("goalEditor.description.text");
+        builder.appendI15dSeparator("goalEditor.description.text"); //$NON-NLS-1$
         builder.appendRow(builder.getLineGapSpec());
-        builder.appendRow(new RowSpec("fill:50dlu:nogrow"));
+        builder.appendRow(new RowSpec("fill:50dlu:nogrow")); //$NON-NLS-1$
         builder.nextLine(2);
-        builder.append("", descriptionPane);
+        builder.append("", descriptionPane); //$NON-NLS-1$
 
     }
 

@@ -16,14 +16,18 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainer.java,v 1.5 2004/08/14 11:11:12 moleman Exp $
+ * $Id: GoalContainer.java,v 1.1 2004/08/14 16:43:35 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.domain;
+package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
 import java.util.Iterator;
 import java.util.List;
 
 import com.jgoodies.binding.list.ArrayListModel;
+
+import de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain;
+import de.uniessen.wiinf.wip.goalgetter.domain.FillLevel;
+import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 
 /**
  * 
@@ -32,7 +36,7 @@ import com.jgoodies.binding.list.ArrayListModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.1 $
  *  
  */
 public class GoalContainer extends AbstractDomain {

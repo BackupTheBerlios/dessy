@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerEditor.java,v 1.8 2004/08/14 11:11:11 moleman Exp $
+ * $Id: GoalContainerEditor.java,v 1.9 2004/08/14 16:43:35 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -26,7 +26,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.uif.util.ResourceUtils;
 
-import de.uniessen.wiinf.wip.goalgetter.domain.GoalContainer;
+import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
 import de.uniessen.wiinf.wip.goalgetter.overviewTable.GoalContainerEditorPopupAdapter;
 import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.GoalContainerTableModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public class GoalContainerEditor extends AbstractEditor {

@@ -16,22 +16,30 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Alternative.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: Alternative.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.TreeMap;
 
 /**
  * 
- * Alternative
+ * This class models an alternative in the GoalGetter decision process.
+ * <p>
+ * An Alternative consists of an identifier, an optional description and a
+ * Collection of intensities.
+ * <p>
+ * The intensities are the alternative-specific value of a Goal.
+ * <p>
+ * <b>Example </b>: We have a Goal named "availability" and an Alternative
+ * called Peter. Peter is available from may to june. So the intensity of the
+ * alternative "Peter" would be "may - june".
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class Alternative extends AbstractDomain {
@@ -50,7 +58,7 @@ public class Alternative extends AbstractDomain {
 
     private String identifier;
 
-    private Map intensityMap = new TreeMap();
+    private TreeMap intensityMap = new TreeMap();
 
     /**
      * Constructs an <code>Alternative</code> with the given identifier.
@@ -116,39 +124,32 @@ public class Alternative extends AbstractDomain {
      * 
      * @return intensities
      */
-    public Map getIntensities() {
+    public TreeMap getIntensities() {
         return intensityMap;
     }
 
     /**
      * Returns the intensity for the given Goal
      * 
-     * @param key
+     * @param g
      *            the Goal to fetch the intensity for
      * @return Intensity for the given Goal
      */
-    public String getIntensity(String key) {
-
-        return (String) intensityMap.get(key);
-    }
 
     public String getIntensity(Goal g) {
-        return getIntensity(g.getIdentifier());
+        return (String) intensityMap.get(g);
     }
 
     /**
      * Puts an intensity
      * 
-     * @param key
-     *            identifier of the Goal that the intensity belongs to
+     * @param g
+     *            Goal that the intensity belongs to
      * @param value
+     *            the intensity value to set
      */
-    public void putIntensity(String key, String value) {
-        intensityMap.put(key, value);
-    }
-
     public void putIntensity(Goal g, String value) {
-        putIntensity(g.getIdentifier(), value);
+        intensityMap.put(g, value);
     }
 
     /**
@@ -158,11 +159,7 @@ public class Alternative extends AbstractDomain {
      *            the Goal whose intensity is to be removed
      */
     public void removeIntensity(Goal goal) {
-        removeIntensity(goal.getIdentifier());
-    }
-
-    public void removeIntensity(String key) {
-        intensityMap.remove(key);
+        removeIntensity(goal);
     }
 
     /*
@@ -186,9 +183,9 @@ public class Alternative extends AbstractDomain {
     }
 
     /**
-     * @return
+     * @return a collection of the Goals
      */
-    public Collection getGoalIdentifiers() {
+    public Collection getGoals() {
         return intensityMap.keySet();
     }
 

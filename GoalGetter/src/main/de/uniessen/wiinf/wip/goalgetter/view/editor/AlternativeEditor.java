@@ -16,11 +16,12 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeEditor.java,v 1.7 2004/08/14 11:11:11 moleman Exp $
+ * $Id: AlternativeEditor.java,v 1.8 2004/08/14 16:43:35 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
 import java.awt.Component;
+import java.util.Collection;
 import java.util.Iterator;
 
 import javax.swing.JEditorPane;
@@ -39,6 +40,7 @@ import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Action;
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
+import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 
 /**
@@ -48,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public final class AlternativeEditor extends AbstractEditor {
@@ -98,24 +100,24 @@ public final class AlternativeEditor extends AbstractEditor {
         for (int i = 0; i < components.length; i++) {
             if (components[i].getClass() == JTextField.class
                     && components[i].getName() != null) {
-                alternative.putIntensity(components[i].getName(),
+                alternative.putIntensity(getGoalByIdentifier(components[i].getName()),
                         ((JTextField) components[i]).getText());
             }
         }
 
     }
 
-    //    private Goal getGoalByName(String s){
-    //        Alternative a = getAlternative();
-    //        Collection c = a.getGoals();
-    //        Iterator iterator = c.iterator();
-    //        while(iterator.hasNext()){
-    //            Goal g = (Goal) iterator.next();
-    //            if(g.getName().equals(s))
-    //                return g;
-    //        }
-    //        return null;
-    //    }
+        private Goal getGoalByIdentifier(String s){
+            Alternative a = getAlternative();
+            Collection c = a.getIntensities().keySet();
+            Iterator iterator = c.iterator();
+            while(iterator.hasNext()){
+                Goal g = (Goal) iterator.next();
+                if(g.getIdentifier().equals(s))
+                    return g;
+            }
+            return null;
+        }
 
     /**
      * Reads the editor contents from the underlying model.
@@ -139,19 +141,19 @@ public final class AlternativeEditor extends AbstractEditor {
         builder.nextLine();
 
         // TODO zugriff auf Goals ermöglichen
-        Iterator iterator = getAlternative().getGoalIdentifiers().iterator();
+        Iterator iterator = getAlternative().getGoals().iterator();
         while (iterator.hasNext()) {
-            String goalIdentifier = (String) iterator.next();
+            Goal goal= (Goal) iterator.next();
             JTextField textfield = new JTextField();
-            textfield.setName(goalIdentifier);
-            textfield.setText(getAlternative().getIntensity(goalIdentifier));
+            textfield.setName(goal.getIdentifier());
+            textfield.setText(getAlternative().getIntensity(goal));
             JTextField shouldBeTextfield = new JTextField();
             // shouldbeTextfield.setName(key);
-            shouldBeTextfield.setText("");
+            shouldBeTextfield.setText(goal.getIntensity());
             //System.out.println(g.getName() + g.getIntensity());
             shouldBeTextfield.setEditable(false);
 
-            builder.append(goalIdentifier, textfield, shouldBeTextfield);
+            builder.append(goal.getName(), textfield, shouldBeTextfield);
             builder.nextLine();
         }
 

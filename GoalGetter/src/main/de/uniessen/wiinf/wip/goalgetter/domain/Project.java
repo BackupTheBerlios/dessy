@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Project.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: Project.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -28,6 +28,10 @@ import java.util.List;
 import com.jgoodies.binding.beans.Model;
 import com.jgoodies.binding.list.ArrayListModel;
 
+import de.uniessen.wiinf.wip.goalgetter.domain.container.ActionContainer;
+import de.uniessen.wiinf.wip.goalgetter.domain.container.AlternativeContainer;
+import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
+
 /**
  * 
  * References all relevant project data
@@ -35,7 +39,7 @@ import com.jgoodies.binding.list.ArrayListModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class Project extends Model {
@@ -184,8 +188,8 @@ public final class Project extends Model {
         Iterator iterator = goalContainer.getGoals().iterator();
         while (iterator.hasNext()) {
             Goal g = (Goal) iterator.next();
-            alternative.putIntensity(g, g.getIntensity());
-            Action ac = new Action(g.getName(), alternative.getIdentifier());
+            alternative.putIntensity(g, "");
+            Action ac = new Action(g, alternative);
             actionContainerByGoal.addAction(ac);
             actionContainerByAlternative.addAction(ac);
         }
