@@ -20,7 +20,7 @@ import com.jgoodies.uif.util.ResourceUtils;
  * TODO To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Generation - Code and Comments
  */
-public class GoalGetterTreePopUp extends JPopupMenu implements ActionListener {
+public class ContextPopup extends JPopupMenu implements ActionListener {
 	private JMenuItem delete;
 	private JMenuItem addCol;
 	private JMenuItem addRow;
@@ -28,13 +28,13 @@ public class GoalGetterTreePopUp extends JPopupMenu implements ActionListener {
 	boolean hasParent = false;
 	private JTable  table;
 	
-	public GoalGetterTreePopUp( JTable t) {
+	public ContextPopup( JTable t) {
 		table = t;
 		//newEntrie = add(new JMenuItem(ResourceUtils.getString("newEntrie")));
-		addCol = add(ResourceUtils.getString("addCol"));
-		addRow = add(ResourceUtils.getString("addRow"));
+		addCol = add(ResourceUtils.getString("contextPopup.addCol.text"));
+		addRow = add(ResourceUtils.getString("contextPopup.addRow.text"));
 		addSeparator();
-		delete = add(ResourceUtils.getString("delete"));
+		delete = add(ResourceUtils.getString("contextPopup.delete.text"));
 		addRow.addActionListener(this);
 		delete.addActionListener(this);
 		addCol.addActionListener(this);

@@ -5,6 +5,9 @@
  * Preferences - Java - Code Generation - Code and Comments
  */
 package de.uniessen.wiinf.wip.goalgetter.overviewTable;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -15,7 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTableEntry.TableElement;
 /**
@@ -34,7 +39,7 @@ public class OverviewTable extends JTable {
 	 * enthält alle namen der tabelle je spalte als String
 	 */
 	Vector name = new Vector();
-	GoalGetterTreePopUp popup;
+	ContextPopup popup;
 	public List entries;
 	public OverviewTable(List entries) {
 		this.entries = entries;
@@ -50,7 +55,13 @@ public class OverviewTable extends JTable {
 		setColumnSelectionAllowed(false);
 		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setName("default name ");
-		}
+		setShowHorizontalLines(false);
+		int gapWidth = 0;
+		int gapHeight = getRowHeight() / 4;
+		//setIntercellSpacing(new Dimension(gapWidth, gapHeight));
+		setRowHeight(getRowHeight() + gapHeight);
+
+	}
 	public void setEditor() {
 		int tmp = getColumnCount();
 		for (int i = 0; i < tmp; i++) {
@@ -60,6 +71,28 @@ public class OverviewTable extends JTable {
 					new VisCellEditor(new JTextField()));
 		}
 	}
+
+	public Component prepareRenderer(TableCellRenderer renderer, int rowIndex,
+			int vColIndex) {
+		Component c = super.prepareRenderer(renderer, rowIndex, vColIndex);
+		if (rowIndex % 2 == 1 && !isCellSelected(rowIndex, vColIndex)) {
+
+			Color color = UIManager.getColor("List.selectionBackground");
+
+			int r = color.getRed();
+			int g = color.getGreen();
+			int b = color.getBlue();
+
+			Color bgcolor = new Color(r, g, b, 34);
+
+			c.setBackground(bgcolor);
+		} else {
+			//	 	 If not shaded, match the table's background
+			c.setBackground(getBackground());
+		}
+		return c;
+	}
+
 	public AbstractTableModel createModel() {
 		return new AbstractTableModel() {
 			public String getColumnName(int col) {
@@ -107,6 +140,7 @@ public class OverviewTable extends JTable {
 							}
 						}
 						te.setValue(value);// wert überschreiben
+					
 					}
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -137,16 +171,16 @@ public class OverviewTable extends JTable {
 			}
 		}
 	}
-	public void addMouseMenu(final JTable t){
-	this.addMouseListener(new MouseAdapter() {
+	public void addMouseMenu(final JTable t) {
+		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				checkPopupMenu(e);
 			}
-			
+
 			public void mouseEntered(MouseEvent e) {
 				checkPopupMenu(e);
 			}
-			
+
 			public void mouseExited(MouseEvent e) {
 				checkPopupMenu(e);
 			}
@@ -161,16 +195,15 @@ public class OverviewTable extends JTable {
 			 */
 			private void checkPopupMenu(MouseEvent e) {
 				if (e.isPopupTrigger()) {
-			//table.setSelectionPath(table.getClosestPathForLocation(e.getX(),
-				//	e.getY()));
-			//		JPopupMenu.setDefaultLightWeightPopupEnabled(true);
-			//TODO: get MainFrame....
-			popup = new GoalGetterTreePopUp(t);
-			
-			popup.show(e.getComponent(), e.getX() + 2,
-					e.getY() + 5);
-			}
-				
+					//table.setSelectionPath(table.getClosestPathForLocation(e.getX(),
+					//	e.getY()));
+					//		JPopupMenu.setDefaultLightWeightPopupEnabled(true);
+					//TODO: get MainFrame....
+					popup = new ContextPopup(t);
+
+					popup.show(e.getComponent(), e.getX() + 2, e.getY() + 5);
+				}
+
 			}
 		});
 	}
