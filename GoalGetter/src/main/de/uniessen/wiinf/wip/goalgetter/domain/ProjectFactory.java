@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ProjectFactory.java,v 1.5 2004/10/05 11:00:30 moleman Exp $
+ * $Id: ProjectFactory.java,v 1.6 2004/10/05 13:36:51 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.domain;
@@ -32,7 +32,7 @@ package de.uniessen.wiinf.wip.goalgetter.domain;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class ProjectFactory {
@@ -51,16 +51,16 @@ public static Project createSample() {
         fillDescription(project.getDescription());
         
         Goal gAvail=createGoal("Availability");
-        gAvail.setIntensity("MÃ¤rz - August");
-        gAvail.setDescription("Das Projekt hat diese Laufzeit. Wegen des Mythical-Man-Month-Effekts ist es zu vermeiden, die Entwickler wÃ¤hrend der Laufzeit auszutauschen. Es ist also zwingend, dass die einzustellende Person Ã¼ber den gesamten Zeitraum hinweg verfÃ¼gbar ist.");
+        gAvail.setIntensity("März - August");
+        gAvail.setDescription("Das Projekt hat diese Laufzeit. Wegen des Mythical-Man-Month-Effekts ist es zu vermeiden, die Entwickler während der Laufzeit auszutauschen. Es ist also zwingend, dass die einzustellende Person über den gesamten Zeitraum hinweg verfügbar ist.");
         
         Goal gKnowl=createGoal("Knowledge");
         gKnowl.setIntensity("Java");
-        gKnowl.setDescription("Java als plattformunabhÃ¤ngige Sprache ist unumgÃ¤nglich. Wegen der NÃ¤he zu C# kÃ¶nnen die Programmierer bei Bedarf schnell umgelernt werden.");
+        gKnowl.setDescription("Java als plattformunabhängige Sprache ist unumgänglich. Wegen der Nähe zu C# können die Programmierer bei Bedarf schnell umgelernt werden.");
         
         Goal gSalar=createGoal("Salary");
         gSalar.setIntensity("<= 10.000");
-        gSalar.setDescription("In Indien kostet ein Entwickler noch weniger. Es ist im Zuge der Standortsicherung dem Entwickler zuzumuten, Ã¼ber die gesamte Laufzeit hinweg nicht mehr als diesen betrag zu kosten.");
+        gSalar.setDescription("In Indien kostet ein Entwickler noch weniger. Es ist im Zuge der Standortsicherung dem Entwickler zuzumuten, über die gesamte Laufzeit hinweg nicht mehr als diesen Betrag zu kosten.");
         
         project.addGoal(gAvail);
         project.addGoal(gKnowl);
@@ -75,15 +75,15 @@ public static Project createSample() {
         project.addAlternative(aKlaus);
         project.addAlternative(aPeter); 
         
-        aKlaus.putIntensity(gAvail,"Januar - MÃ¤rz");
+        aKlaus.putIntensity(gAvail,"Januar - März");
         aKlaus.putIntensity(gKnowl,"C++");
         aKlaus.putIntensity(gSalar,"11.000");
-        aKlaus.setDescription("Klaus ist ein eifriger Programmierer mit dem wir schon in frÃ¼heren Projekten gerne zusammen gearbeitet haben. Obwohl er kein Java kann, kann man ihn wegen seiner objektorientierten C++-Kenntnisse schnell umschulen.");
+        aKlaus.setDescription("Klaus ist ein eifriger Programmierer mit dem wir schon in früheren Projekten gerne zusammen gearbeitet haben. Obwohl er kein Java kann, kann man ihn wegen seiner objektorientierten C++-Kenntnisse schnell umschulen.");
         
         aPeter.putIntensity(gAvail,"Juli");
         aPeter.putIntensity(gKnowl,"Pascal, Java");
         aPeter.putIntensity(gSalar,"12.000");  
-        aPeter.setDescription("Peter kennen wir nicht nÃ¤her.");
+        aPeter.setDescription("Peter kennen wir nicht näher.");
         
         Action acKlausAvail = project.getActionContainer().getActionFor(gAvail,aKlaus);
         Action acPeterAvail= project.getActionContainer().getActionFor(gAvail,aPeter);
@@ -97,14 +97,14 @@ public static Project createSample() {
         acKlausAvail.setPaymentForAction(new Integer(250));
         
         acPeterAvail.setName("verhandeln");
-        acPeterAvail.setResult("MÃ¤rz - August");
+        acPeterAvail.setResult("März - August");
         acPeterAvail.setPaymentForAction(new Integer(25));
         
         acKlausKnowl.setName("Schulung");
         acKlausKnowl.setResult("C++, Java");
         acKlausKnowl.setPaymentForAction(new Integer(1500));
         
-        acPeterKnowl.setName("keine Notwendig");
+        acPeterKnowl.setName("keine notwendig");
         acPeterKnowl.setResult("Pascal, Java");
         acPeterKnowl.setPaymentForAction(new Integer(0));
         
