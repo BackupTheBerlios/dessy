@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisDialog.java,v 1.2 2004/08/14 21:46:51 jsprenger Exp $
+ * $Id: SensitivityAnalysisDialog.java,v 1.3 2004/08/16 11:43:15 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 import java.awt.Component;
@@ -27,12 +27,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -48,7 +52,7 @@ import com.jgoodies.uifextras.panel.HeaderPanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class SensitivityAnalysisDialog extends AbstractDialog {
@@ -100,34 +104,56 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
 	protected JComponent buildContent() {
 		
 		chart = new SensitivityAnalysisChart(elements, nameX, nameY);
+	
+		FormLayout layout = new FormLayout(
+		"right:max(160dlu;p)");  
 		
-		FormLayout layout = new FormLayout("160dlu:grow");
 		JPanel panel = new JPanel();
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				ResourceUtils.getBundle(), panel);
 		builder.setDefaultDialogBorder();
-		testPanel=chart.getChartPanel();
-		builder.append(testPanel);
+		builder.append(buildViewPanel());
 		builder.nextLine();
-		builder.appendI15dSeparator("");
+		builder.appendSeparator();
 		builder.nextLine();
-		builder.append(buildEditFields());
-		
-		builder.append(buildButtonBarWithClose());
+		builder.append(buildbuttonview());
+		//builder.nextLine();
+		//builder.append(buildButtonBarWithClose());
 		p2 = builder.getPanel();
 		return p2;
 	}
 	/**
 	 * @return
 	 */
-private JComponent buildEditFields() {
+	private Component buildViewPanel() {
+		
 		FormLayout layout = new FormLayout(
-				"right:max(40dlu;d), 4dlu, 0:grow, 4dlu,right:max(40dlu;d), 4dlu, 0:grow");
+		"right:pref,10dlu,251dlu");//  
 		JPanel panel = new JPanel();
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				ResourceUtils.getBundle(), panel);
+		testPanel=chart.getChartPanel();
+		testPanel.setPreferredSize(new Dimension(250, 400));
+		JScrollPane pane = (JScrollPane) buildEditFields();
+		pane.setPreferredSize(new Dimension(250,400));
+		builder.append(pane);
+		builder.append(testPanel);
+				
+		return builder.getPanel();
+	}
+	/**
+	 * @return
+	 */
+	private Component buildbuttonview() {
+		JPanel panel = new JPanel();
 		
-		// auswahl für bestealternative
+		FormLayout layout = new FormLayout(
+		"right:pref,10dlu, 30dlu, 30dlu, 70dlu,10dlu,40dlu,10dlu,default");//                                   
+
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				ResourceUtils.getBundle(), panel);
+		
+//		 auswahl für bestealternative
 		int first = 0;
 		String bestAlternative = "";
 		SensitivityElements se;
@@ -148,20 +174,53 @@ private JComponent buildEditFields() {
 			}
 		}
 		builder.append("Beste Alternative: " + bestAlternative);
-		builder.nextColumn();
-		builder.nextColumn();
+	//builder.nextLine();
 		//		 die combo box
 		String[] views = {"2D", "3D"};
 		JComboBox box = new JComboBox(views);
-		box.setPreferredSize(new Dimension(70, 20));
+		box.setPreferredSize(new Dimension(100, 20));
 		box.addActionListener(new BoxAction());
-		builder.append("Ansicht ", box);
-		// 		Ende ComboBox
+		builder.append("Ansicht: ");
+		builder.append(buildUpdateButton());
+		builder.append(box);
+		JButton closeBtn = new JButton("Close");
+		closeBtn.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				dialog.dispose();				
+			}
+			
+		});
+		builder.append(closeBtn);
+// 		Ende ComboBox
+		//builder.appendSeparator();
+		 return builder.getPanel();
+	}
+	/**
+	 * @return
+	 */
+	private Component buildUpdateButton() {
+		JButton btn = new JButton("Aktualisieren");
+		btn.addActionListener(new UpdateAction());
+		btn.setPreferredSize(new Dimension(100, 20));
+		return btn;
+	}
+	/**
+	 * @return
+	 */
+private JComponent buildEditFields() {
 		
-		builder.nextLine();
-		builder.appendSeparator();
+	FormLayout layout = new FormLayout(
+				"right:pref,5dlu, 50dlu, 5dlu, 25dlu,5dlu,default");//                                   
+	//"right:max(10dlu;p),10dlu, 50dlu, 50dlu, 40dlu,10dlu,default");//                                   
+	
+		JPanel panel = new JPanel();
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				ResourceUtils.getBundle(), panel);
+		
 		// setzen der Textfelder mit aktuellen und orginal werten
-		it = elements.iterator();
+		SensitivityElements se;
+		Iterator it = elements.iterator();
 		while (it.hasNext()) {
 			se = (SensitivityElements) it.next();
 			Map values = se.getValues();
@@ -176,7 +235,9 @@ private JComponent buildEditFields() {
 				
 				JTextField tf = new JTextField(values.get(tmp).toString());
 				tf.addActionListener(new TextFieldAction());
+				tf.addCaretListener(new TextFieldCaretListener());
 				tf.setName(se.getName() + "," + tmp.toString());
+				tf.setPreferredSize(new Dimension(40,20));
 				
 				builder.append(tmp.toString(), tf);
 				builder.append("Orginal ", new JLabel(orginals.get(tmp)
@@ -186,10 +247,11 @@ private JComponent buildEditFields() {
 			builder.appendSeparator();
 		}
 		// preferred size muss immer größer ein als die von der scrollpane
-		panel.setPreferredSize(new Dimension(10, panel.countComponents() * 10));
+		panel.setPreferredSize(new Dimension(120, panel.countComponents() * 10));
 		JScrollPane pane = new JScrollPane();
 		pane.setViewportView(panel);
-		pane.setPreferredSize(new Dimension(10, 310));
+		pane.setPreferredSize(new Dimension(200, 400));
+		
 		return pane;
 	}	
 	/**
@@ -204,7 +266,8 @@ private JComponent buildEditFields() {
 	class TextFieldAction implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-			JTextField jtx = (JTextField) e.getSource();
+			JTextField jtx;
+			jtx = (JTextField) e.getSource();
 			if (!jtx.getText().equals("")) {
 				Map map;
 				Iterator i = elements.iterator();
@@ -220,6 +283,29 @@ private JComponent buildEditFields() {
 				chart.updateValues(elements);
 			
 			}
+		}
+	}
+	class TextFieldCaretListener implements CaretListener {
+		
+		public void caretUpdate(CaretEvent e) {
+			JTextField jtx = (JTextField) e.getSource();
+			jtx = (JTextField) e.getSource();
+			Map map;
+				Iterator i = elements.iterator();
+				String[] t = jtx.getName().split(",");
+				while (i.hasNext()) {
+					SensitivityElements element = (SensitivityElements) i
+							.next();
+					if (element.getName().equals(t[0])) 
+						element.getValues().put(t[1], jtx.getText());
+				}
+		}
+	}
+	class UpdateAction implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			chart.updateValues(elements);
+						
 		}
 	}
 	class BoxAction implements ActionListener {
