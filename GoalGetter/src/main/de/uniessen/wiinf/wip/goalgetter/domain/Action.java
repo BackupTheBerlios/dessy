@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Action.java,v 1.7 2004/09/27 08:46:39 moleman Exp $
+ * $Id: Action.java,v 1.8 2004/10/04 21:31:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -48,276 +48,278 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public class Action extends AbstractDomain {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Property constant for the description
-     */
-    public static final String PROPERTYNAME_DESCRIPTION = "description";//$NON-NLS-1$
+	/**
+	 * Property constant for the description
+	 */
+	public static final String PROPERTYNAME_DESCRIPTION = "description";//$NON-NLS-1$
 
-    /**
-     * Property constant for the identifier
-     */
-    public static final String PROPERTYNAME_IDENTIFIER = "identifier";//$NON-NLS-1$
+	/**
+	 * Property constant for the identifier
+	 */
+	public static final String PROPERTYNAME_IDENTIFIER = "identifier";//$NON-NLS-1$
 
-    /**
-     * Property constant for the payment for action
-     */
-    public static final String PROPERTYNAME_PAYMENTFORACTION = "paymentForAction";//$NON-NLS-1$
+	/**
+	 * Property constant for the payment for action
+	 */
+	public static final String PROPERTYNAME_PAYMENTFORACTION = "paymentForAction";//$NON-NLS-1$
 
-    /**
-     * Property constant for the payment for tradeoff
-     */
-    public static final String PROPERTYNAME_PAYMENTFORTRADEOFF = "paymentForTradeoff";//$NON-NLS-1$
+	/**
+	 * Property constant for the payment for tradeoff
+	 */
+	public static final String PROPERTYNAME_PAYMENTFORTRADEOFF = "paymentForTradeoff";//$NON-NLS-1$
 
-    /**
-     * Property constant for the result
-     */
-    public static final String PROPERTYNAME_RESULT = "result";//$NON-NLS-1$
-    
-   /** Property constant for the name
-    */
-   public static final String PROPERTYNAME_NAME = "name";//$NON-NLS-1$
+	/**
+	 * Property constant for the result
+	 */
+	public static final String PROPERTYNAME_RESULT = "result";//$NON-NLS-1$
 
-    private String description;
+	/**
+	 * Property constant for the name
+	 */
+	public static final String PROPERTYNAME_NAME = "name";//$NON-NLS-1$
 
-    private Goal goal;
+	private String description;
 
-    private Alternative alternative;
+	private Goal goal;
 
-    private Integer paymentForAction = new Integer(0);
+	private Alternative alternative;
 
-    private Integer paymentForTradeoff=new Integer(0);
+	private Integer paymentForAction = new Integer(0);
 
-    private String result;
-    
-    private String name;
-    
-    /**
-     * Constructsa an empty actiob. Needed for XML-Writer save.
-     */
-    public Action(){
-        this(null,null);
-    }
-    
+	private Integer paymentForTradeoff = new Integer(0);
 
-    /**
-     * Constructor. it constructs an action for the given goal and alternative
-     * 
-     * @param goal
-     *            the goal to construct the action for
-     * @param alternative
-     *            the alternative to construct the action for
-     */
-    public Action(Goal goal, Alternative alternative) {
-        this.alternative = alternative;
-        this.goal = goal;
-    }
-    
-    /**
-     * Accessor for name
-     * 
-     * @param name
-     *            The name to set.
-     */
-    public void setName(String name) {
-        String oldName = getName();
-        this.name = name;
-        firePropertyChange(PROPERTYNAME_NAME, oldName,
-                name);
-    }
-    
-    /**
-     * Accessor for name
-     * 
-     * @return Returns the name.
-     */
-    public String getName() {
-        return name;
-    }
+	private String result;
 
-    /**
-     * Accessor for paymentForAction
-     * 
-     * @return Returns the payment for action.
-     */
-    public Integer getPaymentForAction() {
-        return paymentForAction;
-    }
+	private String name;
 
-    /**
-     * Accessor for paymentForAction
-     * 
-     * @param paymentForAction
-     *            The paymentForAction to set.
-     */
-    public void setPaymentForAction(Integer paymentForAction) {
-        Integer oldPaymentForAction = getPaymentForAction();
-        this.paymentForAction = paymentForAction;
-        firePropertyChange(PROPERTYNAME_PAYMENTFORACTION, oldPaymentForAction,
-                paymentForAction);
-    }
+	/**
+	 * Constructsa an empty actiob. Needed for XML-Writer save.
+	 */
+	public Action() {
+		this(null, null);
+	}
 
-    /**
-     * Accessor for paymentForTradeoff
-     * 
-     * @return Returns the payment for tradeoff.
-     */
-    public Integer getPaymentForTradeoff() {
-        return paymentForTradeoff;
-    }
+	/**
+	 * Constructor. it constructs an action for the given goal and alternative
+	 * 
+	 * @param goal
+	 *            the goal to construct the action for
+	 * @param alternative
+	 *            the alternative to construct the action for
+	 */
+	public Action(Goal goal, Alternative alternative) {
+		this.alternative = alternative;
+		this.goal = goal;
+	}
 
-    /**
-     * Accessor for paymentForTradeoff
-     * 
-     * @param paymentForTradeoff
-     *            The paymentForTradeoff to set.
-     */
-    public void setPaymentForTradeoff(Integer paymentForTradeoff) {
-        Integer oldPaymentForTradeoff = getPaymentForTradeoff();
-        this.paymentForTradeoff = paymentForTradeoff;
-        firePropertyChange(PROPERTYNAME_PAYMENTFORTRADEOFF,
-                oldPaymentForTradeoff, paymentForTradeoff);
-    }
+	/**
+	 * Accessor for name
+	 * 
+	 * @param name
+	 *            The name to set.
+	 */
+	public void setName(String name) {
+		String oldName = getName();
+		this.name = name;
+		firePropertyChange(PROPERTYNAME_NAME, oldName, name);
+	}
 
-    /**
-     * Accessor for result
-     * 
-     * @return Returns the result of the action.
-     */
-    public String getResult() {
-        return result;
-    }
+	/**
+	 * Accessor for name
+	 * 
+	 * @return Returns the name.
+	 */
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * Accessor for result
-     * 
-     * @param result
-     *            The result to set.
-     */
-    public void setResult(String result) {
-        String oldResult = getResult();
-        this.result = result;
-        firePropertyChange(PROPERTYNAME_RESULT, oldResult, result);
-    }
+	/**
+	 * Accessor for paymentForAction
+	 * 
+	 * @return Returns the payment for action.
+	 */
+	public Integer getPaymentForAction() {
+		return paymentForAction;
+	}
 
-    /**
-     * Accessor for description
-     * 
-     * @return Returns the action's description
-     */
-    public String getDescription() {
-        return description;
-    }
+	/**
+	 * Accessor for paymentForAction
+	 * 
+	 * @param paymentForAction
+	 *            The paymentForAction to set.
+	 */
+	public void setPaymentForAction(Integer paymentForAction) {
+		Integer oldPaymentForAction = getPaymentForAction();
+		this.paymentForAction = paymentForAction;
+		firePropertyChange(PROPERTYNAME_PAYMENTFORACTION, oldPaymentForAction,
+				paymentForAction);
+	}
 
-    /**
-     * Accessor for identifier
-     * 
-     * @return Returns the action's identifier
-     */
-    public String getIdentifier() {
-        return goal.getIdentifier() + alternative.getIdentifier();
-    }
+	/**
+	 * Accessor for paymentForTradeoff
+	 * 
+	 * @return Returns the payment for tradeoff.
+	 */
+	public Integer getPaymentForTradeoff() {
+		return paymentForTradeoff;
+	}
 
-    /**
-     * Accessor for description
-     * 
-     * @param newDescription
-     *            The description to set.
-     */
-    public void setDescription(String newDescription) {
-        String oldDescription = getDescription();
-        description = newDescription;
-        firePropertyChange(PROPERTYNAME_DESCRIPTION, oldDescription,
-                newDescription);
-    }
+	/**
+	 * Accessor for paymentForTradeoff
+	 * 
+	 * @param paymentForTradeoff
+	 *            The paymentForTradeoff to set.
+	 */
+	public void setPaymentForTradeoff(Integer paymentForTradeoff) {
+		Integer oldPaymentForTradeoff = getPaymentForTradeoff();
+		this.paymentForTradeoff = paymentForTradeoff;
+		firePropertyChange(PROPERTYNAME_PAYMENTFORTRADEOFF,
+				oldPaymentForTradeoff, paymentForTradeoff);
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
-    public String toString() {
-        return super.toString() + ':' + getIdentifier();
-    }
+	/**
+	 * Accessor for result
+	 * 
+	 * @return Returns the result of the action.
+	 */
+	public String getResult() {
+		return result;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
-     */
-    protected boolean isEmpty() {
-//      TODO auf Integer umbiegen
-//        return ValidationUtils.isBlank(paymentForAction)
-//                && ValidationUtils.isBlank(paymentForTradeoff);
-        return false;
-    }
+	/**
+	 * Accessor for result
+	 * 
+	 * @param result
+	 *            The result to set.
+	 */
+	public void setResult(String result) {
+		String oldResult = getResult();
+		this.result = result;
+		firePropertyChange(PROPERTYNAME_RESULT, oldResult, result);
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
-     */
-    protected boolean isFilled() {
-        // TODO auf Integer umbiegen
-//        return !ValidationUtils.isBlank(paymentForAction)
-//                || !ValidationUtils.isBlank(paymentForTradeoff);
-        return true;
-    }
+	/**
+	 * Accessor for description
+	 * 
+	 * @return Returns the action's description
+	 */
+	public String getDescription() {
+		return description;
+	}
 
-    /**
-     * Answers the action's Goal
-     * 
-     * @return the Goal this action belongs to
-     */
-    public Goal getGoal() {
-        return goal;
-    }
+	/**
+	 * Accessor for identifier
+	 * 
+	 * @return Returns the action's identifier
+	 */
+	public String getIdentifier() {
+		return goal.getIdentifier() + alternative.getIdentifier();
+	}
 
-    /**
-     * Answers the action's Alternative
-     * 
-     * @return the Alternative this action belongs to
-     */
-    public Alternative getAlternative() {
-        return alternative;
-    }
+	/**
+	 * Accessor for description
+	 * 
+	 * @param newDescription
+	 *            The description to set.
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = getDescription();
+		description = newDescription;
+		firePropertyChange(PROPERTYNAME_DESCRIPTION, oldDescription,
+				newDescription);
+	}
 
-    /**
-     * Comuptes and Answers the difference of both payments. Payments for
-     * actions are costs, Payments for tradeoffs are incomes.
-     * 
-     * @return real costs. The difference between paymentForAction and
-     *         paymentForTradeOff
-     */
-    public int paymentAmount() {
-//      TODO auf Integer umbiegen
-//        String pfa = getPaymentForAction();
-//        String pft = getPaymentForTradeoff();
-//        pfa = (pfa != null) ? pfa : "0"; //$NON-NLS-1$
-//        pft = (pft != null) ? pft : "0"; //$NON-NLS-1$
-//        return Integer.parseInt(pfa) - Integer.parseInt(pft);
-        return getPaymentForAction().intValue() - getPaymentForTradeoff().intValue();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return super.toString() + ':' + getIdentifier();
+	}
 
-    }
-    
-    /** Sets the Goal. Needed for XML-Writer save
-     * @param goal The goal to set.
-     */
-    public void setGoal(Goal goal) {
-        this.goal = goal;
-    }
-    
-    /** Sets the Alternative. Needed for XML-Writer save
-     * @param alternative The alternative to set.
-     */
-    public void setAlternative(Alternative alternative) {
-        this.alternative = alternative;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
+	 */
+	protected boolean isEmpty() {
+		return paymentForAction.intValue() == 0
+				&& paymentForTradeoff.intValue() == 0;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
+	 */
+	protected boolean isFilled() {
+		return paymentForAction.intValue() != 0
+		&& paymentForTradeoff.intValue() != 0;
+	}
+
+	/**
+	 * Answers the action's Goal
+	 * 
+	 * @return the Goal this action belongs to
+	 */
+	public Goal getGoal() {
+		return goal;
+	}
+
+	/**
+	 * Answers the action's Alternative
+	 * 
+	 * @return the Alternative this action belongs to
+	 */
+	public Alternative getAlternative() {
+		return alternative;
+	}
+
+	/**
+	 * Comuptes and Answers the difference of both payments. Payments for
+	 * actions are costs, Payments for tradeoffs are incomes.
+	 * 
+	 * @return real costs. The difference between paymentForAction and
+	 *         paymentForTradeOff
+	 */
+	public int paymentAmount() {
+		//      TODO auf Integer umbiegen
+		//        String pfa = getPaymentForAction();
+		//        String pft = getPaymentForTradeoff();
+		//        pfa = (pfa != null) ? pfa : "0"; //$NON-NLS-1$
+		//        pft = (pft != null) ? pft : "0"; //$NON-NLS-1$
+		//        return Integer.parseInt(pfa) - Integer.parseInt(pft);
+		return getPaymentForAction().intValue()
+				- getPaymentForTradeoff().intValue();
+
+	}
+
+	/**
+	 * Sets the Goal. Needed for XML-Writer save
+	 * 
+	 * @param goal
+	 *            The goal to set.
+	 */
+	public void setGoal(Goal goal) {
+		this.goal = goal;
+	}
+
+	/**
+	 * Sets the Alternative. Needed for XML-Writer save
+	 * 
+	 * @param alternative
+	 *            The alternative to set.
+	 */
+	public void setAlternative(Alternative alternative) {
+		this.alternative = alternative;
+	}
 
 }

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
+ * $Id: MainController.java,v 1.2 2004/10/04 21:31:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.model;
 
@@ -56,7 +56,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class MainController {
@@ -266,26 +266,6 @@ public final class MainController {
             }
             col.add(e);
         }
-
-        //        e = new SensitivityElements("Peter");
-        //        e.addValues("Handlung 1", "500");
-        //        e.addValues("Handlung 2", "700");
-        //        e.addValues("Handlung 3", "1000");
-        //        col.add(e);
-        //
-        //        e = new SensitivityElements("Klaus");
-        //        e.addValues("Handlung 1", "100");
-        //        e.addValues("Handlung 2", "2000");
-        //        e.addValues("Handlung 3", "900");
-        //        col.add(e);
-        //
-        //        e = new SensitivityElements("test");
-        //        e.addValues("Handlung 1", "10");
-        //        e.addValues("Handlung 2", "200");
-        //        e.addValues("Handlung 3", "90");
-        //        col.add(e);
-
-        // end new Elements
 
         new SensitivityAnalysisDialog(getDefaultParentFrame(), col,
                 "Alternative", "Zahlung").open();
