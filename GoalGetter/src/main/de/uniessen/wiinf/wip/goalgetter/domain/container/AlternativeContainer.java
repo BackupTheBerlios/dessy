@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainer.java,v 1.4 2004/08/16 11:25:22 moleman Exp $
+ * $Id: AlternativeContainer.java,v 1.5 2004/08/16 12:26:21 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -36,12 +36,13 @@ import de.uniessen.wiinf.wip.goalgetter.domain.FillLevel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class AlternativeContainer extends AbstractDomain {
 
     private ArrayListModel alternatives = new ArrayListModel();
+    private ArrayListModel alternativesWithShouldBe=new ArrayListModel();
 
     private String identifier;
 
@@ -70,7 +71,8 @@ public class AlternativeContainer extends AbstractDomain {
      *            the initial name
      */
     public AlternativeContainer(String identifier) {
-        this.identifier = identifier;
+        this.identifier = identifier;   
+        this.alternativesWithShouldBe.add("");
     }
 
     /**
@@ -99,10 +101,12 @@ public class AlternativeContainer extends AbstractDomain {
     public ArrayListModel getAlternativesListModel() {
         //TODO auch die Zeile mit den Goal-Intensities direkt liefern und nicht
         // in AlternativeContainerTableMode errechnen
-        ArrayListModel alm = new ArrayListModel();
-        alm.add("");
-        alm.addAll(alternatives);
-        return alm;
+      
+//        ArrayListModel alm = new ArrayListModel();
+//        alm.add("");
+//        alm.addAll(alternatives);
+//        return alm;
+        return alternativesWithShouldBe;
     }
 
     /**
@@ -127,17 +131,25 @@ public class AlternativeContainer extends AbstractDomain {
     public void addAlternative(Alternative newAlternative) {
         List oldAlternatives = getAlternatives();
         alternatives.add(newAlternative);
+        alternativesWithShouldBe.add(newAlternative);
         List newAlternatives = getAlternatives();
         firePropertyChange(PROPERTYNAME_ALTERNATIVES, oldAlternatives,
                 newAlternatives);
     }
 
     /**
-     * @param alternatives
+     * @param newAlternatives
      *            The alternatives to set.
      */
-    public void setAlternatives(ArrayListModel alternatives) {
-        this.alternatives = alternatives;
+    public void setAlternatives(ArrayListModel newAlternatives) {       
+        
+        ArrayListModel oldAlternatives = getAlternatives();
+        alternatives = newAlternatives;
+        alternativesWithShouldBe = new ArrayListModel();
+        alternativesWithShouldBe.add("");
+        alternativesWithShouldBe.addAll(newAlternatives);
+        
+        firePropertyChange(PROPERTYNAME_ALTERNATIVES, oldAlternatives, newAlternatives);
     }
 
     /**
@@ -150,6 +162,7 @@ public class AlternativeContainer extends AbstractDomain {
         List oldAlternatives = getAlternatives();
         alternatives.remove(alternative);
         List newAlternatives = getAlternatives();
+        alternativesWithShouldBe.remove(alternative);
         firePropertyChange(PROPERTYNAME_ALTERNATIVES, oldAlternatives,
                 newAlternatives);
     }
@@ -165,6 +178,7 @@ public class AlternativeContainer extends AbstractDomain {
      */
     protected boolean isEmpty() {
         Iterator iterator = getAlternatives().iterator();
+       
         int fillLevel = 0;
         while (iterator.hasNext()) {
             Alternative a = (Alternative) iterator.next();
@@ -189,6 +203,7 @@ public class AlternativeContainer extends AbstractDomain {
     protected boolean isFilled() {
 
         Iterator iterator = getAlternatives().iterator();
+       
         int fillLevel = 0;
         while (iterator.hasNext()) {
             Alternative a = (Alternative) iterator.next();

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainModule.java,v 1.4 2004/08/16 11:25:22 moleman Exp $
+ * $Id: MainModule.java,v 1.5 2004/08/16 12:26:21 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.RootNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class MainModule extends Model {
@@ -357,11 +357,6 @@ public final class MainModule extends Model {
 
     /**
      * Sets a new tree model for the navigation tree.
-     * <p>
-     * 
-     * TODO: The module shall set the tree selection to the first top-level
-     * node, the project description. Currently this is done in a view, see
-     * <code>Navigator#updateModel(TreeModel)</code>.
      * 
      * @param newModel
      *            the new tree model to set

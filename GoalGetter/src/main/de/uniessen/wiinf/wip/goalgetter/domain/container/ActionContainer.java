@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  *
- * $Id: ActionContainer.java,v 1.2 2004/08/15 15:13:33 moleman Exp $
+ * $Id: ActionContainer.java,v 1.3 2004/08/16 12:26:21 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -37,7 +37,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public class ActionContainer extends AbstractDomain {
@@ -107,8 +107,7 @@ public class ActionContainer extends AbstractDomain {
     /** Sets a new List of Actions
      * @param newActions the List of Actions to be set instead of the current List
      */
-    public void setActions(List newActions) {
-        //TODO consider removing this method
+    public void setActions(List newActions) {        
         List oldActions = getActions();
         actions = newActions;
         firePropertyChange(PROPERTYNAME_ACTIONS, oldActions, newActions);

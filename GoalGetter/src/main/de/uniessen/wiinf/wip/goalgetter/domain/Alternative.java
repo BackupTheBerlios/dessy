@@ -16,14 +16,18 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Alternative.java,v 1.6 2004/08/15 15:13:34 moleman Exp $
+ * $Id: Alternative.java,v 1.7 2004/08/16 12:26:21 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+
+import com.jgoodies.validation.util.ValidationUtils;
 
 /**
  * 
@@ -41,7 +45,7 @@ import java.util.TreeMap;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public class Alternative extends AbstractDomain {
@@ -56,6 +60,11 @@ public class Alternative extends AbstractDomain {
      */
     public static final String PROPERTYNAME_IDENTIFIER = "identifier";//$NON-NLS-1$
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_INTENSITY</code>
+     */
+    public static final String PROPERTYNAME_INTENSITY = "intensity";//$NON-NLS-1$
+
     private String description;
 
     private String identifier;
@@ -63,12 +72,12 @@ public class Alternative extends AbstractDomain {
     private TreeMap intensityMap = new TreeMap();
 
     /**
-     * 
+     *  
      */
     public Alternative() {
-     this(null);
+        this(null);
     }
-    
+
     /**
      * Constructs an <code>Alternative</code> with the given identifier.
      * 
@@ -158,7 +167,10 @@ public class Alternative extends AbstractDomain {
      *            the intensity value to set
      */
     public void putIntensity(Goal g, String value) {
+        Map oldValue = getIntensityMap();
         intensityMap.put(g, value);
+        Map newValue = getIntensityMap();
+        firePropertyChange(PROPERTYNAME_INTENSITY, oldValue, newValue);
     }
 
     /**
@@ -177,8 +189,17 @@ public class Alternative extends AbstractDomain {
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
      */
     protected boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return true;
+        boolean intensitiesEmpty = true;
+
+        Iterator iterator = intensityMap.values().iterator();
+        while (iterator.hasNext()) {
+            String element = (String) iterator.next();
+            intensitiesEmpty = intensitiesEmpty
+                    && ValidationUtils.isBlank(element);
+        }
+
+        return ValidationUtils.isBlank(identifier) && intensitiesEmpty;
+
     }
 
     /*
@@ -187,8 +208,16 @@ public class Alternative extends AbstractDomain {
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
      */
     protected boolean isFilled() {
-        // TODO Auto-generated method stub
-        return false;
+        boolean intensitiesFilled = true;
+
+        Iterator iterator = intensityMap.values().iterator();
+        while (iterator.hasNext()) {
+            String element = (String) iterator.next();
+            intensitiesFilled = intensitiesFilled
+                    && !ValidationUtils.isBlank(element);
+        }
+
+        return !ValidationUtils.isBlank(identifier) && intensitiesFilled;
     }
 
     /**
@@ -201,14 +230,15 @@ public class Alternative extends AbstractDomain {
         return l;
 
     }
-    
+
     /**
-     * @param intensityMap The intensityMap to set.
+     * @param intensityMap
+     *            The intensityMap to set.
      */
     public void setIntensityMap(TreeMap intensityMap) {
         this.intensityMap = intensityMap;
     }
-    
+
     /**
      * @return Returns the intensityMap.
      */

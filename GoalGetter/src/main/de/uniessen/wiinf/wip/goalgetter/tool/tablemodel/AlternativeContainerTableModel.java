@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: AlternativeContainerTableModel.java,v 1.3 2004/08/15 15:13:33 moleman Exp $
+ * $Id: AlternativeContainerTableModel.java,v 1.4 2004/08/16 12:26:21 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
 
@@ -31,7 +31,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class AlternativeContainerTableModel extends TableAdapter {
@@ -54,7 +54,7 @@ public class AlternativeContainerTableModel extends TableAdapter {
 
     private List createColumnNames() {
         List columnNameList = new ArrayList();
-        columnNameList.add(" ");
+        columnNameList.add(" "); //$NON-NLS-1$
         Alternative alternative = (Alternative) getRow(1);
         List goals = alternative.getGoals();
         Iterator iterator = goals.iterator();

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.12 2004/08/16 11:25:22 moleman Exp $
+ * $Id: MainController.java,v 1.13 2004/08/16 12:26:21 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -52,7 +52,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  *  
  */
 public final class MainController {
@@ -198,14 +198,12 @@ public final class MainController {
     /**
      * Adds a goal as child under the selected node.
      */
-    void addGoal() {
-        //  String identifier = DefaultComponentFactory.getInstance().
+    void addGoal() {        
         String identifier = JOptionPane.showInputDialog(
                 getDefaultParentFrame(), "Please enter the name for the goal");
         if (identifier != null) {
             mainModule.addGoal(identifier);
-        }
-        // showMessage("Add goal performed.");
+        }       
     }
 
     /**
@@ -217,8 +215,7 @@ public final class MainController {
                 "Please enter the name for the alternative");
         if (identifier != null) {
             mainModule.addAlternative(identifier);
-        }
-        //showMessage("Add alternative performed.");
+        }       
     }
 
     /**
@@ -245,7 +242,7 @@ public final class MainController {
 
         //mainModule.addAnalyseNode();
 
-        // TODO: anpassen an echte Datanestruktur...
+        // TODO: anpassen an echte Datenstruktur...
         List col = new ArrayList();
         SensitivityElements e;
         String nameX = "Alternative", nameY = "Kosten";

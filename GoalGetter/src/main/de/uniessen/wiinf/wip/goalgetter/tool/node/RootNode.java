@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: RootNode.java,v 1.7 2004/08/15 07:51:42 moleman Exp $
+ * $Id: RootNode.java,v 1.8 2004/08/16 12:26:21 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public final class RootNode extends AbstractTreeNode {
@@ -70,12 +70,12 @@ public final class RootNode extends AbstractTreeNode {
      *            the project to build the tree from
      */
     private void buildNodesFrom(Project project) {
-
+        Iterator i ;
         add(new DescriptionNode(this, project.getDescription()));
 
         GoalContainerNode masterGoalNode = new GoalContainerNode(this, project
                 .getGoalContainer());
-        for (Iterator i = project.getGoals().iterator(); i.hasNext();) {
+        for ( i = project.getGoals().iterator(); i.hasNext();) {
             Goal goal = (Goal) i.next();
             GoalNode node = new GoalNode(masterGoalNode, goal);
             masterGoalNode.add(node);
@@ -84,27 +84,27 @@ public final class RootNode extends AbstractTreeNode {
 
         AlternativeContainerNode masterAlternativeNode = new AlternativeContainerNode(
                 this, project.getAlternativeContainer());
-        for (Iterator i = project.getAlternatives().iterator(); i.hasNext();) {
-            Alternative alternative = (Alternative) i.next();
-            System.out.println(alternative.getIdentifier());
+        
+        i= project.getAlternatives().iterator();
+        
+        while (i.hasNext()) {
+            Alternative alternative = (Alternative) i.next();          
             AlternativeNode node = new AlternativeNode(masterAlternativeNode,
                     alternative);
             masterAlternativeNode.add(node);
+            
         }
+
         add(masterAlternativeNode);
 
         ActionContainerNode masterActionNode;
 
         if (presentationSettings != null
-                && presentationSettings.getActionPresentationMode() == ActionPresentationMode.GOAL) { //TODO:
-            // make
-            // presentation
-            // settings
-            // aware
+                && presentationSettings.getActionPresentationMode() == ActionPresentationMode.GOAL) { 
 
             masterActionNode = new ActionContainerNode(this, project
                     .getActionsbyGoalContainer());
-            for (Iterator i = project.getGoalContainer().getGoals().iterator(); i
+            for ( i = project.getGoalContainer().getGoals().iterator(); i
                     .hasNext();) {
                 Goal goal = (Goal) i.next();
                 ActionGoalNode node = new ActionGoalNode(masterActionNode, goal);
@@ -113,8 +113,13 @@ public final class RootNode extends AbstractTreeNode {
         } else {
             masterActionNode = new ActionContainerNode(this, project
                     .getActionsbyAlternativeContainer());
-            for (Iterator i = project.getAlternativeContainer()
-                    .getAlternatives().iterator(); i.hasNext();) {
+            
+            
+            i= project.getAlternativeContainer().getAlternatives().iterator();
+          
+            while (i.hasNext()) {
+            
+           
                 Alternative alternative = (Alternative) i.next();
                 ActionAlternativeNode node = new ActionAlternativeNode(
                         masterActionNode, alternative);

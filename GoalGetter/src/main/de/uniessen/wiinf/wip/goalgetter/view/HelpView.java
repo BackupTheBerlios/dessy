@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpView.java,v 1.5 2004/08/14 11:11:11 moleman Exp $
+ * $Id: HelpView.java,v 1.6 2004/08/16 12:26:21 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 final class HelpView extends SimpleInternalFrame {
@@ -74,8 +74,7 @@ final class HelpView extends SimpleInternalFrame {
      */
     HelpView(DynamicHelpModule helpModule) {
         super(ResourceUtils.getIcon(Resources.HELP_CONTENTS_ICON_ID),
-                "Dynamic Help Contents");
-        // TODO: I18n
+                ResourceUtils.getString("helpView.dynamicHelpContents.text")); //$NON-NLS-1$
         this.module = helpModule;
         setToolBar(buildToolBar());
         setContent(buildContent());
@@ -94,7 +93,7 @@ final class HelpView extends SimpleInternalFrame {
      * @return built toolbar
      */
     private JToolBar buildToolBar() {
-        ToolBarBuilder builder = new ToolBarBuilder("Help Contents");
+        ToolBarBuilder builder = new ToolBarBuilder();
         builder.add(ActionManager.get(Actions.CLOSE_HELP_VIEW_ID));
         return builder.getToolBar();
     }
@@ -108,7 +107,7 @@ final class HelpView extends SimpleInternalFrame {
         editor = new JEditorPane();
         editor.setMargin(new Insets(10, 10, 5, 2));
         editor.setEditable(false);
-        editor.setContentType("text/html");
+        editor.setContentType("text/html"); //$NON-NLS-1$
         JScrollPane scrollPane = UIFactory.createStrippedScrollPane(editor);
         scrollPane.setMinimumSize(new Dimension(100, 60));
         scrollPane.setPreferredSize(new Dimension(400, 60));
@@ -128,8 +127,8 @@ final class HelpView extends SimpleInternalFrame {
             editor.setPage(helpURL);
         } catch (IOException e) {
             if (helpURL != null)
-                Logger.getLogger("HelpView").severe(
-                        "Can't show help URL: " + helpURL);
+                Logger.getLogger("HelpView").severe( //$NON-NLS-1$
+                        "Can't show help URL: " + helpURL); //$NON-NLS-1$
         }
     }
 
@@ -139,7 +138,7 @@ final class HelpView extends SimpleInternalFrame {
      * @author tfranz
      * @author jsprenger
      * 
-     * @version $Revision: 1.5 $
+     * @version $Revision: 1.6 $
      *  
      */
     private class PageChangeHandler implements PropertyChangeListener {
