@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: HelpTreePanel.java,v 1.1 2004/08/16 11:25:22 moleman Exp $
+ * $Id: HelpTreePanel.java,v 1.2 2004/08/16 12:51:40 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -32,13 +32,13 @@ import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class HelpTreePanel extends SimpleInternalFrame {
 
     /**
-     * @param title
+     *
      */
     public HelpTreePanel(DynamicHelpModule helpModule) {
         super("Dynamic Help Topics");

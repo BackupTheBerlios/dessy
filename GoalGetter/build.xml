@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.4 2004/08/14 11:11:12 moleman Exp $
+   $Id: build.xml,v 1.5 2004/08/16 12:51:40 moleman Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -165,6 +165,7 @@
 			<zipfileset src="${lib.looks.jar}" />
 			<zipfileset src="${lib.uif.jar}" />
 			<zipfileset src="${lib.uif-extras.jar}" />
+			<zipfileset src="${lib.validation.jar}" />
 			<!--			<zipfileset src="${lib.gnujaxp.jar}" /> -->
 			<zipfileset src="${lib.jcommon.jar}" />
 			<zipfileset src="${lib.jfreechart.jar}" />

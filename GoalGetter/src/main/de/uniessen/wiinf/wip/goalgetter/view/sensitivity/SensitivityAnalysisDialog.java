@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisDialog.java,v 1.3 2004/08/16 11:43:15 jsprenger Exp $
+ * $Id: SensitivityAnalysisDialog.java,v 1.4 2004/08/16 12:51:40 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 import java.awt.Component;
@@ -39,6 +39,7 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
+import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.uif.AbstractDialog;
 import com.jgoodies.uif.application.ResourceIDs;
@@ -52,7 +53,7 @@ import com.jgoodies.uifextras.panel.HeaderPanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class SensitivityAnalysisDialog extends AbstractDialog {
@@ -136,6 +137,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
 		testPanel.setPreferredSize(new Dimension(250, 400));
 		JScrollPane pane = (JScrollPane) buildEditFields();
 		pane.setPreferredSize(new Dimension(250,400));
+		pane.setBorder(Borders.EMPTY_BORDER);
 		builder.append(pane);
 		builder.append(testPanel);
 				
@@ -225,7 +227,8 @@ private JComponent buildEditFields() {
 			se = (SensitivityElements) it.next();
 			Map values = se.getValues();
 			Map orginals = se.getOrginalValues();
-			builder.append(se.getName());
+			//builder.append(se.getName());
+			builder.appendSeparator(se.getName());
 			builder.nextLine();
 			Set keys = values.keySet();
 			Iterator i = keys.iterator();
@@ -244,7 +247,7 @@ private JComponent buildEditFields() {
 						.toString()));
 				builder.nextLine();
 			}
-			builder.appendSeparator();
+		//	builder.appendSeparator();
 		}
 		// preferred size muss immer größer ein als die von der scrollpane
 		panel.setPreferredSize(new Dimension(120, panel.countComponents() * 10));

@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: NavigationPanel.java,v 1.1 2004/08/14 11:11:11 moleman Exp $
+ * $Id: NavigationPanel.java,v 1.2 2004/08/16 12:51:40 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -62,7 +62,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class NavigationPanel extends SimpleInternalFrame {
@@ -81,7 +81,6 @@ public class NavigationPanel extends SimpleInternalFrame {
     /**
      * Refers to the tree that displays the navigation nodes.
      * 
-     * @see #initComponents()
      */
     private UIFTree tree;
 

@@ -16,13 +16,14 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerEditor.java,v 1.12 2004/08/16 11:25:22 moleman Exp $
+ * $Id: GoalContainerEditor.java,v 1.13 2004/08/16 12:51:40 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
 import javax.swing.JScrollPane;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
+import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.uif.util.ResourceUtils;
 
@@ -38,7 +39,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.table.OverviewTable;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  *  
  */
 public class GoalContainerEditor extends AbstractEditor {
@@ -70,7 +71,7 @@ public class GoalContainerEditor extends AbstractEditor {
         // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
         //builder.nextLine();
 
-        java.awt.Component overviewPane = new JScrollPane(overviewTable);
+        JScrollPane overviewPane = new JScrollPane(overviewTable);
         builder.append(overviewPane);
 
     }
