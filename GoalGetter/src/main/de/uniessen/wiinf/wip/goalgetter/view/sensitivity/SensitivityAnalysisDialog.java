@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisDialog.java,v 1.5 2004/08/22 11:33:17 jsprenger Exp $
+ * $Id: SensitivityAnalysisDialog.java,v 1.6 2004/08/22 11:52:04 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 import java.awt.Component;
@@ -54,7 +54,7 @@ import com.jgoodies.uifextras.panel.HeaderPanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class SensitivityAnalysisDialog extends AbstractDialog {
@@ -172,7 +172,7 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
 		JPanel panel = new JPanel();
 		
 		FormLayout layout = new FormLayout(
-		"right:pref,10dlu, 50dlu, 30dlu, 40dlu,5dlu,60dlu");//                                   
+		"right:pref,10dlu, 40dlu, 5dlu, 40dlu,5dlu,60dlu");//                                   
 
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				ResourceUtils.getBundle(), panel);
