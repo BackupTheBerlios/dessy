@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisChart.java,v 1.5 2004/08/22 14:30:10 jsprenger Exp $
+ * $Id: SensitivityAnalysisChart.java,v 1.6 2004/09/20 18:43:53 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 import java.awt.Color;
@@ -36,7 +36,7 @@ import org.jfree.data.DefaultCategoryDataset;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public class SensitivityAnalysisChart extends ChartFactory {
@@ -52,6 +52,7 @@ public class SensitivityAnalysisChart extends ChartFactory {
 	protected static final Color OUTER_SHADOW_COLOR = new Color(0, 0, 0, 25);
 	protected static final Color INNER_SHADOW_COLOR = new Color(0, 0, 0, 42);
 	private boolean gitterFlag;
+	
 	/**
 	 * Constructs a SensityvityAnalysisChart
 	 */
@@ -63,7 +64,7 @@ public class SensitivityAnalysisChart extends ChartFactory {
 		this.gitterFlag = true;
 		init();
 	}
-	public void init() {
+	 void init() {
 		category = new DefaultCategoryDataset();
 		Iterator it = elements.iterator();
 		SensitivityElements se;
@@ -88,7 +89,7 @@ public class SensitivityAnalysisChart extends ChartFactory {
 	    plot.getRangeAxis().setAxisLineVisible(true);
         plot.setRangeGridlinesVisible(true);
         plot.setDomainGridlinesVisible(true);
-	    jfc.setBorderVisible(true);
+        jfc.setBorderVisible(true);
 	    
 
 	    

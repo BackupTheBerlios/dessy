@@ -12,11 +12,24 @@ import java.util.Map;
 import javax.swing.JComponent;
 
 /**
+ * All Elements handled in @see de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityAnalysisChart
+ * 
  * @author Jonas Sprenger
  */
 public class SensitivityElements {
 	
-	Map values,orginals;
+	/**
+	 * Comment for <code>values</code>
+	 * saves all given values and changes.
+	 */
+	Map values;
+	
+	/**
+	 * Comment for <code>orginals</code>
+	 * just for the orgiginal values. this value cant be changed
+	 */
+	Map orginals;
+	
 	String name;
 		
 	/**
@@ -31,6 +44,11 @@ public class SensitivityElements {
 		orginals = new HashMap();
 		
 	}
+	/**
+	 * @param name
+	 * @param value
+	 * add Values to the value Map
+	 */
 	public void addValues(String name,Object value){
 		values.put(name,value);	
 		orginals.put(name,value);
@@ -67,6 +85,14 @@ public class SensitivityElements {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	/**
+	 * 
+	 */
+	public void reset() {
+		values.clear();
+		values.putAll(orginals);
+		
 	}
 }
 

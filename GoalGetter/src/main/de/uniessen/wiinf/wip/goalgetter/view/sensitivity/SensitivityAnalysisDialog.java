@@ -14,7 +14,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved. See
  * Readme file for detailed license
  * 
- * $Id: SensitivityAnalysisDialog.java,v 1.8 2004/09/08 18:31:34 moleman Exp $
+ * $Id: SensitivityAnalysisDialog.java,v 1.9 2004/09/20 18:43:54 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.sensitivity;
 
@@ -55,7 +55,7 @@ import com.jgoodies.uifextras.panel.HeaderPanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class SensitivityAnalysisDialog extends AbstractDialog {
@@ -237,15 +237,21 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
     private Component buildbuttonExit() {
         JPanel panel = new JPanel();
 
-        FormLayout layout = new FormLayout("right:max(120dlu;d),10dlu,71dlu");//                                   
+       // FormLayout layout = new FormLayout("right:max(120dlu;d),10dlu,100dlu,10dlu,100dlu");//                                   
+        FormLayout layout = new FormLayout("80dlu,5dlu,80dlu,5dlu,80dlu");//                                   
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), panel);
 
         JButton btn = new JButton("Aktualisieren");
         btn.addActionListener(new UpdateAction());
-        btn.setPreferredSize(new Dimension(100, 20));
+        btn.setPreferredSize(new Dimension(80, 20));
         builder.append(btn);
+        
+        JButton resetbtn = new JButton("Reset");
+        resetbtn.addActionListener(new ResetAction());
+        resetbtn.setPreferredSize(new Dimension(80, 20));
+        builder.append(resetbtn);
 
         JButton closeBtn = new JButton("Close");
         closeBtn.setPreferredSize(new Dimension(80, 20));
@@ -294,11 +300,10 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
                 // tmp.toString());
                 spin1.setName(tmp.toString());
                 spin1.addChangeListener(new SpinnerAction(se));
+               spin1.setToolTipText( orginals.get(tmp).toString());
+                
                 builder.append(tmp.toString() + "(" //$NON-NLS-1$
                         + orginals.get(tmp).toString() + ")", spin1); //$NON-NLS-1$
-
-                //				builder.append(tmp.toString()+"("+orginals.get(tmp)
-                //						.toString()+")", tf);
                 builder.nextLine();
             }
         }
@@ -323,38 +328,40 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
     }
 
     private void sortElements() {
-        //TODO remove infinite loop
-        //                Iterator i = elements.iterator();
-        //                Map entries;
-        //                Set keys;
-        //                Iterator it;
-        //                int currentvalue = 0, lastvalue = 0;
-        //        
-        //                while (i.hasNext()) {
-        //                    SensitivityElements se = (SensitivityElements) i.next();
-        //        
-        //                    entries = se.getValues();
-        //                    keys = entries.keySet();
-        //                    it = keys.iterator();
-        //                    String e;
-        //                    while (it.hasNext()) {
-        //                        e = (String) entries.get(it.next());
-        //                        currentvalue += Integer.parseInt(e);
-        //                    }
-        //                    if (currentvalue < lastvalue || lastvalue == 0) {
-        //        
-        //                        //System.out.println("Schleife ");
-        //                        lastvalue = currentvalue;
-        //                        currentvalue = 0;
-        //                        elements.remove(se);
-        //                        elements.add(0, se);
-        //                        i = elements.iterator();
-        //        
-        //                    } else {
-        //                        lastvalue = currentvalue;
-        //                        currentvalue = 0;
-        //                    }
-        //                }
+        
+                       
+                        Map entries;
+                        Set keys;
+                        Iterator it;
+                        int currentvalue = 0, lastvalue = 0;
+                
+                        Iterator i = elements.iterator();
+                        while (i.hasNext()) {
+                            SensitivityElements se = (SensitivityElements) i.next();
+                
+                            entries = se.getValues();
+                            keys = entries.keySet();
+                            it = keys.iterator();
+                            String e;
+                            while (it.hasNext()) {
+                                e = (String) entries.get(it.next());
+                                currentvalue += Integer.parseInt(e);
+                            }
+                            if(currentvalue != 0){
+                            if (currentvalue < lastvalue || lastvalue == 0) {
+                
+                                lastvalue = currentvalue;
+                                currentvalue = 0;
+                                elements.remove(se);
+                                elements.add(0, se);
+                                i = elements.iterator();
+                
+                            } else {
+                                lastvalue = currentvalue;
+                                currentvalue = 0;
+                            }
+                            }
+                        }
 
     }
 
@@ -424,6 +431,41 @@ public final class SensitivityAnalysisDialog extends AbstractDialog {
                 }
             }
             sortElements();
+            Thread t = new Thread(new Runnable() {
+                public void run() {
+                    chart.updateValues(elements);
+                }
+            });
+            t.start();
+
+        }
+    }
+    
+
+    class ResetAction implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+            Component[] c = spinnerPanel.getComponents();
+            SpinnerNumberModel model;
+
+            stepSize = (Integer) stepSizeTextField.getValue();
+
+            Iterator it = elements.iterator();
+            while (it.hasNext()) {
+                SensitivityElements se = (SensitivityElements) it.next();
+                se.reset();
+            
+            }
+            for (int i = 0; i < c.length; i++) {
+                if (c[i] instanceof JSpinner) {
+                    JSpinner spinner = ((JSpinner) c[i]);
+                   	//System.out.println(spinner.getName()+" value: "+ spinner.getValue());
+                   spinner.setValue(new Integer(spinner.getToolTipText()));
+                   	// model.setStepSize(stepSize);
+                }
+            }
+            
             Thread t = new Thread(new Runnable() {
                 public void run() {
                     chart.updateValues(elements);

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.17 2004/09/20 08:45:55 moleman Exp $
+ * $Id: MainController.java,v 1.18 2004/09/20 18:43:54 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -56,7 +56,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  *  
  */
 public final class MainController {
@@ -244,11 +244,13 @@ public final class MainController {
         // TODO: anpassen an echte Datenstruktur...
         List col = new ArrayList();
         SensitivityElements e;
+        
         Iterator iterator = getMainModule().getProject().getAlternatives()
                 .iterator();
 
         while (iterator.hasNext()) {
             Alternative anAlternative = (Alternative) iterator.next();
+            
             e = new SensitivityElements(anAlternative.getIdentifier());
 
             Iterator actionsIterator = getMainModule().getProject()
@@ -259,7 +261,8 @@ public final class MainController {
                 String name = anAction.getName();
                 if (name == null)
                     name = ""; //$NON-NLS-1$
-                e.addValues(name, Integer.toString(anAction.paymentAmount()));
+          
+                    e.addValues(name, Integer.toString(anAction.paymentAmount()));
             }
             col.add(e);
         }
