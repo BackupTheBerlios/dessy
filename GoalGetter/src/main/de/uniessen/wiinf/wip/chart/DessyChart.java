@@ -21,25 +21,24 @@ import org.jfree.data.DefaultCategoryDataset;
  * Preferences - Java - Code Generation - Code and Comments
  */
 public class DessyChart extends ChartFactory {
-	JTree tree;
 	ChartPanel cp;
-	public DessyChart(JTree tree) {
-		this.tree = tree;
+	public DessyChart() {
+		
 		init();
 	}
 	private void init() {
 		DefaultCategoryDataset category = new DefaultCategoryDataset();
-		category.addValue(5.0, "Peter", "1");
-		category.setValue(2.0, "Peter", "2");
-		category.setValue(7.0, "Peter", "3");
-		category.setValue(1.0, "Peter", "4");
+		category.addValue(500.0, "Peter", "mai");
+		category.setValue(200.0, "Peter", "april");
+		category.setValue(700.0, "Peter", "juni");
+		category.setValue(100.0, "Peter", "juli");
 		
-		category.addValue(4.0, "Holger", "1");
-		category.addValue(0.5, "Holger", "2");
-		category.addValue(2, "Holger", "3");
-		category.addValue(4, "Holger", "4");
+		category.addValue(400.0, "Holger", "mai");
+		category.addValue(100.5, "Holger", "april");
+		category.addValue(200, "Holger", "juni");
+		category.addValue(400, "Holger", "juli");
 		
-		JFreeChart jfc = createAreaChart("Sensibilitätsanalyse", "Nutzen", "Kosten =???",
+		JFreeChart jfc = createAreaChart("Sensibilitätsanalyse", "Verfügbarkeit", "Kosten ",
 				(CategoryDataset) category, PlotOrientation.VERTICAL, true,
 				false, false);
 				
