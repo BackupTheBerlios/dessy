@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.16 2004/09/09 18:19:18 jsprenger Exp $
+ * $Id: MainController.java,v 1.17 2004/09/20 08:45:55 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -56,7 +56,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  *  
  */
 public final class MainController {
@@ -132,8 +132,9 @@ public final class MainController {
      * Saves the project to the current file.
      */
     void save() {
-        if (getMainModule().getProject().getFileName() == null)
+        if (getMainModule().getProject().hasFile() == false) {
             saveAs();
+        }
         getMainModule().getProject().save();
         //  showMessage("Save performed.");
     }
@@ -164,9 +165,9 @@ public final class MainController {
     /**
      * Prints a project summary.
      */
-       void print() {
-    	 	mainModule.print((MainFrame) getDefaultParentFrame());
-    	   	
+    void print() {
+        mainModule.print((MainFrame) getDefaultParentFrame());
+
     }
 
     /**
@@ -225,14 +226,6 @@ public final class MainController {
     }
 
     /**
-     * Adds a action as child under the selected node.
-     */
-    void addAction() {
-        // mainModule().addActionNode();
-        showMessage("Add action performed.");
-    }
-
-    /**
      * Deletes the selected item.
      */
     void deleteItem() {
@@ -250,55 +243,56 @@ public final class MainController {
 
         // TODO: anpassen an echte Datenstruktur...
         List col = new ArrayList();
-        SensitivityElements e;        
-        Iterator iterator = getMainModule().getProject().getAlternatives().iterator();
-        
+        SensitivityElements e;
+        Iterator iterator = getMainModule().getProject().getAlternatives()
+                .iterator();
+
         while (iterator.hasNext()) {
             Alternative anAlternative = (Alternative) iterator.next();
             e = new SensitivityElements(anAlternative.getIdentifier());
-            
-            Iterator actionsIterator = getMainModule().getProject().getActionContainer().getActionsFor(anAlternative).iterator();
-            while (actionsIterator.hasNext()) {              
+
+            Iterator actionsIterator = getMainModule().getProject()
+                    .getActionContainer().getActionsFor(anAlternative)
+                    .iterator();
+            while (actionsIterator.hasNext()) {
                 Action anAction = (Action) actionsIterator.next();
                 String name = anAction.getName();
-                if(name==null)
-                    name=""; //$NON-NLS-1$
-                e.addValues(name,Integer.toString(anAction.paymentAmount()));               
+                if (name == null)
+                    name = ""; //$NON-NLS-1$
+                e.addValues(name, Integer.toString(anAction.paymentAmount()));
             }
             col.add(e);
         }
-        
 
-//        e = new SensitivityElements("Peter");
-//        e.addValues("Handlung 1", "500");
-//        e.addValues("Handlung 2", "700");
-//        e.addValues("Handlung 3", "1000");
-//        col.add(e);
-//
-//        e = new SensitivityElements("Klaus");
-//        e.addValues("Handlung 1", "100");
-//        e.addValues("Handlung 2", "2000");
-//        e.addValues("Handlung 3", "900");
-//        col.add(e);
-//
-//        e = new SensitivityElements("test");
-//        e.addValues("Handlung 1", "10");
-//        e.addValues("Handlung 2", "200");
-//        e.addValues("Handlung 3", "90");
-//        col.add(e);
+        //        e = new SensitivityElements("Peter");
+        //        e.addValues("Handlung 1", "500");
+        //        e.addValues("Handlung 2", "700");
+        //        e.addValues("Handlung 3", "1000");
+        //        col.add(e);
+        //
+        //        e = new SensitivityElements("Klaus");
+        //        e.addValues("Handlung 1", "100");
+        //        e.addValues("Handlung 2", "2000");
+        //        e.addValues("Handlung 3", "900");
+        //        col.add(e);
+        //
+        //        e = new SensitivityElements("test");
+        //        e.addValues("Handlung 1", "10");
+        //        e.addValues("Handlung 2", "200");
+        //        e.addValues("Handlung 3", "90");
+        //        col.add(e);
 
         // end new Elements
-        
+
         new SensitivityAnalysisDialog(getDefaultParentFrame(), col,
                 "Alternative", "Zahlung").open();
-
 
     }
 
     /**
      * Adds a segment as child under the selected node.
      */
-    void showReport() {      
+    void showReport() {
         mainModule.showReport();
     }
 
@@ -370,7 +364,9 @@ public final class MainController {
 
     // Accessing Collaborators **********************************************
 
-    /** Answers the main Module
+    /**
+     * Answers the main Module
+     * 
      * @return main Module
      */
     public MainModule getMainModule() {

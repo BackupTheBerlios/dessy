@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Project.java,v 1.8 2004/09/08 18:31:34 moleman Exp $
+ * $Id: Project.java,v 1.9 2004/09/20 08:45:55 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -46,7 +46,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class Project extends Model {
@@ -248,53 +248,22 @@ public final class Project extends Model {
     public void setGoalContainer(GoalContainer goalContainer) {
         this.goalContainer = goalContainer;
     }
+    
+    /**
+     * @param actionContainer
+     *            The goalContainer to set.
+     */
+    public void setActionContainer(ActionContainer actionContainer) {
+        this.actionContainer = actionContainer;
+    }
 
     //  Managing Actions ********************************************************
 
-    /**
-     * Returns an unmodifiable list of this project's actions.
-     * 
-     * @return an unmodifiable list of this project's actions.
-     */
-    //    public List getActionsbyGoal() {
-    //        return Collections.unmodifiableList(actionContainerByGoal.getActions());
-    //    }
-    //
-    //    public List getActionsbyAlternative() {
-    //        return Collections.unmodifiableList(actionContainerByAlternative
-    //                .getActions());
-    //    }
-    //
-    //    public ActionContainer getActionsbyAlternativeContainer() {
-    //        return actionContainerByAlternative;
-    //    }
-    //
-    //    public ActionContainer getActionsbyGoalContainer() {
-    //        return actionContainerByGoal;
-    //    }
+  
     public ActionContainer getActionContainer() {
         return actionContainer;
     }
 
-    //    /**
-    //     * Adds the given alternative to this project's alternatives.
-    //     *
-    //     * @param alternative
-    //     * the alternative to add
-    //     */
-    //    public void addAction(Action action) {
-    //        actionContainer.addAction(action);
-    //    }
-
-    //    /**
-    //     * Removes the given alternative from this project's alternatives.
-    //     *
-    //     * @param goal
-    //     * the alternative to remove
-    //     */
-    //    public void removeAlternative(Action action) {
-    //        actionContainer.removeAction(action);
-    //    }
 
     /**
      * Finds and answers the alternative with the least payment amount.

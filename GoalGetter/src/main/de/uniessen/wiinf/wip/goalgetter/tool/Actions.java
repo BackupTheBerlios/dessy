@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.9 2004/09/08 18:31:34 moleman Exp $
+ * $Id: Actions.java,v 1.10 2004/09/20 08:45:55 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -52,7 +52,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *  
  */
 /**
@@ -61,7 +61,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *  
  */
 public final class Actions {
@@ -420,9 +420,7 @@ public final class Actions {
             } else if (id.equals(OPEN_PAGE_SETUP_ID)) {
                 PrintManager.openPageSetupDialog();
             } else if (id.equals(ADD_ALTERNATIVE_ID)) {
-                getController().addAlternative();
-            } else if (id.equals(ADD_ACTION_ID)) {
-                getController().addAction();
+                getController().addAlternative();            
             } else if (id.equals(DELETE_ITEM_ID)) {
                 getController().deleteItem();
             } else if (id.equals(SHOW_SENSITIVITYANALYSIS_ID)) {

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Action.java,v 1.5 2004/09/08 18:31:34 moleman Exp $
+ * $Id: Action.java,v 1.6 2004/09/20 08:45:55 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -48,7 +48,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public class Action extends AbstractDomain {
@@ -97,6 +97,14 @@ public class Action extends AbstractDomain {
     private String result;
     
     private String name;
+    
+    /**
+     * Constructsa an empty actiob. Needed for XML-Writer save.
+     */
+    public Action(){
+        this(null,null);
+    }
+    
 
     /**
      * Constructor. it constructs an action for the given goal and alternative
@@ -290,6 +298,20 @@ public class Action extends AbstractDomain {
         pft = (pft != null) ? pft : "0"; //$NON-NLS-1$
         return Integer.parseInt(pfa) - Integer.parseInt(pft);
 
+    }
+    
+    /** Sets the Goal. Needed for XML-Writer save
+     * @param goal The goal to set.
+     */
+    public void setGoal(Goal goal) {
+        this.goal = goal;
+    }
+    
+    /** Sets the Alternative. Needed for XML-Writer save
+     * @param alternative The alternative to set.
+     */
+    public void setAlternative(Alternative alternative) {
+        this.alternative = alternative;
     }
 
 }
