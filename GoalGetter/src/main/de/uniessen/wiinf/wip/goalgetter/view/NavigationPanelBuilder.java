@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: NavigationPanelBuilder.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: NavigationPanelBuilder.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -38,6 +38,7 @@ import javax.swing.tree.TreePath;
 
 import com.jgoodies.uif.component.UIFTree;
 import com.jgoodies.uif.panel.CardPanel;
+import com.jgoodies.uif.util.ResourceUtils;
 import com.jgoodies.uif.util.TreeUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
@@ -60,7 +61,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 final class NavigationPanelBuilder {
@@ -143,7 +144,7 @@ final class NavigationPanelBuilder {
     private JComponent buildNoTreeCard() {
         JPanel panel = new JPanel(new BorderLayout());
         panel
-                .add(new JLabel("No project has been loaded."),
+                .add(new JLabel(ResourceUtils.getString("navigationPanelBuilder.noProjectLoaded.text")),
                         BorderLayout.NORTH);
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         panel.setPreferredSize(new Dimension(150, 200));

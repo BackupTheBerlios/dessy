@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: Actions.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -48,7 +48,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 
@@ -93,6 +93,7 @@ public final class Actions {
     public static final String OPEN_ABOUT_DIALOG_ID = "openAboutDialog";
 
     public static final String CLOSE_HELP_VIEW_ID = "helpView.close";
+    public static final String CLOSE_HELP_NAVIGATOR_ID = "helpNavigator.close";
 
     // Instance Fields ********************************************************
 
@@ -215,6 +216,12 @@ public final class Actions {
 
             public void actionPerformed(ActionEvent event) {
                 getController().closeDynamicHelp();
+            }
+        });
+        ActionManager.register(CLOSE_HELP_NAVIGATOR_ID, new AbstractAction() {
+
+            public void actionPerformed(ActionEvent event) {
+                getController().closeDynamicHelpNavigator();
             }
         });
     }

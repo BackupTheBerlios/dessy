@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpView.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: HelpView.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 final class HelpView extends SimpleInternalFrame {
@@ -91,7 +91,7 @@ final class HelpView extends SimpleInternalFrame {
      */
     private JToolBar buildToolBar() {
         ToolBarBuilder builder = new ToolBarBuilder("Help Contents");
-        builder.add(ActionManager.get(Actions.CLOSE_HELP_VIEW_ID));
+        builder.add(ActionManager.get(Actions.CLOSE_HELP_VIEW_ID));        
         return builder.getToolBar();
     }
 

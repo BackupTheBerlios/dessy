@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DescriptionEditor.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: DescriptionEditor.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -29,6 +29,7 @@ import javax.swing.text.JTextComponent;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Description;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
@@ -40,7 +41,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class DescriptionEditor extends AbstractEditor {
@@ -57,14 +58,14 @@ public final class DescriptionEditor extends AbstractEditor {
         initComponents();
 
         java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu");
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu:grow");
 
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, this);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout,ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
         // CellConstraints cc = new CellConstraints();
 
-        builder.append("Identifier", identifierField);
-        builder.appendSeparator("Description");
+        builder.appendI15d("descriptionEditor.identifier.text", identifierField);
+        builder.appendI15dSeparator("descriptionEditor.description.text");
         builder.appendRow(builder.getLineGapSpec());
         builder.appendRow(new RowSpec("fill:50dlu:nogrow"));
         builder.nextLine(2);

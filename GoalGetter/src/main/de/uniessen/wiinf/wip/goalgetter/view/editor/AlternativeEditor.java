@@ -16,29 +16,26 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeEditor.java,v 1.2 2004/07/12 11:59:37 jsprenger Exp $
+ * $Id: AlternativeEditor.java,v 1.3 2004/07/12 12:38:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
 import java.awt.Component;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
+import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
-import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
-import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTableEntry;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 
 /**
@@ -48,7 +45,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class AlternativeEditor extends AbstractEditor {
@@ -60,9 +57,8 @@ public final class AlternativeEditor extends AbstractEditor {
     private JEditorPane descriptionArea;
 
     private JPanel intensitiesPanel;
-    
-     JTable overviewTable;
-     /**
+
+    /**
      * Constructs a <code>AlternativeEditor</code>.
      */
     public AlternativeEditor() {
@@ -114,41 +110,24 @@ public final class AlternativeEditor extends AbstractEditor {
 
         intensitiesPanel.removeAll();
 
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 150dlu");
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu:grow");
 
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout,ResourceUtils.getBundle(),
                 intensitiesPanel);
-        builder.setDefaultDialogBorder();
+        builder.setBorder(Borders.EMPTY_BORDER);
         // CellConstraints cc = new CellConstraints();
 
-      
-         //OverviewTableEntry element = null;
         Map intensities = getAlternative().getIntensities();
         Iterator iterator = intensities.keySet().iterator();
-      	OverviewTableEntry element=null;
         while (iterator.hasNext()) {
-            
-           	String key = (String) iterator.next();
-           	
-           //	element = new OverviewTableEntry("Identifier",key);
-            
-            
-//            JTextField textfield = new JTextField();
-//            textfield.setName(key);
-//            textfield.setText((String) intensities.get(key));
-//
-//            builder.append(key, textfield);
-//            builder.nextLine();
-        	
-        	
+            String key = (String) iterator.next();
+            JTextField textfield = new JTextField();
+            textfield.setName(key);
+            textfield.setText((String) intensities.get(key));
+
+            builder.append(key, textfield);
+            builder.nextLine();
         }
-//      element.newElement("Availability","June",java.lang.String.class);
-//      element.newElement("Knowledge","java",java.lang.String.class);
-//        element.newElement("Salary","12.000",java.lang.String.class);
-//            entries.add(element);
-//     
-//      overviewTable = new OverviewTable(entries);
-//      builder.append(overviewTable,3);
 
     }
 
@@ -161,19 +140,6 @@ public final class AlternativeEditor extends AbstractEditor {
         identifierField = new JTextField();
         descriptionArea = new JEditorPane();
         intensitiesPanel = new JPanel();
-      	
-      	 // erzeuge neue Tabelle
-        List entries;
-        entries = new ArrayList();
-             
-        OverviewTableEntry element = new OverviewTableEntry("Identifier","User");
-            element.newElement("Availability","June",java.lang.String.class);
-            element.newElement("Knowledge","java",java.lang.String.class);
-            element.newElement("Salary","12.000",java.lang.String.class);
-            element.newElement("Description","......",java.lang.String.class);
-            
-            entries.add(element);
-     overviewTable = new OverviewTable(entries);
     }
 
     // Building *************************************************************
@@ -190,32 +156,23 @@ public final class AlternativeEditor extends AbstractEditor {
 
         initComponents();
 
-//        java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
-//        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu");
-//
-//        DefaultFormBuilder builder = new DefaultFormBuilder(layout, this);
-//        builder.setDefaultDialogBorder();
+        java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu:grow");
 
-//        builder.appendSeparator("Alternative");
-//
-//	    builder.append("Identifier", identifierField);
-//        builder.appendRow(builder.getLineGapSpec());
-//        builder.appendRow(new RowSpec("fill:50dlu:nogrow"));
-//        builder.nextLine(2);
-//        builder.append("Description", descriptionPane);
-//        builder.appendSeparator("Intensities");
-
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, this);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout,ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
-        //  CellConstraints cc = new CellConstraints();
-        builder.appendSeparator("Alternative");
+
+        builder.appendI15dSeparator("alternativeEditor.alternative.text");
+
+        builder.appendI15d("alternativeEditor.identifier.text", identifierField);
         builder.appendRow(builder.getLineGapSpec());
-        // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
+        builder.appendRow(new RowSpec("fill:50dlu:nogrow"));
         builder.nextLine(2);
-        java.awt.Component overviewPane = new JScrollPane(overviewTable);
-        builder.append(overviewPane, 3);
-       
+        builder.appendI15d("alternativeEditor.description.text", descriptionPane);
+
+        builder.appendI15dSeparator("alternativeEditor.intensities.text");
+
+        builder.append(intensitiesPanel, 3);
 
     }
 

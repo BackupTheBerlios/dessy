@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerEditor.java,v 1.2 2004/07/12 11:59:37 jsprenger Exp $
+ * $Id: GoalContainerEditor.java,v 1.3 2004/07/12 12:38:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -31,6 +31,7 @@ import javax.swing.JTable;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.GoalContainer;
 import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
@@ -43,7 +44,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public class GoalContainerEditor extends AbstractEditor {
@@ -63,7 +64,7 @@ public class GoalContainerEditor extends AbstractEditor {
         initComponents();
 
         FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, this);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, ResourceUtils.getBundle(),this);
         builder.setDefaultDialogBorder();
         //  CellConstraints cc = new CellConstraints();
         builder.appendSeparator("Goals");

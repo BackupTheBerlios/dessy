@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionEditor.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: ActionEditor.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -29,6 +29,7 @@ import com.jgoodies.binding.beans.BeanAdapter;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.Action;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
@@ -40,7 +41,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class ActionEditor extends AbstractEditor {
@@ -119,27 +120,27 @@ public final class ActionEditor extends AbstractEditor {
         initComponents();
 
         java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu");
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu:grow");
 
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, this);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, ResourceUtils.getBundle(),this);
         builder.setDefaultDialogBorder();
         //  CellConstraints cc = new CellConstraints();
 
-        builder.appendSeparator("Action");
+        builder.appendI15dSeparator("actionEditor.action.text");
 
-        builder.append("Identifier", identifierField);
+        builder.appendI15d("actionEditor.identifier.text", identifierField);
         builder.nextLine();
-        builder.append("Result", resultField);
+        builder.appendI15d("actionEditor.result.text", resultField);
         builder.nextLine();
-        builder.append("Payment for Action", paymentForActionField);
+        builder.appendI15d("actionEditor.pfa.text", paymentForActionField);
         builder.nextLine();
-        builder.append("Payment for Tradeoff", paymentForTradeoffField);
+        builder.appendI15d("actionEditor.pft.text", paymentForTradeoffField);
         builder.nextLine();
-        builder.appendSeparator("Description");
+        builder.appendI15dSeparator("actionEditor.description.text");
         builder.appendRow(builder.getLineGapSpec());
         builder.appendRow(new RowSpec("fill:50dlu:nogrow"));
         builder.nextLine(2);
-        builder.append("Description", descriptionPane);
+        builder.appendI15d("actionEditor.description.text", descriptionPane);
     }
 
 }
