@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Constants.java,v 1.2 2004/08/15 15:13:34 moleman Exp $
+ * $Id: Constants.java,v 1.3 2004/08/16 11:25:22 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.domain;
@@ -27,12 +27,15 @@ package de.uniessen.wiinf.wip.goalgetter.domain;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class Constants {
     
-    public static final String FILE_EXTENSION ="ggt";
+    /**
+     * File extension for GoalGetter file format
+     */
+    public static final String FILE_EXTENSION ="ggt"; //$NON-NLS-1$
 
     private Constants() {
         // Overrides default constructor; prevents instantiation.

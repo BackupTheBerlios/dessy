@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.7 2004/08/14 16:43:35 moleman Exp $
+ * $Id: Actions.java,v 1.8 2004/08/16 11:25:22 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -30,6 +30,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 import com.jgoodies.binding.beans.BeanAdapter;
+import com.jgoodies.binding.beans.PropertyAdapter;
 import com.jgoodies.binding.value.ValueModel;
 import com.jgoodies.uif.action.ActionManager;
 import com.jgoodies.uif.action.ToggleAction;
@@ -51,7 +52,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 /**
@@ -60,7 +61,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public final class Actions {
@@ -176,6 +177,11 @@ public final class Actions {
      * Comment for <code>NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID</code>
      */
     public static final String NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID = "navigator.actionsByAlternative";//$NON-NLS-1$
+
+    /**
+     * Comment for <code>SHOW_HELP_NAVIGATOR_ID</code>
+     */
+    public static final String SHOW_HELP_NAVIGATOR_ID = "helpNavigator.show"; //$NON-NLS-1$
 
     // Instance Fields ********************************************************
 
@@ -316,6 +322,8 @@ public final class Actions {
             }
         });
 
+        // toggle navigator actions sort mode
+        
         // This adapter vends ValueModels that convert bean properties
         // of the PresentationSettings into the ValueModel interface.
         BeanAdapter presentationAdapter = new BeanAdapter(
@@ -332,6 +340,14 @@ public final class Actions {
                 NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID,
                 ToggleAction.createRadio(navigatorActionViewModeHolder,
                         ActionPresentationMode.ALTERNATIVE)).setEnabled(true);
+
+        // toggle help navigator
+        ValueModel showHelpNavigatorHolder = new PropertyAdapter(getModule()
+                .getHelpModule(),
+                DynamicHelpModule.PROPERTYNAME_HELP_NAVIGATOR_VISIBLE);
+        ActionManager.register(SHOW_HELP_NAVIGATOR_ID,
+                ToggleAction.createCheck(showHelpNavigatorHolder)).setEnabled(
+                true);
     }
 
     //***********************************************************************

@@ -1,6 +1,6 @@
 /*
  * OverviewTable.java
- * Package: de.uniessen.wiinf.wip.goalgetter.overviewTable
+ * Package: de.uniessen.wiinf.wip.goalgetter.view.editor.table
  * Project: GoalGetter
  * 
  * GoalGetter is based on a decision supporting method 
@@ -16,9 +16,9 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: OverviewTable.java,v 1.9 2004/08/15 15:13:34 moleman Exp $
+ * $Id: OverviewTable.java,v 1.1 2004/08/16 11:25:22 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.overviewTable;
+package de.uniessen.wiinf.wip.goalgetter.view.editor.table;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -36,7 +36,7 @@ import com.jgoodies.uifextras.util.ExtTable;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.1 $
  *  
  */
 public class OverviewTable extends ExtTable {

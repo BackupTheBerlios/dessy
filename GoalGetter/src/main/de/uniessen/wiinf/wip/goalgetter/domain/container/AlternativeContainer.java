@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainer.java,v 1.3 2004/08/15 15:13:33 moleman Exp $
+ * $Id: AlternativeContainer.java,v 1.4 2004/08/16 11:25:22 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -36,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.FillLevel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class AlternativeContainer extends AbstractDomain {
@@ -55,6 +55,9 @@ public class AlternativeContainer extends AbstractDomain {
      */
     public static final String PROPERTYNAME_ALTERNATIVES = "alternatives";//$NON-NLS-1$
 
+    /**
+     * Constructs an <code>AlternativeContainer</code> 
+     */
     public AlternativeContainer() {
         this(null);
     }

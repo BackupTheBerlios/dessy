@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.11 2004/08/15 15:13:34 moleman Exp $
+ * $Id: MainController.java,v 1.12 2004/08/16 11:25:22 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -24,15 +24,12 @@ import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileFilter;
 
 import com.jgoodies.uif.application.AbstractMainFrame;
 import com.jgoodies.uif.application.Application;
-import com.jgoodies.uif.util.ResourceUtils;
 import com.jgoodies.uifextras.convenience.DefaultAboutDialog;
 import com.jgoodies.uifextras.convenience.SetupManager;
 import com.jgoodies.uifextras.convenience.TipOfTheDayDialog;
@@ -55,7 +52,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  *  
  */
 public final class MainController {
@@ -331,11 +328,13 @@ public final class MainController {
     }
 
     /**
-     * Closes the view for the dynamic help.
+     * Closes the view for the dynamic help navigator.
      */
     void closeDynamicHelpNavigator() {
-        closeDynamicHelp();
-        showMessage("help navigator closed");
+        getMainModule().getHelpModule().setHelpNavigatorVisible(false);
+        getDefaultParentFrame().repaint(); // ensure the correct toggle state
+                                           // for dynamic help menu button is
+                                           // set.
     }
 
     // Helper Code **********************************************************

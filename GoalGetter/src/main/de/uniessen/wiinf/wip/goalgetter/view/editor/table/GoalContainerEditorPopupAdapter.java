@@ -1,6 +1,6 @@
 /*
- * AlternativeContainerEditorPopupMenuBuilder.java
- * Package: de.uniessen.wiinf.wip.goalgetter.overviewTable
+ * GoalContainerEditorPopupMenuBuilder.java
+ * Package: de.uniessen.wiinf.wip.goalgetter.view.editor.table
  * Project: GoalGetter
  * 
  * GoalGetter is based on a decision supporting method 
@@ -16,9 +16,9 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditorPopupAdapter.java,v 1.1 2004/07/18 21:25:28 moleman Exp $
+ * $Id: GoalContainerEditorPopupAdapter.java,v 1.1 2004/08/16 11:25:22 moleman Exp $
  */
-package de.uniessen.wiinf.wip.goalgetter.overviewTable;
+package de.uniessen.wiinf.wip.goalgetter.view.editor.table;
 
 import javax.swing.JPopupMenu;
 
@@ -28,7 +28,7 @@ import com.jgoodies.uifextras.util.PopupAdapter;
 import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
 
 /**
- * Builds the right click popup menu for the AlternativeContainerEditor
+ * Builds the right click popup menu for the GoalContainerEditor
  * 
  * @author tfranz
  * @author jsprenger
@@ -36,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @version $Revision: 1.1 $
  *  
  */
-public final class AlternativeContainerEditorPopupAdapter extends PopupAdapter {
+public final class GoalContainerEditorPopupAdapter extends PopupAdapter {
 
     /*
      * (non-Javadoc)
@@ -45,7 +45,7 @@ public final class AlternativeContainerEditorPopupAdapter extends PopupAdapter {
      */
     protected JPopupMenu createPopupMenu() {
         JPopupMenu popupMenu = new JPopupMenu();
-        popupMenu.add(ActionManager.get(Actions.ADD_ALTERNATIVE_ID));
+        popupMenu.add(ActionManager.get(Actions.ADD_GOAL_ID));
         popupMenu.add(ActionManager.get(Actions.DELETE_ITEM_ID));
         return popupMenu;
     }

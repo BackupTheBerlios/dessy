@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainMenuBuilder.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
+ * $Id: MainMenuBuilder.java,v 1.6 2004/08/16 11:25:22 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -30,6 +30,7 @@ import com.jgoodies.looks.Options;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
 import com.jgoodies.uif.action.ActionManager;
+import com.jgoodies.uif.action.ToggleAction;
 import com.jgoodies.uif.builder.MenuBuilder;
 import com.jgoodies.uif.osx.OSXApplicationMenu;
 import com.jgoodies.uif.util.ResourceUtils;
@@ -43,7 +44,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class MainMenuBuilder {
@@ -139,6 +140,7 @@ public final class MainMenuBuilder {
         MenuBuilder builder = new MenuBuilder(ResourceUtils
                 .getString("menubar.help.text"), ResourceUtils.getString(//$NON-NLS-1$
                 "menubar.help.mnemonic").charAt(0));//$NON-NLS-1$
+        builder.addToggle((ToggleAction)ActionManager.get(Actions.SHOW_HELP_NAVIGATOR_ID));
         builder.add(ActionManager.get(Actions.OPEN_HELP_CONTENTS_ID));
         builder.addSeparator();
         builder.add(ActionManager.get(Actions.OPEN_TIP_OF_THE_DAY_ID));

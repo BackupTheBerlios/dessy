@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainPageBuilder.java,v 1.7 2004/08/14 11:11:11 moleman Exp $
+ * $Id: MainPageBuilder.java,v 1.8 2004/08/16 11:25:22 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -32,17 +32,13 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.JToolBar;
 
 import com.jgoodies.looks.LookUtils;
-import com.jgoodies.uif.action.ActionManager;
 import com.jgoodies.uif.application.Application;
-import com.jgoodies.uif.builder.ToolBarBuilder;
 import com.jgoodies.uif.panel.SimpleInternalFrame;
 import com.jgoodies.uif.util.ComponentTreeUtils;
 import com.jgoodies.uifextras.util.UIFactory;
 
-import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
 import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
 import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
 import de.uniessen.wiinf.wip.goalgetter.view.editor.ActionContainerEditor;
@@ -62,7 +58,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 
@@ -119,6 +115,10 @@ public final class MainPageBuilder {
                 DynamicHelpModule.PROPERTYNAME_HELP_VISIBLE,
                 new HelpVisibilityChangeHandler());
 
+        mainModule.getHelpModule().addPropertyChangeListener(
+                DynamicHelpModule.PROPERTYNAME_HELP_NAVIGATOR_VISIBLE,
+                new HelpNavigatorVisibilityChangeHandler());
+
     }
 
     // Building *************************************************************
@@ -127,24 +127,15 @@ public final class MainPageBuilder {
      * Creates, binds and configures the subpanels and components.
      */
     private void initComponents() {
-        //        navigator = new SimpleInternalFrame("Navigator");
-        //        navigator.setContent(UIFactory
-        //                .createStrippedScrollPane(new NavigationPanelBuilder(module)
-        //                        .build()));
         navigator = new NavigationPanel(module);
         navigator.setSelected(true);
         navigator.setMinimumSize(new Dimension(100, 100));
         navigator.setPreferredSize(new Dimension(160, 200));
-        //  navigator.setToolBar(buildNavigatorToolBar());
 
-        helpNavigator = new SimpleInternalFrame("Dynamic Help Topics");
-        helpNavigator.setContent(UIFactory
-                .createStrippedScrollPane(new HelpTreeBuilder(module
-                        .getHelpModule()).build()));
+        helpNavigator = new HelpTreePanel(module.getHelpModule());
         helpNavigator.setSelected(true);
         helpNavigator.setMinimumSize(new Dimension(100, 100));
         helpNavigator.setPreferredSize(new Dimension(100, 100));
-        helpNavigator.setToolBar(buildHelpNavigatorToolBar());
 
         editorPanel = new EditorPanel(module);
         editorPanel.setMinimumSize(new Dimension(200, 100));
@@ -174,7 +165,7 @@ public final class MainPageBuilder {
         mainPage.setPreferredSize(PREFERRED_SIZE);
 
         setHelpVisible(false);
-
+        setHelpNavigatorVisible(true);
         return mainPage;
     }
 
@@ -236,27 +227,6 @@ public final class MainPageBuilder {
                 JSplitPane.VERTICAL_SPLIT, buildEditorPanel(), helpView, 0.667);
         return editorHelpSplitPane;
     }
-
-    private JToolBar buildHelpNavigatorToolBar() {
-        ToolBarBuilder builder = new ToolBarBuilder("Help Contents");
-        builder.add(ActionManager.get(Actions.CLOSE_HELP_NAVIGATOR_ID));
-        return builder.getToolBar();
-    }
-
-    //    /**
-    //     * Builds and answers the navigator toolbar.
-    //     *
-    //     * @return navigator toolbar
-    //     */
-    //    private JToolBar buildNavigatorToolBar() {
-    //        //TODO move to navigator panel class
-    //        ToolBarBuilder builder = new ToolBarBuilder("Navigator");
-    //        builder.addToggle((ToggleAction) ActionManager
-    //                .get(Actions.NAVIGATOR_ACTIONS_BY_GOAL_ID));
-    //        builder.addToggle((ToggleAction) ActionManager
-    //                .get(Actions.NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID));
-    //        return builder.getToolBar();
-    //    }
 
     /**
      * Builds and answers the status bar.
@@ -339,18 +309,41 @@ public final class MainPageBuilder {
             editorHelpSplitPane.setTopComponent(null);
             mainSplitPane.setRightComponent(editorPanel);
         }
-        //navigator
-        //        if (b) {
-        //            mainSplitPane.setLeftComponent(navigatorHelpSplitPane);
-        //            navigatorHelpSplitPane.setTopComponent(navigator);
-        //        } else {
-        //            navigatorHelpSplitPane.setTopComponent(null);
-        //            mainSplitPane.setLeftComponent(navigator);
-        //        }
+
     }
 
-    // Listens to changes in the module's navigation tree model and rebuilds the
-    // tree.
+    private void setHelpNavigatorVisible(boolean b) {
+        if (isHelpNavigatorVisible() == b) {
+            return;
+        }
+        //help viewer
+        if (b) {
+            mainSplitPane.setLeftComponent(navigatorHelpSplitPane);
+            navigatorHelpSplitPane.setTopComponent(navigator);
+            helpNavigator.updateUI();
+        } else {
+            setHelpVisible(false);
+            navigatorHelpSplitPane.setTopComponent(null);
+            mainSplitPane.setLeftComponent(navigator);
+        }
+
+    }
+
+   
+    private boolean isHelpNavigatorVisible() {
+        return navigatorHelpSplitPane.getTopComponent() != null;
+    }
+
+    /**
+     * Listens to changes in the module's navigation tree model and rebuilds the
+     * tree.
+     * 
+     * @author tfranz
+     * @author jsprenger
+     * 
+     * @version $Revision: 1.8 $
+     *  
+     */
     private class HelpVisibilityChangeHandler implements PropertyChangeListener {
 
         /**
@@ -363,6 +356,32 @@ public final class MainPageBuilder {
         public void propertyChange(PropertyChangeEvent evt) {
             boolean visible = ((Boolean) evt.getNewValue()).booleanValue();
             setHelpVisible(visible);
+        }
+    }
+
+    /**
+     * Listens to changes in the module's navigation tree model and rebuilds the
+     * tree.
+     * 
+     * @author tfranz
+     * @author jsprenger
+     * 
+     * @version $Revision: 1.8 $
+     *  
+     */
+    private class HelpNavigatorVisibilityChangeHandler implements
+            PropertyChangeListener {
+
+        /**
+         * The module's help visibility has changed. Show or hide the help
+         * viewer.
+         * 
+         * @param evt
+         *            describes the property change
+         */
+        public void propertyChange(PropertyChangeEvent evt) {
+            boolean visible = ((Boolean) evt.getNewValue()).booleanValue();            
+            setHelpNavigatorVisible(visible);
         }
     }
 
@@ -379,11 +398,14 @@ public final class MainPageBuilder {
             super.updateUI();
             if (getComponentCount() == 0)
                 return;
-            if (editorHelpSplitPane == null || isHelpVisible())
-                return;
+            //            if (editorHelpSplitPane == null || isHelpVisible())
+            //                return;
             ComponentTreeUtils.updateComponentTreeUI(editorHelpSplitPane);
             // if (navigatorHelpSplitPane == null || isHelpNavigatorVisible())
-            ComponentTreeUtils.updateComponentTreeUI(navigatorHelpSplitPane);
+            ComponentTreeUtils.updateComponentTreeUI(navigatorHelpSplitPane);        
+               
+            
+            
         }
 
     }

@@ -13,8 +13,15 @@
    <tocitem text="User's Guide" image="chapter">
        <tocitem text="Introduction" 	image="topic" target="guide.introduction"/>
        <tocitem text="Features" 		image="topic" target="guide.features"/>
-       <tocitem text="User Interface" 	image="topic" target="guide.user_interface"/>
+       <tocitem text="User Interface" 	image="topic" target="guide.user_interface"/>       
    </tocitem>
+   
+   <tocitem text="Navigator items" 	image="chapter">
+            <tocitem text="Description" 	image="topic" target="navigator.description"/>
+            <tocitem text="Goal" 	image="topic" target="navigator.goal"/>
+            <tocitem text="Alternative" 	image="topic" target="navigator.alternative"/>
+            <tocitem text="Action" 	image="topic" target="navigator.action"/>
+       </tocitem>
 
    <tocitem text="License Agreement" 	image="topic" target="license"/>
    <tocitem text="Contact" 				image="topic" target="contact"/>

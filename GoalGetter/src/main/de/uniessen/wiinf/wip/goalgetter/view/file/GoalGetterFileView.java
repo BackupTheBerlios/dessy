@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: GoalGetterFileView.java,v 1.1 2004/08/15 15:13:34 moleman Exp $
+ * $Id: GoalGetterFileView.java,v 1.2 2004/08/16 11:25:22 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.file;
 
@@ -32,8 +32,7 @@ import java.util.Hashtable;
  * obsolete. At minimum, it should be rewritten at that time to use any new type
  * information provided by java.io.File
  * 
- * Example: JFileChooser chooser = new JFileChooser(); 
- * fileView = new
+ * Example: JFileChooser chooser = new JFileChooser(); fileView = new
  * ExampleFileView(); fileView.putIcon("jpg", new
  * ImageIcon("images/jpgIcon.jpg")); fileView.putIcon("gif", new
  * ImageIcon("images/gifIcon.gif")); chooser.setFileView(fileView);
@@ -52,7 +51,6 @@ public class GoalGetterFileView extends FileView {
      * The name of the file. Do nothing special here. Let the system file view
      * handle this.
      * 
-     * @see #setName
      * @see FileView#getName
      */
     public String getName(File f) {
@@ -61,6 +59,11 @@ public class GoalGetterFileView extends FileView {
 
     /**
      * Adds a human readable description of the file.
+     * 
+     * @param f
+     *            file to set description for
+     * @param fileDescription
+     *            description to set
      */
     public void putDescription(File f, String fileDescription) {
         fileDescriptions.put(fileDescription, f);
@@ -73,11 +76,16 @@ public class GoalGetterFileView extends FileView {
      */
     public String getDescription(File f) {
         return (String) fileDescriptions.get(f);
-    };
+    }
 
     /**
      * Adds a human readable type description for files. Based on "dot"
      * extension strings, e.g: ".gif". Case is ignored.
+     * 
+     * @param extension
+     *            extension to set description for
+     * @param typeDescription
+     *            description to set
      */
     public void putTypeDescription(String extension, String typeDescription) {
         typeDescriptions.put(typeDescription, extension);
@@ -87,6 +95,11 @@ public class GoalGetterFileView extends FileView {
      * Adds a human readable type description for files of the type of the
      * passed in file. Based on "dot" extension strings, e.g: ".gif". Case is
      * ignored.
+     * 
+     * @param f
+     *            file to set description for
+     * @param typeDescription
+     *            description to set
      */
     public void putTypeDescription(File f, String typeDescription) {
         putTypeDescription(getExtension(f), typeDescription);
@@ -102,7 +115,11 @@ public class GoalGetterFileView extends FileView {
     }
 
     /**
-     * Conveinience method that returnsa the "dot" extension for the given file.
+     * Convenience method that returnsa the "dot" extension for the given file.
+     * 
+     * @param f
+     *            file to get the extension for
+     * @return extension for the given file
      */
     public String getExtension(File f) {
         String name = f.getName();
@@ -119,6 +136,11 @@ public class GoalGetterFileView extends FileView {
     /**
      * Adds an icon based on the file type "dot" extension string, e.g: ".gif".
      * Case is ignored.
+     * 
+     * @param extension
+     *            extension to add the icon for
+     * @param icon
+     *            icon to set for the file extension
      */
     public void putIcon(String extension, Icon icon) {
         icons.put(extension, icon);
@@ -143,16 +165,17 @@ public class GoalGetterFileView extends FileView {
      * Whether the file is hidden or not. This implementation returns true if
      * the filename starts with a "."
      * 
-     * @see FileView#isHidden
+     * @param f
+     *            file to check hidden status for
+     * @return Whether the file is hidden or not
      */
     public Boolean isHidden(File f) {
         String name = f.getName();
-        if (name != null && !name.equals("") && name.charAt(0) == '.') {
+        if (name != null && !name.equals("") && name.charAt(0) == '.') { //$NON-NLS-1$
             return Boolean.TRUE;
-        } else {
-            return Boolean.FALSE;
         }
-    };
+        return Boolean.FALSE;
+    }
 
     /**
      * Whether the directory is traversable or not. Generic implementation
@@ -171,7 +194,7 @@ public class GoalGetterFileView extends FileView {
         //    return Boolean.FALSE;
         // }
         return null; // Use default from FileSystemView
-    };
+    }
 
 }
 

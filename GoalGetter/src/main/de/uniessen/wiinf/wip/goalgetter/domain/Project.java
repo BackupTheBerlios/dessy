@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Project.java,v 1.5 2004/08/15 15:13:34 moleman Exp $
+ * $Id: Project.java,v 1.6 2004/08/16 11:25:22 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -45,7 +45,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class Project extends Model {
@@ -81,8 +81,11 @@ public final class Project extends Model {
 
     // Instance Creation ******************************************************
 
+    /**
+     * Constructs a <code>Project</code> 
+     */
     public Project() {
-        this("New Project");
+        this(null);
     }
 
     /**
@@ -198,7 +201,7 @@ public final class Project extends Model {
         Iterator iterator = goalContainer.getGoals().iterator();
         while (iterator.hasNext()) {
             Goal g = (Goal) iterator.next();
-            alternative.putIntensity(g, "");
+            alternative.putIntensity(g, ""); // default intensity
             Action ac = new Action(g, alternative);
             actionContainerByGoal.addAction(ac);
             actionContainerByAlternative.addAction(ac);
@@ -287,14 +290,7 @@ public final class Project extends Model {
     //        actionContainer.removeAction(action);
     //    }
 
-    /**
-     * Returns the Project's ActionContainer instance
-     * 
-     * @return ActionContainer
-     */
-    public ActionContainer getActionContainer() {
-        return new ActionContainer("Actions");
-    }
+   
 
     // Reading and Saving *****************************************************
 
@@ -328,7 +324,7 @@ public final class Project extends Model {
      */
     public void save() {
         if (!hasFile()) {
-            throw new IllegalStateException("Can't save project without file.");
+            throw new IllegalStateException("Can't save project without file."); //$NON-NLS-1$
         }
         saveAs(file);
     }

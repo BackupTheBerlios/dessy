@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.12 2004/08/15 15:13:34 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.13 2004/08/16 11:25:22 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -27,10 +27,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.container.AlternativeContainer;
-import de.uniessen.wiinf.wip.goalgetter.overviewTable.AlternativeContainerEditorPopupAdapter;
-import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.AlternativeContainerTableModel;
+import de.uniessen.wiinf.wip.goalgetter.view.editor.table.AlternativeContainerEditorPopupAdapter;
+import de.uniessen.wiinf.wip.goalgetter.view.editor.table.OverviewTable;
 
 /**
  * AlternativeContainerEditor
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.AlternativeContainerTabl
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {

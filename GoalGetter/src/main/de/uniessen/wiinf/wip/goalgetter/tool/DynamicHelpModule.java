@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DynamicHelpModule.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
+ * $Id: DynamicHelpModule.java,v 1.3 2004/08/16 11:25:22 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -49,7 +49,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.help.HelpSets;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class DynamicHelpModule extends Model {
@@ -59,17 +59,22 @@ public final class DynamicHelpModule extends Model {
     /**
      * Bound Bean Property <code>PROPERTYNAME_HELP_TREE_MODEL</code>
      */
-    public static final String PROPERTYNAME_HELP_TREE_MODEL = "helpTreeModel";
+    public static final String PROPERTYNAME_HELP_TREE_MODEL = "helpTreeModel"; //$NON-NLS-1$
 
     /**
      * Bound Bean Property <code>PROPERTYNAME_HELP_PAGE</code>
      */
-    public static final String PROPERTYNAME_HELP_PAGE = "helpPage";
+    public static final String PROPERTYNAME_HELP_PAGE = "helpPage"; //$NON-NLS-1$
 
     /**
      * Bound Bean Property <code>PROPERTYNAME_HELP_VISIBLE</code>
      */
-    public static final String PROPERTYNAME_HELP_VISIBLE = "helpVisible";
+    public static final String PROPERTYNAME_HELP_VISIBLE = "helpVisible"; //$NON-NLS-1$
+
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_HELP_NAVIGATOR_VISIBLE</code>
+     */
+    public static final String PROPERTYNAME_HELP_NAVIGATOR_VISIBLE = "helpNavigatorVisible"; //$NON-NLS-1$
 
     // Instance Fields ********************************************************
 
@@ -111,6 +116,15 @@ public final class DynamicHelpModule extends Model {
      */
     private boolean helpVisible;
 
+    /**
+     * Determines whether the dynamic help navigator shall be displayed or
+     * hidden.
+     * 
+     * @see #isHelpNavigatorVisible()
+     * @see #setHelpNavigatorVisible(boolean)
+     */
+    private boolean helpNavigatorVisible;
+
     // Instance Creation ******************************************************
 
     /**
@@ -126,6 +140,7 @@ public final class DynamicHelpModule extends Model {
                 .setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         helpTreeSelectionModel
                 .addTreeSelectionListener(new HelpTreeSelectionChangeHandler());
+        helpNavigatorVisible=true;
     }
 
     // Managing the Help Tree Model *************************************
@@ -178,9 +193,9 @@ public final class DynamicHelpModule extends Model {
         Object oldValue = helpRegistry.put(domainClass, node);
         if (oldValue != null) {
             Logger logger = Logger
-                    .getLogger("de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule");
+                    .getLogger("de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule"); //$NON-NLS-1$
             logger
-                    .warning("Duplicate help registered for class "
+                    .warning("Duplicate help registered for class " //$NON-NLS-1$
                             + domainClass);
         }
     }
@@ -249,6 +264,15 @@ public final class DynamicHelpModule extends Model {
     }
 
     /**
+     * Answers whether the dynamic help is visible or not.
+     * 
+     * @return true if the help viewer is visible, false if hidden.
+     */
+    public boolean isHelpNavigatorVisible() {
+        return helpNavigatorVisible;
+    }
+
+    /**
      * Sets a new visibility for the help viewer.
      * 
      * @param newVisibility
@@ -260,6 +284,21 @@ public final class DynamicHelpModule extends Model {
         boolean oldVisibility = isHelpVisible();
         helpVisible = newVisibility;
         firePropertyChange(PROPERTYNAME_HELP_VISIBLE, oldVisibility,
+                newVisibility);
+    }
+
+    /**
+     * Sets a new visibility for the help viewer.
+     * 
+     * @param newVisibility
+     *            the help page to set
+     * 
+     * @see #isHelpNavigatorVisible()
+     */
+    public void setHelpNavigatorVisible(boolean newVisibility) {        
+        boolean oldVisibility = isHelpNavigatorVisible();       
+        helpNavigatorVisible = newVisibility;
+        firePropertyChange(PROPERTYNAME_HELP_NAVIGATOR_VISIBLE, oldVisibility,
                 newVisibility);
     }
 

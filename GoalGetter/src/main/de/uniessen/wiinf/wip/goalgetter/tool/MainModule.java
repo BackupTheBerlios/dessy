@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainModule.java,v 1.3 2004/08/14 11:11:12 moleman Exp $
+ * $Id: MainModule.java,v 1.4 2004/08/16 11:25:22 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.RootNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class MainModule extends Model {
@@ -197,7 +197,7 @@ public final class MainModule extends Model {
      */
     public void setProject(Project newProject) {
         if (newProject == null)
-            throw new NullPointerException("The project must not be null.");
+            throw new NullPointerException("The project must not be null."); //$NON-NLS-1$
 
         Project oldProject = getProject();
         project = newProject;
@@ -205,7 +205,7 @@ public final class MainModule extends Model {
                 new GoalNameChangeHandler());
         firePropertyChange(PROPERTYNAME_PROJECT, oldProject, newProject);
         setNavigationTreeModel(createNavigationTreeModel(newProject));
-
+        setSelection(project.getDescription());
     }
 
     /**
@@ -431,8 +431,7 @@ public final class MainModule extends Model {
      */
     public void storeState() {
         Preferences prefs = Application.getUserPreferences();
-        getPresentationSettings().storeIn(prefs);
-        System.out.println("ich komme hier wirklich hin.");
+        getPresentationSettings().storeIn(prefs);      
         SetupManager.incrementUsageCounter();
     }
 

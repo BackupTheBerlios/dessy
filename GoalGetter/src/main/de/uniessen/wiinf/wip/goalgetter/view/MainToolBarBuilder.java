@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainToolBarBuilder.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
+ * $Id: MainToolBarBuilder.java,v 1.3 2004/08/16 11:25:22 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -30,6 +30,7 @@ import com.jgoodies.looks.Options;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
 import com.jgoodies.uif.action.ActionManager;
+import com.jgoodies.uif.action.ToggleAction;
 import com.jgoodies.uif.builder.ToolBarBuilder;
 import com.jgoodies.uif.component.ToolBarButton;
 
@@ -42,7 +43,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 final class MainToolBarBuilder {
@@ -77,6 +78,7 @@ final class MainToolBarBuilder {
         builder.add(createToolBarButton(Actions.ADD_ALTERNATIVE_ID));
         builder.addLargeGap();
         builder.addGlue();
+        builder.addToggle((ToggleAction)ActionManager.get(Actions.SHOW_HELP_NAVIGATOR_ID));
         builder.add(com.jgoodies.uif.action.ActionManager
                 .get(Actions.OPEN_HELP_CONTENTS_ID));
         builder.addGap(2);
