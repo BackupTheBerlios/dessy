@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Action.java,v 1.6 2004/09/20 08:45:55 moleman Exp $
+ * $Id: Action.java,v 1.7 2004/09/27 08:46:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -48,7 +48,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public class Action extends AbstractDomain {
@@ -90,9 +90,9 @@ public class Action extends AbstractDomain {
 
     private Alternative alternative;
 
-    private String paymentForAction;
+    private Integer paymentForAction = new Integer(0);
 
-    private String paymentForTradeoff;
+    private Integer paymentForTradeoff=new Integer(0);
 
     private String result;
     
@@ -146,7 +146,7 @@ public class Action extends AbstractDomain {
      * 
      * @return Returns the payment for action.
      */
-    public String getPaymentForAction() {
+    public Integer getPaymentForAction() {
         return paymentForAction;
     }
 
@@ -156,8 +156,8 @@ public class Action extends AbstractDomain {
      * @param paymentForAction
      *            The paymentForAction to set.
      */
-    public void setPaymentForAction(String paymentForAction) {
-        String oldPaymentForAction = getPaymentForAction();
+    public void setPaymentForAction(Integer paymentForAction) {
+        Integer oldPaymentForAction = getPaymentForAction();
         this.paymentForAction = paymentForAction;
         firePropertyChange(PROPERTYNAME_PAYMENTFORACTION, oldPaymentForAction,
                 paymentForAction);
@@ -168,7 +168,7 @@ public class Action extends AbstractDomain {
      * 
      * @return Returns the payment for tradeoff.
      */
-    public String getPaymentForTradeoff() {
+    public Integer getPaymentForTradeoff() {
         return paymentForTradeoff;
     }
 
@@ -178,8 +178,8 @@ public class Action extends AbstractDomain {
      * @param paymentForTradeoff
      *            The paymentForTradeoff to set.
      */
-    public void setPaymentForTradeoff(String paymentForTradeoff) {
-        String oldPaymentForTradeoff = getPaymentForTradeoff();
+    public void setPaymentForTradeoff(Integer paymentForTradeoff) {
+        Integer oldPaymentForTradeoff = getPaymentForTradeoff();
         this.paymentForTradeoff = paymentForTradeoff;
         firePropertyChange(PROPERTYNAME_PAYMENTFORTRADEOFF,
                 oldPaymentForTradeoff, paymentForTradeoff);
@@ -252,8 +252,10 @@ public class Action extends AbstractDomain {
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isEmpty()
      */
     protected boolean isEmpty() {
-        return ValidationUtils.isBlank(paymentForAction)
-                && ValidationUtils.isBlank(paymentForTradeoff);
+//      TODO auf Integer umbiegen
+//        return ValidationUtils.isBlank(paymentForAction)
+//                && ValidationUtils.isBlank(paymentForTradeoff);
+        return false;
     }
 
     /*
@@ -262,8 +264,10 @@ public class Action extends AbstractDomain {
      * @see de.uniessen.wiinf.wip.goalgetter.domain.AbstractDomain#isFilled()
      */
     protected boolean isFilled() {
-        return !ValidationUtils.isBlank(paymentForAction)
-                || !ValidationUtils.isBlank(paymentForTradeoff);
+        // TODO auf Integer umbiegen
+//        return !ValidationUtils.isBlank(paymentForAction)
+//                || !ValidationUtils.isBlank(paymentForTradeoff);
+        return true;
     }
 
     /**
@@ -292,11 +296,13 @@ public class Action extends AbstractDomain {
      *         paymentForTradeOff
      */
     public int paymentAmount() {
-        String pfa = getPaymentForAction();
-        String pft = getPaymentForTradeoff();
-        pfa = (pfa != null) ? pfa : "0"; //$NON-NLS-1$
-        pft = (pft != null) ? pft : "0"; //$NON-NLS-1$
-        return Integer.parseInt(pfa) - Integer.parseInt(pft);
+//      TODO auf Integer umbiegen
+//        String pfa = getPaymentForAction();
+//        String pft = getPaymentForTradeoff();
+//        pfa = (pfa != null) ? pfa : "0"; //$NON-NLS-1$
+//        pft = (pft != null) ? pft : "0"; //$NON-NLS-1$
+//        return Integer.parseInt(pfa) - Integer.parseInt(pft);
+        return getPaymentForAction().intValue() - getPaymentForTradeoff().intValue();
 
     }
     

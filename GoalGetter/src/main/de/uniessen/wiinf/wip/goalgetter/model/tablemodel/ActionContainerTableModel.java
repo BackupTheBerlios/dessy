@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: ActionContainerTableModel.java,v 1.1 2004/09/25 14:56:57 moleman Exp $
+ * $Id: ActionContainerTableModel.java,v 1.2 2004/09/27 08:46:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.model.tablemodel;
 
@@ -30,7 +30,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class ActionContainerTableModel extends TableAdapter {
@@ -49,6 +49,16 @@ public class ActionContainerTableModel extends TableAdapter {
     public ActionContainerTableModel(ListModel listModel) {
         super(listModel, columnNames);
 
+    }
+    
+    /*
+     * JTable uses this method to determine the default renderer/
+     * editor for each cell.  If we didn't implement this method,
+     * then the last column would contain text ("true"/"false"),
+     * rather than a check box.
+     */
+    public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
     }
 
     /*
@@ -110,10 +120,10 @@ public class ActionContainerTableModel extends TableAdapter {
             action.setResult((String) aValue);
             break;
         case 3:
-            action.setPaymentForAction((String) aValue);
+            action.setPaymentForAction((Integer) aValue);
             break;
         case 4:
-            action.setPaymentForTradeoff((String) aValue);
+            action.setPaymentForTradeoff((Integer) aValue);
             break;
         default:
             break;
