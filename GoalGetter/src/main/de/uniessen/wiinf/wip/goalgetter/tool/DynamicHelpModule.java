@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DynamicHelpModule.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: DynamicHelpModule.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -49,17 +49,26 @@ import de.uniessen.wiinf.wip.goalgetter.tool.help.HelpSets;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class DynamicHelpModule extends Model {
 
     // Names of the Bound Bean Properties *************************************
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_HELP_TREE_MODEL</code>
+     */
     public static final String PROPERTYNAME_HELP_TREE_MODEL = "helpTreeModel";
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_HELP_PAGE</code>
+     */
     public static final String PROPERTYNAME_HELP_PAGE = "helpPage";
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_HELP_VISIBLE</code>
+     */
     public static final String PROPERTYNAME_HELP_VISIBLE = "helpVisible";
 
     // Instance Fields ********************************************************
@@ -159,6 +168,11 @@ public final class DynamicHelpModule extends Model {
 
     /**
      * Registers a help tree for a domain class.
+     * 
+     * @param domainClass
+     *            domain class to register help for
+     * @param node
+     *            node to register help for
      */
     public void registerHelp(Class domainClass, TreeNode node) {
         Object oldValue = helpRegistry.put(domainClass, node);

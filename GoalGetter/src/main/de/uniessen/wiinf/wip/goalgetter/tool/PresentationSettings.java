@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: PresentationSettings.java,v 1.2 2004/07/28 16:02:18 moleman Exp $
+ * $Id: PresentationSettings.java,v 1.3 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -31,28 +31,39 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class PresentationSettings extends Model {
 
     // Names of the Bound Bean Properties *************************************
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_EXPAND_SELECTED_PATHS</code>
+     */
     public static final String PROPERTYNAME_EXPAND_SELECTED_PATHS = "expandSelectedPaths";
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_COLLAPSE_DESELECTED_PATHS</code>
+     */
     public static final String PROPERTYNAME_COLLAPSE_DESELECTED_PATHS = "collapseDeselectedPaths";
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_ACTION_PRESENTATION_MODE</code>
+     */
     public static final String PROPERTYNAME_ACTION_PRESENTATION_MODE = "actionPresentationMode";
 
     // Default Values *********************************************************
 
     /**
-     * The default value (true) for property 'expandSelectedPaths'.
+     * The default value (<code>true</code>) for property
+     * 'expandSelectedPaths'.
      */
     private static final boolean DEFAULT_EXPAND_SELECTED_PATHS = true;
 
     /**
-     * The default value (false) for property 'collapseDeselectedPaths'.
+     * The default value (<code>false</code>) for property
+     * 'collapseDeselectedPaths'.
      */
     private static final boolean DEFAULT_COLLAPSE_DESELECTED_PATHS = false;
 
@@ -126,6 +137,14 @@ public final class PresentationSettings extends Model {
         return actionPresentationMode;
     }
 
+    /**
+     * Sets the presentation mode for the action node. Actions can be shown
+     * either by Goal or by Alternative.
+     * 
+     * @param newMode
+     *            mode to set
+     * @see ActionPresentationMode
+     */
     public void setActionPresentationMode(ActionPresentationMode newMode) {
         ActionPresentationMode oldMode = getActionPresentationMode();
         actionPresentationMode = newMode;

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpSets.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: HelpSets.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.help;
@@ -40,28 +40,55 @@ import de.uniessen.wiinf.wip.goalgetter.tool.DynamicHelpModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class HelpSets {
 
+    /**
+     * Holds the <code>WELCOME_HELP_SET</code>
+     */
     public static final TreeNode WELCOME_HELP_SET = createWelcomeHelpSet();
 
+    /**
+     * Holds the <code>DECISION_HELP_SET</code>
+     */
     public static final TreeNode DECISION_HELP_SET = createDecisionHelpSet();
 
+    /**
+     * Holds the <code>GOAL_HELP_SET</code>
+     */
     public static final TreeNode GOAL_HELP_SET = createGoalHelpSet();
 
+    /**
+     * Holds the <code>ALTERNATIVE_HELP_SET</code>
+     */
     public static final TreeNode ALTERNATIVE_HELP_SET = createAlternativeHelpSet();
 
+    /**
+     * Holds the <code>ACTION_HELP_SET</code>
+     */
     public static final TreeNode ACTION_HELP_SET = createActionHelpSet();
 
+    /**
+     * Holds the <code>GOALCONTAINER_HELP_SET</code>
+     */
     public static final TreeNode GOALCONTAINER_HELP_SET = createGoalContainerHelpSet();
 
+    /**
+     * Holds the <code>ALTERNATIVECONTAINER_HELP_SET</code>
+     */
     public static final TreeNode ALTERNATIVECONTAINER_HELP_SET = createAlternativeContainerHelpSet();
 
+    /**
+     * Comment for <code>ACTIONCONTAINER_HELP_SET</code>
+     */
     public static final TreeNode ACTIONCONTAINER_HELP_SET = createActionContainerHelpSet();
 
-    private static final String URL_PREFIX = "docs/help/dynamic/";
+    /**
+     * Comment for <code>URL_PREFIX</code>
+     */
+    private static final String URL_PREFIX = "docs/help/dynamic/";//$NON-NLS-1$
 
     private HelpSets() {
         // Suppresses default constructor, ensuring non-instantiability.
@@ -87,6 +114,8 @@ public final class HelpSets {
 
     /**
      * Creates and answers the welcome help set.
+     * 
+     * @return welcome help set
      */
     private static TreeNode createWelcomeHelpSet() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode();
@@ -107,6 +136,8 @@ public final class HelpSets {
 
     /**
      * Creates and answers the decision help set.
+     * 
+     * @return decision help set
      */
     private static TreeNode createDecisionHelpSet() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode();
@@ -123,6 +154,8 @@ public final class HelpSets {
 
     /**
      * Creates and answers the goal help set.
+     * 
+     * @return goal help set
      */
     private static TreeNode createGoalHelpSet() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode();
@@ -138,6 +171,8 @@ public final class HelpSets {
 
     /**
      * Creates and answers the alternative help set.
+     * 
+     * @return alternative help set
      */
     private static TreeNode createAlternativeHelpSet() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode();
@@ -152,6 +187,8 @@ public final class HelpSets {
 
     /**
      * Creates and answers the action help set.
+     * 
+     * @return action help set
      */
     private static TreeNode createActionHelpSet() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode();
@@ -166,6 +203,8 @@ public final class HelpSets {
 
     /**
      * Creates and answers the goalcontainer help set.
+     * 
+     * @return goalcontainer help set
      */
     private static TreeNode createGoalContainerHelpSet() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode();
@@ -180,6 +219,8 @@ public final class HelpSets {
 
     /**
      * Creates and answers the alternativecontainer help set.
+     * 
+     * @return alternativecontainer help set
      */
     private static TreeNode createAlternativeContainerHelpSet() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode();
@@ -193,7 +234,9 @@ public final class HelpSets {
     }
 
     /**
-     * Creates and answers the goalcontainer help set.
+     * Creates and answers the actioncontainer help set.
+     * 
+     * @return actioncontainer help set
      */
     private static TreeNode createActionContainerHelpSet() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode();
@@ -208,6 +251,12 @@ public final class HelpSets {
 
     /**
      * Creates and returns a topic node.
+     * 
+     * @param name
+     *            name for the topic to create
+     * @param path
+     *            path for the topic to create
+     * @return topic
      */
     private static DefaultMutableTreeNode createTopic(String name, String path) {
         String fullPath = URL_PREFIX + path + ".html";
@@ -216,6 +265,10 @@ public final class HelpSets {
 
     /**
      * Creates and returns a chapter node.
+     * 
+     * @param name
+     *            name for the chapter to create
+     * @return chapter
      */
     private static DefaultMutableTreeNode createChapter(String name) {
         return new DefaultMutableTreeNode(HelpNode.createChapter(name));

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Resources.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: Resources.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -32,41 +32,101 @@ import com.jgoodies.uif.util.ResourceUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
+ */
+/**
+ * Resources 
+ *
+ * @author tfranz
+ * @author jsprenger
+ * 
+ * @version $Revision: 1.2 $
+ *
+ */
+/**
+ * Resources 
+ *
+ * @author tfranz
+ * @author jsprenger
+ * 
+ * @version $Revision: 1.2 $
+ *
  */
 public final class Resources {
 
     // IDs ********************************************************************
 
-    public static final String DESCRIPTION_NAME_ID = "description.name";
+    /**
+     * Comment for <code>DESCRIPTION_NAME_ID</code>
+     */
+    public static final String DESCRIPTION_NAME_ID = "description.name";//$NON-NLS-1$
 
-    public static final String DESCRIPTION_ICON_ID = "description.icon";
+    /**
+     * Comment for <code>DESCRIPTION_ICON_ID</code>
+     */
+    public static final String DESCRIPTION_ICON_ID = "description.icon";//$NON-NLS-1$
 
-    public static final String GOAL_ICON_ID = "goal.icon";
+    /**
+     * Comment for <code>GOAL_ICON_ID</code>
+     */
+    public static final String GOAL_ICON_ID = "goal.icon";//$NON-NLS-1$
 
-    public static final String ALTERNATIVE_ICON_ID = "alternative.icon";
+    /**
+     * Comment for <code>ALTERNATIVE_ICON_ID</code>
+     */
+    public static final String ALTERNATIVE_ICON_ID = "alternative.icon";//$NON-NLS-1$
 
-    public static final String ACTION_ICON_ID = "action.icon";
+    /**
+     * Comment for <code>ACTION_ICON_ID</code>
+     */
+    public static final String ACTION_ICON_ID = "action.icon";//$NON-NLS-1$
 
-    public static final String ARROW_ICON_ID = "arrow.icon";
+    /**
+     * Comment for <code>ARROW_ICON_ID</code>
+     */
+    public static final String ARROW_ICON_ID = "arrow.icon";//$NON-NLS-1$
 
-    public static final String LOGO_ICON_ID = "logo.icon";
+    /**
+     * Comment for <code>LOGO_ICON_ID</code>
+     */
+    public static final String LOGO_ICON_ID = "logo.icon";//$NON-NLS-1$
 
-    public static final String HELP_CONTENTS_ICON_ID = "helpContents.icon";
+    /**
+     * Comment for <code>HELP_CONTENTS_ICON_ID</code>
+     */
+    public static final String HELP_CONTENTS_ICON_ID = "helpContents.icon";//$NON-NLS-1$
 
-    public static final String DEFAULT_PROJECT_NAME_ID = "defaultProject.name";
+    /**
+     * Comment for <code>DEFAULT_PROJECT_NAME_ID</code>
+     */
+    public static final String DEFAULT_PROJECT_NAME_ID = "defaultProject.name";//$NON-NLS-1$
 
     // Resources **************************************************************
 
+    /**
+     * Comment for <code>DESCRIPTION_NAME</code>
+     */
     public static final String DESCRIPTION_NAME = getString(DESCRIPTION_NAME_ID);
 
+    /**
+     * Comment for <code>DESCRIPTION_ICON</code>
+     */
     public static final Icon DESCRIPTION_ICON = getIcon(DESCRIPTION_ICON_ID);
 
+    /**
+     * Comment for <code>GOAL_ICON</code>
+     */
     public static final Icon GOAL_ICON = getIcon(GOAL_ICON_ID);
 
+    /**
+     * Comment for <code>ALTERNATIVE_ICON</code>
+     */
     public static final Icon ALTERNATIVE_ICON = getIcon(ALTERNATIVE_ICON_ID);
 
+    /**
+     * Comment for <code>ACTION_ICON</code>
+     */
     public static final Icon ACTION_ICON = getIcon(ACTION_ICON_ID);
 
     // Helper Code ************************************************************

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.7 2004/07/19 18:22:02 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.8 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -32,18 +32,21 @@ import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 
 /**
- * AllAlternativesEditor
+ * AlternativeContainerEditor
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
 
     private OverviewTable overviewTable;
 
+    /**
+     * Constructs a <code>AlternativeContainerEditor</code>
+     */
     public AlternativeContainerEditor() {
         super(Resources.ALTERNATIVE_ICON, "Alternative Overview");
     }

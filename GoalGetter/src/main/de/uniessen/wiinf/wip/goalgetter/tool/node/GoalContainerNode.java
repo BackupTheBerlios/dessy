@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerNode.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: GoalContainerNode.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -33,38 +33,48 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class GoalContainerNode extends AbstractTreeNode {
-
     /**
-     * Constructor
+     * Constructs a <code>GoalContainerNode</code> for the specified parent
+     * and goalcontainer.
      * 
      * @param parent
-     * @param goal
+     *            this node's parent
+     * @param goalcontainer
+     *            the associated model, an instance of GoalContainer
      */
     public GoalContainerNode(NavigationNode parent, GoalContainer goalcontainer) {
         super(parent, goalcontainer);
     }
 
-    /**
-     *  
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode#getName()
      */
     public String getName() {
         return getGoalContainer().getIdentifier();
     }
 
-    /**
-     *  
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode#getIcon(boolean)
      */
     public Icon getIcon(boolean sel) {
         return Resources.GOAL_ICON;
     }
 
     /**
+     * Returns this node's associated GoalContainer instance. Convenience
+     * function for {@link NavigationNode#getModel()}with the respective
+     * typecast
      * 
-     * @return
+     * @return this node's associated GoalContainer instance.
+     * @see NavigationNode#getModel()
      */
     public GoalContainer getGoalContainer() {
         return (GoalContainer) getModel();

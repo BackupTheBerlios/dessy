@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DescriptionNode.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: DescriptionNode.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -33,7 +33,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class DescriptionNode extends AbstractTreeNode {
@@ -78,7 +78,8 @@ public final class DescriptionNode extends AbstractTreeNode {
     }
 
     /**
-     * Returns this node's associated Description instance.
+     * Returns this node's associated Description instance. Convenience function
+     * for {@link NavigationNode#getModel()}with the respective typecast
      * 
      * @return this node's associated Description instance.
      * @see NavigationNode#getModel()

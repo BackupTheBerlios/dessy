@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: RootNode.java,v 1.4 2004/07/28 16:02:18 moleman Exp $
+ * $Id: RootNode.java,v 1.5 2004/08/07 09:28:04 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -36,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class RootNode extends AbstractTreeNode {
@@ -44,7 +44,7 @@ public final class RootNode extends AbstractTreeNode {
     // Instance Creation ******************************************************
 
     /**
-     * Creates a root node for the specified project.
+     * Constructs a root node for the specified project.
      * 
      * @param project
      *            the associated project
@@ -91,19 +91,20 @@ public final class RootNode extends AbstractTreeNode {
 
         ActionContainerNode actionByGoalNode = new ActionContainerNode(
                 masterActionNode, project.getActionsbyGoalContainer());
-        for (Iterator i = project.getGoalContainer().getGoals()
-                .iterator(); i.hasNext();) {
-            Goal goal= (Goal) i.next();
+        for (Iterator i = project.getGoalContainer().getGoals().iterator(); i
+                .hasNext();) {
+            Goal goal = (Goal) i.next();
             ActionGoalNode node = new ActionGoalNode(actionByGoalNode, goal);
             actionByGoalNode.add(node);
         }
 
         ActionContainerNode actionByAlternativeNode = new ActionContainerNode(
                 masterActionNode, project.getActionsbyAlternativeContainer());
-        for (Iterator i = project.getAlternativeContainer()
-                .getAlternatives().iterator(); i.hasNext();) {
+        for (Iterator i = project.getAlternativeContainer().getAlternatives()
+                .iterator(); i.hasNext();) {
             Alternative alternative = (Alternative) i.next();
-            ActionAlternativeNode node = new ActionAlternativeNode(actionByAlternativeNode, alternative);
+            ActionAlternativeNode node = new ActionAlternativeNode(
+                    actionByAlternativeNode, alternative);
             actionByAlternativeNode.add(node);
         }
 
@@ -117,9 +118,10 @@ public final class RootNode extends AbstractTreeNode {
     // ************************************************************************
 
     /**
-     * Returns this node's associated Description instance.
+     * Returns this node's associated Goal Project. Convenience function for
+     * {@link NavigationNode#getModel()}with the respective typecast
      * 
-     * @return this node's associated Description instance.
+     * @return this node's associated Project instance.
      * @see NavigationNode#getModel()
      */
     public Project getProject() {

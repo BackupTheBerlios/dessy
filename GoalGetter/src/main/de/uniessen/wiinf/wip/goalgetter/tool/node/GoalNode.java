@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalNode.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: GoalNode.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -33,7 +33,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class GoalNode extends AbstractTreeNode {
@@ -41,13 +41,12 @@ public final class GoalNode extends AbstractTreeNode {
     // Instance Creation ******************************************************
 
     /**
-     * Constructs a <code>FlangeNode</code> for the specified parent and
-     * flange.
+     * Constructs a <code>GoalNode</code> for the specified parent and goal.
      * 
      * @param parent
      *            this node's parent
-     * @param flange
-     *            the associated model, an instance of Flange
+     * @param goal
+     *            the associated model, an instance of Goal
      */
     public GoalNode(NavigationNode parent, Goal goal) {
         super(parent, goal);
@@ -55,10 +54,10 @@ public final class GoalNode extends AbstractTreeNode {
 
     // Implementing the NavigationNode Interface ******************************
 
-    /**
-     * Returns this node's name, the identifier of the associated flange.
+    /*
+     * (non-Javadoc)
      * 
-     * @return this node's name
+     * @see de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode#getName()
      */
     public String getName() {
         return getGoal().getIdentifier();
@@ -66,20 +65,20 @@ public final class GoalNode extends AbstractTreeNode {
 
     // ************************************************************************
 
-    /**
-     * Returns this node's icon, ignores the selection. The icons is requested
-     * from a global resource repository.
+    /*
+     * (non-Javadoc)
      * 
-     * @return this node's icon.
+     * @see de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode#getIcon(boolean)
      */
     public Icon getIcon(boolean sel) {
         return Resources.GOAL_ICON;
     }
 
     /**
-     * Returns this node's associated Flange instance.
+     * Returns this node's associated Goal instance. Convenience function for
+     * {@link NavigationNode#getModel()}with the respective typecast
      * 
-     * @return this node's associated Flange instance.
+     * @return this node's associated Goal instance.
      * @see NavigationNode#getModel()
      */
     public Goal getGoal() {

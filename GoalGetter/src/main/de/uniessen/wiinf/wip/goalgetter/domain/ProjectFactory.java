@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ProjectFactory.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: ProjectFactory.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.domain;
@@ -25,11 +25,14 @@ package de.uniessen.wiinf.wip.goalgetter.domain;
  * 
  * A factory that can create a sample project with a sample description, some
  * goals and alternatives and actions.
+ * <p>
+ * This class is only for development purposes and may be removed after
+ * completing the load and save mechanism
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class ProjectFactory {
@@ -59,6 +62,9 @@ public final class ProjectFactory {
 
     /**
      * Sets sample data in the given description.
+     * 
+     * @param description
+     *            the description to fill
      */
     private static void fillDescription(Description description) {
         description.setIdentifier("Sample Project");
@@ -67,6 +73,10 @@ public final class ProjectFactory {
 
     /**
      * Creates and returns a sample goal with the specified identifier.
+     * 
+     * @param identifier
+     *            the identifier for the goal
+     * @return instantiated Goal
      */
     private static Goal createGoal(String identifier) {
         return new Goal(identifier);
@@ -74,6 +84,10 @@ public final class ProjectFactory {
 
     /**
      * Creates and returns a sample alternative with the specified identifier.
+     * 
+     * @param identifier
+     *            the identifier for the Alternative
+     * @return instantiated Alternative
      */
     private static Alternative createAlternative(String identifier) {
         return new Alternative(identifier);

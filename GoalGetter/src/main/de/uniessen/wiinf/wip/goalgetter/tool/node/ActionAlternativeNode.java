@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionAlternativeNode.java,v 1.1 2004/07/19 18:22:02 moleman Exp $
+ * $Id: ActionAlternativeNode.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -33,7 +33,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class ActionAlternativeNode extends AbstractTreeNode {
@@ -45,8 +45,8 @@ public final class ActionAlternativeNode extends AbstractTreeNode {
      * 
      * @param parent
      *            this node's parent
-     * @param shaft
-     *            the associated model, an instance of Action
+     * @param alternative
+     *            the associated model, an instance of Alternative
      */
     public ActionAlternativeNode(NavigationNode parent, Alternative alternative) {
         super(parent, alternative);
@@ -67,8 +67,11 @@ public final class ActionAlternativeNode extends AbstractTreeNode {
 
     /**
      * Returns this node's icon, ignores the selection. The icons is requested
-     * from a global resource repository.
+     * from a global resource repository. It differs wether the node is selected
+     * or not
      * 
+     * @param sel
+     *            get Icon for selected state or unselected state. unused.
      * @return this node's icon.
      */
     public Icon getIcon(boolean sel) {
@@ -76,7 +79,8 @@ public final class ActionAlternativeNode extends AbstractTreeNode {
     }
 
     /**
-     * Returns this node's associated Action instance.
+     * Returns this node's associated Action instance. Convenience function for
+     * {@link NavigationNode#getModel()}with the respective typecast
      * 
      * @return this node's associated Action instance.
      * @see NavigationNode#getModel()

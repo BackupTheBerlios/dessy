@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainModule.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: MainModule.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -50,19 +50,31 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.RootNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class MainModule extends Model {
 
     // Names of the Bound Bean Properties *************************************
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_PROJECT</code>
+     */
     public static final String PROPERTYNAME_PROJECT = "project";
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_SELECTION</code>
+     */
     public static final String PROPERTYNAME_SELECTION = "selection";
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_SELECTION_TYPE</code>
+     */
     public static final String PROPERTYNAME_SELECTION_TYPE = "selectionType";
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_NAVIGATION_TREE_MODEL</code>
+     */
     public static final String PROPERTYNAME_NAVIGATION_TREE_MODEL = "navigationTreeModel";
 
     // Instance Fields ********************************************************
@@ -214,6 +226,10 @@ public final class MainModule extends Model {
 
     // managing decisions *****************************************************
 
+    /**
+     * Adds a Goal
+     * @see Goal
+     */
     public void addGoal() {
         Goal g = new Goal("Supergoal");
         project.addGoal(g);
@@ -221,6 +237,10 @@ public final class MainModule extends Model {
 
     }
 
+    /**
+     * Adds an Alternative
+     * @see Alternative
+     */
     public void addAlternative() {
         Alternative a = new Alternative("SuperAlternative");
         project.addAlternative(a);

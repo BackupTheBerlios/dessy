@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalEditor.java,v 1.4 2004/07/18 21:25:28 moleman Exp $
+ * $Id: GoalEditor.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -42,7 +42,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class GoalEditor extends AbstractEditor {
@@ -68,10 +68,16 @@ public class GoalEditor extends AbstractEditor {
         return (Goal) getModel();
     }
 
+    /* (non-Javadoc)
+     * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#getTitleSuffix()
+     */
     protected String getTitleSuffix() {
         return getGoal().getIdentifier();
     }
 
+    /* (non-Javadoc)
+     * @see de.uniessen.wiinf.wip.goalgetter.view.editor.Editor#getDomainClass()
+     */
     public Class getDomainClass() {
         return de.uniessen.wiinf.wip.goalgetter.domain.Goal.class;
     }
@@ -105,14 +111,7 @@ public class GoalEditor extends AbstractEditor {
 
     // Building *************************************************************
 
-    /**
-     * Builds the pane. Columns are specified before components are added to the
-     * form, rows are added dynamically using the {@link DefaultFormBuilder}.
-     * <p>
-     * 
-     * The builder combines a step that is done again and again: add a label,
-     * proceed to the next data column and add a component.
-     */
+
     protected void build() {
         initComponents();
 

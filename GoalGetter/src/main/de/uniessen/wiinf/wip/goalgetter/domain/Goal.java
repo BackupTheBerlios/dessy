@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Goal.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: Goal.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -29,20 +29,31 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class Goal extends Model {
 
-    public static final String PROPERTYNAME_DESCRIPTION = "description";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_DESCRIPTION</code>
+     */
+    public static final String PROPERTYNAME_DESCRIPTION = "description";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_IDENTIFIER = "identifier";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_IDENTIFIER</code>
+     */
+    public static final String PROPERTYNAME_IDENTIFIER = "identifier";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_UNIT = "unit";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_UNIT</code>
+     */
+    public static final String PROPERTYNAME_UNIT = "unit";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_INTENSITY = "intensity";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_INTENSITY</code>
+     */
+    public static final String PROPERTYNAME_INTENSITY = "intensity";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_OPERATOR = "operator";
 
     private String description;
 
@@ -51,8 +62,7 @@ public class Goal extends Model {
     private String unit;
 
     private String intensity;
-
-    private String operator;
+    
 
     // Instance Creation ******************************************************
 
@@ -67,7 +77,7 @@ public class Goal extends Model {
     }
 
     /**
-     * 
+     * Answers the description
      * @return description
      */
     public String getDescription() {
@@ -75,7 +85,7 @@ public class Goal extends Model {
     }
 
     /**
-     * 
+     * Answers the identifier
      * @return identifier
      */
     public String getIdentifier() {
@@ -148,25 +158,7 @@ public class Goal extends Model {
         firePropertyChange(PROPERTYNAME_INTENSITY, oldIntensity, newIntensity);
     }
 
-    /**
-     * sets the operator
-     * 
-     * @param newoperator
-     *            the operator to set
-     */
-    public void setOperator(String newOperator) {
-        String oldOperator = getOperator();
-        this.operator = newOperator;
-        firePropertyChange(PROPERTYNAME_OPERATOR, oldOperator, newOperator);
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public String getOperator() {
-        return operator;
-    }
+   
 
     //  Misc *******************************************************************
 

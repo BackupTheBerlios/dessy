@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AbstractEditor.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: AbstractEditor.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import com.jgoodies.binding.beans.BeanAdapter;
+import com.jgoodies.forms.builder.DefaultFormBuilder;
 
 /**
  * 
@@ -35,7 +36,7 @@ import com.jgoodies.binding.beans.BeanAdapter;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public abstract class AbstractEditor extends JPanel implements Editor {
@@ -53,6 +54,11 @@ public abstract class AbstractEditor extends JPanel implements Editor {
     /**
      * Constructs an <code>AbstractEditor</code> with the specified
      * <code>Icon</code> and title prefix.
+     * 
+     * @param icon
+     *            icon for the editor
+     * @param titlePrefix
+     *            titlePrefix for the editor
      */
     public AbstractEditor(Icon icon, String titlePrefix) {
         this.icon = icon;
@@ -62,6 +68,9 @@ public abstract class AbstractEditor extends JPanel implements Editor {
 
     /**
      * Constructs an <code>AbstractEditor</code> with the specified icon.
+     * 
+     * @param icon
+     *            icon for the editor
      */
     public AbstractEditor(Icon icon) {
         this(icon, "");
@@ -70,6 +79,9 @@ public abstract class AbstractEditor extends JPanel implements Editor {
     /**
      * Constructs an <code>AbstractEditor</code> with the specified title
      * prefix.
+     * 
+     * @param titlePrefix
+     *            titlePrefix for the editor
      */
     public AbstractEditor(String titlePrefix) {
         this(null, titlePrefix);
@@ -83,7 +95,12 @@ public abstract class AbstractEditor extends JPanel implements Editor {
     abstract public Class getDomainClass();
 
     /**
-     * Builds this panel.
+     * Builds the pane. Columns are specified before components are added to the
+     * form, rows are added dynamically using the {@link DefaultFormBuilder}.
+     * <p>
+     * 
+     * The builder combines a step that is done again and again: add a label,
+     * proceed to the next data column and add a component.
      */
     abstract protected void build();
 

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Project.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: Project.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -34,7 +34,7 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class Project extends Model {
@@ -86,10 +86,20 @@ public final class Project extends Model {
 
     // The public API *********************************************************
 
+    /**
+     * Answers the Project's name
+     * 
+     * @return name
+     */
     public String getName() {
         return getDescription().getIdentifier();
     }
 
+    /**
+     * Answers the Project's description
+     * 
+     * @return description
+     */
     public Description getDescription() {
         return description;
     }
@@ -132,6 +142,11 @@ public final class Project extends Model {
         goalContainer.removeGoal(goal);
     }
 
+    /**
+     * Returns the Project's GoalContainer instance
+     * 
+     * @return GoalContainer
+     */
     public GoalContainer getGoalContainer() {
         return goalContainer;
     }
@@ -180,6 +195,11 @@ public final class Project extends Model {
         alternativeContainer.removeAlternative(alternative);
     }
 
+    /**
+     * Returns the Project's AlternativeContainer instance
+     * 
+     * @return AlternativeContainer
+     */
     public AlternativeContainer getAlternativeContainer() {
         return alternativeContainer;
     }
@@ -208,24 +228,32 @@ public final class Project extends Model {
         return actionContainerByGoal;
     }
 
-    /**
-     * Adds the given alternative to this project's alternatives.
-     * 
-     * @param alternative
-     *            the alternative to add
-     */
+    //    /**
+    //     * Adds the given alternative to this project's alternatives.
+    //     *
+    //     * @param alternative
+    //     * the alternative to add
+    //     */
     //    public void addAction(Action action) {
     //        actionContainer.addAction(action);
     //    }
-    /**
-     * Removes the given alternative from this project's alternatives.
-     * 
-     * @param goal
-     *            the alternative to remove
-     */
+
+    //    /**
+    //     * Removes the given alternative from this project's alternatives.
+    //     *
+    //     * @param goal
+    //     * the alternative to remove
+    //     */
     //    public void removeAlternative(Action action) {
     //        actionContainer.removeAction(action);
     //    }
+    
+    
+    /**
+     * Returns the Project's ActionContainer instance
+     * 
+     * @return ActionContainer
+     */
     public ActionContainer getActionContainer() {
         return new ActionContainer("Actions");
     }
@@ -234,8 +262,10 @@ public final class Project extends Model {
 
     /**
      * Reads, creates and returns a Project from the given <code>File</code>.
-     * <p>
-     * A real app would parse the file.
+     * 
+     * @param f
+     *            File to read from
+     * @return project
      */
     public static Project readFrom(File f) {
         // TODO: really read from file

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.6 2004/07/28 16:02:18 moleman Exp $
+ * $Id: MainController.java,v 1.7 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -34,9 +34,9 @@ import com.jgoodies.uifextras.convenience.DefaultAboutDialog;
 import com.jgoodies.uifextras.convenience.SetupManager;
 import com.jgoodies.uifextras.convenience.TipOfTheDayDialog;
 
-import de.uniessen.wiinf.wip.chart.DessyChart;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
 import de.uniessen.wiinf.wip.goalgetter.domain.ProjectFactory;
+import de.uniessen.wiinf.wip.goalgetter.view.chart.SensitivityAnalysisChart;
 import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
 
 /**
@@ -47,7 +47,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class MainController {
@@ -201,7 +201,7 @@ public final class MainController {
     void showSensitivityAnalysis() {
 
         //mainModule.addAnalyseNode();
-        DessyChart chart = new DessyChart();
+        SensitivityAnalysisChart chart = new SensitivityAnalysisChart();
         JDialog d = new JDialog();
         d.setSize(300, 300);
         d.setLocationRelativeTo(getDefaultParentFrame());
@@ -277,6 +277,9 @@ public final class MainController {
 
     /**
      * Show a message.
+     * 
+     * @param what
+     *            the Message to show
      */
     private void showMessage(String what) {
         JOptionPane.showMessageDialog(getDefaultParentFrame(), what);

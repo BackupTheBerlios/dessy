@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.4 2004/07/28 16:02:18 moleman Exp $
+ * $Id: Actions.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -51,57 +51,131 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
-
+/**
+ * Actions
+ * 
+ * @author tfranz
+ * @author jsprenger
+ * 
+ * @version $Revision: 1.5 $
+ *  
+ */
 public final class Actions {
 
     // Action IDs *************************************************************
 
-    public static final String NEW_PROJECT_ID = "newProject";
+    /**
+     * Comment for <code>NEW_PROJECT_ID</code>
+     */
+    public static final String NEW_PROJECT_ID = "newProject";//$NON-NLS-1$
 
-    public static final String OPEN_PROJECT_ID = "openProject";
+    /**
+     * Comment for <code>OPEN_PROJECT_ID</code>
+     */
+    public static final String OPEN_PROJECT_ID = "openProject";//$NON-NLS-1$
 
-    public static final String SAVE_ID = "save";
+    /**
+     * Comment for <code>SAVE_ID</code>
+     */
+    public static final String SAVE_ID = "save";//$NON-NLS-1$
 
-    public static final String SAVE_AS_ID = "saveAs";
+    /**
+     * Comment for <code>SAVE_AS_ID</code>
+     */
+    public static final String SAVE_AS_ID = "saveAs";//$NON-NLS-1$
 
-    public static final String OPEN_PAGE_SETUP_ID = "openPageSetup";
+    /**
+     * Comment for <code>OPEN_PAGE_SETUP_ID</code>
+     */
+    public static final String OPEN_PAGE_SETUP_ID = "openPageSetup";//$NON-NLS-1$
 
-    public static final String PRINT_ID = "print";
+    /**
+     * Comment for <code>PRINT_ID</code>
+     */
+    public static final String PRINT_ID = "print";//$NON-NLS-1$
 
-    public static final String OPEN_PRINT_DIALOG_ID = "openPrintDialog";
+    /**
+     * Comment for <code>OPEN_PRINT_DIALOG_ID</code>
+     */
+    public static final String OPEN_PRINT_DIALOG_ID = "openPrintDialog";//$NON-NLS-1$
 
-    public static final String OPEN_PREFERENCES_ID = "openPreferences";
+    /**
+     * Comment for <code>OPEN_PREFERENCES_ID</code>
+     */
+    public static final String OPEN_PREFERENCES_ID = "openPreferences";//$NON-NLS-1$
 
-    public static final String EXIT_ID = "exit";
+    /**
+     * Comment for <code>EXIT_ID</code>
+     */
+    public static final String EXIT_ID = "exit";//$NON-NLS-1$
 
-    public static final String ADD_GOAL_ID = "addGoal";
+    /**
+     * Comment for <code>ADD_GOAL_ID</code>
+     */
+    public static final String ADD_GOAL_ID = "addGoal";//$NON-NLS-1$
 
-    public static final String ADD_ACTION_ID = "addAction";
+    /**
+     * Comment for <code>ADD_ACTION_ID</code>
+     */
+    public static final String ADD_ACTION_ID = "addAction";//$NON-NLS-1$
 
-    public static final String ADD_ALTERNATIVE_ID = "addAlternative";
+    /**
+     * Comment for <code>ADD_ALTERNATIVE_ID</code>
+     */
+    public static final String ADD_ALTERNATIVE_ID = "addAlternative";//$NON-NLS-1$
 
-    public static final String DELETE_ITEM_ID = "deleteItem";
+    /**
+     * Comment for <code>DELETE_ITEM_ID</code>
+     */
+    public static final String DELETE_ITEM_ID = "deleteItem";//$NON-NLS-1$
 
-    public static final String SHOW_REPORT_ID = "showReport";
+    /**
+     * Comment for <code>SHOW_REPORT_ID</code>
+     */
+    public static final String SHOW_REPORT_ID = "showReport";//$NON-NLS-1$
 
-    public static final String SHOW_SENSITIVITYANALYSIS_ID = "showSensitivityAnalysis";
+    /**
+     * Comment for <code>SHOW_SENSITIVITYANALYSIS_ID</code>
+     */
+    public static final String SHOW_SENSITIVITYANALYSIS_ID = "showSensitivityAnalysis";//$NON-NLS-1$
 
-    public static final String OPEN_HELP_CONTENTS_ID = "openHelpContents";
+    /**
+     * Comment for <code>OPEN_HELP_CONTENTS_ID</code>
+     */
+    public static final String OPEN_HELP_CONTENTS_ID = "openHelpContents";//$NON-NLS-1$
 
-    public static final String OPEN_TIP_OF_THE_DAY_ID = "openTipOfTheDay";
+    /**
+     * Comment for <code>OPEN_TIP_OF_THE_DAY_ID</code>
+     */
+    public static final String OPEN_TIP_OF_THE_DAY_ID = "openTipOfTheDay";//$NON-NLS-1$
 
-    public static final String OPEN_ABOUT_DIALOG_ID = "openAboutDialog";
+    /**
+     * Comment for <code>OPEN_ABOUT_DIALOG_ID</code>
+     */
+    public static final String OPEN_ABOUT_DIALOG_ID = "openAboutDialog";//$NON-NLS-1$
 
-    public static final String CLOSE_HELP_VIEW_ID = "helpView.close";
+    /**
+     * Comment for <code>CLOSE_HELP_VIEW_ID</code>
+     */
+    public static final String CLOSE_HELP_VIEW_ID = "helpView.close";//$NON-NLS-1$
 
-    public static final String CLOSE_HELP_NAVIGATOR_ID = "helpNavigator.close";
+    /**
+     * Comment for <code>CLOSE_HELP_NAVIGATOR_ID</code>
+     */
+    public static final String CLOSE_HELP_NAVIGATOR_ID = "helpNavigator.close";//$NON-NLS-1$
 
-    public static final String NAVIGATOR_ACTIONS_BY_GOAL_ID = "navigator.actionsByGoal";
+    /**
+     * Comment for <code>NAVIGATOR_ACTIONS_BY_GOAL_ID</code>
+     */
+    public static final String NAVIGATOR_ACTIONS_BY_GOAL_ID = "navigator.actionsByGoal";//$NON-NLS-1$
 
-    public static final String NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID = "navigator.actionsByAlternative";
+    /**
+     * Comment for <code>NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID</code>
+     */
+    public static final String NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID = "navigator.actionsByAlternative";//$NON-NLS-1$
 
     // Instance Fields ********************************************************
 
@@ -360,6 +434,9 @@ public final class Actions {
     /**
      * Registers a <code>DispatchingAction</code> with the
      * <code>ActionManager</code> using the given id.
+     * 
+     * @param id
+     *            id of the action to register
      */
     private void register(String id) {
         register(id, true);
@@ -368,6 +445,11 @@ public final class Actions {
     /**
      * Registers a <code>DispatchingAction</code> with the
      * <code>ActionManager</code> using the given id and enablement.
+     * 
+     * @param id
+     *            id of the action to register
+     * @param enabled
+     *            enables or diables the action by default
      */
     private void register(String id, boolean enabled) {
         Action action = new DispatchingAction(id);

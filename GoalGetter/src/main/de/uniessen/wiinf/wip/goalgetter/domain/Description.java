@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Description.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: Description.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -29,31 +29,59 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class Description extends Model {
 
-    public static final String PROPERTYNAME_DESCRIPTION = "description";
+    /**
+     * Bound bean property <code>PROPERTYNAME_DESCRIPTION</code>
+     */
+    public static final String PROPERTYNAME_DESCRIPTION = "description";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_IDENTIFIER = "identifier";
+    /**
+     * Bound bean property <code>PROPERTYNAME_IDENTIFIER</code>
+     */
+    public static final String PROPERTYNAME_IDENTIFIER = "identifier";//$NON-NLS-1$
 
     private String description;
 
     private String identifier;
 
+    /**
+     * Constructs a <code>Description</code> with the given identifier.
+     * 
+     * @param identifier
+     *            the initial name
+     */
     public Description(String identifier) {
         this.identifier = identifier;
     }
 
+    /**
+     * Answers the description
+     * 
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Answers the identifier
+     * 
+     * @return identifier
+     */
     public String getIdentifier() {
         return identifier;
     }
 
+    /**
+     * sets the description
+     * 
+     * @param newDescription
+     *            description to set
+     */
     public void setDescription(String newDescription) {
         String oldDescription = getDescription();
         description = newDescription;
@@ -61,6 +89,12 @@ public final class Description extends Model {
                 newDescription);
     }
 
+    /**
+     * sets the identifier
+     * 
+     * @param newIdentifier
+     *            the identifier to set
+     */
     public void setIdentifier(String newIdentifier) {
         String oldIdentifier = getIdentifier();
         identifier = newIdentifier;

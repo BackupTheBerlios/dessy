@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeEditor.java,v 1.5 2004/07/18 21:26:39 moleman Exp $
+ * $Id: AlternativeEditor.java,v 1.6 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -46,7 +46,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class AlternativeEditor extends AbstractEditor {
@@ -113,7 +113,7 @@ public final class AlternativeEditor extends AbstractEditor {
         intensitiesPanel.removeAll();
 
         FormLayout layout = new FormLayout(
-                "right:max(40dlu;p), 4dlu, 0:grow:0.7, 4dlu, 0:grow:0.3");
+                "right:max(40dlu;p), 4dlu, 0:grow:0.7, 4dlu, 0:grow:0.3");//$NON-NLS-1$
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), intensitiesPanel);
@@ -169,24 +169,24 @@ public final class AlternativeEditor extends AbstractEditor {
 
         java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
         FormLayout layout = new FormLayout(
-                "right:max(40dlu;p), 4dlu, 160dlu:grow");
+                "right:max(40dlu;p), 4dlu, 160dlu:grow");//$NON-NLS-1$
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
 
-        builder.appendI15dSeparator("alternativeEditor.alternative.text");
+        builder.appendI15dSeparator("alternativeEditor.alternative.text");//$NON-NLS-1$
 
         builder
-                .appendI15d("alternativeEditor.identifier.text",
+                .appendI15d("alternativeEditor.identifier.text",//$NON-NLS-1$
                         identifierField);
         builder.appendRow(builder.getLineGapSpec());
-        builder.appendRow(new RowSpec("fill:50dlu:nogrow"));
+        builder.appendRow(new RowSpec("fill:50dlu:nogrow"));//$NON-NLS-1$
         builder.nextLine(2);
-        builder.appendI15d("alternativeEditor.description.text",
+        builder.appendI15d("alternativeEditor.description.text",//$NON-NLS-1$
                 descriptionPane);
 
-        builder.appendI15dSeparator("alternativeEditor.intensities.text");
+        builder.appendI15dSeparator("alternativeEditor.intensities.text");//$NON-NLS-1$
 
         builder.append(intensitiesPanel, 3);
 

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainFrame.java,v 1.4 2004/08/06 11:30:37 moleman Exp $
+ * $Id: MainFrame.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -39,13 +39,16 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class MainFrame extends AbstractMainFrame {
 
     private static final Dimension MINIMUM_SIZE = new Dimension(500, 400);
 
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_HELP_NAVIGATOR_VISIBLE</code>
+     */
     public static final String PROPERTYNAME_HELP_NAVIGATOR_VISIBLE = "helpNavigatorVisible";
 
     /**
@@ -93,6 +96,7 @@ public final class MainFrame extends AbstractMainFrame {
 
     /**
      * Builds and returns the menu bar.
+     * @return built menu bar
      */
     private JMenuBar buildMenuBar() {
         return new MainMenuBuilder().build();
@@ -103,7 +107,7 @@ public final class MainFrame extends AbstractMainFrame {
      * the window if the user has shrinked the window below this given size.
      * 
      * @return the frame's minimum size
-     * @see com.jgoodies.swing.AbstractFrame#getWindowMinimumSize()
+     * @see com.jgoodies.uif.application.AbstractMainFrame#getWindowMinimumSize()
      */
     public Dimension getWindowMinimumSize() {
         return MINIMUM_SIZE;

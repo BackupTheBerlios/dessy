@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: NavigationPanelBuilder.java,v 1.7 2004/07/28 16:05:53 moleman Exp $
+ * $Id: NavigationPanelBuilder.java,v 1.8 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -61,7 +61,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *  
  */
 final class NavigationPanelBuilder {
@@ -128,7 +128,9 @@ final class NavigationPanelBuilder {
 
     /**
      * Builds and returns a CardPanel with two cards: one for the navigation
-     * tree, another for the empty card..
+     * tree, another for the empty card.
+     * 
+     * @return the card panel
      */
     JComponent build() {
         cardPanel = new CardPanel();
@@ -140,6 +142,8 @@ final class NavigationPanelBuilder {
     /**
      * Builds and returns a stub panel that is used as long as no
      * <code>Project</code> has been set.
+     * 
+     * @return stub panel
      */
     private JComponent buildNoTreeCard() {
         JPanel panel = new JPanel(new BorderLayout());

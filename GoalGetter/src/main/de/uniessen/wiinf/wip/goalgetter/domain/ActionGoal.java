@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionGoal.java,v 1.1 2004/07/19 18:22:02 moleman Exp $
+ * $Id: ActionGoal.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -29,20 +29,20 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class ActionGoal extends Model {
 
-    public static final String PROPERTYNAME_DESCRIPTION = "description";
+    public static final String PROPERTYNAME_DESCRIPTION = "description";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_IDENTIFIER = "identifier";
+    public static final String PROPERTYNAME_IDENTIFIER = "identifier";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_PAYMENTFORACTION = "paymentForAction";
+    public static final String PROPERTYNAME_PAYMENTFORACTION = "paymentForAction";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_PAYMENTFORTRADEOFF = "paymentForTradeoff";
+    public static final String PROPERTYNAME_PAYMENTFORTRADEOFF = "paymentForTradeoff";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_RESULT = "result";
+    public static final String PROPERTYNAME_RESULT = "result";//$NON-NLS-1$
 
     private String description;
 

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DescriptionEditor.java,v 1.4 2004/07/18 21:26:39 moleman Exp $
+ * $Id: DescriptionEditor.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -41,7 +41,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class DescriptionEditor extends AbstractEditor {
@@ -49,7 +49,10 @@ public final class DescriptionEditor extends AbstractEditor {
     private JTextComponent descriptionArea;
 
     private JTextComponent identifierField;
-
+    /**
+     * Constructs a <code>DescriptionEditor</code>
+     * 
+     */
     public DescriptionEditor() {
         super(Resources.DESCRIPTION_ICON, "General Decision Data");
     }
@@ -58,7 +61,7 @@ public final class DescriptionEditor extends AbstractEditor {
         initComponents();
 
         java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");//$NON-NLS-1$
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
@@ -66,11 +69,11 @@ public final class DescriptionEditor extends AbstractEditor {
         // CellConstraints cc = new CellConstraints();
 
         builder
-                .appendI15d("descriptionEditor.identifier.text",
+                .appendI15d("descriptionEditor.identifier.text",//$NON-NLS-1$
                         identifierField);
-        builder.appendI15dSeparator("descriptionEditor.description.text");
+        builder.appendI15dSeparator("descriptionEditor.description.text");//$NON-NLS-1$
         builder.appendRow(builder.getLineGapSpec());
-        builder.appendRow(new RowSpec("fill:50dlu:nogrow"));
+        builder.appendRow(new RowSpec("fill:50dlu:nogrow"));//$NON-NLS-1$
         builder.nextLine(2);
         builder.append("", descriptionPane);
     }

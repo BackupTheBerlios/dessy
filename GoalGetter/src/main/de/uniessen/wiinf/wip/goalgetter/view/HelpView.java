@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpView.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
+ * $Id: HelpView.java,v 1.4 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 final class HelpView extends SimpleInternalFrame {
@@ -88,6 +88,8 @@ final class HelpView extends SimpleInternalFrame {
 
     /**
      * Builds and answers the toolbar.
+     * 
+     * @return built toolbar
      */
     private JToolBar buildToolBar() {
         ToolBarBuilder builder = new ToolBarBuilder("Help Contents");
@@ -97,6 +99,8 @@ final class HelpView extends SimpleInternalFrame {
 
     /**
      * Builds and answers the content pane.
+     * 
+     * @return built content pane
      */
     private JComponent buildContent() {
         editor = new JEditorPane();
@@ -113,6 +117,9 @@ final class HelpView extends SimpleInternalFrame {
 
     /**
      * Sets the page for the specified <code>URL</code>.
+     * 
+     * @param helpURL
+     *            the URL to display in the help window
      */
     private void setPage(URL helpURL) {
         try {
@@ -124,7 +131,15 @@ final class HelpView extends SimpleInternalFrame {
         }
     }
 
-    // Updates the help page if the module's page has changed.
+    /**
+     * Updates the help page if the module's page has changed.
+     * 
+     * @author tfranz
+     * @author jsprenger
+     * 
+     * @version $Revision: 1.4 $
+     *  
+     */
     private class PageChangeHandler implements PropertyChangeListener {
 
         /**

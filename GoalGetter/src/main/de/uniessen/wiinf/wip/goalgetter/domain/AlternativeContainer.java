@@ -16,48 +16,76 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainer.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: AlternativeContainer.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.jgoodies.binding.beans.Model;
+import com.jgoodies.binding.list.ArrayListModel;
 
 /**
  * 
- * AlternativeContainer
+ * Holder for the alternatives in the decision model
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class AlternativeContainer extends Model {
 
-    private final List alternatives = new ArrayList();
+    private final ArrayListModel alternatives = new ArrayListModel();
 
     private String identifier;
 
-    public static final String PROPERTYNAME_IDENTIFIER = "identifier";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_IDENTIFIER</code>
+     */
+    public static final String PROPERTYNAME_IDENTIFIER = "identifier";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_ALTERNATIVES = "alternatives";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_ALTERNATIVES</code>
+     */
+    public static final String PROPERTYNAME_ALTERNATIVES = "alternatives";//$NON-NLS-1$
 
+    /**
+     * Constructs an <code>AlternativeContainer</code> with the given
+     * identifier.
+     * 
+     * @param identifier
+     *            the initial name
+     */
     public AlternativeContainer(String identifier) {
         this.identifier = identifier;
     }
 
+    /**
+     * Answers the identifier
+     * 
+     * @return identifier
+     */
     public String getIdentifier() {
         return identifier;
     }
 
-    public List getAlternatives() {
-        return Collections.unmodifiableList(alternatives);
+    /**
+     * Returns the list of alternatives
+     * 
+     * @return alternatives
+     */
+    public ArrayListModel getAlternatives() {
+        return alternatives;
     }
 
+    /**
+     * sets the identifier
+     * 
+     * @param newIdentifier
+     *            the identifier to set
+     */
     public void setIdentifier(String newIdentifier) {
         String oldIdentifier = getIdentifier();
         identifier = newIdentifier;
@@ -65,6 +93,12 @@ public class AlternativeContainer extends Model {
                 newIdentifier);
     }
 
+    /**
+     * Adds an Alternative to the list
+     * 
+     * @param newAlternative
+     *            alternative to add
+     */
     public void addAlternative(Alternative newAlternative) {
         List oldAlternatives = getAlternatives();
         alternatives.add(newAlternative);
@@ -73,6 +107,12 @@ public class AlternativeContainer extends Model {
                 newAlternatives);
     }
 
+    /**
+     * removes an Alternative from the list
+     * 
+     * @param alternative
+     *            Alternative to remove
+     */
     public void removeAlternative(Alternative alternative) {
         List oldAlternatives = getAlternatives();
         alternatives.remove(alternative);

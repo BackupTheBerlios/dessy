@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Alternative.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: Alternative.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -32,14 +32,20 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class Alternative extends Model {
 
-    public static final String PROPERTYNAME_DESCRIPTION = "description";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_DESCRIPTION</code>
+     */
+    public static final String PROPERTYNAME_DESCRIPTION = "description";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_IDENTIFIER = "identifier";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_IDENTIFIER</code>
+     */
+    public static final String PROPERTYNAME_IDENTIFIER = "identifier";//$NON-NLS-1$
 
     private String description;
 
@@ -47,19 +53,41 @@ public class Alternative extends Model {
 
     private Map intensities = new TreeMap();
 
+    /**
+     * Constructs an <code>Alternative</code> with the given identifier.
+     * 
+     * @param identifier
+     *            the initial name
+     */
     public Alternative(String identifier) {
         this.identifier = identifier;
 
     }
 
+    /**
+     * Answers the description
+     * 
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Answers the identifier
+     * 
+     * @return identifier
+     */
     public String getIdentifier() {
         return identifier;
     }
 
+    /**
+     * Sets the description
+     * 
+     * @param newDescription
+     *            the new description to set
+     */
     public void setDescription(String newDescription) {
         String oldDescription = getDescription();
         description = newDescription;
@@ -67,6 +95,12 @@ public class Alternative extends Model {
                 newDescription);
     }
 
+    /**
+     * Sets the identifier
+     * 
+     * @param newIdentifier
+     *            the new identifier to set
+     */
     public void setIdentifier(String newIdentifier) {
         String oldIdentifier = getIdentifier();
         identifier = newIdentifier;
@@ -78,14 +112,24 @@ public class Alternative extends Model {
         return super.toString() + ':' + getIdentifier();
     }
 
+    /** Returns the intensities
+     * @return intensities
+     */
     public Map getIntensities() {
         return intensities;
     }
 
+    /** Puts an intensity  
+     * @param key 
+     * @param value
+     */
     public void putIntensity(Object key, Object value) {
         intensities.put(key, value);
     }
 
+    /** removes an intensity
+     * @param key the intensity to remove
+     */
     public void removeIntensity(Object key) {
         intensities.remove(key);
     }

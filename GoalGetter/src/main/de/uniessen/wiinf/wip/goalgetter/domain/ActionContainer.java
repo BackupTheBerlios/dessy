@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  *
- * $Id: ActionContainer.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: ActionContainer.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -27,12 +27,12 @@ import com.jgoodies.binding.beans.Model;
 
 /**
  * 
- * ActionContainer
+ * Holder for the actions in the decision model
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class ActionContainer extends Model {
@@ -41,14 +41,30 @@ public class ActionContainer extends Model {
 
     private String identifier;
 
-    public static final String PROPERTYNAME_IDENTIFIER = "identifier";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_IDENTIFIER</code>
+     */
+    public static final String PROPERTYNAME_IDENTIFIER = "identifier";//$NON-NLS-1$
 
-    public static final String PROPERTYNAME_ACTIONS = "actions";
+    /**
+     * Bound Bean Property <code>PROPERTYNAME_ACTIONS</code>
+     */
+    public static final String PROPERTYNAME_ACTIONS = "actions";//$NON-NLS-1$
 
+    /**
+     * Constructs an <code>ActionContainer</code> with the given identifier.
+     * 
+     * @param identifier
+     *            the initial name
+     */
     public ActionContainer(String identifier) {
         this.identifier = identifier;
     }
-
+    /**
+     * Answers the identifier
+     * 
+     * @return identifier
+     */
     public String getIdentifier() {
         return identifier;
     }
@@ -56,7 +72,12 @@ public class ActionContainer extends Model {
     public List getActions() {
         return actions;
     }
-
+    /**
+     * Sets the identifier
+     * 
+     * @param newIdentifier
+     *            the new identifier to set
+     */
     public void setIdentifier(String newIdentifier) {
         String oldIdentifier = getIdentifier();
         identifier = newIdentifier;

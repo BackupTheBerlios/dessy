@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionGoalNode.java,v 1.1 2004/07/19 18:22:02 moleman Exp $
+ * $Id: ActionGoalNode.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -33,7 +33,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class ActionGoalNode extends AbstractTreeNode {
@@ -41,12 +41,13 @@ public final class ActionGoalNode extends AbstractTreeNode {
     // Instance Creation ******************************************************
 
     /**
-     * Constructs a <code>ShaftNode</code> for the given parent and action.
+     * Constructs a <code>ActionGoalNode</code> for the given parent and
+     * action.
      * 
      * @param parent
      *            this node's parent
-     * @param shaft
-     *            the associated model, an instance of Action
+     * @param goal
+     *            the associated model, an instance of Goal
      */
     public ActionGoalNode(NavigationNode parent, Goal goal) {
         super(parent, goal);
@@ -76,7 +77,8 @@ public final class ActionGoalNode extends AbstractTreeNode {
     }
 
     /**
-     * Returns this node's associated Action instance.
+     * Returns this node's associated Action instance. Convenience function for
+     * {@link NavigationNode#getModel()}with the respective typecast
      * 
      * @return this node's associated Action instance.
      * @see NavigationNode#getModel()

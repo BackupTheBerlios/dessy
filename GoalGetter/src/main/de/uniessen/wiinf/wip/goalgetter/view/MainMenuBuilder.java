@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainMenuBuilder.java,v 1.4 2004/07/18 21:26:39 moleman Exp $
+ * $Id: MainMenuBuilder.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -43,13 +43,15 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class MainMenuBuilder {
 
     /**
      * Configures, composes, and returns the menu bar.
+     * 
+     * @return built menubar
      */
     JMenuBar build() {
         JMenuBar menuBar = new JMenuBar();
@@ -72,11 +74,13 @@ public final class MainMenuBuilder {
 
     /**
      * Builds and returns the File menu.
+     * 
+     * @return built file menu
      */
     private JMenu buildFileMenu() {
         MenuBuilder builder = new MenuBuilder(ResourceUtils
-                .getString("menubar.file.text"), ResourceUtils.getString(
-                "menubar.file.mnemonic").charAt(0));
+                .getString("menubar.file.text"), ResourceUtils.getString(//$NON-NLS-1$
+                "menubar.file.mnemonic").charAt(0));//$NON-NLS-1$
         builder.add(ActionManager.get(Actions.NEW_PROJECT_ID));
         builder.add(ActionManager.get(Actions.OPEN_PROJECT_ID));
         builder.addSeparator();
@@ -97,12 +101,14 @@ public final class MainMenuBuilder {
     }
 
     /**
-     * Builds and returns the Component menu.
+     * Builds and returns the Navigator menu.
+     * 
+     * @return built Navigator menu
      */
     private JMenu buildNavigatorMenu() {
         MenuBuilder builder = new MenuBuilder(ResourceUtils
-                .getString("menubar.components.text"), ResourceUtils.getString(
-                "menubar.components.mnemonic").charAt(0));
+                .getString("menubar.components.text"), ResourceUtils.getString(//$NON-NLS-1$
+                "menubar.components.mnemonic").charAt(0));//$NON-NLS-1$
         builder.add(ActionManager.get(Actions.ADD_GOAL_ID));
         builder.add(ActionManager.get(Actions.ADD_ALTERNATIVE_ID));
         //builder.add(ActionManager.get(Actions.ADD_ACTION_ID));
@@ -112,11 +118,13 @@ public final class MainMenuBuilder {
 
     /**
      * Builds and returns the Report menu.
+     * 
+     * @return built report menu
      */
     private JMenu buildReportMenu() {
         MenuBuilder builder = new MenuBuilder(ResourceUtils
-                .getString("menubar.reports.text"), ResourceUtils.getString(
-                "menubar.reports.mnemonic").charAt(0));
+                .getString("menubar.reports.text"), ResourceUtils.getString(//$NON-NLS-1$
+                "menubar.reports.mnemonic").charAt(0));//$NON-NLS-1$
         builder.add(ActionManager.get(Actions.SHOW_REPORT_ID));
         builder.add(ActionManager.get(Actions.SHOW_SENSITIVITYANALYSIS_ID));
         return builder.getMenu();
@@ -124,11 +132,13 @@ public final class MainMenuBuilder {
 
     /**
      * Builds and returns the Help menu.
+     * 
+     * @return built help menu
      */
     private JMenu buildHelpMenu() {
         MenuBuilder builder = new MenuBuilder(ResourceUtils
-                .getString("menubar.help.text"), ResourceUtils.getString(
-                "menubar.help.mnemonic").charAt(0));
+                .getString("menubar.help.text"), ResourceUtils.getString(//$NON-NLS-1$
+                "menubar.help.mnemonic").charAt(0));//$NON-NLS-1$
         builder.add(ActionManager.get(Actions.OPEN_HELP_CONTENTS_ID));
         builder.addSeparator();
         builder.add(ActionManager.get(Actions.OPEN_TIP_OF_THE_DAY_ID));

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: WelcomePanel.java,v 1.4 2004/07/28 16:02:18 moleman Exp $
+ * $Id: WelcomePanel.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class WelcomePanel extends GradientBackgroundPanel implements
@@ -102,6 +102,8 @@ public final class WelcomePanel extends GradientBackgroundPanel implements
 
     /**
      * Builds and answers the foreground.
+     * 
+     * @return foreground Component
      */
     private JComponent buildForeground() {
         JLabel welcomeLbl = new JLabel(ResourceUtils
@@ -132,6 +134,13 @@ public final class WelcomePanel extends GradientBackgroundPanel implements
         return builder.getPanel();
     }
 
+    /**
+     * Creates and answers an action component for the given action
+     * 
+     * @param a
+     *            Action to create the Component for
+     * @return Action Component
+     */
     private JComponent createActionComponent(Action a) {
         ActionLabel label = new ActionLabel(a);
         label.setIcon(ResourceUtils.getIcon(Resources.ARROW_ICON_ID));

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainToolBarBuilder.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: MainToolBarBuilder.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -42,7 +42,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 final class MainToolBarBuilder {
@@ -85,6 +85,11 @@ final class MainToolBarBuilder {
 
     /**
      * Creates and returns a button which is suitable for use in a tool bar.
+     * 
+     * @param actionID
+     *            the action id to crete the button for
+     * @return toolbar button
+     * @see de.uniessen.wiinf.wip.goalgetter.tool.Actions
      */
     private AbstractButton createToolBarButton(String actionID) {
         return new ToolBarButton(ActionManager.get(actionID));

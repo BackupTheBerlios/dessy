@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Editor.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: Editor.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -30,23 +30,29 @@ import javax.swing.JToolBar;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public interface Editor {
 
     /**
      * Answers the editor's icon.
+     * 
+     * @return the editor's icon.
      */
     Icon getIcon();
 
     /**
      * Answers the editor's title.
+     * 
+     * @return the editor's title.
      */
     String getTitle();
 
     /**
      * Answers the editor's tool bar.
+     * 
+     * @return the editor's tool bar.
      */
     JToolBar getToolBar();
 
@@ -63,16 +69,23 @@ public interface Editor {
     /**
      * Returns the associated domain class used to register this editor with the
      * EditorPanel's registry.
+     * 
+     * @return associated domain Class
      */
     Class getDomainClass();
 
     /**
      * Returns this editor's model.
+     * 
+     * @return the editor's model
      */
     Object getModel();
 
     /**
      * Sets this editor's model. Called when the edited instance changed.
+     * 
+     * @param model
+     *            the model to set for the editor
      */
     void setModel(Object model);
 

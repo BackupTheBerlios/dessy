@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: EditorPanel.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: EditorPanel.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -58,7 +58,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class EditorPanel extends SimpleInternalFrame {
@@ -107,6 +107,8 @@ public final class EditorPanel extends SimpleInternalFrame {
      * <code>JScrollPane</code>. The panel will be replaced later by the
      * different viewers, where we access the viewer via the scrollpane's
      * viewport view.
+     * 
+     * @return built content
      */
     private JComponent buildContent() {
         return scrollPane = UIFactory.createStrippedScrollPane(new JPanel());

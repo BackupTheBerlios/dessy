@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: HelpNode.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: HelpNode.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.help;
 
@@ -34,14 +34,20 @@ import com.jgoodies.uif.util.ResourceUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 
 public final class HelpNode {
 
+    /**
+     * Constant for a chapter item
+     */
     public static final int CHAPTER_ITEM = 0;
 
+    /**
+     * Constant for a topic item
+     */
     public static final int TOPIC_ITEM = 1;
 
     private static final String BOOK_ICON_ID = "com.jgoodies.help.openBook.icon";
@@ -62,6 +68,14 @@ public final class HelpNode {
 
     /**
      * Constructs a <code>HelpNode</code> with the given name, type, and URL.
+     * 
+     * @param name
+     *            name of the helpnode to construct
+     * @param type
+     *            type of the helpnode to construct (either
+     *            {@link HelpNode#CHAPTER_ITEM}or {@link HelpNode#TOPIC_ITEM}
+     * @param url
+     *            url where the contents for this help node are stored
      */
     private HelpNode(String name, int type, URL url) {
         this.name = name;
@@ -71,6 +85,10 @@ public final class HelpNode {
 
     /**
      * Creates and returns a chapter help node with the given name.
+     * 
+     * @param name
+     *            name for the chapter to create
+     * @return chapter help node
      */
     static HelpNode createChapter(String name) {
         return new HelpNode(name, CHAPTER_ITEM, null);
@@ -78,6 +96,12 @@ public final class HelpNode {
 
     /**
      * Creates and returns a topic help node with the given name and path.
+     * 
+     * @param name
+     *            name for the topic to create
+     * @param path
+     *            path for the topic to create
+     * @return topic help node
      */
     static HelpNode createTopic(String name, String path) {
         URL url = ResourceUtils.getURL(path);
@@ -86,6 +110,8 @@ public final class HelpNode {
 
     /**
      * Creates and returns the help root node.
+     * 
+     * @return help root node
      */
     static HelpNode createRoot() {
         return createChapter("root");
@@ -93,6 +119,10 @@ public final class HelpNode {
 
     // Accessors **************************************************************
 
+    /**
+     * @return <code>true</code> if this node is a chapter, <code>false</code>
+     *         otherwise
+     */
     public boolean isChapter() {
         return type == CHAPTER_ITEM;
     }
@@ -101,14 +131,36 @@ public final class HelpNode {
         return name;
     }
 
+    /**
+     * Answers the <code>HelpNode</code> s URL
+     * 
+     * @return URL
+     */
     public URL getURL() {
         return url;
     }
 
+    /**
+     * checks and answers wether the <code>HelpNode</code> s URL matches the
+     * given URL
+     * 
+     * @param aUrl
+     *            URL to compare to the HelpNodes URL
+     * @return <code>true</code> if the given URL matches the HelpNodes URL,
+     *         <code>false</code> otherwise
+     */
     boolean matches(URL aUrl) {
         return aUrl.equals(getURL());
     }
 
+    /**
+     * Answers the nodes Icon. Takes into consideration wether the node is a
+     * chapter or a topic and its selection state
+     * 
+     * @param sel
+     *            selection state. currently not evaluated.
+     * @return Icon
+     */
     public Icon getIcon(boolean sel) {
         return isChapter() ? BOOK_ICON : TOPIC_ICON;
     }

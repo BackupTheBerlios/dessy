@@ -10,26 +10,39 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: ActionPresentationMode.java,v 1.1 2004/07/28 16:02:18 moleman Exp $
+ * $Id: ActionPresentationMode.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
 /**
- * A typesafe enumaration for the Navigator Action modes.
+ * A typesafe enumaration for the Navigator Action modes. An action mode
+ * describes the grouping rule to display the actions in the navigator.
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class ActionPresentationMode {
+    /**
+     * presentation mode for a grouping by
+     * {@link de.uniessen.wiinf.wip.goalgetter.domain.Goal}
+     */
     public static final ActionPresentationMode GOAL = new ActionPresentationMode(
             "Goal");
 
+    /**
+     * presentation mode for a grouping by
+     * {@link de.uniessen.wiinf.wip.goalgetter.domain.Alternative}
+     */
     public static final ActionPresentationMode ALTERNATIVE = new ActionPresentationMode(
             "Alternative");
 
+    /**
+     * The default Presentation Mode, returned by {@link #valueOf(String)}if no
+     * other emode matches the String.
+     */
     public static final ActionPresentationMode DEFAULT = GOAL;
 
     /**
@@ -39,18 +52,21 @@ public final class ActionPresentationMode {
 
     /**
      * Constructs a <code>ViewMode</code> for the specified name.
+     * 
+     * @param name
+     *            name of the presentation mode to construct
      */
     private ActionPresentationMode(String name) {
         this.name = name;
     }
 
     /**
-     * Answers a <code>ViewMode</code> for the specified case insensitive
-     * name, <code>DEFAULT</code> if none fits.
+     * Answers a <code>PresentationMode</code> for the specified case
+     * insensitive name, <code>DEFAULT</code> if none fits.
      * 
      * @param name
      *            the name to look for
-     * @return the associated SortMode or DEFAULT if none fits
+     * @return the associated PresentationMode or DEFAULT if none fits
      */
     public static ActionPresentationMode valueOf(String name) {
         if (GOAL.name.equalsIgnoreCase(name))
@@ -61,6 +77,11 @@ public final class ActionPresentationMode {
             return DEFAULT;
     }
 
+    /**
+     * Returns the name of the presentationMode
+     * 
+     * @return name
+     */
     public String name() {
         return name;
     }

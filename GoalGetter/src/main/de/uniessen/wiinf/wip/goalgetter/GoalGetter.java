@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalGetter.java,v 1.2 2004/07/19 18:22:02 moleman Exp $
+ * $Id: GoalGetter.java,v 1.3 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter;
 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.MainFrame;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 
@@ -79,12 +79,14 @@ public final class GoalGetter extends DefaultApplicationStarter {
         Options.setGlobalFontSizeHints(FontSizeHints.MIXED2);
         Options.setDefaultIconSize(new Dimension(18, 18));
         Options.setPopupDropShadowEnabled(true);
-        UIManager.put("ToolBar.separatorSize", new DimensionUIResource(6, 18));
+        UIManager.put("ToolBar.separatorSize", new DimensionUIResource(6, 18));//$NON-NLS-1$
         super.configureUI();
     }
 
     /**
      * Creates and returns the application's main frame.
+     * 
+     * @return new MainFrame
      */
     protected AbstractMainFrame createMainFrame() {
         return new MainFrame(mainModule);
@@ -110,15 +112,15 @@ public final class GoalGetter extends DefaultApplicationStarter {
         addMessageHandler();
 
         // Create the module that provides all high-level models.
-        Splash.setNote("Creating Models", 30);
+        Splash.setNote("Creating Models", 30);//$NON-NLS-1$
         mainModule = new MainModule();
 
         // Create the controller that provides the major operations.
-        Splash.setNote("Creating Controller", 40);
+        Splash.setNote("Creating Controller", 40);//$NON-NLS-1$
         mainController = new MainController(mainModule);
 
         // Initialize all Actions
-        Splash.setNote("Initializing Actions...", 50);
+        Splash.setNote("Initializing Actions...", 50);//$NON-NLS-1$
         initializeActions();
 
         HelpSets.registerHelpSets(mainModule.getHelpModule());
@@ -132,10 +134,10 @@ public final class GoalGetter extends DefaultApplicationStarter {
 
         checkSetup();
 
-        Splash.setNote("Building UI...", 60);
+        Splash.setNote("Building UI...", 60);//$NON-NLS-1$
         mainFrame.build();
 
-        Splash.setNote("Finishing...", 90);
+        Splash.setNote("Finishing...", 90);//$NON-NLS-1$
         mainFrame.open();
         mainController.checkForOpenTipOfTheDayDialog();
     }
@@ -143,24 +145,26 @@ public final class GoalGetter extends DefaultApplicationStarter {
     /**
      * Defines a bunch of application wide constants, and launches the boot
      * process for the GoalGetter application.
+     * 
+     * @param arguments
+     *            arguments passed from command line
      */
     public static void main(String[] arguments) {
-        OSXApplicationMenu.setAboutName("GoalGetter");
+        OSXApplicationMenu.setAboutName("GoalGetter");//$NON-NLS-1$ 
         new GoalGetter()
                 .boot(new Globals(
-                        "GoalGetter", // Application name
-                        "goalgetter", // prefix for logs and prefs
-                        "0.1", // version
-                        "0.1.3 (July-19-2004)", // full version
-                        "A Decision supporting system using the GoalGetter Method by Markus Stallkamp", // description
-                        "\u00a9 2004", // copyright
-                        "Universität Duisburg-Essen", // vendor
-                        "de/uniessen/wiinf/wip/goalgetter/", // resource
-                        // properties URL
-                        "docs/help/global/Help.hs", // helpset URL
-                        "docs/help/tips/index.txt", // tip index path
-                        "http://www.wip.uni-essen.de/", // vendor URL
-                        "tim.franz@uni-essen.de")); // support eMail
+                        "GoalGetter", //$NON-NLS-1$ // Application name
+                        "goalgetter",//$NON-NLS-1$ // prefix for logs and prefs
+                        "0.1",//$NON-NLS-1$ // version
+                        "0.1.3 (July-19-2004)",//$NON-NLS-1$ // full version
+                        "A Decision supporting system using the GoalGetter Method by Markus Stallkamp",//$NON-NLS-1$ // description
+                        "\u00a9 2004",//$NON-NLS-1$ // copyright
+                        "Universität Duisburg-Essen", //$NON-NLS-1$ // vendor
+                        "de/uniessen/wiinf/wip/goalgetter/",//$NON-NLS-1$ // resource properties URL
+                        "docs/help/global/Help.hs",//$NON-NLS-1$ // helpset URL
+                        "docs/help/tips/index.txt",//$NON-NLS-1$ // tip index path
+                        "http://www.wip.uni-essen.de/",//$NON-NLS-1$ // vendor URL
+                        "tim.franz@uni-essen.de"));//$NON-NLS-1$ // support eMail
     }
 
 }

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GeneralTabBuilder.java,v 1.4 2004/08/06 11:30:37 moleman Exp $
+ * $Id: GeneralTabBuilder.java,v 1.5 2004/08/07 09:28:04 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
@@ -43,7 +43,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class GeneralTabBuilder {
@@ -132,8 +132,8 @@ public final class GeneralTabBuilder {
      * @return the general tab
      */
     JComponent build() {
-        FormLayout layout = new FormLayout("7dlu, left:pref, 0:grow",
-                "pref, 2dlu, pref, 14dlu, " + "pref, 2dlu, pref, 2dlu, pref");
+        FormLayout layout = new FormLayout("7dlu, left:pref, 0:grow",//$NON-NLS-1$
+                "pref, 2dlu, pref, 14dlu, " + "pref, 2dlu, pref, 2dlu, pref");//$NON-NLS-1$ //$NON-NLS-2$
 
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();

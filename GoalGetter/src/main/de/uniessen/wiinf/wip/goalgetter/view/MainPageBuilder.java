@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainPageBuilder.java,v 1.5 2004/07/28 16:02:18 moleman Exp $
+ * $Id: MainPageBuilder.java,v 1.6 2004/08/07 09:28:03 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -63,7 +63,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 
@@ -73,12 +73,13 @@ public final class MainPageBuilder {
             620, 510)
             : new Dimension(760, 570);
 
-    private static final String COPYRIGHT_TEXT = Application.getGlobals().getFullCopyright();
+    private static final String COPYRIGHT_TEXT = Application.getGlobals()
+            .getFullCopyright();
 
     // Preferences Key
-    private static final String MAIN_DIVIDER_LOCATION_KEY = "mainDividerLocation";
+    private static final String MAIN_DIVIDER_LOCATION_KEY = "mainDividerLocation";//$NON-NLS-1$
 
-    private static final String VIEWER_HELP_DIVIDER_LOCATION_KEY = "viewerHelpDividerLocation";
+    private static final String VIEWER_HELP_DIVIDER_LOCATION_KEY = "viewerHelpDividerLocation";//$NON-NLS-1$
 
     /**
      * Refers to the module that provides all high-level models. Used to build
@@ -159,6 +160,8 @@ public final class MainPageBuilder {
     /**
      * Builds this panel with the horizontal <code>JSplitPane</code> in the
      * center and a status bar in the south.
+     * 
+     * @return main Page
      */
     JComponent build() {
         initComponents();
@@ -178,6 +181,8 @@ public final class MainPageBuilder {
     /**
      * Builds and answers the main <code>JSplitPane</code> that contains the
      * navigation elements on the left, and the view panels on the right.
+     * 
+     * @return main split pane
      */
     private JComponent buildMainSplitPane() {
         mainSplitPane = UIFactory.createStrippedSplitPane(
@@ -190,6 +195,8 @@ public final class MainPageBuilder {
     /**
      * Builds the <code>Navigator</code>, the <code>HelpNavigator</code>
      * and answers them wrapped by a stripped <code>JSplitPane</code>.
+     * 
+     * @return navigator help panel
      */
     private JComponent buildNavigatorHelpPanel() {
         navigatorHelpSplitPane = UIFactory.createStrippedSplitPane(
@@ -199,6 +206,8 @@ public final class MainPageBuilder {
 
     /**
      * Builds and answers the <code>EditorPanel</code>.
+     * 
+     * @return editor panel
      */
     private EditorPanel buildEditorPanel() {
         WelcomePanel welcomePanel = new WelcomePanel();
@@ -219,6 +228,8 @@ public final class MainPageBuilder {
     /**
      * Builds the <code>EditorPanel</code>, the <code>HelpView</code> and
      * answers them wrapped by a stripped <code>JSplitPane</code>.
+     * 
+     * @return editor help panel
      */
     private JComponent buildEditorHelpPanel() {
         editorHelpSplitPane = UIFactory.createStrippedSplitPane(
@@ -231,20 +242,26 @@ public final class MainPageBuilder {
         builder.add(ActionManager.get(Actions.CLOSE_HELP_NAVIGATOR_ID));
         return builder.getToolBar();
     }
-    
-    
+
     /**
-     * Builds and answers the toolbar.
+     * Builds and answers the navigator toolbar.
+     * 
+     * @return navigator toolbar
      */
     private JToolBar buildNavigatorToolBar() {
-        ToolBarBuilder builder = new ToolBarBuilder("Navigator");       
-        builder.addToggle((ToggleAction)ActionManager.get(Actions.NAVIGATOR_ACTIONS_BY_GOAL_ID));
-        builder.addToggle((ToggleAction)ActionManager.get(Actions.NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID));
+        //TODO move to navigator panel class
+        ToolBarBuilder builder = new ToolBarBuilder("Navigator");
+        builder.addToggle((ToggleAction) ActionManager
+                .get(Actions.NAVIGATOR_ACTIONS_BY_GOAL_ID));
+        builder.addToggle((ToggleAction) ActionManager
+                .get(Actions.NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID));
         return builder.getToolBar();
     }
 
     /**
      * Builds and answers the status bar.
+     * 
+     * @return status bar
      */
     private JPanel buildStatusBar() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -257,6 +274,9 @@ public final class MainPageBuilder {
 
     /**
      * Restores the frame's state from the user preferences.
+     * 
+     * @param userPrefs
+     *            the preferences instance to restore the state from
      */
     public void restoreFrom(Preferences userPrefs) {
         int mainDividerLocation = userPrefs.getInt(MAIN_DIVIDER_LOCATION_KEY,
@@ -276,6 +296,9 @@ public final class MainPageBuilder {
 
     /**
      * Stores the frame's state in the user preferences.
+     * 
+     * @param userPrefs
+     *            the preferences instance to store the state into
      */
     public void storeIn(Preferences userPrefs) {
         int mainDividerLocation = mainSplitPane.getDividerLocation();
@@ -289,6 +312,9 @@ public final class MainPageBuilder {
 
     /**
      * Answers if the dynamic help contents panel is visible.
+     * 
+     * @return <code>true</code> if help is visible, <code>false</code> if
+     *         help is not visible
      */
     private boolean isHelpVisible() {
         return editorHelpSplitPane.getTopComponent() != null;
@@ -296,6 +322,10 @@ public final class MainPageBuilder {
 
     /**
      * Sets the visiblity of the dynamic help contents panel.
+     * 
+     * @param b
+     *            set to <code>true</code> if help should be set to visible,
+     *            <code>false</code> for hiding the help
      */
     private void setHelpVisible(boolean b) {
         if (isHelpVisible() == b) {

@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: GoalContainerTableModel.java,v 1.1 2004/07/18 21:25:28 moleman Exp $
+ * $Id: GoalContainerTableModel.java,v 1.2 2004/08/07 09:28:04 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
 
@@ -27,15 +27,15 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class GoalContainerTableModel extends TableAdapter {
 
     private static final String[] COLUMN_NAMES = {
-            ResourceUtils.getString("goalEditor.identifier.text"),
-            ResourceUtils.getString("goalEditor.unit.text"),
-            ResourceUtils.getString("goalEditor.intensity.text") };
+            ResourceUtils.getString("goalEditor.identifier.text"), //$NON-NLS-1$
+            ResourceUtils.getString("goalEditor.unit.text"), //$NON-NLS-1$
+            ResourceUtils.getString("goalEditor.intensity.text") }; //$NON-NLS-1$
 
     /**
      * @param listModel

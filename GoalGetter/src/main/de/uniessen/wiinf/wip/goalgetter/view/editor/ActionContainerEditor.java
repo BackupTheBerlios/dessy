@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionContainerEditor.java,v 1.4 2004/07/18 21:26:39 moleman Exp $
+ * $Id: ActionContainerEditor.java,v 1.5 2004/08/07 09:28:03 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -33,11 +33,14 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class ActionContainerEditor extends AbstractEditor {
 
+    /**
+     * Constructs a <code>ActionContainerEditor</code>
+     */
     public ActionContainerEditor() {
         super(Resources.ACTION_ICON, "Actions Overview");
     }
@@ -60,11 +63,8 @@ public class ActionContainerEditor extends AbstractEditor {
 
     }
 
-    /**
-     *  
-     */
     private void initComponents() {
-
+        // empty. no components to initialize
     }
 
     /*

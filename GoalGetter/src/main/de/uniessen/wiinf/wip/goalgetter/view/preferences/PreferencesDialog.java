@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: PreferencesDialog.java,v 1.5 2004/07/31 11:03:35 moleman Exp $
+ * $Id: PreferencesDialog.java,v 1.6 2004/08/07 09:28:04 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
@@ -45,7 +45,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class PreferencesDialog extends AbstractDialog {
@@ -110,6 +110,7 @@ public final class PreferencesDialog extends AbstractDialog {
 
     /**
      * Builds and returns the tabbed pane.
+     * @return tabbed Pane
      */
     protected JTabbedPane buildTabbedPane() {
         Component generalPanel = new GeneralTabBuilder(settings,
@@ -118,9 +119,9 @@ public final class PreferencesDialog extends AbstractDialog {
         lafPanel = new LookAndFeelPanel(getTriggerChannel());
 
         JTabbedPane pane = new JTabbedPane();
-        pane.addTab(ResourceUtils.getString("preferencesDialog.general.text"),
+        pane.addTab(ResourceUtils.getString("preferencesDialog.general.text"),//$NON-NLS-1$
                 generalPanel);
-        pane.addTab(ResourceUtils.getString("preferencesDialog.laf.text"),
+        pane.addTab(ResourceUtils.getString("preferencesDialog.laf.text"),//$NON-NLS-1$
                 lafPanel);
         return pane;
     }
@@ -136,6 +137,9 @@ public final class PreferencesDialog extends AbstractDialog {
 
     /**
      * Unlike the default try to get an aspect ratio of 1:1.
+     * 
+     * @param component
+     *            the component to resize
      */
     protected void resizeHook(JComponent component) {
         Resizer.ONE2ONE.resizeDialogContent(component);
