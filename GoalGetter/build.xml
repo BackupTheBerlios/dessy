@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.1 2004/07/03 20:17:08 moleman Exp $
+   $Id: build.xml,v 1.2 2004/07/12 13:03:09 moleman Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -40,6 +40,10 @@
         <pathelement location="${lib.looks.jar}" 	  /> 
         <pathelement location="${lib.uif.jar}"   	  /> 
     	<pathelement location="${lib.uif-extras.jar}" /> 
+   <!-- 	<pathelement location="${lib.gnujaxp.jar}" /> -->
+    	<pathelement location="${lib.jcommon.jar}" /> 
+    	<pathelement location="${lib.jfreechart.jar}" />
+<!--    	<pathelement location="${lib.servlet.jar}" /> -->
     </path>
     
     <path id="classpath.main">
@@ -48,6 +52,10 @@
         <pathelement location="${lib.looks.jar}" 	  /> 
         <pathelement location="${lib.uif.jar}"   	  /> 
     	<pathelement location="${lib.uif-extras.jar}" /> 
+<!--    	<pathelement location="${lib.gnujaxp.jar}" />  -->
+    	<pathelement location="${lib.jcommon.jar}" /> 
+    	<pathelement location="${lib.jfreechart.jar}" />
+    <!--	<pathelement location="${lib.servlet.jar}" /> -->
     </path>
     
   
@@ -159,6 +167,10 @@
 			<zipfileset src="${lib.looks.jar}"	 />
 			<zipfileset src="${lib.uif.jar}"     />
 			<zipfileset src="${lib.uif-extras.jar}" />
+<!--			<zipfileset src="${lib.gnujaxp.jar}" /> -->
+	    	<zipfileset src="${lib.jcommon.jar}" /> 
+			<zipfileset src="${lib.jfreechart.jar}" />
+	<!--		<zipfileset src="${lib.servlet.jar}" /> -->
 		</jar>
 	</target>
 	
