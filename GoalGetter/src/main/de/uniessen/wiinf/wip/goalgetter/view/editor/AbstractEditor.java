@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AbstractEditor.java,v 1.2 2004/08/07 09:28:03 moleman Exp $
+ * $Id: AbstractEditor.java,v 1.3 2004/08/15 15:13:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -36,7 +36,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public abstract class AbstractEditor extends JPanel implements Editor {
@@ -73,7 +73,7 @@ public abstract class AbstractEditor extends JPanel implements Editor {
      *            icon for the editor
      */
     public AbstractEditor(Icon icon) {
-        this(icon, "");
+        this(icon, ""); //$NON-NLS-1$
     }
 
     /**

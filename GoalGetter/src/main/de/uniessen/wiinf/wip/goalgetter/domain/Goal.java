@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Goal.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
+ * $Id: Goal.java,v 1.5 2004/08/15 15:13:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -29,7 +29,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class Goal extends AbstractDomain implements Comparable {
@@ -64,6 +64,10 @@ public class Goal extends AbstractDomain implements Comparable {
 
     // Instance Creation ******************************************************
 
+    public Goal(){
+        this(null);
+    }
+    
     /**
      * Constructs a <code>Goal</code> with the given identifier.
      * 

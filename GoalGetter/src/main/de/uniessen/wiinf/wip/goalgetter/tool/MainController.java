@@ -16,28 +16,33 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.10 2004/08/14 21:46:51 jsprenger Exp $
+ * $Id: MainController.java,v 1.11 2004/08/15 15:13:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
-import java.awt.FileDialog;
 import java.awt.Frame;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
 
 import com.jgoodies.uif.application.AbstractMainFrame;
 import com.jgoodies.uif.application.Application;
+import com.jgoodies.uif.util.ResourceUtils;
 import com.jgoodies.uifextras.convenience.DefaultAboutDialog;
 import com.jgoodies.uifextras.convenience.SetupManager;
 import com.jgoodies.uifextras.convenience.TipOfTheDayDialog;
 import com.jgoodies.uifextras.printing.PrintManager;
 
+import de.uniessen.wiinf.wip.goalgetter.domain.Constants;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
 import de.uniessen.wiinf.wip.goalgetter.domain.ProjectFactory;
+import de.uniessen.wiinf.wip.goalgetter.tool.file.GoalGetterFileFilter;
+import de.uniessen.wiinf.wip.goalgetter.view.file.GoalGetterFileView;
 import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
 import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityAnalysisDialog;
 import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
@@ -50,7 +55,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *  
  */
 public final class MainController {
@@ -102,30 +107,57 @@ public final class MainController {
      * main module. Uses a sample project in this demo.
      */
     void openProject() {
-        FileDialog dialog = new FileDialog(getDefaultParentFrame(),
-                "Open project file");
-        dialog.setVisible(true);
-        if (dialog.getFile() == null)
-            return;
 
-        System.out.println("You've choosen to open this file: "
-                + dialog.getFile());
-        getMainModule()
-                .setProject(Project.readFrom(new File(dialog.getFile())));
+        JFileChooser chooser = new JFileChooser();
+
+        GoalGetterFileFilter filter = new GoalGetterFileFilter();
+        filter.addExtension(Constants.FILE_EXTENSION);
+        filter.setDescription("Goal Getter Decision Project");
+        chooser.setFileFilter(filter);
+
+        GoalGetterFileView fileView = new GoalGetterFileView();
+        fileView.putIcon(Constants.FILE_EXTENSION, Resources.GOAL_ICON);
+        chooser.setFileView(fileView);
+
+        int returnVal = chooser.showOpenDialog(getDefaultParentFrame());
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+            getMainModule().setProject(
+                    Project.readFrom(chooser.getSelectedFile()));
+        }
     }
 
     /**
      * Saves the project to the current file.
      */
     void save() {
-        showMessage("Save performed.");
+        if (getMainModule().getProject().getFileName() == null)
+            saveAs();
+        getMainModule().getProject().save();
+        //  showMessage("Save performed.");
     }
 
     /**
      * Asks the user for a file name and saves the project to that file.
      */
     void saveAs() {
-        showMessage("Save as performed.");
+
+        JFileChooser chooser = new JFileChooser();
+
+        GoalGetterFileFilter filter = new GoalGetterFileFilter();
+        filter.addExtension(Constants.FILE_EXTENSION);
+        filter.setDescription("Goal Getter Decision Project");
+        chooser.setFileFilter(filter);
+
+        GoalGetterFileView fileView = new GoalGetterFileView();
+        fileView.putIcon(Constants.FILE_EXTENSION, Resources.GOAL_ICON);
+        chooser.setFileView(fileView);
+
+        int returnVal = chooser.showSaveDialog(getDefaultParentFrame());
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            getMainModule().getProject().saveAs(chooser.getSelectedFile());
+        }
+
     }
 
     /**
@@ -216,25 +248,26 @@ public final class MainController {
 
         //mainModule.addAnalyseNode();
 
-    	// TODO: anpassen an echte Datanestruktur...
-    	List col = new ArrayList();
-    	SensitivityElements e;
-    	String nameX = "Alternative",nameY="Kosten";
-    	
-    	e = new SensitivityElements("Peter");
-    	e.addValues("Handlung 1","500");
-    	e.addValues("Handlung 2","700");
-    	e.addValues("Handlung 3","1000");
-    	col.add(e);
-    	
-    	e = new SensitivityElements("Klaus");
-    	e.addValues("Handlung 1","100");
-    	e.addValues("Handlung 2","2000");
-    	e.addValues("Handlung 3","900");
-    	col.add(e);
-    	
-    	    	// end new Elements
-    	new SensitivityAnalysisDialog(getDefaultParentFrame(),col,nameX,nameY).open();
+        // TODO: anpassen an echte Datanestruktur...
+        List col = new ArrayList();
+        SensitivityElements e;
+        String nameX = "Alternative", nameY = "Kosten";
+
+        e = new SensitivityElements("Peter");
+        e.addValues("Handlung 1", "500");
+        e.addValues("Handlung 2", "700");
+        e.addValues("Handlung 3", "1000");
+        col.add(e);
+
+        e = new SensitivityElements("Klaus");
+        e.addValues("Handlung 1", "100");
+        e.addValues("Handlung 2", "2000");
+        e.addValues("Handlung 3", "900");
+        col.add(e);
+
+        // end new Elements
+        new SensitivityAnalysisDialog(getDefaultParentFrame(), col, nameX,
+                nameY).open();
 
         //        SensitivityAnalysisChart chart = new SensitivityAnalysisChart();
         //        JDialog d = new JDialog();

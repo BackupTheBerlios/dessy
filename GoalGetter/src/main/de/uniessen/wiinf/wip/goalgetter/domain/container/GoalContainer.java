@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainer.java,v 1.1 2004/08/14 16:43:35 moleman Exp $
+ * $Id: GoalContainer.java,v 1.2 2004/08/15 15:13:33 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -36,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class GoalContainer extends AbstractDomain {
@@ -55,6 +55,10 @@ public class GoalContainer extends AbstractDomain {
      */
     public static final String PROPERTYNAME_GOALS = "goals";//$NON-NLS-1$
 
+    
+    public GoalContainer(){
+        this("GoalContainer");
+    }
     /**
      * Constructs a <code>GoalContainer</code> with the given identifier.
      * 

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: WelcomePanel.java,v 1.6 2004/08/14 11:11:11 moleman Exp $
+ * $Id: WelcomePanel.java,v 1.7 2004/08/15 15:13:34 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class WelcomePanel extends GradientBackgroundPanel implements
@@ -73,7 +73,7 @@ public final class WelcomePanel extends GradientBackgroundPanel implements
     }
 
     public String getTitle() {
-        return ResourceUtils.getString("welcomePanel.welcome.text");
+        return ResourceUtils.getString("welcomePanel.welcome.text"); //$NON-NLS-1$
     }
 
     public JToolBar getToolBar() {
@@ -109,18 +109,18 @@ public final class WelcomePanel extends GradientBackgroundPanel implements
      */
     private JComponent buildForeground() {
         JLabel welcomeLbl = new JLabel(ResourceUtils
-                .getString("welcomePanel.welcomeTo.text"));
+                .getString("welcomePanel.welcomeTo.text")); //$NON-NLS-1$
         JLabel logoLbl = new JLabel(ResourceUtils
                 .getIcon(Resources.LOGO_ICON_ID));
         JLabel selectLbl = new JLabel(ResourceUtils
-                .getString("welcomePanel.selectOptionsBelow.text"));
+                .getString("welcomePanel.selectOptionsBelow.text")); //$NON-NLS-1$
         Component newProjectButton = createActionComponent(ActionManager
                 .get(Actions.NEW_PROJECT_ID));
         Component openProjectButton = createActionComponent(ActionManager
                 .get(Actions.OPEN_PROJECT_ID));
 
-        FormLayout layout = new FormLayout("9dlu, left:pref:grow",
-                "b:pref, c:pref, t:pref, 9dlu, pref, 6dlu, pref");
+        FormLayout layout = new FormLayout("9dlu, left:pref:grow", //$NON-NLS-1$
+                "b:pref, c:pref, t:pref, 9dlu, pref, 6dlu, pref"); //$NON-NLS-1$
         PanelBuilder builder = new PanelBuilder(layout);
         builder.getPanel().setOpaque(false);
         builder.setBorder(Borders.DLU14_BORDER);

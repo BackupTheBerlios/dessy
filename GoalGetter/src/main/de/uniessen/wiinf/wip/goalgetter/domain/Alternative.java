@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Alternative.java,v 1.5 2004/08/15 07:51:42 moleman Exp $
+ * $Id: Alternative.java,v 1.6 2004/08/15 15:13:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -41,7 +41,7 @@ import java.util.TreeMap;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public class Alternative extends AbstractDomain {
@@ -62,6 +62,13 @@ public class Alternative extends AbstractDomain {
 
     private TreeMap intensityMap = new TreeMap();
 
+    /**
+     * 
+     */
+    public Alternative() {
+     this(null);
+    }
+    
     /**
      * Constructs an <code>Alternative</code> with the given identifier.
      * 
@@ -193,6 +200,20 @@ public class Alternative extends AbstractDomain {
         l.addAll(set);
         return l;
 
+    }
+    
+    /**
+     * @param intensityMap The intensityMap to set.
+     */
+    public void setIntensityMap(TreeMap intensityMap) {
+        this.intensityMap = intensityMap;
+    }
+    
+    /**
+     * @return Returns the intensityMap.
+     */
+    public TreeMap getIntensityMap() {
+        return intensityMap;
     }
 
 }

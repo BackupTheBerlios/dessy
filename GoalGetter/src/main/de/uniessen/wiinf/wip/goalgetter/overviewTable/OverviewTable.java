@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: OverviewTable.java,v 1.8 2004/08/14 11:11:11 moleman Exp $
+ * $Id: OverviewTable.java,v 1.9 2004/08/15 15:13:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.overviewTable;
 
@@ -27,6 +27,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 
+import com.jgoodies.uif.util.SystemUtils;
 import com.jgoodies.uifextras.util.ExtTable;
 
 /**
@@ -35,7 +36,7 @@ import com.jgoodies.uifextras.util.ExtTable;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public class OverviewTable extends ExtTable {
@@ -85,16 +86,22 @@ public class OverviewTable extends ExtTable {
     protected void configureTable() {
         super.configureTable();
         getTableHeader().setReorderingAllowed(false);
-        setAutoResizeMode(AUTO_RESIZE_LAST_COLUMN);
+        setAutoResizeMode(AUTO_RESIZE_NEXT_COLUMN);
         setRowSelectionAllowed(true);
         setFocusable(true);
         setColumnSelectionAllowed(true);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setShowHorizontalLines(false);
-        int gapHeight = getRowHeight() / 4;
-        setRowHeight(getRowHeight() + gapHeight);
-        //setDefaultEditor (Object.class, new GenericEditor());
+        setRowHeight(calcRowHeight());
         setEnabled(true);
+    }
+
+    private int calcRowHeight() {
+        int minimumRowHeight = getFont().getSize() + 14;
+        int defaultRowHeight = SystemUtils.IS_LOW_RES ? 17 : 18;
+        int chosenHeight = Math.max(minimumRowHeight, defaultRowHeight);
+        int gapHeight = chosenHeight / 4;
+        return chosenHeight + gapHeight;
     }
 
     public Component prepareRenderer(TableCellRenderer renderer, int rowIndex,
@@ -139,6 +146,15 @@ public class OverviewTable extends ExtTable {
             c.setForeground(UIManager.getColor("List.selectionForeground"));//$NON-NLS-1$
         }
         return c;
+    }
+
+    /**
+     * Updates the UI. In addition to the superclass behavior, we set the row
+     * height to a level with much more padding.
+     */
+    public void updateUI() {
+        super.updateUI();
+        setRowHeight(calcRowHeight());
     }
 
 }

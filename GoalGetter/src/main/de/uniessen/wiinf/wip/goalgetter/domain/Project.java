@@ -16,17 +16,23 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Project.java,v 1.4 2004/08/14 16:43:35 moleman Exp $
+ * $Id: Project.java,v 1.5 2004/08/15 15:13:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import com.jgoodies.binding.beans.Model;
-import com.jgoodies.binding.list.ArrayListModel;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.container.ActionContainer;
 import de.uniessen.wiinf.wip.goalgetter.domain.container.AlternativeContainer;
@@ -39,7 +45,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.container.GoalContainer;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class Project extends Model {
@@ -49,24 +55,24 @@ public final class Project extends Model {
     /**
      * Refers to <code>Description</code> object that describes this project.
      */
-    private final Description description;
+    private Description description;
 
     /**
      * Holds a list of goals
      */
-    private final GoalContainer goalContainer;
+    private GoalContainer goalContainer;
 
     /**
      * Holds a list of alternatives
      */
-    private final AlternativeContainer alternativeContainer;
+    private AlternativeContainer alternativeContainer;
 
     /**
      * Holds a list of actions
      */
-    private final ActionContainer actionContainerByGoal;
+    private ActionContainer actionContainerByGoal;
 
-    private final ActionContainer actionContainerByAlternative;
+    private ActionContainer actionContainerByAlternative;
 
     /**
      * The file used to save this project to.
@@ -74,6 +80,10 @@ public final class Project extends Model {
     private File file;
 
     // Instance Creation ******************************************************
+
+    public Project() {
+        this("New Project");
+    }
 
     /**
      * Constructs a <code>Project</code> with the given name and and empty
@@ -86,9 +96,9 @@ public final class Project extends Model {
         this.description = new Description(name);
         this.goalContainer = new GoalContainer("Goals");
         this.alternativeContainer = new AlternativeContainer("Alternatives");
-        this.actionContainerByGoal = new ActionContainer("by Goal");
+        this.actionContainerByGoal = new ActionContainer("Actions by Goal");
         this.actionContainerByAlternative = new ActionContainer(
-                "by Alternative");
+                "Actions by Alternative");
     }
 
     // The public API *********************************************************
@@ -216,78 +226,21 @@ public final class Project extends Model {
         return alternativeContainer;
     }
 
-    public ArrayListModel getAlternativeIntensitiesFor(Goal g) {
-        ArrayListModel aModel = new ArrayListModel();
-
-        Iterator i = alternativeContainer.getAlternatives().iterator();
-        while (i.hasNext()) {
-            //  aModel
-        }
-        return aModel;
-
+    /**
+     * @param alternativeContainer
+     *            The alternativeContainer to set.
+     */
+    public void setAlternativeContainer(
+            AlternativeContainer alternativeContainer) {
+        this.alternativeContainer = alternativeContainer;
     }
 
-    public ArrayListModel alternativesForTable() {
-        ArrayListModel aModel = new ArrayListModel();
-
-        Iterator goalIterator = goalContainer.getGoals().iterator();
-        Iterator alternativeIterator = alternativeContainer.getAlternatives()
-                .iterator();
-        while (alternativeIterator.hasNext()) {
-            while (goalIterator.hasNext()) {
-                Goal g = (Goal) goalIterator.next();
-                Alternative a = (Alternative) alternativeIterator.next();
-                aModel.add(new AlternativeTableRow(g.getName(), g
-                        .getIntensity(), a.getIdentifier(), a.getIntensity(g)));
-            }
-        }
-        return aModel;
-    }
-
-    public class AlternativeTableRow {
-        String goalIdentifier;
-
-        String goalValue;
-
-        String alternativeIdentifier;
-
-        String alternativeValue;
-
-        public AlternativeTableRow(String goalId, String goalVal,
-                String alternativeID, String alternativeVal) {
-            this.goalIdentifier = goalId;
-            this.goalValue = goalVal;
-            this.alternativeIdentifier = alternativeID;
-            this.alternativeValue = alternativeVal;
-        }
-
-        /**
-         * @return Returns the alternativeIdentifier.
-         */
-        public String getAlternativeIdentifier() {
-            return alternativeIdentifier;
-        }
-
-        /**
-         * @return Returns the alternativeValue.
-         */
-        public String getAlternativeValue() {
-            return alternativeValue;
-        }
-
-        /**
-         * @return Returns the goalIdentifier.
-         */
-        public String getGoalIdentifier() {
-            return goalIdentifier;
-        }
-
-        /**
-         * @return Returns the goalValue.
-         */
-        public String getGoalValue() {
-            return goalValue;
-        }
+    /**
+     * @param goalContainer
+     *            The goalContainer to set.
+     */
+    public void setGoalContainer(GoalContainer goalContainer) {
+        this.goalContainer = goalContainer;
     }
 
     //  Managing Actions ********************************************************
@@ -353,10 +306,21 @@ public final class Project extends Model {
      * @return project
      */
     public static Project readFrom(File f) {
-        // TODO: really read from file
-        Project model = ProjectFactory.createSample();
-        model.setFile(f);
-        return model;
+        // TODO: make filename selection
+        XMLDecoder dec;
+        try {
+            dec = new XMLDecoder(new BufferedInputStream(new FileInputStream(
+                    f)));
+            Object importObject = dec.readObject();
+            dec.close();
+
+            Project model = (Project) importObject;
+            model.setFile(f);
+            return model;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ProjectFactory.createSample();
     }
 
     /**
@@ -376,8 +340,19 @@ public final class Project extends Model {
      *            the file to save to
      */
     public void saveAs(File aFile) {
-        // TODO: really save project
+        // TODO: make filename selection
         setFile(aFile);
+        System.out.println(file);
+        XMLEncoder enc;
+        try {
+            enc = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(
+                    file)));
+            enc.writeObject(this);
+            enc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

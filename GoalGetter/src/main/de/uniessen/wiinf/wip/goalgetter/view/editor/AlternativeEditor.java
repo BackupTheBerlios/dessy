@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeEditor.java,v 1.8 2004/08/14 16:43:35 moleman Exp $
+ * $Id: AlternativeEditor.java,v 1.9 2004/08/15 15:13:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *  
  */
 public final class AlternativeEditor extends AbstractEditor {
@@ -100,30 +100,29 @@ public final class AlternativeEditor extends AbstractEditor {
         for (int i = 0; i < components.length; i++) {
             if (components[i].getClass() == JTextField.class
                     && components[i].getName() != null) {
-                alternative.putIntensity(getGoalByIdentifier(components[i].getName()),
-                        ((JTextField) components[i]).getText());
+                alternative.putIntensity(getGoalByIdentifier(components[i]
+                        .getName()), ((JTextField) components[i]).getText());
             }
         }
 
     }
 
-        private Goal getGoalByIdentifier(String s){
-            Alternative a = getAlternative();
-            Collection c = a.getIntensities().keySet();
-            Iterator iterator = c.iterator();
-            while(iterator.hasNext()){
-                Goal g = (Goal) iterator.next();
-                if(g.getIdentifier().equals(s))
-                    return g;
-            }
-            return null;
+    private Goal getGoalByIdentifier(String s) {
+        Alternative a = getAlternative();
+        Collection c = a.getIntensities().keySet();
+        Iterator iterator = c.iterator();
+        while (iterator.hasNext()) {
+            Goal g = (Goal) iterator.next();
+            if (g.getIdentifier().equals(s))
+                return g;
         }
+        return null;
+    }
 
     /**
      * Reads the editor contents from the underlying model.
      */
     protected void updateView() {
-        Alternative alternative = getAlternative();
         super.updateView();
 
         intensitiesPanel.removeAll();
@@ -134,23 +133,21 @@ public final class AlternativeEditor extends AbstractEditor {
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), intensitiesPanel);
         builder.setBorder(Borders.EMPTY_BORDER);
-        // CellConstraints cc = new CellConstraints();
 
-        builder.append("", new JLabel(identifierField.getText()), new JLabel(
+        builder.append("", new JLabel(identifierField.getText()), new JLabel( //$NON-NLS-1$
                 "Sollzustand"));
         builder.nextLine();
 
-        // TODO zugriff auf Goals ermöglichen
         Iterator iterator = getAlternative().getGoals().iterator();
         while (iterator.hasNext()) {
-            Goal goal= (Goal) iterator.next();
+            Goal goal = (Goal) iterator.next();
+
             JTextField textfield = new JTextField();
             textfield.setName(goal.getIdentifier());
             textfield.setText(getAlternative().getIntensity(goal));
+
             JTextField shouldBeTextfield = new JTextField();
-            // shouldbeTextfield.setName(key);
             shouldBeTextfield.setText(goal.getIntensity());
-            //System.out.println(g.getName() + g.getIntensity());
             shouldBeTextfield.setEditable(false);
 
             builder.append(goal.getName(), textfield, shouldBeTextfield);

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.11 2004/08/15 07:51:42 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.12 2004/08/15 15:13:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.AlternativeContainerTabl
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
@@ -65,17 +65,13 @@ public class AlternativeContainerEditor extends AbstractEditor {
     protected void build() {
         initComponents();
 
-        FormLayout layout = new FormLayout(
-        "0:grow:0.9");//$NON-NLS-1$
-DefaultFormBuilder builder = new DefaultFormBuilder(layout,
-        ResourceUtils.getBundle(), this);
-builder.setDefaultDialogBorder();
-        builder
-                .appendI15dSeparator("alternativeContainerEditor.alternatives.text");//$NON-NLS-1$
- 
-        builder.nextLine();
+        FormLayout layout = new FormLayout("0:grow:0.9");//$NON-NLS-1$
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+                ResourceUtils.getBundle(), this);
+        builder.setDefaultDialogBorder();
+
         java.awt.Component overviewPane = new JScrollPane(overviewTable);
-        builder.append(overviewPane, 3);
+        builder.append(overviewPane);
     }
 
     /**
@@ -85,6 +81,7 @@ builder.setDefaultDialogBorder();
         overviewTable = new OverviewTable();
         overviewTable
                 .addMouseListener(new AlternativeContainerEditorPopupAdapter());
+        overviewTable.setHighlightColumn(0);
     }
 
     /*
@@ -96,6 +93,12 @@ builder.setDefaultDialogBorder();
         return AlternativeContainer.class;
     }
 
+    /**
+     * Convenience function for {@link AlternativeContainerEditor#getModel()}including the correct
+     * typecast.
+     * 
+     * @return AlternativeContainer
+     */
     private AlternativeContainer getAlternativeContainer() {
         return (AlternativeContainer) getModel();
     }
@@ -106,7 +109,7 @@ builder.setDefaultDialogBorder();
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#getTitleSuffix()
      */
     protected String getTitleSuffix() {
-        return getAlternativeContainer().getIdentifier();
+        return ""; //$NON-NLS-1$
     }
 
     /*

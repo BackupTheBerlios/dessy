@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainer.java,v 1.2 2004/08/15 07:51:42 moleman Exp $
+ * $Id: AlternativeContainer.java,v 1.3 2004/08/15 15:13:33 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -36,12 +36,12 @@ import de.uniessen.wiinf.wip.goalgetter.domain.FillLevel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public class AlternativeContainer extends AbstractDomain {
 
-    private final ArrayListModel alternatives = new ArrayListModel();
+    private ArrayListModel alternatives = new ArrayListModel();
 
     private String identifier;
 
@@ -54,6 +54,10 @@ public class AlternativeContainer extends AbstractDomain {
      * Bound Bean Property <code>PROPERTYNAME_ALTERNATIVES</code>
      */
     public static final String PROPERTYNAME_ALTERNATIVES = "alternatives";//$NON-NLS-1$
+
+    public AlternativeContainer() {
+        this(null);
+    }
 
     /**
      * Constructs an <code>AlternativeContainer</code> with the given
@@ -83,7 +87,7 @@ public class AlternativeContainer extends AbstractDomain {
     public ArrayListModel getAlternatives() {
         return alternatives;
     }
-    
+
     /**
      * Returns the list of alternatives
      * 
@@ -123,6 +127,14 @@ public class AlternativeContainer extends AbstractDomain {
         List newAlternatives = getAlternatives();
         firePropertyChange(PROPERTYNAME_ALTERNATIVES, oldAlternatives,
                 newAlternatives);
+    }
+
+    /**
+     * @param alternatives
+     *            The alternatives to set.
+     */
+    public void setAlternatives(ArrayListModel alternatives) {
+        this.alternatives = alternatives;
     }
 
     /**

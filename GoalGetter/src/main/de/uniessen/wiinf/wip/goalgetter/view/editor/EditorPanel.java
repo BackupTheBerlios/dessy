@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: EditorPanel.java,v 1.3 2004/08/14 11:11:11 moleman Exp $
+ * $Id: EditorPanel.java,v 1.4 2004/08/15 15:13:34 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -58,7 +58,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class EditorPanel extends SimpleInternalFrame {
@@ -93,7 +93,7 @@ public final class EditorPanel extends SimpleInternalFrame {
      *            used to observe selection changes
      */
     public EditorPanel(MainModule mainModule) {
-        super("Editor");
+        super("Editor"); //$NON-NLS-1$
         editorRegistry = new HashMap();
         editors = new LinkedList();
         setContent(buildContent());
@@ -163,8 +163,8 @@ public final class EditorPanel extends SimpleInternalFrame {
         Object oldValue = editorRegistry.put(domainClass, editor);
         if (oldValue != null) {
             Logger logger = Logger
-                    .getLogger("de.uniessen.wiinf.wip.goalgetter.view.editor.EditorPanel");
-            logger.warning("Duplicate editor registered for " + domainClass);
+                    .getLogger("de.uniessen.wiinf.wip.goalgetter.view.editor.EditorPanel"); //$NON-NLS-1$
+            logger.warning("Duplicate editor registered for " + domainClass); //$NON-NLS-1$
         }
     }
 

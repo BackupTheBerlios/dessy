@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerEditor.java,v 1.10 2004/08/15 07:51:42 moleman Exp $
+ * $Id: GoalContainerEditor.java,v 1.11 2004/08/15 15:13:34 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.GoalContainerTableModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *  
  */
 public class GoalContainerEditor extends AbstractEditor {
@@ -66,11 +66,9 @@ public class GoalContainerEditor extends AbstractEditor {
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
-
-        builder.appendI15dSeparator("goalContainerEditor.goals.text");//$NON-NLS-1$
         //   builder.appendRow(builder.getLineGapSpec());
         // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
-        builder.nextLine();
+        //builder.nextLine();
 
         java.awt.Component overviewPane = new JScrollPane(overviewTable);
         builder.append(overviewPane);
@@ -101,7 +99,7 @@ public class GoalContainerEditor extends AbstractEditor {
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#getTitleSuffix()
      */
     protected String getTitleSuffix() {
-        return getGoalContainer().getIdentifier();
+        return ""; //$NON-NLS-1$
     }
 
     /*

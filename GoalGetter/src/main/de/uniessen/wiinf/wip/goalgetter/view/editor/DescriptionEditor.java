@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: DescriptionEditor.java,v 1.6 2004/08/14 11:11:11 moleman Exp $
+ * $Id: DescriptionEditor.java,v 1.7 2004/08/15 15:13:33 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -41,7 +41,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *  
  */
 public final class DescriptionEditor extends AbstractEditor {
@@ -75,7 +75,7 @@ public final class DescriptionEditor extends AbstractEditor {
         builder.appendRow(builder.getLineGapSpec());
         builder.appendRow(new RowSpec("fill:50dlu:nogrow"));//$NON-NLS-1$
         builder.nextLine(2);
-        builder.append("", descriptionPane);
+        builder.append("", descriptionPane); //$NON-NLS-1$
     }
 
     private Description getDescription() {

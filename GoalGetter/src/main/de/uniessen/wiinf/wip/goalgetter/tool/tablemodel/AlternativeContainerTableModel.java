@@ -10,7 +10,7 @@
  * Jonas Sprenger (jonas.sprenger@gmx.de),
  * Tim Franz (tim.franz@uni-essen.de)
  * 
- * $Id: AlternativeContainerTableModel.java,v 1.2 2004/08/15 07:51:42 moleman Exp $
+ * $Id: AlternativeContainerTableModel.java,v 1.3 2004/08/15 15:13:33 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool.tablemodel;
 
@@ -31,7 +31,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public class AlternativeContainerTableModel extends TableAdapter {
@@ -49,11 +49,12 @@ public class AlternativeContainerTableModel extends TableAdapter {
     public AlternativeContainerTableModel(ListModel listModel) {
         super(listModel);
         this.columnNames = createColumnNames();
+       
     }
 
     private List createColumnNames() {
         List columnNameList = new ArrayList();
-columnNameList.add("");
+        columnNameList.add(" ");
         Alternative alternative = (Alternative) getRow(1);
         List goals = alternative.getGoals();
         Iterator iterator = goals.iterator();
@@ -71,17 +72,16 @@ columnNameList.add("");
      * @see javax.swing.table.TableModel#getValueAt(int, int)
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if(rowIndex==0 && columnIndex ==0){
+        if (rowIndex == 0 && columnIndex == 0) {
             return "Zielwert";
         }
-        
-        
-        if(rowIndex==0 && columnIndex >0){
+
+        if (rowIndex == 0 && columnIndex > 0) {
             return getGoalAt(columnIndex).getIntensity();
         }
-        
+
         Alternative alternative = (Alternative) getRow(rowIndex);
-       System.out.println(alternative.getIdentifier());
+        System.out.println(alternative.getIdentifier());
 
         switch (columnIndex) {
         case 0:
@@ -93,23 +93,25 @@ columnNameList.add("");
         }
     }
 
+    /**
+     * Only cells with a rowIndex > 0and a colIndex >0 can be edited. the first
+     * row and cell are secondary header cells.
+     */
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return rowIndex > 0 && columnIndex > 0;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javax.swing.table.TableModel#setValueAt(java.lang.Object, int, int)
+     */
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Alternative alternative = (Alternative) getRow(rowIndex);
-        switch (columnIndex) {
-        case 0:
-            alternative.setIdentifier((String) aValue);
-            break;
-        //        case 1:
-        //            alternative.setUnit((String) aValue);
-        //            break;
-        //        case 2:
-        //            alternative.setIntensity((String) aValue);
-        //            break;
-        }
+
+        Goal g = getGoalAt(columnIndex);
+        alternative.putIntensity(g, (String) aValue);
+
     }
 
     /**
@@ -140,10 +142,9 @@ columnNameList.add("");
      * @see #getColumnName(int)
      * @see #getRowCount()
      */
-    public int getColumnCount() {      
+    public int getColumnCount() {
         return columnNames.size();
     }
-
 
     public List getHighlightColumns() {
         List l = new ArrayList();
@@ -155,7 +156,7 @@ columnNameList.add("");
     private Goal getGoalAt(int i) {
         Alternative alternative = (Alternative) getRow(1);
         System.out.println(alternative.getGoals().size());
-        return (Goal) (alternative.getGoals()).get(i-1);
+        return (Goal) (alternative.getGoals()).get(i - 1);
     }
 
 }

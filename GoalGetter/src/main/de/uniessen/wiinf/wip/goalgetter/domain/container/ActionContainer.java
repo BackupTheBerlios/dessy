@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  *
- * $Id: ActionContainer.java,v 1.1 2004/08/14 16:43:35 moleman Exp $
+ * $Id: ActionContainer.java,v 1.2 2004/08/15 15:13:33 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain.container;
 
@@ -37,7 +37,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class ActionContainer extends AbstractDomain {
@@ -57,6 +57,13 @@ public class ActionContainer extends AbstractDomain {
      * Bound Bean Property <code>PROPERTYNAME_ACTIONS</code>
      */
     public static final String PROPERTYNAME_ACTIONS = "actions";//$NON-NLS-1$
+    
+    /**
+     * 
+     */
+    public ActionContainer() {
+        this(null);
+    }
 
     /**
      * Constructs an <code>ActionContainer</code> with the given identifier.
