@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionContainerEditor.java,v 1.3 2004/07/18 21:25:28 moleman Exp $
+ * $Id: ActionContainerEditor.java,v 1.4 2004/07/18 21:26:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -33,7 +33,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class ActionContainerEditor extends AbstractEditor {
@@ -51,8 +51,9 @@ public class ActionContainerEditor extends AbstractEditor {
         // TODO Auto-generated method stub
         initComponents();
 
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");        
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, ResourceUtils.getBundle(), this);
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+                ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
         //  CellConstraints cc = new CellConstraints();
         builder.appendSeparator("Actions");

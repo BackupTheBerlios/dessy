@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.4 2004/07/12 13:03:09 moleman Exp $
+ * $Id: MainController.java,v 1.5 2004/07/18 21:26:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -47,12 +47,10 @@ import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class MainController {
-    
-  
 
     /**
      * Refers to the module that provides all high-level models. Used to modify
@@ -201,18 +199,18 @@ public final class MainController {
      * Adds a segment as child under the selected node.
      */
     void showSensitivityAnalysis() {
-     
-       	//mainModule.addAnalyseNode();
-        	DessyChart chart = new DessyChart();
-        	JDialog d = new JDialog();
-        	d.setSize(300,300);
-        	d.setLocationRelativeTo(getDefaultParentFrame());
-        	d.getContentPane().add(chart.getChartPanel());
-        	d.show();
-        	//JOptionPane.showMessageDialog(getDefaultParentFrame(), what);
-        	
-        	//showMessage("Show Sensitivity Analysis performed.");
-        
+
+        //mainModule.addAnalyseNode();
+        DessyChart chart = new DessyChart();
+        JDialog d = new JDialog();
+        d.setSize(300, 300);
+        d.setLocationRelativeTo(getDefaultParentFrame());
+        d.getContentPane().add(chart.getChartPanel());
+        d.show();
+        //JOptionPane.showMessageDialog(getDefaultParentFrame(), what);
+
+        //showMessage("Show Sensitivity Analysis performed.");
+
     }
 
     /**
@@ -266,7 +264,7 @@ public final class MainController {
     void closeDynamicHelp() {
         getMainModule().getHelpModule().setHelpVisible(false);
     }
-    
+
     /**
      * Closes the view for the dynamic help.
      */

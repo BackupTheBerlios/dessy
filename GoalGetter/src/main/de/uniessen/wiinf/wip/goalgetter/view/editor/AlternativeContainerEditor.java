@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.5 2004/07/18 21:25:28 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.6 2004/07/18 21:26:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -37,7 +37,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
@@ -57,10 +57,12 @@ public class AlternativeContainerEditor extends AbstractEditor {
         initComponents();
 
         FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout,ResourceUtils.getBundle(), this);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+                ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
         //  CellConstraints cc = new CellConstraints();
-        builder.appendI15dSeparator("alternativeContainerEditor.alternatives.text");
+        builder
+                .appendI15dSeparator("alternativeContainerEditor.alternatives.text");
         builder.appendRow(builder.getLineGapSpec());
         // builder.appendRow(new RowSpec("fill:200dlu:nogrow"));
         builder.nextLine(2);
@@ -84,24 +86,25 @@ public class AlternativeContainerEditor extends AbstractEditor {
         String columnNames[] = { "  ", "Klaus", "Peter" };
 
         overviewTable = new OverviewTable(rowData, columnNames);
-       
-//        List entries = new ArrayList();
-//        // neue Zeile
-//       OverviewTableEntry element = new OverviewTableEntry("Alternative","Klaus");
-//       element.newElement("Availability"," June",java.lang.String.class);
-//       element.newElement("Knowledge","java",java.lang.String.class);
-//       element.newElement("Salary","12.000",java.lang.String.class);
-//       entries.add(element);
-//        // neue Zeile
-//       element =  new OverviewTableEntry("Alternative","Peter");
-//       element.newElement("Availability","June",java.lang.String.class);
-//       element.newElement("Knowledge","java",java.lang.String.class);
-//       element.newElement("Salary","12.000",java.lang.String.class);
-//       entries.add(element);
-//       // neue Zeile
-//       
-//        // erzeuge neue Tabelle
-//       overviewTable = new OverviewTable(entries);
+
+        //        List entries = new ArrayList();
+        //        // neue Zeile
+        //       OverviewTableEntry element = new
+        // OverviewTableEntry("Alternative","Klaus");
+        //       element.newElement("Availability"," June",java.lang.String.class);
+        //       element.newElement("Knowledge","java",java.lang.String.class);
+        //       element.newElement("Salary","12.000",java.lang.String.class);
+        //       entries.add(element);
+        //        // neue Zeile
+        //       element = new OverviewTableEntry("Alternative","Peter");
+        //       element.newElement("Availability","June",java.lang.String.class);
+        //       element.newElement("Knowledge","java",java.lang.String.class);
+        //       element.newElement("Salary","12.000",java.lang.String.class);
+        //       entries.add(element);
+        //       // neue Zeile
+        //       
+        //        // erzeuge neue Tabelle
+        //       overviewTable = new OverviewTable(entries);
     }
 
     /*

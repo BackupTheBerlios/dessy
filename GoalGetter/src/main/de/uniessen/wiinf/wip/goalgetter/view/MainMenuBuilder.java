@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainMenuBuilder.java,v 1.3 2004/07/18 21:25:28 moleman Exp $
+ * $Id: MainMenuBuilder.java,v 1.4 2004/07/18 21:26:39 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -43,7 +43,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class MainMenuBuilder {
@@ -74,7 +74,9 @@ public final class MainMenuBuilder {
      * Builds and returns the File menu.
      */
     private JMenu buildFileMenu() {
-        MenuBuilder builder = new MenuBuilder(ResourceUtils.getString("menubar.file.text"), ResourceUtils.getString("menubar.file.mnemonic").charAt(0));
+        MenuBuilder builder = new MenuBuilder(ResourceUtils
+                .getString("menubar.file.text"), ResourceUtils.getString(
+                "menubar.file.mnemonic").charAt(0));
         builder.add(ActionManager.get(Actions.NEW_PROJECT_ID));
         builder.add(ActionManager.get(Actions.OPEN_PROJECT_ID));
         builder.addSeparator();
@@ -98,7 +100,9 @@ public final class MainMenuBuilder {
      * Builds and returns the Component menu.
      */
     private JMenu buildNavigatorMenu() {
-        MenuBuilder builder = new MenuBuilder(ResourceUtils.getString("menubar.components.text"), ResourceUtils.getString("menubar.components.mnemonic").charAt(0));
+        MenuBuilder builder = new MenuBuilder(ResourceUtils
+                .getString("menubar.components.text"), ResourceUtils.getString(
+                "menubar.components.mnemonic").charAt(0));
         builder.add(ActionManager.get(Actions.ADD_GOAL_ID));
         builder.add(ActionManager.get(Actions.ADD_ALTERNATIVE_ID));
         //builder.add(ActionManager.get(Actions.ADD_ACTION_ID));
@@ -110,7 +114,9 @@ public final class MainMenuBuilder {
      * Builds and returns the Report menu.
      */
     private JMenu buildReportMenu() {
-        MenuBuilder builder = new MenuBuilder(ResourceUtils.getString("menubar.reports.text"), ResourceUtils.getString("menubar.reports.mnemonic").charAt(0));
+        MenuBuilder builder = new MenuBuilder(ResourceUtils
+                .getString("menubar.reports.text"), ResourceUtils.getString(
+                "menubar.reports.mnemonic").charAt(0));
         builder.add(ActionManager.get(Actions.SHOW_REPORT_ID));
         builder.add(ActionManager.get(Actions.SHOW_SENSITIVITYANALYSIS_ID));
         return builder.getMenu();
@@ -120,7 +126,9 @@ public final class MainMenuBuilder {
      * Builds and returns the Help menu.
      */
     private JMenu buildHelpMenu() {
-        MenuBuilder builder = new MenuBuilder(ResourceUtils.getString("menubar.help.text"), ResourceUtils.getString("menubar.help.mnemonic").charAt(0));
+        MenuBuilder builder = new MenuBuilder(ResourceUtils
+                .getString("menubar.help.text"), ResourceUtils.getString(
+                "menubar.help.mnemonic").charAt(0));
         builder.add(ActionManager.get(Actions.OPEN_HELP_CONTENTS_ID));
         builder.addSeparator();
         builder.add(ActionManager.get(Actions.OPEN_TIP_OF_THE_DAY_ID));

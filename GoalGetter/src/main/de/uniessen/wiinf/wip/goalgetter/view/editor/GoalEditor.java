@@ -16,12 +16,12 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalEditor.java,v 1.3 2004/07/12 12:38:12 moleman Exp $
+ * $Id: GoalEditor.java,v 1.4 2004/07/18 21:25:28 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
-import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
@@ -42,18 +42,16 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public class GoalEditor extends AbstractEditor {
 
-    private JTextComponent descriptionArea;
+    private JTextArea descriptionArea;
 
     private JTextComponent identifierField;
 
     private JTextComponent unitField;
-
-    private JTextComponent operatorField;
 
     private JTextComponent intensityField;
 
@@ -85,10 +83,12 @@ public class GoalEditor extends AbstractEditor {
      */
     private void initComponents() {
         identifierField = new JTextField();
-        descriptionArea = new JEditorPane();
+        descriptionArea = new JTextArea();
+        descriptionArea.setLineWrap(true);
+        //descriptionArea.setFont(getCurrentTheme().getControlTextFont());
+
         unitField = new JTextField();
         intensityField = new JTextField();
-        operatorField = new JTextField();
 
         beanAdapter = new BeanAdapter(getModel(), true);
 
@@ -100,8 +100,6 @@ public class GoalEditor extends AbstractEditor {
                 .getValueModel(Goal.PROPERTYNAME_UNIT)));
         intensityField.setDocument(new DocumentAdapter(beanAdapter
                 .getValueModel(Goal.PROPERTYNAME_INTENSITY)));
-        operatorField.setDocument(new DocumentAdapter(beanAdapter
-                .getValueModel(Goal.PROPERTYNAME_OPERATOR)));
 
     }
 
@@ -119,7 +117,8 @@ public class GoalEditor extends AbstractEditor {
         initComponents();
 
         java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu:grow");
+
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
                 ResourceUtils.getBundle(), this);
@@ -128,8 +127,6 @@ public class GoalEditor extends AbstractEditor {
         builder.appendI15d("goalEditor.identifier.text", identifierField);
         builder.nextLine();
         builder.appendI15d("goalEditor.unit.text", unitField);
-        builder.nextLine();
-        builder.appendI15d("goalEditor.operator.text", operatorField);
         builder.nextLine();
         builder.appendI15d("goalEditor.intensity.text", intensityField);
         builder.nextLine();

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainer.java,v 1.2 2004/07/18 21:25:28 moleman Exp $
+ * $Id: GoalContainer.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
@@ -32,7 +32,7 @@ import com.jgoodies.binding.list.ArrayListModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public class GoalContainer extends Model {
@@ -87,7 +87,5 @@ public class GoalContainer extends Model {
     public String toString() {
         return super.toString() + ':' + getIdentifier();
     }
-    
-
 
 }

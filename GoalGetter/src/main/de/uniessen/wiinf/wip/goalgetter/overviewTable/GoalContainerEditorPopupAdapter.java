@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerEditorPopupAdapter.java,v 1.1 2004/07/18 21:25:28 moleman Exp $
+ * $Id: GoalContainerEditorPopupAdapter.java,v 1.2 2004/07/18 21:26:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.overviewTable;
 
@@ -33,12 +33,14 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
-public final class GoalContainerEditorPopupAdapter extends PopupAdapter{
+public final class GoalContainerEditorPopupAdapter extends PopupAdapter {
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.jgoodies.uifextras.util.PopupAdapter#createPopupMenu()
      */
     protected JPopupMenu createPopupMenu() {

@@ -32,18 +32,20 @@ import javax.swing.JFormattedTextField;
  * 
  * <pre>
  * 
- *  new EmptyFormatter(new NumberFormatter());
- *  new EmptyFormatter(new NumberFormatter(), -1);
- *  new EmptyFormatter(new NumberFormatter(new IntegerFormat(3)), -1);
  *  
- *  new EmptyFormatter(new DateFormatter());
- *  new EmptyFormatter(new DateFormatter(
- *          DateFormat.getDateInstance(DateFormat.SHORT));
+ *   new EmptyFormatter(new NumberFormatter());
+ *   new EmptyFormatter(new NumberFormatter(), -1);
+ *   new EmptyFormatter(new NumberFormatter(new IntegerFormat(3)), -1);
+ *   
+ *   new EmptyFormatter(new DateFormatter());
+ *   new EmptyFormatter(new DateFormatter(
+ *           DateFormat.getDateInstance(DateFormat.SHORT));
+ *   
  *  
  * </pre>
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see javax.swing.text.DateFormatter
  * @see javax.swing.text.NumberFormatter
@@ -195,10 +197,12 @@ public final class EmptyFormatter extends JFormattedTextField.AbstractFormatter 
      * 
      * <pre>
      * 
-     *  isBlank(null)     = true
-     *  isBlank(&quot;&quot;)       = true
-     *  isBlank(&quot; &quot;)      = true
-     *  isBlank(&quot;Hi &quot;)    = false
+     *  
+     *   isBlank(null)     = true
+     *   isBlank(&quot;&quot;)       = true
+     *   isBlank(&quot; &quot;)      = true
+     *   isBlank(&quot;Hi &quot;)    = false
+     *   
      *  
      * </pre>
      * 

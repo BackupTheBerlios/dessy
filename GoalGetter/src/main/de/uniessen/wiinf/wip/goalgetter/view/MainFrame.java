@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainFrame.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
+ * $Id: MainFrame.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -39,13 +39,13 @@ import de.uniessen.wiinf.wip.goalgetter.tool.MainModule;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class MainFrame extends AbstractMainFrame {
 
     private static final Dimension MINIMUM_SIZE = new Dimension(500, 400);
-    
+
     public static final String PROPERTYNAME_HELP_NAVIGATOR_VISIBLE = "helpNavigatorVisible";
 
     /**
@@ -142,8 +142,6 @@ public final class MainFrame extends AbstractMainFrame {
         // welcomePanel.storeIn(userPrefs);
         mainPageBuilder().storeIn(userPrefs);
     }
-    
-
 
     // Accessing Collaborators **********************************************
 

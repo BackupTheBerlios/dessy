@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainPageBuilder.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
+ * $Id: MainPageBuilder.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -60,7 +60,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 
@@ -96,7 +96,7 @@ public final class MainPageBuilder {
     private JSplitPane mainSplitPane;
 
     private JSplitPane editorHelpSplitPane;
-    
+
     private JSplitPane navigatorHelpSplitPane;
 
     private JLabel statusField;
@@ -114,8 +114,8 @@ public final class MainPageBuilder {
 
         mainModule.getHelpModule().addPropertyChangeListener(
                 DynamicHelpModule.PROPERTYNAME_HELP_VISIBLE,
-                new HelpVisibilityChangeHandler());     
-       
+                new HelpVisibilityChangeHandler());
+
     }
 
     // Building *************************************************************
@@ -132,7 +132,7 @@ public final class MainPageBuilder {
         navigator.setMinimumSize(new Dimension(100, 100));
         navigator.setPreferredSize(new Dimension(160, 200));
 
-        helpNavigator = new SimpleInternalFrame("Dynamic Help Topics");       
+        helpNavigator = new SimpleInternalFrame("Dynamic Help Topics");
         helpNavigator.setContent(UIFactory
                 .createStrippedScrollPane(new HelpTreeBuilder(module
                         .getHelpModule()).build()));
@@ -188,8 +188,8 @@ public final class MainPageBuilder {
      * and answers them wrapped by a stripped <code>JSplitPane</code>.
      */
     private JComponent buildNavigatorHelpPanel() {
-        navigatorHelpSplitPane =UIFactory.createStrippedSplitPane(JSplitPane.VERTICAL_SPLIT,
-                navigator, helpNavigator, 0.667);
+        navigatorHelpSplitPane = UIFactory.createStrippedSplitPane(
+                JSplitPane.VERTICAL_SPLIT, navigator, helpNavigator, 0.667);
         return navigatorHelpSplitPane;
     }
 
@@ -221,7 +221,7 @@ public final class MainPageBuilder {
                 JSplitPane.VERTICAL_SPLIT, buildEditorPanel(), helpView, 0.667);
         return editorHelpSplitPane;
     }
-    
+
     private JToolBar buildHelpNavigatorToolBar() {
         ToolBarBuilder builder = new ToolBarBuilder("Help Contents");
         builder.add(ActionManager.get(Actions.CLOSE_HELP_NAVIGATOR_ID));
@@ -295,13 +295,13 @@ public final class MainPageBuilder {
             mainSplitPane.setRightComponent(editorPanel);
         }
         //navigator
-//        if (b) {
-//            mainSplitPane.setLeftComponent(navigatorHelpSplitPane);
-//            navigatorHelpSplitPane.setTopComponent(navigator);
-//        } else {
-//            navigatorHelpSplitPane.setTopComponent(null);
-//            mainSplitPane.setLeftComponent(navigator);
-//        }
+        //        if (b) {
+        //            mainSplitPane.setLeftComponent(navigatorHelpSplitPane);
+        //            navigatorHelpSplitPane.setTopComponent(navigator);
+        //        } else {
+        //            navigatorHelpSplitPane.setTopComponent(null);
+        //            mainSplitPane.setLeftComponent(navigator);
+        //        }
     }
 
     // Listens to changes in the module's navigation tree model and rebuilds the
@@ -333,15 +333,12 @@ public final class MainPageBuilder {
             if (getComponentCount() == 0)
                 return;
             if (editorHelpSplitPane == null || isHelpVisible())
-                return;            
+                return;
             ComponentTreeUtils.updateComponentTreeUI(editorHelpSplitPane);
-           // if (navigatorHelpSplitPane == null || isHelpNavigatorVisible())
+            // if (navigatorHelpSplitPane == null || isHelpNavigatorVisible())
             ComponentTreeUtils.updateComponentTreeUI(navigatorHelpSplitPane);
         }
 
     }
-    
-    
 
-   
 }

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeEditor.java,v 1.4 2004/07/18 21:25:28 moleman Exp $
+ * $Id: AlternativeEditor.java,v 1.5 2004/07/18 21:26:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -46,7 +46,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public final class AlternativeEditor extends AbstractEditor {
@@ -93,7 +93,8 @@ public final class AlternativeEditor extends AbstractEditor {
 
         Component[] components = intensitiesPanel.getComponents();
         for (int i = 0; i < components.length; i++) {
-            if (components[i].getClass() == JTextField.class && components[i].getName()!=null) {
+            if (components[i].getClass() == JTextField.class
+                    && components[i].getName() != null) {
                 alternative.putIntensity(components[i].getName(),
                         ((JTextField) components[i]).getText());
             }
@@ -111,14 +112,16 @@ public final class AlternativeEditor extends AbstractEditor {
 
         intensitiesPanel.removeAll();
 
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow:0.7, 4dlu, 0:grow:0.3");
+        FormLayout layout = new FormLayout(
+                "right:max(40dlu;p), 4dlu, 0:grow:0.7, 4dlu, 0:grow:0.3");
 
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout,ResourceUtils.getBundle(),
-                intensitiesPanel);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+                ResourceUtils.getBundle(), intensitiesPanel);
         builder.setBorder(Borders.EMPTY_BORDER);
         // CellConstraints cc = new CellConstraints();
-        
-        builder.append("", new JLabel(getAlternative().getIdentifier()),new JLabel("Sollzustand"));
+
+        builder.append("", new JLabel(getAlternative().getIdentifier()),
+                new JLabel("Sollzustand"));
         builder.nextLine();
 
         Map intensities = getAlternative().getIntensities();
@@ -129,7 +132,7 @@ public final class AlternativeEditor extends AbstractEditor {
             textfield.setName(key);
             textfield.setText((String) intensities.get(key));
             JTextField shouldBeTextfield = new JTextField();
-           // shouldbeTextfield.setName(key);
+            // shouldbeTextfield.setName(key);
             shouldBeTextfield.setText("1000");
             shouldBeTextfield.setEditable(false);
 
@@ -165,18 +168,23 @@ public final class AlternativeEditor extends AbstractEditor {
         initComponents();
 
         java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu:grow");
+        FormLayout layout = new FormLayout(
+                "right:max(40dlu;p), 4dlu, 160dlu:grow");
 
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout,ResourceUtils.getBundle(), this);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+                ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
 
         builder.appendI15dSeparator("alternativeEditor.alternative.text");
 
-        builder.appendI15d("alternativeEditor.identifier.text", identifierField);
+        builder
+                .appendI15d("alternativeEditor.identifier.text",
+                        identifierField);
         builder.appendRow(builder.getLineGapSpec());
         builder.appendRow(new RowSpec("fill:50dlu:nogrow"));
         builder.nextLine(2);
-        builder.appendI15d("alternativeEditor.description.text", descriptionPane);
+        builder.appendI15d("alternativeEditor.description.text",
+                descriptionPane);
 
         builder.appendI15dSeparator("alternativeEditor.intensities.text");
 

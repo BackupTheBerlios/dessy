@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainerEditor.java,v 1.4 2004/07/18 21:25:28 moleman Exp $
+ * $Id: GoalContainerEditor.java,v 1.5 2004/07/18 21:26:39 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -38,7 +38,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.tablemodel.GoalContainerTableModel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class GoalContainerEditor extends AbstractEditor {
@@ -85,27 +85,27 @@ public class GoalContainerEditor extends AbstractEditor {
         //        String columnNames[] = { "Goal", "operator", "intensity" };
         // overviewTable = new JTable(rowData, columnNames);
 
-//        List entries = new ArrayList();
-//        // neue Zeile
-//        OverviewTableEntry element = new OverviewTableEntry("Goal",
-//                "Availability");
-//        element.newElement("Operator", "=", java.lang.String.class);
-//        element.newElement("Intensity", "may - june", java.lang.String.class);
-//        entries.add(element);
-//        // neue Zeile
-//        element = new OverviewTableEntry("Goal", "Knowledge");
-//        element.newElement("Operator", ">=", java.lang.String.class);
-//        element.newElement("Intensity", "java", java.lang.String.class);
-//        entries.add(element);
-//        // neue Zeile
-//        element = new OverviewTableEntry("Goal", "Salary");
-//        element.newElement("Operator", ">=", java.lang.String.class);
-//        element.newElement("Intensity", "12.000", java.lang.String.class);
-//        entries.add(element);
-//        // erzeuge neue Tabelle
-        
-        
-        overviewTable = new OverviewTable();       
+        //        List entries = new ArrayList();
+        //        // neue Zeile
+        //        OverviewTableEntry element = new OverviewTableEntry("Goal",
+        //                "Availability");
+        //        element.newElement("Operator", "=", java.lang.String.class);
+        //        element.newElement("Intensity", "may - june",
+        // java.lang.String.class);
+        //        entries.add(element);
+        //        // neue Zeile
+        //        element = new OverviewTableEntry("Goal", "Knowledge");
+        //        element.newElement("Operator", ">=", java.lang.String.class);
+        //        element.newElement("Intensity", "java", java.lang.String.class);
+        //        entries.add(element);
+        //        // neue Zeile
+        //        element = new OverviewTableEntry("Goal", "Salary");
+        //        element.newElement("Operator", ">=", java.lang.String.class);
+        //        element.newElement("Intensity", "12.000", java.lang.String.class);
+        //        entries.add(element);
+        //        // erzeuge neue Tabelle
+
+        overviewTable = new OverviewTable();
         overviewTable.addMouseListener(new GoalContainerEditorPopupAdapter());
 
     }
@@ -134,7 +134,8 @@ public class GoalContainerEditor extends AbstractEditor {
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#updateModel()
      */
     protected void updateModel() {
-        GoalContainerTableModel gctm = new GoalContainerTableModel(getGoalContainer().getGoals());
+        GoalContainerTableModel gctm = new GoalContainerTableModel(
+                getGoalContainer().getGoals());
         overviewTable.setModel(gctm);
 
     }
@@ -149,7 +150,8 @@ public class GoalContainerEditor extends AbstractEditor {
      * @see de.uniessen.wiinf.wip.goalgetter.view.editor.AbstractEditor#updateView()
      */
     protected void updateView() {
-        GoalContainerTableModel gctm = new GoalContainerTableModel(getGoalContainer().getGoals());
+        GoalContainerTableModel gctm = new GoalContainerTableModel(
+                getGoalContainer().getGoals());
         overviewTable.setModel(gctm);
 
     }

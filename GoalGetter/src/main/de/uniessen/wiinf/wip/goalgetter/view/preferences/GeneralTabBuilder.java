@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GeneralTabBuilder.java,v 1.2 2004/07/18 21:25:28 moleman Exp $
+ * $Id: GeneralTabBuilder.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
@@ -42,7 +42,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class GeneralTabBuilder {
@@ -91,11 +91,13 @@ public final class GeneralTabBuilder {
      */
     private void initComponents(PresentationSettings settings,
             ValueModel triggerChannel) {
-        showTipsBox = new JCheckBox(ResourceUtils.getString("generalTabBuilder.showtipofday.text"));
+        showTipsBox = new JCheckBox(ResourceUtils
+                .getString("generalTabBuilder.showtipofday.text"));
         showTipsBox.setModel(new ToggleButtonAdapter(new BufferedValueModel(
                 TipOfTheDayDialog.showingTipsModel(), triggerChannel)));
 
-        autoExpandBox = new JCheckBox(ResourceUtils.getString("generalTabBuilder.autoexpand.text"));
+        autoExpandBox = new JCheckBox(ResourceUtils
+                .getString("generalTabBuilder.autoexpand.text"));
         autoExpandBox
                 .setModel(new ToggleButtonAdapter(
                         new BufferedValueModel(
@@ -104,7 +106,8 @@ public final class GeneralTabBuilder {
                                         PresentationSettings.PROPERTYNAME_EXPAND_SELECTED_PATHS),
                                 triggerChannel)));
 
-        autoCollapseBox = new JCheckBox(ResourceUtils.getString("generalTabBuilder.autocollapse.text"));
+        autoCollapseBox = new JCheckBox(ResourceUtils
+                .getString("generalTabBuilder.autocollapse.text"));
         autoCollapseBox
                 .setModel(new ToggleButtonAdapter(
                         new BufferedValueModel(
@@ -131,10 +134,15 @@ public final class GeneralTabBuilder {
         builder.setDefaultDialogBorder();
         CellConstraints cc = new CellConstraints();
 
-        builder.addSeparator(ResourceUtils.getString("generalTabBuilder.onStartup.text"), cc.xyw(1, 1, 3));
+        builder
+                .addSeparator(ResourceUtils
+                        .getString("generalTabBuilder.onStartup.text"), cc.xyw(
+                        1, 1, 3));
         builder.add(showTipsBox, cc.xy(2, 3));
 
-        builder.addSeparator(ResourceUtils.getString("generalTabBuilder.navigationTree.text"), cc.xyw(1, 5, 3));
+        builder.addSeparator(ResourceUtils
+                .getString("generalTabBuilder.navigationTree.text"), cc.xyw(1,
+                5, 3));
         builder.add(autoExpandBox, cc.xy(2, 7));
         builder.add(autoCollapseBox, cc.xy(2, 9));
 

@@ -1,5 +1,5 @@
 /*
- * GoalContainerEditorPopupMenuBuilder.java
+ * AlternativeContainerEditorPopupMenuBuilder.java
  * Package: de.uniessen.wiinf.wip.goalgetter.overviewTable
  * Project: GoalGetter
  * 
@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionContainerEditorPopupAdapter.java,v 1.2 2004/07/18 21:26:39 moleman Exp $
+ * $Id: AlternativeContainerEditorPopupAdapter.java,v 1.1 2004/07/18 21:25:28 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.overviewTable;
 
@@ -28,15 +28,15 @@ import com.jgoodies.uifextras.util.PopupAdapter;
 import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
 
 /**
- * Builds the right click popup menu for the GoalContainerEditor
+ * Builds the right click popup menu for the AlternativeContainerEditor
  * 
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.1 $
  *  
  */
-public final class ActionContainerEditorPopupAdapter extends PopupAdapter {
+public final class AlternativeContainerEditorPopupAdapter extends PopupAdapter {
 
     /*
      * (non-Javadoc)
@@ -45,7 +45,6 @@ public final class ActionContainerEditorPopupAdapter extends PopupAdapter {
      */
     protected JPopupMenu createPopupMenu() {
         JPopupMenu popupMenu = new JPopupMenu();
-        popupMenu.add(ActionManager.get(Actions.ADD_GOAL_ID));
         popupMenu.add(ActionManager.get(Actions.ADD_ALTERNATIVE_ID));
         popupMenu.add(ActionManager.get(Actions.DELETE_ITEM_ID));
         return popupMenu;
