@@ -16,13 +16,15 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.9 2004/08/14 11:11:11 moleman Exp $
+ * $Id: MainController.java,v 1.10 2004/08/14 21:46:51 jsprenger Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -38,6 +40,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
 import de.uniessen.wiinf.wip.goalgetter.domain.ProjectFactory;
 import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
 import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityAnalysisDialog;
+import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityElements;
 
 /**
  * Provides all application-level behavior. Most of the methods in this class
@@ -47,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.sensitivity.SensitivityAnalysisDial
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *  
  */
 public final class MainController {
@@ -213,7 +216,25 @@ public final class MainController {
 
         //mainModule.addAnalyseNode();
 
-        new SensitivityAnalysisDialog(getDefaultParentFrame()).open();
+    	// TODO: anpassen an echte Datanestruktur...
+    	List col = new ArrayList();
+    	SensitivityElements e;
+    	String nameX = "Alternative",nameY="Kosten";
+    	
+    	e = new SensitivityElements("Peter");
+    	e.addValues("Handlung 1","500");
+    	e.addValues("Handlung 2","700");
+    	e.addValues("Handlung 3","1000");
+    	col.add(e);
+    	
+    	e = new SensitivityElements("Klaus");
+    	e.addValues("Handlung 1","100");
+    	e.addValues("Handlung 2","2000");
+    	e.addValues("Handlung 3","900");
+    	col.add(e);
+    	
+    	    	// end new Elements
+    	new SensitivityAnalysisDialog(getDefaultParentFrame(),col,nameX,nameY).open();
 
         //        SensitivityAnalysisChart chart = new SensitivityAnalysisChart();
         //        JDialog d = new JDialog();
