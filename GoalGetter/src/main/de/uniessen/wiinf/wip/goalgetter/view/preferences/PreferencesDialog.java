@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: PreferencesDialog.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
+ * $Id: PreferencesDialog.java,v 1.4 2004/07/28 16:02:18 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
@@ -33,7 +33,7 @@ import com.jgoodies.uif.AbstractBoundDialog;
 import com.jgoodies.uif.application.ResourceIDs;
 import com.jgoodies.uif.util.Resizer;
 import com.jgoodies.uif.util.ResourceUtils;
-import com.jgoodies.uifextras.panels.HeaderPanel;
+import com.jgoodies.uifextras.panel.HeaderPanel;
 import com.jgoodies.uifextras.plaf.LookAndFeelPanel;
 
 import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
@@ -45,7 +45,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class PreferencesDialog extends AbstractBoundDialog {

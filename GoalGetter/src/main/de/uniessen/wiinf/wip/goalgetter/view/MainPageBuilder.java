@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainPageBuilder.java,v 1.4 2004/07/19 18:22:02 moleman Exp $
+ * $Id: MainPageBuilder.java,v 1.5 2004/07/28 16:02:18 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -35,6 +35,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 
 import com.jgoodies.looks.LookUtils;
+import com.jgoodies.uif.ToggleAction;
 import com.jgoodies.uif.action.ActionManager;
 import com.jgoodies.uif.application.Application;
 import com.jgoodies.uif.builder.ToolBarBuilder;
@@ -62,7 +63,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.editor.WelcomePanel;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 
@@ -133,6 +134,7 @@ public final class MainPageBuilder {
         navigator.setSelected(true);
         navigator.setMinimumSize(new Dimension(100, 100));
         navigator.setPreferredSize(new Dimension(160, 200));
+        navigator.setToolBar(buildNavigatorToolBar());
 
         helpNavigator = new SimpleInternalFrame("Dynamic Help Topics");
         helpNavigator.setContent(UIFactory
@@ -227,6 +229,17 @@ public final class MainPageBuilder {
     private JToolBar buildHelpNavigatorToolBar() {
         ToolBarBuilder builder = new ToolBarBuilder("Help Contents");
         builder.add(ActionManager.get(Actions.CLOSE_HELP_NAVIGATOR_ID));
+        return builder.getToolBar();
+    }
+    
+    
+    /**
+     * Builds and answers the toolbar.
+     */
+    private JToolBar buildNavigatorToolBar() {
+        ToolBarBuilder builder = new ToolBarBuilder("Navigator");       
+        builder.addToggle((ToggleAction)ActionManager.get(Actions.NAVIGATOR_ACTIONS_BY_GOAL_ID));
+        builder.addToggle((ToggleAction)ActionManager.get(Actions.NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID));
         return builder.getToolBar();
     }
 

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainController.java,v 1.5 2004/07/18 21:26:39 moleman Exp $
+ * $Id: MainController.java,v 1.6 2004/07/28 16:02:18 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.tool;
 
@@ -47,7 +47,7 @@ import de.uniessen.wiinf.wip.goalgetter.view.preferences.PreferencesDialog;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *  
  */
 public final class MainController {
@@ -101,7 +101,7 @@ public final class MainController {
     void openProject() {
         FileDialog dialog = new FileDialog(getDefaultParentFrame(),
                 "Open project file");
-        dialog.show();
+        dialog.setVisible(true);
         if (dialog.getFile() == null)
             return;
 
@@ -206,7 +206,7 @@ public final class MainController {
         d.setSize(300, 300);
         d.setLocationRelativeTo(getDefaultParentFrame());
         d.getContentPane().add(chart.getChartPanel());
-        d.show();
+        d.setVisible(true);
         //JOptionPane.showMessageDialog(getDefaultParentFrame(), what);
 
         //showMessage("Show Sensitivity Analysis performed.");

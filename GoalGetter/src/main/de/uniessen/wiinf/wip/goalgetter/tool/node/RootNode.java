@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: RootNode.java,v 1.3 2004/07/19 18:22:02 moleman Exp $
+ * $Id: RootNode.java,v 1.4 2004/07/28 16:02:18 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool.node;
@@ -25,7 +25,6 @@ import java.util.Iterator;
 
 import javax.swing.Icon;
 
-import de.uniessen.wiinf.wip.goalgetter.domain.Action;
 import de.uniessen.wiinf.wip.goalgetter.domain.Alternative;
 import de.uniessen.wiinf.wip.goalgetter.domain.Goal;
 import de.uniessen.wiinf.wip.goalgetter.domain.Project;
@@ -37,7 +36,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class RootNode extends AbstractTreeNode {

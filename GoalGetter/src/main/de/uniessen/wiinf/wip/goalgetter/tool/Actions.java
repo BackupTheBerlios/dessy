@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: Actions.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
+ * $Id: Actions.java,v 1.4 2004/07/28 16:02:18 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -29,6 +29,9 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
+import com.jgoodies.binding.beans.BeanAdapter;
+import com.jgoodies.binding.value.ValueModel;
+import com.jgoodies.uif.ToggleAction;
 import com.jgoodies.uif.action.ActionManager;
 import com.jgoodies.uifextras.help.HelpBroker;
 import com.jgoodies.uifextras.printing.PrintManager;
@@ -48,7 +51,7 @@ import de.uniessen.wiinf.wip.goalgetter.domain.Project;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 
@@ -96,6 +99,10 @@ public final class Actions {
 
     public static final String CLOSE_HELP_NAVIGATOR_ID = "helpNavigator.close";
 
+    public static final String NAVIGATOR_ACTIONS_BY_GOAL_ID = "navigator.actionsByGoal";
+
+    public static final String NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID = "navigator.actionsByAlternative";
+
     // Instance Fields ********************************************************
 
     /**
@@ -104,6 +111,14 @@ public final class Actions {
      * @see #getController()
      */
     private final MainController controller;
+
+    /**
+     * Refers to the module that provides all high-level models. Used to access
+     * the presentation settings.
+     * 
+     * @see #getPresentationSettings()
+     */
+    private final MainModule mainModule;
 
     // Instance Creation ******************************************************
 
@@ -119,6 +134,7 @@ public final class Actions {
      */
     private Actions(MainModule mainModule, MainController controller) {
         this.controller = controller;
+        this.mainModule = mainModule;
         registerActions();
         mainModule.addPropertyChangeListener(new ModuleChangeHandler());
         updateSelectionActionEnablement(null);
@@ -225,6 +241,23 @@ public final class Actions {
                 getController().closeDynamicHelpNavigator();
             }
         });
+
+        // This adapter vends ValueModels that convert bean properties
+        // of the PresentationSettings into the ValueModel interface.
+        BeanAdapter presentationAdapter = new BeanAdapter(
+                getPresentationSettings(), true);
+
+        ValueModel navigatorActionViewModeHolder = presentationAdapter
+                .getValueModel(PresentationSettings.PROPERTYNAME_ACTION_PRESENTATION_MODE);
+
+        ActionManager.register(
+                NAVIGATOR_ACTIONS_BY_GOAL_ID,
+                ToggleAction.createRadio(navigatorActionViewModeHolder,
+                        ActionPresentationMode.GOAL)).setEnabled(true);
+        ActionManager.register(
+                NAVIGATOR_ACTIONS_BY_ALTERNATIVE_ID,
+                ToggleAction.createRadio(navigatorActionViewModeHolder,
+                        ActionPresentationMode.ALTERNATIVE)).setEnabled(true);
     }
 
     //***********************************************************************
@@ -408,6 +441,10 @@ public final class Actions {
 
     MainController getController() {
         return controller;
+    }
+
+    PresentationSettings getPresentationSettings() {
+        return mainModule.getPresentationSettings();
     }
 
 }

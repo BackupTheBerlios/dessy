@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: WelcomePanel.java,v 1.3 2004/07/18 21:26:39 moleman Exp $
+ * $Id: WelcomePanel.java,v 1.4 2004/07/28 16:02:18 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
@@ -35,7 +35,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.uif.action.ActionManager;
 import com.jgoodies.uif.util.ResourceUtils;
-import com.jgoodies.uifextras.panels.GradientBackgroundPanel;
+import com.jgoodies.uifextras.panel.GradientBackgroundPanel;
 import com.jgoodies.uifextras.util.ActionLabel;
 
 import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
@@ -50,7 +50,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class WelcomePanel extends GradientBackgroundPanel implements

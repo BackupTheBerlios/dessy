@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: PresentationSettings.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: PresentationSettings.java,v 1.2 2004/07/28 16:02:18 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.tool;
@@ -31,7 +31,7 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class PresentationSettings extends Model {
@@ -41,6 +41,8 @@ public final class PresentationSettings extends Model {
     public static final String PROPERTYNAME_EXPAND_SELECTED_PATHS = "expandSelectedPaths";
 
     public static final String PROPERTYNAME_COLLAPSE_DESELECTED_PATHS = "collapseDeselectedPaths";
+
+    public static final String PROPERTYNAME_ACTION_PRESENTATION_MODE = "actionPresentationMode";
 
     // Default Values *********************************************************
 
@@ -53,6 +55,8 @@ public final class PresentationSettings extends Model {
      * The default value (false) for property 'collapseDeselectedPaths'.
      */
     private static final boolean DEFAULT_COLLAPSE_DESELECTED_PATHS = false;
+
+    private ActionPresentationMode actionPresentationMode = ActionPresentationMode.DEFAULT;
 
     // Fields *****************************************************************
 
@@ -112,11 +116,30 @@ public final class PresentationSettings extends Model {
                 newValue);
     }
 
+    /**
+     * Returns the current overview mode that indicates how the overview is
+     * presentated: summary, list or table.
+     * 
+     * @return the current overview mode
+     */
+    public ActionPresentationMode getActionPresentationMode() {
+        return actionPresentationMode;
+    }
+
+    public void setActionPresentationMode(ActionPresentationMode newMode) {
+        ActionPresentationMode oldMode = getActionPresentationMode();
+        actionPresentationMode = newMode;
+        firePropertyChange(PROPERTYNAME_ACTION_PRESENTATION_MODE, oldMode,
+                newMode);
+    }
+
     // Property Persistency ***************************************************
 
     private static final String KEY_EXPAND_SELECTED_PATHS = "state.expandSelectedPaths";
 
     private static final String KEY_COLLAPSE_DESELECTED_PATHS = "state.collapseDeselectedPaths";
+
+    private static final String KEY_ACTION_PRESENTATION_MODE = "state.actionPresentationMode";
 
     /**
      * Restores the persistent properties from the specified Preferences.
@@ -131,6 +154,9 @@ public final class PresentationSettings extends Model {
         setCollapseDeselectedPaths(prefs.getBoolean(
                 KEY_COLLAPSE_DESELECTED_PATHS,
                 DEFAULT_COLLAPSE_DESELECTED_PATHS));
+
+        setActionPresentationMode(ActionPresentationMode.valueOf(prefs.get(
+                KEY_ACTION_PRESENTATION_MODE, "")));
     }
 
     /**
@@ -144,6 +170,9 @@ public final class PresentationSettings extends Model {
 
         prefs.putBoolean(KEY_COLLAPSE_DESELECTED_PATHS,
                 getCollapseDeselectedPaths());
+
+        prefs.put(KEY_ACTION_PRESENTATION_MODE, getActionPresentationMode()
+                .name());
     }
 
 }

@@ -6,13 +6,10 @@
  */
 package de.uniessen.wiinf.wip.chart;
 
-import javax.swing.JTree;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.CategoryDataset;
 import org.jfree.data.DefaultCategoryDataset;
 
 /**
@@ -42,8 +39,8 @@ public class DessyChart extends ChartFactory {
         category.addValue(400, "Holger", "juli");
 
         JFreeChart jfc = createAreaChart("Sensibilitätsanalyse",
-                "Verfügbarkeit", "Kosten ", (CategoryDataset) category,
-                PlotOrientation.VERTICAL, true, false, false);
+                "Verfügbarkeit", "Kosten ", category, PlotOrientation.VERTICAL,
+                true, false, false);
 
         cp = new ChartPanel(jfc);
     }
