@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: ActionEditor.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
+ * $Id: ActionEditor.java,v 1.3 2004/07/18 21:25:28 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -41,7 +41,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 public final class ActionEditor extends AbstractEditor {
@@ -120,7 +120,7 @@ public final class ActionEditor extends AbstractEditor {
         initComponents();
 
         java.awt.Component descriptionPane = new JScrollPane(descriptionArea);
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu:grow");
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, ResourceUtils.getBundle(),this);
         builder.setDefaultDialogBorder();

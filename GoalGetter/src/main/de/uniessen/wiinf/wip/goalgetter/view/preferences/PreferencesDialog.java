@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: PreferencesDialog.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: PreferencesDialog.java,v 1.2 2004/07/18 21:25:28 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view.preferences;
@@ -45,7 +45,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.PresentationSettings;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public final class PreferencesDialog extends AbstractBoundDialog {
@@ -90,9 +90,8 @@ public final class PreferencesDialog extends AbstractBoundDialog {
      * Builds and returns the preference's header.
      */
     protected JComponent buildHeader() {
-        return new HeaderPanel("Preferences",
-                "You can see and edit the tool's persistent preferences."
-                        + "\nClick on a tab to select a different category.",
+        return new HeaderPanel(ResourceUtils.getString("preferencesDialog.preferencesHeader.text"),
+                ResourceUtils.getString("preferencesDialog.preferencesDescription.text"),
                 ResourceUtils.getIcon(ResourceIDs.PREFERENCES_ICON));
     }
 
@@ -116,8 +115,8 @@ public final class PreferencesDialog extends AbstractBoundDialog {
         lafPanel = new LookAndFeelPanel(getTriggerChannel());
 
         JTabbedPane pane = new JTabbedPane();
-        pane.addTab("General", generalPanel);
-        pane.addTab("Look & Feel", lafPanel);
+        pane.addTab(ResourceUtils.getString("preferencesDialog.general.text"), generalPanel);
+        pane.addTab(ResourceUtils.getString("preferencesDialog.laf.text"), lafPanel);
         return pane;
     }
 

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: NavigationPanelBuilder.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
+ * $Id: NavigationPanelBuilder.java,v 1.3 2004/07/18 21:25:28 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view;
 
@@ -61,7 +61,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.node.NavigationNode;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
 final class NavigationPanelBuilder {
@@ -165,7 +165,7 @@ final class NavigationPanelBuilder {
         // Expand top-level nodes, here: shafts
         TreeUtils.expandTopLevel(tree);
         // Preselect the first node, here: project data
-        tree.setSelectionRow(0);
+       // tree.setSelectionRow(0);
     }
 
     /**
@@ -258,7 +258,7 @@ final class NavigationPanelBuilder {
                     : getTextNonSelectionColor());
             selected = sel;
             this.setIcon(node.getIcon(sel));
-            this.setText(node.getName());
+            this.setText(node.getName());          
             return this;
         }
     }

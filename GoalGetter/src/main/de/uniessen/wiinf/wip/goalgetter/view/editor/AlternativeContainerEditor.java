@@ -16,12 +16,9 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeContainerEditor.java,v 1.4 2004/07/12 13:03:09 moleman Exp $
+ * $Id: AlternativeContainerEditor.java,v 1.5 2004/07/18 21:25:28 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -32,7 +29,6 @@ import com.jgoodies.uif.util.ResourceUtils;
 
 import de.uniessen.wiinf.wip.goalgetter.domain.AlternativeContainer;
 import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTable;
-import de.uniessen.wiinf.wip.goalgetter.overviewTable.OverviewTableEntry;
 import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
 
 /**
@@ -41,7 +37,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *  
  */
 public class AlternativeContainerEditor extends AbstractEditor {
@@ -60,7 +56,7 @@ public class AlternativeContainerEditor extends AbstractEditor {
     protected void build() {
         initComponents();
 
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu");
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,ResourceUtils.getBundle(), this);
         builder.setDefaultDialogBorder();
         //  CellConstraints cc = new CellConstraints();
@@ -78,34 +74,34 @@ public class AlternativeContainerEditor extends AbstractEditor {
     private void initComponents() {
         //TODO table model
 
-//        String rowData[][] = {
-//
-//        { "Availability", "April", "Jan-May" },
-//                { "Knowledge", "C++", "Pascal" },
-//                { "Salary", "11.000", "12.000" }
-//
-//        };
-//        String columnNames[] = { "  ", "Klaus", "Peter" };
-//
-//        overviewTable = new JTable(rowData, columnNames);
+        String rowData[][] = {
+
+        { "Availability", "April", "Jan-May" },
+                { "Knowledge", "C++", "Pascal" },
+                { "Salary", "11.000", "12.000" }
+
+        };
+        String columnNames[] = { "  ", "Klaus", "Peter" };
+
+        overviewTable = new OverviewTable(rowData, columnNames);
        
-        List entries = new ArrayList();
-        // neue Zeile
-       OverviewTableEntry element = new OverviewTableEntry("Alternative","Klaus");
-       element.newElement("Availability"," June",java.lang.String.class);
-       element.newElement("Knowledge","java",java.lang.String.class);
-       element.newElement("Salary","12.000",java.lang.String.class);
-       entries.add(element);
-        // neue Zeile
-       element =  new OverviewTableEntry("Alternative","Peter");
-       element.newElement("Availability","June",java.lang.String.class);
-       element.newElement("Knowledge","java",java.lang.String.class);
-       element.newElement("Salary","12.000",java.lang.String.class);
-       entries.add(element);
-       // neue Zeile
-       
-        // erzeuge neue Tabelle
-       overviewTable = new OverviewTable(entries);
+//        List entries = new ArrayList();
+//        // neue Zeile
+//       OverviewTableEntry element = new OverviewTableEntry("Alternative","Klaus");
+//       element.newElement("Availability"," June",java.lang.String.class);
+//       element.newElement("Knowledge","java",java.lang.String.class);
+//       element.newElement("Salary","12.000",java.lang.String.class);
+//       entries.add(element);
+//        // neue Zeile
+//       element =  new OverviewTableEntry("Alternative","Peter");
+//       element.newElement("Availability","June",java.lang.String.class);
+//       element.newElement("Knowledge","java",java.lang.String.class);
+//       element.newElement("Salary","12.000",java.lang.String.class);
+//       entries.add(element);
+//       // neue Zeile
+//       
+//        // erzeuge neue Tabelle
+//       overviewTable = new OverviewTable(entries);
     }
 
     /*

@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: MainMenuBuilder.java,v 1.2 2004/07/12 12:38:12 moleman Exp $
+ * $Id: MainMenuBuilder.java,v 1.3 2004/07/18 21:25:28 moleman Exp $
  */
 
 package de.uniessen.wiinf.wip.goalgetter.view;
@@ -43,10 +43,10 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Actions;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  *  
  */
-final class MainMenuBuilder {
+public final class MainMenuBuilder {
 
     /**
      * Configures, composes, and returns the menu bar.

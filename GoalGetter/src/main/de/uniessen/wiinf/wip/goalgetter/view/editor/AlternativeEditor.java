@@ -16,7 +16,7 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: AlternativeEditor.java,v 1.3 2004/07/12 12:38:12 moleman Exp $
+ * $Id: AlternativeEditor.java,v 1.4 2004/07/18 21:25:28 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.view.editor;
 
@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -45,7 +46,7 @@ import de.uniessen.wiinf.wip.goalgetter.tool.Resources;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  *  
  */
 public final class AlternativeEditor extends AbstractEditor {
@@ -92,7 +93,7 @@ public final class AlternativeEditor extends AbstractEditor {
 
         Component[] components = intensitiesPanel.getComponents();
         for (int i = 0; i < components.length; i++) {
-            if (components[i].getClass() == JTextField.class) {
+            if (components[i].getClass() == JTextField.class && components[i].getName()!=null) {
                 alternative.putIntensity(components[i].getName(),
                         ((JTextField) components[i]).getText());
             }
@@ -110,12 +111,15 @@ public final class AlternativeEditor extends AbstractEditor {
 
         intensitiesPanel.removeAll();
 
-        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 160dlu:grow");
+        FormLayout layout = new FormLayout("right:max(40dlu;p), 4dlu, 0:grow:0.7, 4dlu, 0:grow:0.3");
 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout,ResourceUtils.getBundle(),
                 intensitiesPanel);
         builder.setBorder(Borders.EMPTY_BORDER);
         // CellConstraints cc = new CellConstraints();
+        
+        builder.append("", new JLabel(getAlternative().getIdentifier()),new JLabel("Sollzustand"));
+        builder.nextLine();
 
         Map intensities = getAlternative().getIntensities();
         Iterator iterator = intensities.keySet().iterator();
@@ -124,8 +128,12 @@ public final class AlternativeEditor extends AbstractEditor {
             JTextField textfield = new JTextField();
             textfield.setName(key);
             textfield.setText((String) intensities.get(key));
+            JTextField shouldBeTextfield = new JTextField();
+           // shouldbeTextfield.setName(key);
+            shouldBeTextfield.setText("1000");
+            shouldBeTextfield.setEditable(false);
 
-            builder.append(key, textfield);
+            builder.append(key, textfield, shouldBeTextfield);
             builder.nextLine();
         }
 

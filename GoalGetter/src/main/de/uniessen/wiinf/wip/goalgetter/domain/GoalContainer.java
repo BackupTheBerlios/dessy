@@ -16,14 +16,14 @@
  * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  * See Readme file for detailed license
  * 
- * $Id: GoalContainer.java,v 1.1 2004/07/03 20:17:08 moleman Exp $
+ * $Id: GoalContainer.java,v 1.2 2004/07/18 21:25:28 moleman Exp $
  */
 package de.uniessen.wiinf.wip.goalgetter.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.jgoodies.binding.beans.Model;
+import com.jgoodies.binding.list.ArrayListModel;
 
 /**
  * 
@@ -32,12 +32,12 @@ import com.jgoodies.binding.beans.Model;
  * @author tfranz
  * @author jsprenger
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  *  
  */
 public class GoalContainer extends Model {
 
-    private List goals = new ArrayList();
+    private ArrayListModel goals = new ArrayListModel();
 
     private String identifier;
 
@@ -53,7 +53,7 @@ public class GoalContainer extends Model {
         return identifier;
     }
 
-    public List getGoals() {
+    public ArrayListModel getGoals() {
         return goals;
     }
 
@@ -64,8 +64,8 @@ public class GoalContainer extends Model {
                 newIdentifier);
     }
 
-    public void setGoals(List newGoals) {
-        List oldGoals = getGoals();
+    public void setGoals(ArrayListModel newGoals) {
+        ArrayListModel oldGoals = getGoals();
         goals = newGoals;
         firePropertyChange(PROPERTYNAME_GOALS, oldGoals, newGoals);
     }
@@ -87,5 +87,7 @@ public class GoalContainer extends Model {
     public String toString() {
         return super.toString() + ':' + getIdentifier();
     }
+    
+
 
 }
